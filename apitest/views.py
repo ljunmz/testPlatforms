@@ -1,10 +1,9 @@
 import datetime
 import json
 
-import numpy as np
-from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, render_to_response
+from django.urls import base
 from django.views.decorators.csrf import csrf_exempt
 from apitest.models import TestdataNode, TestdataFlow
 
@@ -47,28 +46,23 @@ def getNodeData(request):
             'method': e.method,
             'parameter': e.parameter,
             'expect_response': e.expect_response,
-            'dbcheck': {
-                "ischechdb": e.ischechdb,
-                "sql_str": e.sql_str,
-                "sql_para": e.sql_para,
-                "expect_db": e.expect_db
-            },
+            'state': e.state,
+            "ischechdb": e.ischechdb,
+            "sql_str": e.sql_str,
+            "sql_para": e.sql_para,
+            "expect_db": e.expect_db,
             'pre_keys': e.pre_keys,
             'sleep_time': e.sleep_time,
-            'presql': {
-                "isexcute_pre_sql": e.isexcute_pre_sql,
-                "pre_sql_str": e.pre_sql_str,
-                "pre_sql_para": e.pre_sql_para,
-                "pre_sql_out": e.pre_sql_out
-            },
+            "isexcute_pre_sql": e.isexcute_pre_sql,
+            "pre_sql_str": e.pre_sql_str,
+            "pre_sql_para": e.pre_sql_para,
+            "pre_sql_out": e.pre_sql_out,
             'post_keys': e.post_keys,
             'post_keys_extractor': e.post_keys_extractor,
             'post_keys_default': e.post_keys_default,
-            'state': e.state
         })
     print(nodeDataList)
     return JsonResponse(nodeDataList, safe=False)
-    # return HttpResponse(listToJson(nodeDataList), content_type="application/json,charset=utf-8")
 
 
 @csrf_exempt
@@ -88,6 +82,7 @@ def getOutSql(request):
     })
     print(outSqlDataList)
     return JsonResponse(outSqlDataList, safe=False)
+
 
 @csrf_exempt
 def editOutSql(request):
@@ -125,6 +120,7 @@ def getPreSql(request):
     print(preSqlDataList)
     return JsonResponse(preSqlDataList, safe=False)
 
+
 @csrf_exempt
 def editPreSql(request):
     node_id = json.loads(request.body)["node_id"]
@@ -155,6 +151,7 @@ def savePostKey(request):
     )
     response = [{"code": "200", "msg": "后置变量提取配置成功"}]
     return JsonResponse(response, safe=False)
+
 
 @csrf_exempt
 def getPostKey(request):
@@ -243,14 +240,6 @@ def editFlow(request):
         creater=json.loads(request.body)["creater"],
         update_time=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     )
-    # obj = TestdataFlow.objects.get(flow_id=flow_id)
-    # obj.flow_name = flow_name,
-    # obj.password = password,
-    # obj.priority = priority,
-    # obj.state = state,
-    # obj.account = account,
-    # obj.update_time = update_time
-    # obj.save()
     response = [{"code": "200", "msg": "测试流保存成功"}]
     return JsonResponse(response, safe=False)
 
@@ -258,13 +247,16 @@ def editFlow(request):
 @csrf_exempt
 def deleteFlow(request):
     flow_id = json.loads(request.body)["pk"]
+    print('flow_id=', flow_id)
     TestdataFlow.objects.filter(flow_id=flow_id).delete()
     response = [{"code": "200", "msg": "测试流删除成功"}]
     return JsonResponse(response, safe=False)
 
+
 @csrf_exempt
 def deleteNode(request):
     node_id = json.loads(request.body)["pk"]
+    print("node_id",node_id)
     TestdataNode.objects.filter(node_id=node_id).delete()
     response = [{"code": "200", "msg": "接口删除成功"}]
     return JsonResponse(response, safe=False)
@@ -272,7 +264,6 @@ def deleteNode(request):
 
 @csrf_exempt
 def addNode(request):
-    global isexcute_pre_sql, pre_sql_out, pre_sql_str, expect_db, sql_para, sql_str, pre_sql_para, ischechdb
     flow_id = json.loads(request.body)["flow_id"]
     order_id = json.loads(request.body)["order_id"]
     node_id = TestdataNode.objects.all().order_by("-node_id")[0].node_id + 1
@@ -283,37 +274,32 @@ def addNode(request):
     parameter = json.loads(request.body)["parameter"]
     pre_keys = json.loads(request.body)["pre_keys"]
     sleep_time = json.loads(request.body)["sleep_time"]
-    presql = json.loads(request.body)["presql"]
-    ischechdb = json.loads(request.body)["dbcheck"]
-
-    for key, value in presql.items():
-        if key == "isexcute_pre_sql":
-            isexcute_pre_sql = value
-        elif key == "pre_sql_out":
-            pre_sql_out = value
-        elif key == "pre_sql_str":
-            pre_sql_str = value
-        elif key == "pre_sql_para":
-            pre_sql_para = value
-
-    for key, value in ischechdb.items():
-        if key == "expect_db":
-            expect_db = value
-        elif key == "ischechdb":
-            ischechdb = value
-        elif key == "sql_para":
-            sql_para = value
-        elif key == "sql_str":
-            sql_str = value
-
+    state = json.loads(request.body)["state"]
+    isexcute_pre_sql = json.loads(request.body)["isexcute_pre_sql"]
+    pre_sql_out = json.loads(request.body)["pre_sql_out"]
+    pre_sql_str = json.loads(request.body)["pre_sql_str"]
+    pre_sql_para = json.loads(request.body)["pre_sql_para"]
+    expect_db = json.loads(request.body)["expect_db"]
+    ischechdb = json.loads(request.body)["ischechdb"]
+    sql_para = json.loads(request.body)["sql_para"]
+    sql_str = json.loads(request.body)["sql_str"]
     post_keys = json.loads(request.body)["post_keys"]
     post_keys_extractor = json.loads(request.body)["post_keys_extractor"]
     post_keys_default = json.loads(request.body)["post_keys_default"]
     create_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     update_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    addNodeData = TestdataNode.objects.create(
+
+    print(type(flow_id))
+    print(type(order_id))
+    print(type(node_id))
+    print(type(method))
+    print(type(sleep_time))
+    print(type(state))
+    print(type(isexcute_pre_sql))
+    print(type(ischechdb))
+    TestdataNode.objects.create(
         node_id=node_id,
-        order_id=order_id,
+        order_id=int(order_id),
         flow_id=flow_id,
         node_code=node_code,
         node_name=node_name,
@@ -322,6 +308,7 @@ def addNode(request):
         parameter=parameter,
         pre_keys=pre_keys,
         sleep_time=sleep_time,
+        state=state,
         isexcute_pre_sql=isexcute_pre_sql,
         pre_sql_out=pre_sql_out,
         pre_sql_para=pre_sql_para,
@@ -342,7 +329,6 @@ def addNode(request):
 
 @csrf_exempt
 def editNode(request):
-    global isexcute_pre_sql, pre_sql_out, pre_sql_str, expect_db, sql_para, sql_str, pre_sql_para, ischechdb
     order_id = json.loads(request.body)["order_id"]
     flow_id = json.loads(request.body)["flow_id"]
     node_id = json.loads(request.body)["pk"]
@@ -352,10 +338,13 @@ def editNode(request):
     method = json.loads(request.body)["method"]
     path = json.loads(request.body)["path"]
     parameter = json.loads(request.body)["parameter"]
+    expect_response = json.loads(request.body)["expect_response"]
     pre_keys = json.loads(request.body)["pre_keys"]
     sleep_time = json.loads(request.body)["sleep_time"]
+    state = json.loads(request.body)["state"]
     update_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    addNodeData = TestdataNode.objects.filter(node_id=node_id).update(
+    print("node_id",node_id)
+    TestdataNode.objects.filter(node_id=node_id).update(
         node_id=node_id,
         order_id=order_id,
         flow_id=flow_id,
@@ -364,8 +353,10 @@ def editNode(request):
         method=method,
         path=path,
         parameter=parameter,
+        expect_response=expect_response,
         pre_keys=pre_keys,
         sleep_time=sleep_time,
+        state=state,
         update_time=update_time
     )
     response = [{"code": "200", "msg": "接口添加成功"}]

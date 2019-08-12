@@ -25,7 +25,7 @@ SECRET_KEY = '_vp2f(&o*2s32-wap(=4px9_1)07v3%zafk)+ddg_5w4sh$#u#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,12 +78,20 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'test',
+        # 'USER': 'root',
+        # 'PASSWORD': '123456',
+        # 'HOST': '192.168.15.133',
+        # 'PORT': '3306'
+
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': '192.168.15.133',
+        'NAME': 'automation',
+        'USER': 'planadmin',
+        'PASSWORD': 'pL%5^an3a$4in',
+        'HOST': '47.112.0.183',
         'PORT': '3306'
+
     }
 }
 
