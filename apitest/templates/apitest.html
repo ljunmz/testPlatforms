@@ -192,7 +192,7 @@
                                 <span style="color: coral">确定删除当前测试流吗？删除后将不可恢复</span>
                                 <span slot="footer" class="dialog-footer">
                                      <el-button @click="deleteFlowDialogVisible = false">取 消</el-button>
-                                     <el-button type="primary" @click="deleteFlowRow(sflowData)">确定删除</el-button>
+                                     <el-button type="primary" @click="deleteFlowRow(flowData)">确定删除</el-button>
                                 </span>
                             </el-dialog>
                             <el-button size="mini" class="save"
@@ -214,6 +214,7 @@
                                     +添加接口
                                 </el-button>
                                 <el-table
+                                        ref="nodeTable"
                                         id="nodeTable"
                                         :data="nodeData"
                                         stripe
@@ -349,13 +350,15 @@
                                             </span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="接口状态" show-overflow-tooltip prop="state">
+                                    <el-table-column label="接口状态" prop="state" width="180px" id="state">
                                         <template slot-scope="scope">
-                                            <el-input size="mini" :placeholder="scope.row.state" v-model="scope.row.state"></el-input>
+                                            <el-input size="mini" style="display: none;margin: 0;padding: 0"
+                                                      :placeholder="scope.row.state"
+                                                      v-model="scope.row.state"></el-input>
                                             <span class="span" style="display: block">
-                                               {%verbatim%}
-                                                  {{formatStateNode(scope.row.state}}
-                                               {%endverbatim%}
+                                                {%verbatim%}
+                                                {{formatState(scope.row)}}
+                                                {%endverbatim%}
                                             </span>
                                         </template>
                                     </el-table-column>
@@ -1013,11 +1016,7 @@
                 return row[property] === value;
             },
             getOutSql(index, row) {
-                var nodeTable = document.getElementById('nodeTable');
-                var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row")[index];
-                if (currentRow.getElementsByClassName("saveNode")[0].style.display==='block') {
-                    currentRow.getElementsByClassName("saveNode")[0].click();
-                }
+
                 this.loading = true;
                 var dataPost = {"node_id": row.pk};
                 this.$http.post('http://172.16.10.172:8000/getOutSql', dataPost).then(
@@ -1042,11 +1041,7 @@
                 )
             },
             getPreSql(index, row) {
-                var nodeTable = document.getElementById('nodeTable');
-                var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row")[index];
-                if (currentRow.getElementsByClassName("saveNode")[0].style.display==='block') {
-                    currentRow.getElementsByClassName("saveNode")[0].click();
-                }
+
                 this.loading = true;
                 var dataPost = {"node_id": row.pk};
                 this.$http.post('http://172.16.10.172:8000/getPreSql', dataPost).then(
@@ -1071,11 +1066,7 @@
                 )
             },
             getPostKey(index, row) {
-                var nodeTable = document.getElementById('nodeTable');
-                var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row")[index];
-                if (currentRow.getElementsByClassName("saveNode")[0].style.display==='block') {
-                    currentRow.getElementsByClassName("saveNode")[0].click();
-                }
+
                 this.loading = true;
                 var dataPost = {"node_id": row.pk};
                 this.$http.post('http://172.16.10.172:8000/getPostKey', dataPost).then(
@@ -1296,12 +1287,14 @@
                 console.log("index", index);
             },
             editNodeTable(index, row) {
+                this.$refs.nodeTable.setCurrentRow(row);
                 var nodeTable = document.getElementById('nodeTable');
                 var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row")[index];
                 console.log("editNodeTable-index", index);
                 console.log("editNodeTable-row", row);
                 console.log("editNodeTable-nodeTable", nodeTable);
                 console.log("editNodeTable-currentRow", currentRow);
+                console.log("editNodeTable-el-table__row", nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row"));
                 for (var i = 0; i < currentRow.children.length - 4; i++) {
                     var cell = currentRow.children[i].getElementsByClassName('cell')[0];
                     var elInput = cell.children[0];
@@ -1310,10 +1303,11 @@
                     elSpan.style.display = 'none';
                     cell.style.color = 'blue';
                 }
-                currentRow.children[11].getElementsByClassName('saveNode')[0].style.display = 'block';
-                currentRow.children[11].getElementsByClassName('editNode')[0].style.display = 'none';
+                currentRow.children[12].getElementsByClassName('saveNode')[0].style.display = 'block';
+                currentRow.children[12].getElementsByClassName('editNode')[0].style.display = 'none';
             },
             dbEditNodeTable(index, row) {
+                this.$refs.nodeTable.setCurrentRow(row);
                 var nodeTable = document.getElementById('nodeTable');
                 var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row")[0];
                 console.log("dbEditNodeTable-row",row);
@@ -1328,10 +1322,11 @@
                     elSpan.style.display = 'none';
                     cell.style.color = 'blue';
                 }
-                currentRow.children[11].getElementsByClassName('saveNode')[0].style.display = 'block';
-                currentRow.children[11].getElementsByClassName('editNode')[0].style.display = 'none';
+                currentRow.children[12].getElementsByClassName('saveNode')[0].style.display = 'block';
+                currentRow.children[12].getElementsByClassName('editNode')[0].style.display = 'none';
             },
             saveNodeEdit(index, row, event) {
+                this.$refs.nodeTable.setCurrentRow(row);
                 var nodeTable = document.getElementById('nodeTable');
                 var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row")[index];
                 console.log("saveNodeEdit-row", row);
@@ -1380,8 +1375,8 @@
                                 message: '恭喜你，保存成功',
                                 type: 'success'
                             });
-                            currentRow.children[11].getElementsByClassName('saveNode')[0].style.display = 'none';
-                            currentRow.children[11].getElementsByClassName('editNode')[0].style.display = 'block';
+                            currentRow.children[12].getElementsByClassName('saveNode')[0].style.display = 'none';
+                            currentRow.children[12].getElementsByClassName('editNode')[0].style.display = 'block';
                         } else {
                             this.$message({
                                 showClose: true,
@@ -1502,22 +1497,30 @@
             },
             expandChange(row, expandedRows, index) {
                 this.loading = true;
-                this.nodeFlowId = row.pk;
-                console.log("expandChange-nodeFlowId", this.nodeFlowId);
-                var dataPost = {"flow_id": row.pk};
-                this.$http.post('http://172.16.10.172:8000/getNodeData', dataPost).then(
-                    function (data) {
-                        this.nodeData = data.body;
-                    }
-                );
                 if (expandedRows.length > 1) {
                     this.expands = [];
                     if (row) {
                         this.expands.splice(index, 1);
                     }
                     this.$refs.flowTableRef.toggleRowExpansion(expandedRows[0]);
+                    this.nodeFlowId = row.pk;
+                    console.log("expandChange-nodeFlowId", this.nodeFlowId);
+                    var dataPost = {"flow_id": row.pk};
+                    this.$http.post('http://172.16.10.172:8000/getNodeData', dataPost).then(
+                        function (data) {
+                            this.nodeData = data.body;
+                        }
+                    );
                 } else {
                     this.expands = [];
+                    this.nodeFlowId = row.pk;
+                    console.log("expandChange-nodeFlowId", this.nodeFlowId);
+                    var dataPost = {"flow_id": row.pk};
+                    this.$http.post('http://172.16.10.172:8000/getNodeData', dataPost).then(
+                        function (data) {
+                            this.nodeData = data.body;
+                        }
+                    );
                 }
             },
             formatJson(row, index) {

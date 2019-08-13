@@ -26,8 +26,7 @@ def getFlowData(request):
                                 'priority': e.priority,
                                 'creater': e.creater,
                                 'state': e.state,
-                                'operation': "1",
-                            })
+                                'operation': "1"})
     return JsonResponse(flowDataList, safe=False)
 
 
@@ -59,8 +58,7 @@ def getNodeData(request):
             "pre_sql_out": e.pre_sql_out,
             'post_keys': e.post_keys,
             'post_keys_extractor': e.post_keys_extractor,
-            'post_keys_default': e.post_keys_default,
-        })
+            'post_keys_default': e.post_keys_default})
     print(nodeDataList)
     return JsonResponse(nodeDataList, safe=False)
 
@@ -256,7 +254,7 @@ def deleteFlow(request):
 @csrf_exempt
 def deleteNode(request):
     node_id = json.loads(request.body)["pk"]
-    print("node_id",node_id)
+    print("node_id", node_id)
     TestdataNode.objects.filter(node_id=node_id).delete()
     response = [{"code": "200", "msg": "接口删除成功"}]
     return JsonResponse(response, safe=False)
@@ -343,7 +341,7 @@ def editNode(request):
     sleep_time = json.loads(request.body)["sleep_time"]
     state = json.loads(request.body)["state"]
     update_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print("node_id",node_id)
+    print("node_id", node_id)
     TestdataNode.objects.filter(node_id=node_id).update(
         node_id=node_id,
         order_id=order_id,
