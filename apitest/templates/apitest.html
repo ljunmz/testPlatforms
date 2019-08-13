@@ -33,6 +33,38 @@
             text-overflow: ellipsis;
             -o-text-overflow: ellipsis;
             white-space: nowrap;
+            margin-left: 2px;
+            padding: 2px;
+        }
+
+        .popover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-top: 1px;
+            z-index: 1060;
+            display: block;
+            max-width: 276px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-style: normal;
+            font-weight: 500;
+            line-height: 2.4;
+            text-align: center;
+            text-align: start;
+            text-decoration: none;
+            text-shadow: none;
+            text-transform: none;
+            letter-spacing: normal;
+            word-break: normal;
+            word-spacing: normal;
+            white-space: normal;
+            line-break: auto;
+            font-size: .875rem;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: padding-box;
+
+            /* border-radius: .3rem; */
         }
 
     </style>
@@ -84,7 +116,7 @@
                         :data="flowData"
                         :header-cell-style="{background:'#836FFF',color:'#F0FFFF',padding:'3px'}"
                         border
-                        height="750px"
+                        height="800px"
                         stripe
                         size="mini"
                         highlight-current-row="true"
@@ -182,7 +214,7 @@
                                        @click.native.prevent="addFlowRow(flowData,scope.$index, scope.row)">添加
                             </el-button>
                             <el-button size="mini" type="danger" style="margin: 2px;padding: 5px"
-                                       @click="deleteFlowDialogVisible = true">删除
+                                       @click="deleteFlowRow(scope.$index,flowData)">删除
                             </el-button>
                             <el-dialog
                                     title="删除测试流"
@@ -192,7 +224,7 @@
                                 <span style="color: coral">确定删除当前测试流吗？删除后将不可恢复</span>
                                 <span slot="footer" class="dialog-footer">
                                      <el-button @click="deleteFlowDialogVisible = false">取 消</el-button>
-                                     <el-button type="primary" @click="deleteFlowRow(flowData)">确定删除</el-button>
+                                     <el-button type="primary" @click="deleteFlowOk(scope.$index,scope.row,flowData)">确定删除</el-button>
                                 </span>
                             </el-dialog>
                             <el-button size="mini" class="save"
@@ -213,18 +245,26 @@
                                            style="float: left;margin: 5px">
                                     +添加接口
                                 </el-button>
+                                <el-button size="mini" type="primary" @click="dialogTableVisible = true"
+                                           style="float: left;margin: 5px">
+                                    筛选负责人
+                                </el-button>
                                 <el-table
                                         ref="nodeTable"
                                         id="nodeTable"
+                                        class="nodeTable"
                                         :data="nodeData"
                                         stripe
                                         height="450px"
                                         size="mini"
+                                        @row-click="rowClick"
                                         @cell-dblclick="dbEditNodeTable"
                                         highlight-current-row="true"
                                         :header-cell-style="{background:'#606266',color:'#FFFFFF',padding:0}"
                                         cell-style="padding:2px,font-size: 10px">
-                                    <el-table-column label="步骤" width="80px" prop="order_id">
+                                    <el-table-column label="步骤" width="80px"
+                                                     sortable="true"
+                                                     prop="order_id">
                                         <template slot-scope="scope">
                                             <el-input size="mini" style="display: none"
                                                       :placeholder="scope.row.order_id"
@@ -272,22 +312,22 @@
                                     </span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="请求参数" width="180px" show-overflow-tooltip prop="parameter"
+                                    <el-table-column label="请求参数" width="190px" show-overflow-tooltip prop="parameter"
                                                      style="padding: 0">
                                         <template slot-scope="scope">
                                             <el-input size="mini" style="display: none"
                                                       :placeholder="scope.row.parameter"
                                                       v-model="scope.row.parameter"></el-input>
                                             <el-popover
-                                                    style="max-width:170px;margin: 5px"
+                                                    style="max-width:170px"
                                                     class="popover"
-                                                    width="400px"
+                                                    width="600px"
                                                     placement="left"
                                                     trigger="click">
                                                 <p style="margin: 10px;font-weight: bold;color: #2140ff">接口请求参数配置</p>
                                                 <el-input class="el-input-parameter" type="textarea"
                                                           :autosize="{ minRows: 5, maxRows: 20}"
-                                                          style="display: block;width: 400px"
+                                                          style="display: block;width: 600px"
                                                           :placeholder="scope.row.parameter"
                                                           v-model="scope.row.parameter"></el-input>
                                                 <el-button class="formatButton" type="primary"
@@ -302,10 +342,9 @@
                                                     取消
                                                 </el-button>
                                                 <span class="parameterSpan"
-                                                      style="margin:0"
-                                                      type="primary" size="mini"
+                                                      style="color: chocolate"
                                                       slot="reference"
-                                                      @click="getParameter(scope.$index, scope.row)">
+                                                      @click="getParameter(scope.$index, scope.row,scope.$event)">
                                                 {%verbatim%}
                                                 {{scope.row.parameter}}
                                                 {%endverbatim%}
@@ -350,7 +389,7 @@
                                             </span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="接口状态" prop="state" width="180px" id="state">
+                                    <el-table-column label="接口状态" prop="state" width="130px" id="state">
                                         <template slot-scope="scope">
                                             <el-input size="mini" style="display: none;margin: 0;padding: 0"
                                                       :placeholder="scope.row.state"
@@ -362,32 +401,61 @@
                                             </span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="前置sql" width="160px" class="preSqlbutton"
+                                    <el-table-column label="前置sql" width="140px" class="preSqlbutton"
+                                                     style="padding-bottom: 5px;"
                                                      show-overflow-tooltip
                                                      prop="preSql">
                                         <template slot-scope="scope">
                                             <el-popover
                                                     class="popover"
-                                                    placement="right"
-                                                    width="900px"
+                                                    border="0"
+                                                    placement="left"
+                                                    width="800px"
                                                     trigger="click">
                                                 <p style="margin: 10px;font-weight: bold;color: #2140ff">前置SQL查询信息配置</p>
-                                                <el-table
-                                                        class="preSqlTable"
-                                                        :data="preSqlData"
-                                                        border
-                                                        :header-cell-style="{background:'#606266',color:'#FFFFFF',padding:0}">
-                                                    <el-table-column width="100px" property="key" label="key"
-                                                                     style="font-weight: bold"></el-table-column>
-                                                    <el-table-column width="800px" property="value" label="value">
-                                                        <template slot-scope="scope">
-                                                            <el-input class="el-input-pre" type="textarea" autosize
-                                                                      style="display: block"
-                                                                      :placeholder="scope.row.value"
-                                                                      v-model="scope.row.value"></el-input>
-                                                        </template>
-                                                    </el-table-column>
-                                                </el-table>
+                                                <p style="font-weight: bold;">
+                                                <p></p>
+                                                <el-tag style="float:left;margin: 3px;font-weight: bold" size="medium">
+                                                    前置SQL查询开关
+                                                </el-tag>
+                                                <p></p>
+                                                <el-select size="mini" v-model="preSqlData.isexcute_pre_sql"
+                                                           style="margin: 1px;width: 750px"
+                                                           placeholder="请选择是否开启前置SQL查询">
+                                                    <el-option label="开启前置SQl查询" value=1></el-option>
+                                                    <el-option label="关闭前置SQl查询" value=0></el-option>
+                                                </el-select>
+                                                </p>
+                                                <p style="font-weight: bold;">
+                                                    <el-tag style="float:left;margin: 3px" size="medium">前置SQL查询语句
+                                                    </el-tag>
+                                                    <el-input class="el-input-parameter" type="textarea"
+                                                              :autosize="{ minRows: 3, maxRows: 20}"
+                                                              style="display: block;width: 750px"
+                                                              :placeholder="preSqlData.pre_sql_str"
+                                                              v-model="preSqlData.pre_sql_str">
+                                                    </el-input>
+                                                </p>
+                                                <p style="font-weight: bold;">
+                                                    <el-tag style="float:left;margin: 3px" size="medium">前置SQL的变量参数
+                                                    </el-tag>
+                                                    <el-input class="el-input-parameter" type="textarea"
+                                                              :autosize="{ minRows: 2, maxRows: 20}"
+                                                              style="display: block;width: 750px"
+                                                              :placeholder="preSqlData.pre_sql_para"
+                                                              v-model="preSqlData.pre_sql_para">
+                                                    </el-input>
+                                                </p>
+                                                <p style="font-weight: bold;">
+                                                    <el-tag style="float:left;margin: 1px" size="medium">前置SQl查询结果接收变量
+                                                    </el-tag>
+                                                    <el-input class="el-input-parameter" type="textarea"
+                                                              :autosize="{ minRows: 2, maxRows: 20}"
+                                                              style="display: block;width: 750px"
+                                                              :placeholder="preSqlData.pre_sql_out"
+                                                              v-model="preSqlData.pre_sql_out">
+                                                    </el-input>
+                                                </p>
                                                 <el-button type="primary" style="float: right;margin: 10px"
                                                            @click="savePreSql(preSqlData,scope.row)">保存修改
                                                 </el-button>
@@ -395,41 +463,71 @@
                                                            @click="pCancel()">
                                                     取消
                                                 </el-button>
-                                                <el-button style="margin:1px 5px 1px 5px;float: right"
-                                                           class="popoverButtonPre" type="primary" size="mini"
-                                                           slot="reference"
-                                                           @click.native.prevent="getPreSql(scope.$index, scope.row)">
+                                                <span
+                                                        style="color: chocolate"
+                                                        class="popoverButtonPre"
+                                                        slot="reference"
+                                                        @click="getPreSql(scope.$index, scope.row,scope.$event)">
                                                     {%verbatim%}
                                                     {{formatPreSql(scope.row,preSqlData)}}
                                                     {%endverbatim%}
-                                                </el-button>
+                                                </span>
                                             </el-popover>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="后置sql" width="130px" show-overflow-tooltip prop="outSql">
+                                    <el-table-column label="后置sql" width="110px" show-overflow-tooltip
+                                                     prop="outSqlData">
                                         <template slot-scope="scope">
                                             <el-popover
                                                     class="popover"
-                                                    placement="right"
-                                                    width="900px"
+                                                    border="0"
+                                                    placement="left"
+                                                    width="800px"
                                                     trigger="click">
-                                                <p style="margin: 10px;font-weight: bold;color: #2140ff">后置sql校验信息配置</p>
-                                                <el-table
-                                                        class="outSqlTable"
-                                                        :data="outSqlData"
-                                                        border
-                                                        :header-cell-style="{background:'#606266',color:'#FFFFFF',padding:0}">
-                                                    <el-table-column width="100px" property="key" label="key"
-                                                                     style="font-weight: bold"></el-table-column>
-                                                    <el-table-column width="800px" property="value" label="value">
-                                                        <template slot-scope="scope">
-                                                            <el-input class="el-input" type="textarea" autosize
-                                                                      style="display: block"
-                                                                      :placeholder="scope.row.value"
-                                                                      v-model="scope.row.value"></el-input>
-                                                        </template>
-                                                    </el-table-column>
-                                                </el-table>
+                                                <p style="margin: 10px;font-weight: bold;color: #2140ff">后置SQL校验信息配置</p>
+                                                <p style="font-weight: bold;">
+                                                <p></p>
+                                                <el-tag style="float:left;margin: 3px;font-weight: bold" size="medium">
+                                                    后置SQL校验开关
+                                                </el-tag>
+                                                <p></p>
+                                                <el-select size="mini" v-model="outSqlData.ischechdb"
+                                                           style="margin: 1px;width: 750px"
+                                                           placeholder="请选择是否开启后置SQL校验">
+                                                    <el-option label="开启后置SQL校验" value=1></el-option>
+                                                    <el-option label="关闭后置SQL校验" value=0></el-option>
+                                                </el-select>
+                                                </p>
+                                                <p style="font-weight: bold;">
+                                                    <el-tag style="float:left;margin: 3px" size="medium">后置SQL校验语句
+                                                    </el-tag>
+                                                    <el-input class="el-input-parameter" type="textarea"
+                                                              :autosize="{ minRows: 3, maxRows: 20}"
+                                                              style="display: block;width: 750px"
+                                                              :placeholder="outSqlData.sql_str"
+                                                              v-model="outSqlData.sql_str">
+                                                    </el-input>
+                                                </p>
+                                                <p style="font-weight: bold;">
+                                                    <el-tag style="float:left;margin: 3px" size="medium">后置SQL变量参数
+                                                    </el-tag>
+                                                    <el-input class="el-input-parameter" type="textarea"
+                                                              :autosize="{ minRows: 2, maxRows: 20}"
+                                                              style="display: block;width: 750px"
+                                                              :placeholder="outSqlData.sql_para"
+                                                              v-model="outSqlData.sql_para">
+                                                    </el-input>
+                                                </p>
+                                                <p style="font-weight: bold;">
+                                                    <el-tag style="float:left;margin: 1px" size="medium">后置SQL校验预期结果
+                                                    </el-tag>
+                                                    <el-input class="el-input-parameter" type="textarea"
+                                                              :autosize="{ minRows: 2, maxRows: 20}"
+                                                              style="display: block;width: 750px"
+                                                              :placeholder="outSqlData.expect_db"
+                                                              v-model="outSqlData.expect_db">
+                                                    </el-input>
+                                                </p>
                                                 <el-button type="primary" style="float: right;margin: 10px"
                                                            @click="saveOutSql(outSqlData,scope.row)">保存修改
                                                 </el-button>
@@ -437,41 +535,57 @@
                                                            @click="pCancel()">
                                                     取消
                                                 </el-button>
-                                                <el-button style="margin: 1px 5px 1px 5px"
-                                                           class="popoverButton" type="primary" size="mini"
-                                                           slot="reference"
-                                                           @click.native.prevent="getOutSql(scope.$index, scope.row)">
+                                                <span
+                                                        style="color: chocolate"
+                                                        class="popoverButton"
+                                                        slot="reference"
+                                                        @click="getOutSql(scope.$index, scope.row,scope.$event)">
                                                     {%verbatim%}
-                                                    {{formatOutSql(scope.row)}}
+                                                    {{formatOutSql(scope.row,outSqlData)}}
                                                     {%endverbatim%}
-                                                </el-button>
+                                                </span>
                                             </el-popover>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="后置变量提取" width="130px" show-overflow-tooltip prop="outSql">
+                                    <el-table-column label="后置变量提取" width="110px" show-overflow-tooltip
+                                                     prop="postKeyData">
                                         <template slot-scope="scope">
                                             <el-popover
                                                     class="popover"
-                                                    placement="right"
-                                                    width="900px"
+                                                    border="0"
+                                                    placement="left"
+                                                    width="800px"
                                                     trigger="click">
-                                                <p style="margin: 10px;font-weight: bold;color: #2140ff">后置提取变量信息配置</p>
-                                                <el-table
-                                                        class="outSqlTable"
-                                                        :data="postKeyData"
-                                                        border
-                                                        :header-cell-style="{background:'#606266',color:'#FFFFFF',padding:0}">
-                                                    <el-table-column width="100px" property="key" label="key"
-                                                                     style="font-weight: bold"></el-table-column>
-                                                    <el-table-column width="800px" property="value" label="value">
-                                                        <template slot-scope="scope">
-                                                            <el-input class="el-input" type="textarea" autosize
-                                                                      style="display: block"
-                                                                      :placeholder="scope.row.value"
-                                                                      v-model="scope.row.value"></el-input>
-                                                        </template>
-                                                    </el-table-column>
-                                                </el-table>
+                                                <p style="margin: 10px;font-weight: bold;color: #2140ff">后置变量提取信息配置</p>
+                                                <p style="font-weight: bold;">
+                                                    <el-tag style="float:left;margin: 3px" size="medium">后置提取变量名
+                                                    </el-tag>
+                                                    <el-input class="el-input-parameter"
+                                                              style="display: block;width: 750px"
+                                                              :placeholder="postKeyData.post_keys"
+                                                              v-model="postKeyData.post_keys">
+                                                    </el-input>
+                                                </p>
+                                                <p style="font-weight: bold;">
+                                                    <el-tag style="float:left;margin: 3px" size="medium">后置变量提取表达式
+                                                    </el-tag>
+                                                    <el-input class="el-input-parameter" type="textarea"
+                                                              :autosize="{ minRows: 1, maxRows: 20}"
+                                                              style="display: block;width: 750px"
+                                                              :placeholder="postKeyData.post_keys_extractor"
+                                                              v-model="postKeyData.post_keys_extractor">
+                                                    </el-input>
+                                                </p>
+                                                <p style="font-weight: bold;">
+                                                    <el-tag style="float:left;margin: 1px" size="medium">后置提取变量默认值
+                                                    </el-tag>
+                                                    <el-input class="el-input-parameter" type="textarea"
+                                                              :autosize="{ minRows: 1, maxRows: 20}"
+                                                              style="display: block;width: 750px"
+                                                              :placeholder="postKeyData.post_keys_default"
+                                                              v-model="postKeyData.post_keys_default">
+                                                    </el-input>
+                                                </p>
                                                 <el-button type="primary" style="float: right;margin: 10px"
                                                            @click="savePostKey(postKeyData,scope.row)">保存修改
                                                 </el-button>
@@ -479,14 +593,15 @@
                                                            @click="pCancel()">
                                                     取消
                                                 </el-button>
-                                                <el-button style="margin: 1px 5px 1px 5px"
-                                                           class="popoverButtonPost" type="primary" size="mini"
-                                                           slot="reference"
-                                                           @click.native.prevent="getPostKey(scope.$index, scope.row)">
+                                                <span
+                                                        style="color: chocolate"
+                                                        class="popoverButtonPost"
+                                                        slot="reference"
+                                                        @click="getPostKey(scope.$index, scope.row,scope.$event)">
                                                     {%verbatim%}
-                                                    {{formatPostKey(scope.row)}}
+                                                    {{formatPostKey(scope.row,postKeyData)}}
                                                     {%endverbatim%}
-                                                </el-button>
+                                                </span>
                                             </el-popover>
                                         </template>
                                     </el-table-column>
@@ -498,16 +613,16 @@
                                             </el-button>
                                             <el-button size="mini" type="danger"
                                                        style="margin: 2px;padding: 5px"
-                                                       @click="deleteNodeDialogVisible=true">删除
+                                                       @click="deleteNodeRow(scope.$index,nodeData)">删除
                                             </el-button>
                                             <el-button size="mini" class="saveNode"
                                                        style="display: none;margin: 2px;padding: 5px;float: left"
                                                        type="warning"
-                                                       @click="saveNodeEdit(scope.$index, scope.row)">保存
+                                                       @click="saveNodeEdit(scope.$index, scope.row,scope.$event)">保存
                                             </el-button>
                                             <el-button size="mini" class="editNode" type="primary"
                                                        style="margin: 2px;padding: 5px;float: left"
-                                                       @click="editNodeTable(scope.$index, scope.row)">编辑
+                                                       @click="editNodeTable(scope.$index, scope.row,scope.$event)">编辑
                                             </el-button>
                                             <el-dialog
                                                     title="删除接口"
@@ -516,7 +631,8 @@
                                                 <span style="color: coral">确定删除当前接口吗？删除后将不可恢复</span>
                                                 <span slot="footer" class="dialog-footer">
                                                     <el-button @click="deleteNodeDialogVisible = false">取 消</el-button>
-                                                    <el-button type="primary" @click="deleteNodeRow(scope.$index, nodeData)">确定删除</el-button>
+                                                    <el-button type="primary"
+                                                               @click="deleteNodeOk(scope.$index, nodeData)">确定删除</el-button>
                                                 </span>
                                             </el-dialog>
                                         </template>
@@ -528,7 +644,7 @@
                 </el-table>
             </template>
         </div>
-        <div style="margin-top:10px;margin-left: 0px">
+        <div style="margin-top:10px;margin-left: 0px;display: none">
             <el-pagination
                     background
                     layout="prev, pager, next"
@@ -536,22 +652,22 @@
             </el-pagination>
         </div>
     </div>
-    <el-dialog title="新增接口测试流" :visible.sync="dialogFormVisible">
-        <el-form :model="flowDataDefault">
-            <el-form-item label="测试流名称" :label-width="formLabelWidth">
-                <el-input v-model="flowDataDefault.flow_name" autocomplete="off"></el-input>
+    <el-dialog style="font-weight: bold"  title="新增接口测试流" :visible.sync="dialogFormVisible">
+        <el-form  :model="flowDataDefault">
+            <el-form-item  label="测试流名称" :label-width="formLabelWidth">
+                <el-input v-model="flowDataDefault.flow_name" autocomplete="off" placeholder="请输入接口测试流名称（功能模块名称）"></el-input>
             </el-form-item>
             <el-form-item label="测试账号" :label-width="formLabelWidth">
-                <el-input v-model="flowDataDefault.account" autocomplete="off"></el-input>
+                <el-input v-model="flowDataDefault.account" autocomplete="off" placeholder="请输入测试账号（最好测试环境和线上账号一致）"></el-input>
             </el-form-item>
             <el-form-item label="测试账号密码" :label-width="formLabelWidth">
-                <el-input v-model="flowDataDefault.password" autocomplete="off"></el-input>
+                <el-input v-model="flowDataDefault.password" autocomplete="off"  placeholder="请输入测试账号密码"></el-input>
             </el-form-item>
             <el-form-item label="优先级" :label-width="formLabelWidth">
-                <el-input v-model="flowDataDefault.priority" autocomplete="off"></el-input>
+                <el-input v-model="flowDataDefault.priority" autocomplete="off" placeholder="请设置执行优先级（预留字段）"></el-input>
             </el-form-item>
             <el-form-item label="负责人" :label-width="formLabelWidth">
-                <el-input v-model="flowDataDefault.creater" autocomplete="off"></el-input>
+                <el-input v-model="flowDataDefault.creater" autocomplete="off" placeholder="请输入模块自动化测试负责人"></el-input>
             </el-form-item>
             <el-form-item label="是否开启自动化" :label-width="formLabelWidth">
                 <el-select v-model="flowDataDefault.state" placeholder="请选择是否开启自动化">
@@ -740,6 +856,8 @@
         },
         data() {
             return {
+                deleteFlowId: '',
+                deleteNodeId: '',
                 nodeFlowId: '',
                 nodeDataDefault: [
                     {
@@ -766,17 +884,14 @@
                         "post_keys_default": "",
                     }
                 ],
-                flowDataDefault: [
-                    {
+                flowDataDefault: {
                         "pk": "",
-                        "flow_name": "请输入测试流名称",
-                        "account": "请输入测试账号",
-                        "password": "请输入测试账号密码",
-                        "priority": "请设置优先级",
-                        "creater": "请输入负责人",
-                        "state": "0",
-                    }
-                ],
+                        "flow_name": "",
+                        "account": "",
+                        "password": "",
+                        "priority": "1",
+                        "creater": "",
+                        "state": "0"},
                 activeIndex2: '3',
                 modal1: false,
                 modal2: false,
@@ -786,6 +901,7 @@
                 postKeyData: [],
                 preSqlData: [],
                 parameterData: [],
+                currentRow: '',
                 value: true,
                 visible: false,
                 dialogFormVisible: false,
@@ -802,28 +918,27 @@
                 this.loading = true;
                 var dataPost = {
                     "node_id": row.pk,
-                    "post_keys": postKeyData[0].value,
-                    "post_keys_extractor": postKeyData[1].value,
-                    "post_keys_default": postKeyData[2].value
+                    "post_keys": postKeyData.post_keys,
+                    "post_keys_extractor": postKeyData.post_keys_extractor,
+                    "post_keys_default": postKeyData.post_keys_default
                 };
                 this.$http.post('http://172.16.10.172:8000/savePostKey', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         console.log("responData=", responData);
                         if (responData === 200 || responData === '200') {
-
-                            row.post_keys = postKeyData[0].value;
-                            row.post_keys_extractor = postKeyData[1].value;
-                            row.post_keys_default = postKeyData[2].value;
                             console.log("this.nodeData=", this.nodeData);
                             var nodeTable = document.getElementById('nodeTable');
                             var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row")[0];
-                            if (postKeyData[0].value != null && postKeyData[0].value > 0 && postKeyData[0].value !== "") {
+                            if (postKeyData.post_keys != null && postKeyData.post_keys > 0 && postKeyData.post_keys !== "") {
                                 currentRow.getElementsByClassName("popoverButtonPost")[0].innerHTML = '已提取后置变量';
                             } else {
                                 currentRow.getElementsByClassName("popoverButtonPost")[0].innerHTML = '未提取后置变量';
                             }
                             console.log("postKeyData=", this.postKeyData);
+                            row.post_keys = postKeyData.post_keys;
+                            row.post_keys_extractor = postKeyData.post_keys_extractor;
+                            row.post_keys_default = postKeyData.post_keys_default;
                             this.$message({
                                 showClose: true,
                                 message: '恭喜你，后置变量提取设置成功',
@@ -831,16 +946,11 @@
                             });
                             document.body.click();
                         } else {
-                            this.postKeyData = [{
-                                "key": "提取变量名",
-                                "value": row.post_keys
-                            }, {
-                                "key": "提取表达式",
-                                "value": row.post_keys_extractor
-                            }, {
-                                "key": "默认取值",
-                                "value": row.post_keys_default
-                            }];
+                            this.postKeyData = {
+                                "post_keys": row.post_keys,
+                                "post_keys_extractor": row.post_keys_extractor,
+                                "post_keys_default": row.post_keys_default
+                            };
                             this.$message({
                                 showClose: true,
                                 message: '很抱歉，后置变量提取设置失败',
@@ -886,10 +996,10 @@
                 this.loading = true;
                 var dataPost = {
                     "node_id": row.pk,
-                    "ischechdb": outSqlData[0].value,
-                    "sql_str": outSqlData[1].value,
-                    "sql_para": outSqlData[2].value,
-                    "expect_db": outSqlData[3].value,
+                    "ischechdb": outSqlData.ischechdb,
+                    "sql_str": outSqlData.sql_str,
+                    "sql_para": outSqlData.sql_para,
+                    "expect_db": outSqlData.expect_db
                 };
                 this.$http.post('http://172.16.10.172:8000/editOutSql', dataPost).then(
                     function (data) {
@@ -897,17 +1007,17 @@
                         if (responData === 200 || responData === '200') {
                             var nodeTable = document.getElementById('nodeTable');
                             var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row")[0];
-                            if (outSqlData[0].value === '1' || outSqlData[0].value === 1) {
+                            if (outSqlData.ischechdb === '1' || outSqlData.ischechdb === 1) {
                                 currentRow.getElementsByClassName("popoverButton")[0].innerHTML = '已开启SQL校验';
-                            } else if (outSqlData[0].value === '0' || outSqlData[0].value === 0) {
+                            } else if (outSqlData.ischechdb === '0' || outSqlData.ischechdb === 0) {
                                 currentRow.getElementsByClassName("popoverButton")[0].innerHTML = '已关闭SQL校验';
                             } else {
                                 currentRow.getElementsByClassName("popoverButton")[0].innerHTML = '未配置SQL校验';
                             }
-                            row.ischechdb = outSqlData[0].value;
-                            row.sql_str = outSqlData[1].value;
-                            row.sql_para = outSqlData[2].value;
-                            row.expect_db = outSqlData[3].value;
+                            row.ischechdb = outSqlData.ischechdb;
+                            row.sql_str = outSqlData.sql_str;
+                            row.sql_para = outSqlData.sql_para;
+                            row.expect_db = outSqlData.expect_db;
                             document.body.click();
                             this.$message({
                                 showClose: true,
@@ -915,19 +1025,12 @@
                                 type: 'success'
                             });
                         } else {
-                            this.outSqlData = [{
-                                "key": "是否开启",
-                                "value": row.ischechdb
-                            }, {
-                                "key": "SQL语句",
-                                "value": row.sql_str
-                            }, {
-                                "key": "传入参数",
-                                "value": row.sql_para
-                            }, {
-                                "key": "校验结果",
-                                "value": row.expect_db
-                            },];
+                            this.outSqlData = {
+                                "ischechdb": row.ischechdb,
+                                "sql_str": row.sql_str,
+                                "sql_para": row.sql_para,
+                                "expect_db": row.expect_db
+                            };
                             this.$message({
                                 showClose: true,
                                 message: '很遗憾，保存失败',
@@ -941,10 +1044,10 @@
                 this.loading = true;
                 var dataPost = {
                     "node_id": row.pk,
-                    "isexcute_pre_sql": preSqlData[0].value,
-                    "pre_sql_str": preSqlData[1].value,
-                    "pre_sql_para": preSqlData[2].value,
-                    "pre_sql_out": preSqlData[3].value,
+                    "isexcute_pre_sql": preSqlData.isexcute_pre_sql,
+                    "pre_sql_str": preSqlData.pre_sql_str,
+                    "pre_sql_para": preSqlData.pre_sql_para,
+                    "pre_sql_out": preSqlData.pre_sql_out,
                 };
                 this.$http.post('http://172.16.10.172:8000/editPreSql', dataPost).then(
                     function (data) {
@@ -952,17 +1055,17 @@
                         if (responData === 200 || responData === '200') {
                             var nodeTable = document.getElementById('nodeTable');
                             var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row")[0];
-                            if (preSqlData[0].value === '1' || preSqlData[0].value === 1) {
+                            if (preSqlData.isexcute_pre_sql === '1' || preSqlData.isexcute_pre_sql === 1) {
                                 currentRow.getElementsByClassName("popoverButtonPre")[0].innerHTML = '已开启前置SQL查询';
-                            } else if (preSqlData[0].value === '0' || preSqlData[0].value === 0) {
+                            } else if (preSqlData.isexcute_pre_sql === '0' || preSqlData.isexcute_pre_sql === 0) {
                                 currentRow.getElementsByClassName("popoverButtonPre")[0].innerHTML = '已关闭前置SQL查询';
                             } else {
                                 currentRow.getElementsByClassName("popoverButtonPre")[0].innerHTML = '未配置前置SQL校验';
                             }
-                            row.isexcute_pre_sql = preSqlData[0].value;
-                            row.pre_sql_str = preSqlData[1].value;
-                            row.pre_sql_para = preSqlData[2].value;
-                            row.pre_sql_out = preSqlData[3].value;
+                            row.isexcute_pre_sql = preSqlData.isexcute_pre_sql;
+                            row.pre_sql_str = preSqlData.pre_sql_str;
+                            row.pre_sql_para = preSqlData.pre_sql_para;
+                            row.pre_sql_out = preSqlData.pre_sql_out;
                             document.body.click();
                             this.$message({
                                 showClose: true,
@@ -970,19 +1073,12 @@
                                 type: 'success'
                             });
                         } else {
-                            this.preSqlData = [{
-                                "key": "是否开启",
-                                "value": row.isexcute_pre_sql
-                            }, {
-                                "key": "SQL语句",
-                                "value": row.pre_sql_str
-                            }, {
-                                "key": "传入参数",
-                                "value": row.pre_sql_para
-                            }, {
-                                "key": "接收参数",
-                                "value": row.pre_sql_out
-                            },];
+                            this.preSqlData = {
+                                "isexcute_pre_sql": row.isexcute_pre_sql,
+                                "pre_sql_str": row.pre_sql_str,
+                                "pre_sql_para": row.pre_sql_para,
+                                "pre_sql_out": row.pre_sql_out
+                            };
                             this.$message({
                                 showClose: true,
                                 message: '很遗憾，保存失败',
@@ -1002,10 +1098,10 @@
                 return row.ischechdb === 1 || row.ischechdb === '1' ? '已开启SQL校验' : row.ischechdb === 0 || row.ischechdb === '0' ? '已关闭SQL校验' : '未配置SQL校验'
             },
             formatStateNode: function (row, column) {
-                console.log("row",row);
+                console.log("row", row);
                 return row.state === 1 || row.state === '1' ? '已开启接口' : row.state === 0 || row.state === '0' ? '已关闭接口' : '未设置接口状态'
             },
-            formatPostKey: function (row, column) {
+            formatPostKey: function (row, formatPostKey) {
                 return row.post_keys != null && row.post_keys.length > 0 && row.post_keys !== "" ? '已提取后置变量' : '未提取后置变量';
             },
             handleSelect(key, keyPath) {
@@ -1015,80 +1111,75 @@
                 const property = column['prop'];
                 return row[property] === value;
             },
-            getOutSql(index, row) {
-
+            getOutSql(index, row, even) {
+                this.currentRow = document.getElementById('nodeTable').getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row ")[0];
+                console.log('getOutSql-index', index);
+                console.log('getOutSql-this.currentRow', this.currentRow);
+                this.outSqlData = '';
                 this.loading = true;
                 var dataPost = {"node_id": row.pk};
                 this.$http.post('http://172.16.10.172:8000/getOutSql', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
-                        this.outSqlData = [{
-                            "key": "是否开启",
-                            "value": responData[0].ischechdb
-                        }, {
-                            "key": "SQL语句",
-                            "value": responData[0].sql_str
-                        }, {
-                            "key": "传入参数",
-                            "value": responData[0].sql_para
-                        }, {
-                            "key": "校验结果",
-                            "value": responData[0].expect_db
-                        },];
+                        this.outSqlData = {
+                            "ischechdb": responData[0].ischechdb,
+                            "sql_str": responData[0].sql_str,
+                            "sql_para": responData[0].sql_para,
+                            "expect_db": responData[0].expect_db
+                        };
                         console.log("outSqlData=", this.outSqlData);
                     }
                 )
             },
             getPreSql(index, row) {
-
+                this.currentRow = document.getElementById('nodeTable').getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row ")[0];
+                console.log('getPreSql-index', index);
+                console.log('getPreSql-row', row);
+                console.log('getPreSql-this.currentRow', this.currentRow);
                 this.loading = true;
+                this.preSqlData = '';
                 var dataPost = {"node_id": row.pk};
                 this.$http.post('http://172.16.10.172:8000/getPreSql', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
-                        this.preSqlData = [{
-                            "key": "是否开启",
-                            "value": responData[0].isexcute_pre_sql
-                        }, {
-                            "key": "SQL语句",
-                            "value": responData[0].pre_sql_str
-                        }, {
-                            "key": "传入参数",
-                            "value": responData[0].pre_sql_para
-                        }, {
-                            "key": "接收参数",
-                            "value": responData[0].pre_sql_out
-                        },];
+                        this.preSqlData = {
+                            "isexcute_pre_sql": responData[0].isexcute_pre_sql,
+                            "pre_sql_str": responData[0].pre_sql_str,
+                            "pre_sql_para": responData[0].pre_sql_para,
+                            "pre_sql_out": responData[0].pre_sql_out
+                        };
                         console.log("preSqlData=", this.preSqlData);
                     }
                 )
             },
             getPostKey(index, row) {
-
+                this.currentRow = document.getElementById('nodeTable').getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row ")[0];
+                console.log('getPostKey-index', index);
+                console.log('getPostKey-this.currentRow', this.currentRow);
+                this.postKeyData = '';
                 this.loading = true;
                 var dataPost = {"node_id": row.pk};
                 this.$http.post('http://172.16.10.172:8000/getPostKey', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
-                        this.postKeyData = [{
-                            "key": "提取变量名",
-                            "value": responData[0].post_keys
-                        }, {
-                            "key": "提取表达式",
-                            "value": responData[0].post_keys_extractor
-                        }, {
-                            "key": "默认取值",
-                            "value": responData[0].post_keys_default
-                        }];
-                        console.log("postKeyData=", this.postKeyData);
+                        this.postKeyData = {
+                            "post_keys": responData[0].post_keys,
+                            "post_keys_extractor": responData[0].post_keys_extractor,
+                            "post_keys_default": responData[0].post_keys_default
+                        };
+                        console.log("postKeyDataGet=", this.postKeyData);
                     }
                 )
             },
             getParameter(index, row) {
+                this.currentRow = document.getElementById('nodeTable').getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row ")[0];
                 this.loading = true;
+                this.parameterData = '';
+                console.log('getParameter-index', index);
+                console.log('getParameter-this.currentRow', this.currentRow);
                 var dataPost = {"node_id": row.pk};
                 this.$http.post('http://172.16.10.172:8000/getParameter', dataPost).then(
                     function (data) {
@@ -1149,64 +1240,6 @@
                     'post_keys_default': "",
                     "pk": nodeData.length + 1
                 })
-            },
-            deleteFlowRow(index, rows) {
-                console.log(rows);
-                console.log(index);
-                this.loading = true;
-                var dataPost = {
-                    "pk": rows[index].pk,
-                };
-                this.$http.post('http://172.16.10.172:8000/deleteFlow', dataPost).then(
-                    function (data) {
-                        var responData = data.status;
-                        if (responData === 200 || responData === '200') {
-                            this.$message({
-                                showClose: true,
-                                message: '恭喜你，删除成功',
-                                type: 'success'
-                            });
-                            rows.splice(index, 1);
-                            this.deleteFlowDialogVisible = false
-                        } else {
-                            this.$message({
-                                showClose: true,
-                                message: '很遗憾，删除失败，快查查原因吧',
-                                type: 'error'
-                            });
-                        }
-                    }
-                );
-
-            },
-            deleteNodeRow(index, rows) {
-                this.loading = true;
-                console.log(rows);
-                console.log(index);
-                console.log(rows[index].pk);
-                var dataPost = {
-                    "pk": rows[index].pk,
-                };
-                this.$http.post('http://172.16.10.172:8000/deleteNode', dataPost).then(
-                    function (data) {
-                        var responData = data.status;
-                        if (responData === 200 || responData === '200') {
-                            this.$message({
-                                showClose: true,
-                                message: '恭喜你，删除成功',
-                                type: 'success'
-                            });
-                            rows.splice(index, 1);
-                            this.deleteNodeDialogVisible = false
-                        } else {
-                            this.$message({
-                                showClose: true,
-                                message: '很遗憾，删除失败，快查查原因吧',
-                                type: 'error'
-                            });
-                        }
-                    }
-                );
             },
             saveFlowEdit(index, row) {
                 var flowTable = document.getElementById('flowTable');
@@ -1287,7 +1320,7 @@
                 console.log("index", index);
             },
             editNodeTable(index, row) {
-                this.$refs.nodeTable.setCurrentRow(row);
+                console.log("this.currentRow", this.currentRow);
                 var nodeTable = document.getElementById('nodeTable');
                 var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row")[index];
                 console.log("editNodeTable-index", index);
@@ -1307,11 +1340,11 @@
                 currentRow.children[12].getElementsByClassName('editNode')[0].style.display = 'none';
             },
             dbEditNodeTable(index, row) {
-                this.$refs.nodeTable.setCurrentRow(row);
                 var nodeTable = document.getElementById('nodeTable');
                 var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row")[0];
-                console.log("dbEditNodeTable-row",row);
-                console.log("dbEditNodeTable-index",index);
+                console.log("dbEditNodeTable-row=", row);
+                console.log("dbEditNodeTable-this.currentRow=", this.currentRow);
+                console.log("dbEditNodeTable-index=", index);
                 console.log("dbEditNodeTable-nodeTable=", nodeTable);
                 console.log("dbEditNodeTable-currentRow=", currentRow);
                 for (var i = 0; i < currentRow.children.length - 4; i++) {
@@ -1326,13 +1359,14 @@
                 currentRow.children[12].getElementsByClassName('editNode')[0].style.display = 'none';
             },
             saveNodeEdit(index, row, event) {
-                this.$refs.nodeTable.setCurrentRow(row);
                 var nodeTable = document.getElementById('nodeTable');
                 var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row")[index];
+                console.log("this.currentRow", this.currentRow);
                 console.log("saveNodeEdit-row", row);
                 console.log("saveNodeEdit-index", index);
                 console.log("saveNodeEdit-nodeTable", nodeTable);
                 console.log("saveNodeEdit-currentRow", currentRow);
+
                 for (var i = 0; i < currentRow.children.length - 4; i++) {
                     var cell = currentRow.children[i].getElementsByClassName('cell')[0];
                     var elInput = cell.children[0];
@@ -1386,6 +1420,8 @@
                         }
                     }
                 );
+                this.currentRow = currentRow;
+                console.log("saveNodeEdit-this.currentRow2", this.currentRow)
             },
             addFlowOk(flowDataDefault) {
                 var account = flowDataDefault.account;
@@ -1461,20 +1497,44 @@
                         'post_keys': nodeDataDefault[0].post_keys,
                         'post_keys_extractor': nodeDataDefault[0].post_keys_extractor,
                         'post_keys_default': nodeDataDefault[0].post_keys_default,
-                        "pk": this.nodeFlowId
                     };
                     console.log("DataPost=", dataPost);
                     this.$http.post('http://172.16.10.172:8000/addNode', dataPost).then(
                         function (data) {
                             console.log(dataPost);
                             var responData = data.status;
+                            var node_id = data.body[0].node_id;
                             if (responData === 200 || responData === '200') {
                                 this.$message({
                                     showClose: true,
                                     message: '恭喜你，添加成功',
                                     type: 'success'
                                 });
-                                this.nodeData.push(dataPost);
+                                this.nodeData.push(
+                                    {
+                                        "order_id": nodeDataDefault[0].order_id,
+                                        "flow_id": this.nodeFlowId,
+                                        "node_name": nodeDataDefault[0].node_name,
+                                        "method": nodeDataDefault[0].method,
+                                        "path": nodeDataDefault[0].path,
+                                        "parameter": nodeDataDefault[0].parameter,
+                                        "pre_keys": nodeDataDefault[0].pre_keys,
+                                        "sleep_time": nodeDataDefault[0].sleep_time,
+                                        "state": nodeDataDefault[0].state,
+                                        "expect_response": nodeDataDefault[0].expect_response,
+                                        "isexcute_pre_sql": nodeDataDefault[0].isexcute_pre_sql,
+                                        "pre_sql_out": nodeDataDefault[0].pre_sql_out,
+                                        "pre_sql_para": nodeDataDefault[0].pre_sql_para,
+                                        "pre_sql_str": nodeDataDefault[0].pre_sql_str,
+                                        "expect_db": nodeDataDefault[0].expect_db,
+                                        "ischechdb": nodeDataDefault[0].ischechdb,
+                                        "sql_para": nodeDataDefault[0].sql_para,
+                                        "sql_str": nodeDataDefault[0].sql_str,
+                                        'post_keys': nodeDataDefault[0].post_keys,
+                                        'post_keys_extractor': nodeDataDefault[0].post_keys_extractor,
+                                        'post_keys_default': nodeDataDefault[0].post_keys_default,
+                                        "pk": node_id
+                                    });
                             } else {
                                 this.$message({
                                     showClose: true,
@@ -1509,6 +1569,7 @@
                     this.$http.post('http://172.16.10.172:8000/getNodeData', dataPost).then(
                         function (data) {
                             this.nodeData = data.body;
+                            this.currentRow = '';
                         }
                     );
                 } else {
@@ -1519,6 +1580,7 @@
                     this.$http.post('http://172.16.10.172:8000/getNodeData', dataPost).then(
                         function (data) {
                             this.nodeData = data.body;
+                            this.currentRow = '';
                         }
                     );
                 }
@@ -1530,6 +1592,74 @@
                 } else {
                     row.parameter = JSON.stringify(JSON.parse(text), null, 2);
                 }
+            },
+            deleteFlowRow(index, rows) {
+                this.deleteFlowId = rows[index].pk;
+                rows.splice(index, 1);
+                this.deleteFlowDialogVisible=true;
+            },
+            deleteNodeRow(index, rows) {
+                this.deleteNodeId = rows[index].pk;
+                rows.splice(index, 1);
+                this.deleteNodeDialogVisible=true;
+            },
+            deleteFlowOk() {
+                this.loading = true;
+                var dataPost = {
+                    "flow_id": this.deleteFlowId,
+                };
+                this.$http.post('http://172.16.10.172:8000/deleteFlow', dataPost).then(
+                    function (data) {
+                        var responData = data.status;
+                        if (responData === 200 || responData === '200') {
+                            this.$message({
+                                showClose: true,
+                                message: '恭喜你，删除成功',
+                                type: 'success'
+                            });
+                            this.deleteFlowDialogVisible = false
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，删除失败，快查查原因吧',
+                                type: 'error'
+                            });
+                        }
+                    }
+                );
+            },
+            deleteNodeOk() {
+                this.loading = true;
+                var dataPost = {
+                    "node_id": this.deleteNodeId,
+                };
+                this.$http.post('http://172.16.10.172:8000/deleteNode', dataPost).then(
+                    function (data) {
+                        var responData = data.status;
+                        if (responData === 200 || responData === '200') {
+                            this.$message({
+                                showClose: true,
+                                message: '恭喜你，删除成功',
+                                type: 'success'
+                            });
+                            this.deleteNodeDialogVisible = false
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，删除失败，快查查原因吧',
+                                type: 'error'
+                            });
+                        }
+                    }
+                );
+            },
+            rowClick(row, column, event) {
+                console.log("this.currentRow=", this.currentRow);
+                console.log("column=", column);
+                this.currentRow = document.getElementById('nodeTable').getElementsByClassName("current-row")[0];
+                console.log("this.currentRow2=", this.currentRow);
+                this.currentRow = document.getElementById('nodeTable').getElementsByClassName("current-row")[0];
+                console.log("this.currentRow3=", this.currentRow);
             }
         }
     })

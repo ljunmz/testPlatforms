@@ -45,14 +45,14 @@ def getNodeData(request):
             'method': e.method,
             'parameter': e.parameter,
             'expect_response': e.expect_response,
-            'state': e.state,
-            "ischechdb": e.ischechdb,
+            'state': str(e.state),
+            "ischechdb": str(e.ischechdb),
             "sql_str": e.sql_str,
             "sql_para": e.sql_para,
             "expect_db": e.expect_db,
             'pre_keys': e.pre_keys,
             'sleep_time': e.sleep_time,
-            "isexcute_pre_sql": e.isexcute_pre_sql,
+            "isexcute_pre_sql": str(e.isexcute_pre_sql),
             "pre_sql_str": e.pre_sql_str,
             "pre_sql_para": e.pre_sql_para,
             "pre_sql_out": e.pre_sql_out,
@@ -72,7 +72,7 @@ def getOutSql(request):
     outSqlDataList.insert(10000, {
         "pk": data[0].pk,
         "flow_id": data[0].flow_id,
-        "ischechdb": data[0].ischechdb,
+        "ischechdb": str(data[0].ischechdb),
         "sql_str": data[0].sql_str,
         "sql_para": data[0].sql_para,
         "expect_db": data[0].expect_db,
@@ -103,13 +103,14 @@ def editOutSql(request):
 @csrf_exempt
 def getPreSql(request):
     node_id = json.loads(request.body)["node_id"]
+    print(node_id)
     data = TestdataNode.objects.filter(node_id__exact=node_id)
     preSqlDataList = []
     print(data)
     preSqlDataList.insert(10000, {
         "pk": data[0].pk,
         "flow_id": data[0].flow_id,
-        "isexcute_pre_sql": data[0].isexcute_pre_sql,
+        "isexcute_pre_sql": str(data[0].isexcute_pre_sql),
         "pre_sql_str": data[0].pre_sql_str,
         "pre_sql_para": data[0].pre_sql_para,
         "pre_sql_out": data[0].pre_sql_out,
@@ -122,7 +123,8 @@ def getPreSql(request):
 @csrf_exempt
 def editPreSql(request):
     node_id = json.loads(request.body)["node_id"]
-    isexcute_pre_sql = json.loads(request.body)["isexcute_pre_sql"]
+    isexcute_pre_sql = int(json.loads(request.body)["isexcute_pre_sql"])
+    print(type(isexcute_pre_sql))
     pre_sql_str = json.loads(request.body)["pre_sql_str"]
     pre_sql_para = json.loads(request.body)["pre_sql_para"]
     pre_sql_out = json.loads(request.body)["pre_sql_out"]
@@ -140,8 +142,12 @@ def editPreSql(request):
 def savePostKey(request):
     node_id = json.loads(request.body)["node_id"]
     post_keys = json.loads(request.body)["post_keys"]
+    print(post_keys)
     post_keys_extractor = json.loads(request.body)["post_keys_extractor"]
+    print(post_keys_extractor)
     post_keys_default = json.loads(request.body)["post_keys_default"]
+    print(post_keys_default)
+
     TestdataNode.objects.filter(node_id=node_id).update(
         post_keys=post_keys,
         post_keys_extractor=post_keys_extractor,
@@ -244,7 +250,7 @@ def editFlow(request):
 
 @csrf_exempt
 def deleteFlow(request):
-    flow_id = json.loads(request.body)["pk"]
+    flow_id = json.loads(request.body)["flow_id"]
     print('flow_id=', flow_id)
     TestdataFlow.objects.filter(flow_id=flow_id).delete()
     response = [{"code": "200", "msg": "测试流删除成功"}]
@@ -253,7 +259,7 @@ def deleteFlow(request):
 
 @csrf_exempt
 def deleteNode(request):
-    node_id = json.loads(request.body)["pk"]
+    node_id = json.loads(request.body)["node_id"]
     print("node_id", node_id)
     TestdataNode.objects.filter(node_id=node_id).delete()
     response = [{"code": "200", "msg": "接口删除成功"}]
@@ -321,7 +327,7 @@ def addNode(request):
         create_time=create_time,
         update_time=update_time
     )
-    response = [{"code": "200", "msg": "接口添加成功"}]
+    response = [{"code": "200", "msg": "接口添加成功","node_id": node_id}]
     return JsonResponse(response, safe=False)
 
 
