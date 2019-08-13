@@ -108,6 +108,17 @@
     <div style="margin: 0 20px 0 20px;padding: 1px">
         <el-button size="small" type="primary" @click="dialogFormVisible = true" style="margin: 10px">+添加接口测试流
         </el-button>
+        <template>
+            <el-select v-model="filtrate" @change="filtrateCreater" placeholder="筛选负责人">
+                <el-option
+                        v-for="item in creater"
+                        :key="item.creater"
+                        :label="item.creater"
+                        :value="item.creater">
+                </el-option>
+            </el-select>
+        </template>
+
         <div>
             <template>
                 <el-table
@@ -244,10 +255,6 @@
                                 <el-button size="mini" type="primary" @click="dialogTableVisible = true"
                                            style="float: left;margin: 5px">
                                     +添加接口
-                                </el-button>
-                                <el-button size="mini" type="primary" @click="dialogTableVisible = true"
-                                           style="float: left;margin: 5px">
-                                    筛选负责人
                                 </el-button>
                                 <el-table
                                         ref="nodeTable"
@@ -856,6 +863,26 @@
         },
         data() {
             return {
+                filtrate:'',
+                creater:[{
+                    "creater":"柳军"
+                },{
+                    "creater":"陈俊波"
+                },{
+                    "creater":"崔庆用"
+                },{
+                    "creater":"余一鸣"
+                },{
+                    "creater":"陆金爱"
+                },{
+                    "creater":"刘鎏"
+                },{
+                    "creater":"周国庆"
+                },{
+                    "creater":"余伟鹏"
+                },{
+                    "creater":"全部负责人"
+                }],
                 deleteFlowId: '',
                 deleteNodeId: '',
                 nodeFlowId: '',
@@ -894,6 +921,7 @@
                         "state": "0"},
                 activeIndex2: '3',
                 modal1: false,
+                search: '',
                 modal2: false,
                 flowData: [],
                 nodeData: [],
@@ -1660,6 +1688,26 @@
                 console.log("this.currentRow2=", this.currentRow);
                 this.currentRow = document.getElementById('nodeTable').getElementsByClassName("current-row")[0];
                 console.log("this.currentRow3=", this.currentRow);
+            },
+            filtrateCreater(){
+                var dataPost = {
+                    "creater": this.filtrate,
+                };
+                this.$http.post('http://172.16.10.172:8000/getCreater', dataPost).then(
+                    function (data) {
+                        var responData = data.status;
+                        if (responData === 200 || responData === '200') {
+                           this.flowData = data.body;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，筛选失败',
+                                type: 'error'
+                            });
+                        }
+                    }
+                );
+
             }
         }
     })

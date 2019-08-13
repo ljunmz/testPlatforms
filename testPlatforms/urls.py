@@ -19,7 +19,7 @@ from django.urls import path
 from django.views.static import serve
 
 from apitest.views import apitest, getFlowData, getNodeData, getOutSql, getPreSql, getPostKey, getParameter, addFlow, \
-    editFlow, deleteFlow, addNode, editNode, savePostKey, editParameter, deleteNode, editOutSql, editPreSql
+    editFlow, deleteFlow, addNode, editNode, savePostKey, editParameter, deleteNode, editOutSql, editPreSql, getCreater
 from testPlatforms import settings
 
 urlpatterns = [
@@ -41,5 +41,6 @@ urlpatterns = [
     url(r'^editParameter', editParameter),
     url(r'^editOutSql', editOutSql),
     url(r'^editPreSql', editPreSql),
+    url(r'^getCreater', getCreater),
     # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_URL}),
 ]

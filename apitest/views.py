@@ -173,6 +173,28 @@ def getPostKey(request):
     print(postKeyDataList)
     return JsonResponse(postKeyDataList, safe=False)
 
+@csrf_exempt
+def getCreater(request):
+    creater = json.loads(request.body)["creater"]
+
+    if creater == "全部负责人":
+        data = TestdataFlow.objects.all()
+    else:
+        data = TestdataFlow.objects.filter(creater__exact=creater)
+    flowDataListForCreater = []
+    for e in data:
+        flowDataListForCreater.insert(10000,
+                            {
+                                'pk': e.pk,
+                                'flow_name': e.flow_name,
+                                'account': e.account,
+                                'password': e.password,
+                                'priority': e.priority,
+                                'creater': e.creater,
+                                'state': e.state,
+                                'operation': 1})
+    print(flowDataListForCreater)
+    return JsonResponse(flowDataListForCreater, safe=False)
 
 @csrf_exempt
 def getParameter(request):
@@ -264,6 +286,8 @@ def deleteNode(request):
     TestdataNode.objects.filter(node_id=node_id).delete()
     response = [{"code": "200", "msg": "接口删除成功"}]
     return JsonResponse(response, safe=False)
+
+
 
 
 @csrf_exempt
