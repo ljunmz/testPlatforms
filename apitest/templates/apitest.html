@@ -107,9 +107,9 @@
     </el-menu>
     <div style="margin: 0 20px 0 20px;padding: 1px">
         <el-button size="small" type="primary" @click="dialogFormVisible = true" style="margin: 10px">+添加接口测试流
-        </el-button>
+        </el-button >
         <template>
-            <el-select v-model="filtrate" @change="filtrateCreater" placeholder="筛选负责人">
+            <el-select size="small" v-model="filtrate" @change="filtrateCreater" placeholder="筛选负责人">
                 <el-option
                         v-for="item in creater"
                         :key="item.creater"
@@ -118,7 +118,6 @@
                 </el-option>
             </el-select>
         </template>
-
         <div>
             <template>
                 <el-table
@@ -247,6 +246,12 @@
                                        style="margin: 2px;padding: 5px;float: left"
                                        @click="editFlowTable(scope.$index, scope.row)">编辑
                             </el-button>
+                            <el-button size="mini" class="save"
+                                       style="display: none;margin: 2px;padding: 5px;float: left"
+                                       type="warning"
+                                       @click="action(scope.row)">运行
+                            </el-button>
+
                         </template>
                     </el-table-column>
                     <el-table-column type="expand" width="140px" label="展开详情">
@@ -262,7 +267,7 @@
                                         class="nodeTable"
                                         :data="nodeData"
                                         stripe
-                                        height="450px"
+                                        height="550px"
                                         size="mini"
                                         @row-click="rowClick"
                                         @cell-dblclick="dbEditNodeTable"
@@ -283,7 +288,7 @@
                                     </span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="接口名称" show-overflow-tooltip prop="node_name">
+                                    <el-table-column label="接口名称" width="220px" show-overflow-tooltip prop="node_name">
                                         <template slot-scope="scope">
                                             <el-input size="mini" style="display: none"
                                                       :placeholder="scope.row.node_name"
@@ -319,7 +324,7 @@
                                     </span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="请求参数" width="190px" show-overflow-tooltip prop="parameter"
+                                    <el-table-column label="请求参数" width="180px" show-overflow-tooltip prop="parameter"
                                                      style="padding: 0">
                                         <template slot-scope="scope">
                                             <el-input size="mini" style="display: none"
@@ -396,7 +401,7 @@
                                             </span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="接口状态" prop="state" width="130px" id="state">
+                                    <el-table-column label="接口状态" prop="state" width="100px" id="state">
                                         <template slot-scope="scope">
                                             <el-input size="mini" style="display: none;margin: 0;padding: 0"
                                                       :placeholder="scope.row.state"
@@ -604,10 +609,8 @@
                                                         style="color: chocolate"
                                                         class="popoverButtonPost"
                                                         slot="reference"
+                                                        v-text="formatPostKey(scope.row,postKeyData)"
                                                         @click="getPostKey(scope.$index, scope.row,scope.$event)">
-                                                    {%verbatim%}
-                                                    {{formatPostKey(scope.row,postKeyData)}}
-                                                    {%endverbatim%}
                                                 </span>
                                             </el-popover>
                                         </template>
@@ -659,16 +662,18 @@
             </el-pagination>
         </div>
     </div>
-    <el-dialog style="font-weight: bold"  title="新增接口测试流" :visible.sync="dialogFormVisible">
-        <el-form  :model="flowDataDefault">
-            <el-form-item  label="测试流名称" :label-width="formLabelWidth">
-                <el-input v-model="flowDataDefault.flow_name" autocomplete="off" placeholder="请输入接口测试流名称（功能模块名称）"></el-input>
+    <el-dialog style="font-weight: bold" title="新增接口测试流" :visible.sync="dialogFormVisible">
+        <el-form :model="flowDataDefault">
+            <el-form-item label="测试流名称" :label-width="formLabelWidth">
+                <el-input v-model="flowDataDefault.flow_name" autocomplete="off"
+                          placeholder="请输入接口测试流名称（功能模块名称）"></el-input>
             </el-form-item>
             <el-form-item label="测试账号" :label-width="formLabelWidth">
-                <el-input v-model="flowDataDefault.account" autocomplete="off" placeholder="请输入测试账号（最好测试环境和线上账号一致）"></el-input>
+                <el-input v-model="flowDataDefault.account" autocomplete="off"
+                          placeholder="请输入测试账号（最好测试环境和线上账号一致）"></el-input>
             </el-form-item>
             <el-form-item label="测试账号密码" :label-width="formLabelWidth">
-                <el-input v-model="flowDataDefault.password" autocomplete="off"  placeholder="请输入测试账号密码"></el-input>
+                <el-input v-model="flowDataDefault.password" autocomplete="off" placeholder="请输入测试账号密码"></el-input>
             </el-form-item>
             <el-form-item label="优先级" :label-width="formLabelWidth">
                 <el-input v-model="flowDataDefault.priority" autocomplete="off" placeholder="请设置执行优先级（预留字段）"></el-input>
@@ -848,14 +853,12 @@
             <el-button type="primary" @click="addNodeOk(nodeDataDefault)">确 定</el-button>
         </div>
     </el-dialog>
-
-
 </div>
 <script type="text/javascript">
     var vm = new Vue({
         el: '#app',
         mounted: function () {
-            this.$http.get('http://172.16.10.172:8000/getFlowData').then(
+            this.$http.get(this.url+'/getFlowData').then(
                 function (data) {
                     this.flowData = data.body;
                 }
@@ -863,26 +866,28 @@
         },
         data() {
             return {
-                filtrate:'',
-                creater:[{
-                    "creater":"柳军"
-                },{
-                    "creater":"陈俊波"
-                },{
-                    "creater":"崔庆用"
-                },{
-                    "creater":"余一鸣"
-                },{
-                    "creater":"陆金爱"
-                },{
-                    "creater":"刘鎏"
-                },{
-                    "creater":"周国庆"
-                },{
-                    "creater":"余伟鹏"
-                },{
-                    "creater":"全部负责人"
-                }],
+                url:'http://172.16.10.172:8000',
+                filtrate: '',
+                creater: [
+                    {
+                        "creater": "全部负责人"
+                    }, {
+                        "creater": "柳军"
+                    }, {
+                        "creater": "陈俊波"
+                    }, {
+                        "creater": "崔庆用"
+                    }, {
+                        "creater": "余一鸣"
+                    }, {
+                        "creater": "陆金爱"
+                    }, {
+                        "creater": "刘鎏"
+                    }, {
+                        "creater": "周国庆"
+                    }, {
+                        "creater": "余伟鹏"
+                    }],
                 deleteFlowId: '',
                 deleteNodeId: '',
                 nodeFlowId: '',
@@ -912,13 +917,14 @@
                     }
                 ],
                 flowDataDefault: {
-                        "pk": "",
-                        "flow_name": "",
-                        "account": "",
-                        "password": "",
-                        "priority": "1",
-                        "creater": "",
-                        "state": "0"},
+                    "pk": "",
+                    "flow_name": "",
+                    "account": "",
+                    "password": "",
+                    "priority": "1",
+                    "creater": "",
+                    "state": "0"
+                },
                 activeIndex2: '3',
                 modal1: false,
                 search: '',
@@ -950,7 +956,7 @@
                     "post_keys_extractor": postKeyData.post_keys_extractor,
                     "post_keys_default": postKeyData.post_keys_default
                 };
-                this.$http.post('http://172.16.10.172:8000/savePostKey', dataPost).then(
+                this.$http.post(this.url+'/savePostKey', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         console.log("responData=", responData);
@@ -992,7 +998,7 @@
             saveParameter(parameterData, row) {
                 this.loading = true;
                 var dataPost = {"node_id": row.pk, "parameter": row.parameter};
-                this.$http.post('http://172.16.10.172:8000/editParameter', dataPost).then(
+                this.$http.post(this.url+'/editParameter', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1029,7 +1035,7 @@
                     "sql_para": outSqlData.sql_para,
                     "expect_db": outSqlData.expect_db
                 };
-                this.$http.post('http://172.16.10.172:8000/editOutSql', dataPost).then(
+                this.$http.post(this.url+'/editOutSql', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1077,7 +1083,7 @@
                     "pre_sql_para": preSqlData.pre_sql_para,
                     "pre_sql_out": preSqlData.pre_sql_out,
                 };
-                this.$http.post('http://172.16.10.172:8000/editPreSql', dataPost).then(
+                this.$http.post(this.url+'/editPreSql', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1146,7 +1152,7 @@
                 this.outSqlData = '';
                 this.loading = true;
                 var dataPost = {"node_id": row.pk};
-                this.$http.post('http://172.16.10.172:8000/getOutSql', dataPost).then(
+                this.$http.post(this.url+'/getOutSql', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
@@ -1168,7 +1174,7 @@
                 this.loading = true;
                 this.preSqlData = '';
                 var dataPost = {"node_id": row.pk};
-                this.$http.post('http://172.16.10.172:8000/getPreSql', dataPost).then(
+                this.$http.post(this.url+'/getPreSql', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
@@ -1189,7 +1195,7 @@
                 this.postKeyData = '';
                 this.loading = true;
                 var dataPost = {"node_id": row.pk};
-                this.$http.post('http://172.16.10.172:8000/getPostKey', dataPost).then(
+                this.$http.post(this.url+'/getPostKey', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
@@ -1209,7 +1215,7 @@
                 console.log('getParameter-index', index);
                 console.log('getParameter-this.currentRow', this.currentRow);
                 var dataPost = {"node_id": row.pk};
-                this.$http.post('http://172.16.10.172:8000/getParameter', dataPost).then(
+                this.$http.post(this.url+'/getParameter', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
@@ -1290,7 +1296,7 @@
                     "state": row.state,
                     "pk": row.pk
                 };
-                this.$http.post('http://172.16.10.172:8000/editFlow', dataPost).then(
+                this.$http.post(this.url+'/editFlow', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1428,7 +1434,7 @@
                     'post_keys_default': row.post_keys_default,
                     "pk": row.pk
                 };
-                this.$http.post('http://172.16.10.172:8000/editNode', dataPost).then(
+                this.$http.post(this.url+'/editNode', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1472,7 +1478,7 @@
                         "state": state,
                         "pk": this.flowData.length + 1
                     };
-                    this.$http.post('http://172.16.10.172:8000/addFlow', dataPost).then(
+                    this.$http.post(this.url+'/addFlow', dataPost).then(
                         function (data) {
                             var responData = data.status;
                             if (responData === 200 || responData === '200') {
@@ -1527,7 +1533,7 @@
                         'post_keys_default': nodeDataDefault[0].post_keys_default,
                     };
                     console.log("DataPost=", dataPost);
-                    this.$http.post('http://172.16.10.172:8000/addNode', dataPost).then(
+                    this.$http.post(this.url+'/addNode', dataPost).then(
                         function (data) {
                             console.log(dataPost);
                             var responData = data.status;
@@ -1594,7 +1600,7 @@
                     this.nodeFlowId = row.pk;
                     console.log("expandChange-nodeFlowId", this.nodeFlowId);
                     var dataPost = {"flow_id": row.pk};
-                    this.$http.post('http://172.16.10.172:8000/getNodeData', dataPost).then(
+                    this.$http.post(this.url+'/getNodeData', dataPost).then(
                         function (data) {
                             this.nodeData = data.body;
                             this.currentRow = '';
@@ -1605,7 +1611,7 @@
                     this.nodeFlowId = row.pk;
                     console.log("expandChange-nodeFlowId", this.nodeFlowId);
                     var dataPost = {"flow_id": row.pk};
-                    this.$http.post('http://172.16.10.172:8000/getNodeData', dataPost).then(
+                    this.$http.post(this.url+'/getNodeData', dataPost).then(
                         function (data) {
                             this.nodeData = data.body;
                             this.currentRow = '';
@@ -1624,19 +1630,19 @@
             deleteFlowRow(index, rows) {
                 this.deleteFlowId = rows[index].pk;
                 rows.splice(index, 1);
-                this.deleteFlowDialogVisible=true;
+                this.deleteFlowDialogVisible = true;
             },
             deleteNodeRow(index, rows) {
                 this.deleteNodeId = rows[index].pk;
                 rows.splice(index, 1);
-                this.deleteNodeDialogVisible=true;
+                this.deleteNodeDialogVisible = true;
             },
             deleteFlowOk() {
                 this.loading = true;
                 var dataPost = {
                     "flow_id": this.deleteFlowId,
                 };
-                this.$http.post('http://172.16.10.172:8000/deleteFlow', dataPost).then(
+                this.$http.post(this.url+'/deleteFlow', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1661,7 +1667,7 @@
                 var dataPost = {
                     "node_id": this.deleteNodeId,
                 };
-                this.$http.post('http://172.16.10.172:8000/deleteNode', dataPost).then(
+                this.$http.post(this.url+'/deleteNode', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1689,15 +1695,15 @@
                 this.currentRow = document.getElementById('nodeTable').getElementsByClassName("current-row")[0];
                 console.log("this.currentRow3=", this.currentRow);
             },
-            filtrateCreater(){
+            filtrateCreater() {
                 var dataPost = {
                     "creater": this.filtrate,
                 };
-                this.$http.post('http://172.16.10.172:8000/getCreater', dataPost).then(
+                this.$http.post(this.url+'/getCreater', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
-                           this.flowData = data.body;
+                            this.flowData = data.body;
                         } else {
                             this.$message({
                                 showClose: true,

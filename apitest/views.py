@@ -1,9 +1,9 @@
 import datetime
 import json
+import os
 
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, render_to_response
-from django.urls import base
 from django.views.decorators.csrf import csrf_exempt
 from apitest.models import TestdataNode, TestdataFlow
 
@@ -289,7 +289,6 @@ def deleteNode(request):
 
 
 
-
 @csrf_exempt
 def addNode(request):
     flow_id = json.loads(request.body)["flow_id"]
@@ -389,3 +388,16 @@ def editNode(request):
     )
     response = [{"code": "200", "msg": "接口添加成功"}]
     return JsonResponse(response, safe=False)
+
+
+@csrf_exempt
+def action(request):
+    flow_name = json.loads(request.body)["flow_name"]
+    if flow_name == "all":
+        f = open("G:\\svn\\自动化测试\\API-Test\\业务流程-整合.jmx")
+    else:
+        print()
+
+
+
+
