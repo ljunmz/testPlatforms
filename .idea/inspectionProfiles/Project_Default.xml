@@ -14,7 +14,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="21">
+          <list size="24">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -36,6 +36,9 @@
             <item index="18" class="java.lang.String" itemvalue="el-dialog" />
             <item index="19" class="java.lang.String" itemvalue="el-form-item" />
             <item index="20" class="java.lang.String" itemvalue="el-pagination" />
+            <item index="21" class="java.lang.String" itemvalue="el-radio-button" />
+            <item index="22" class="java.lang.String" itemvalue="el-menu-item-group" />
+            <item index="23" class="java.lang.String" itemvalue="el-radio-group" />
           </list>
         </value>
       </option>
@@ -47,6 +50,15 @@
           <option value="W605" />
           <option value="E303" />
           <option value="E305" />
+          <option value="W292" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N806" />
+          <option value="N802" />
         </list>
       </option>
     </inspection_tool>

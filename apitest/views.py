@@ -6,6 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from apitest.models import TestdataNode, TestdataFlow
+from apitest.readJmx import changeAciton
 
 
 @csrf_exempt
@@ -173,6 +174,7 @@ def getPostKey(request):
     print(postKeyDataList)
     return JsonResponse(postKeyDataList, safe=False)
 
+
 @csrf_exempt
 def getCreater(request):
     creater = json.loads(request.body)["creater"]
@@ -184,17 +186,18 @@ def getCreater(request):
     flowDataListForCreater = []
     for e in data:
         flowDataListForCreater.insert(10000,
-                            {
-                                'pk': e.pk,
-                                'flow_name': e.flow_name,
-                                'account': e.account,
-                                'password': e.password,
-                                'priority': e.priority,
-                                'creater': e.creater,
-                                'state': e.state,
-                                'operation': 1})
+                                      {
+                                          'pk': e.pk,
+                                          'flow_name': e.flow_name,
+                                          'account': e.account,
+                                          'password': e.password,
+                                          'priority': e.priority,
+                                          'creater': e.creater,
+                                          'state': e.state,
+                                          'operation': 1})
     print(flowDataListForCreater)
     return JsonResponse(flowDataListForCreater, safe=False)
+
 
 @csrf_exempt
 def getParameter(request):
@@ -288,7 +291,6 @@ def deleteNode(request):
     return JsonResponse(response, safe=False)
 
 
-
 @csrf_exempt
 def addNode(request):
     flow_id = json.loads(request.body)["flow_id"]
@@ -350,7 +352,7 @@ def addNode(request):
         create_time=create_time,
         update_time=update_time
     )
-    response = [{"code": "200", "msg": "接口添加成功","node_id": node_id}]
+    response = [{"code": "200", "msg": "接口添加成功", "node_id": node_id}]
     return JsonResponse(response, safe=False)
 
 
@@ -391,13 +393,12 @@ def editNode(request):
 
 
 @csrf_exempt
-def action(request):
-    flow_name = json.loads(request.body)["flow_name"]
-    if flow_name == "all":
-        f = open("G:\\svn\\自动化测试\\API-Test\\业务流程-整合.jmx")
-    else:
-        print()
-
-
-
-
+def actionFlow(request):
+    flow_id = json.loads(request.body)["flow_id"]
+    newStr = 'flow_id = ' + str(flow_id)
+    path = "G:\\svn\\自动化测试\\API-Test\\"
+    changeAciton(newStr, path)
+    os.chdir(path)
+    os.system("ant")
+    response = [{"code": "200", "msg": "接口触发允许成功，请查收邮件"}]
+    return JsonResponse(response, safe=False)
