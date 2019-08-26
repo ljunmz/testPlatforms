@@ -32,4 +32,3 @@ def addEmail(email, path):
 
 
 
-addEmail("cuiqingyong@jielema.com,yuyiming@jielema.com,cuiqingyong@jielema.com", "G:\\svn\\自动化测试\\API-Test\\")

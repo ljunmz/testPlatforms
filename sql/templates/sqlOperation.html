@@ -2,9 +2,243 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <!-- 引入vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+
+    <!-- 引入element -->
+    <script src="//unpkg.com/element-ui@2.11.0/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入vue-resource -->
+    <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.js" type="text/javascript" charset="utf-8"></script>
+    <style lang="scss">
+        .el-tooltip__popper {
+            max-width: 40%
+        }
+        .el-menu-vertical-demo:not(.el-menu--collapse) {
+            width: 200px;
+            min-height: 400px;
+        }
+        .el-popover {
+            background: rgb(177, 176, 176) !important;
+        }
+        span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-left: 2px;
+            padding: 2px;
+        }
+        .popover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-top: 1px;
+            z-index: 1060;
+            display: block;
+            max-width: 276px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-style: normal;
+            font-weight: 500;
+            line-height: 2.4;
+            text-align: center;
+            text-align: start;
+            text-decoration: none;
+            text-shadow: none;
+            text-transform: none;
+            letter-spacing: normal;
+            word-break: normal;
+            word-spacing: normal;
+            white-space: normal;
+            line-break: auto;
+            font-size: .875rem;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: padding-box;
+        }
+
+    </style>
+    <title>时光序数据库操作</title>
 </head>
-<body>
+<body style="background-color: #b4c1c1">
+<div id="app" style="margin: 0">
+    <el-menu
+            :default-active="activeIndex"
+            class="el-menu-demo"
+            mode="horizontal"
+            @select="handleSelect"
+            background-color="#545c64"
+            text-color="#fff"
+            active-text-color="#ffd04b">
+        <el-menu-item index="1" style="color: #21aeff;font-weight: bold;font-size: 18px">时光序测试平台</el-menu-item>
+        <el-menu-item index="1">首页</el-menu-item>
+        <el-submenu index="2">
+            <template slot="title">测试用例管</template>
+            <el-menu-item index="2-1">Android测试用例</el-menu-item>
+            <el-menu-item index="2-2">IOS测试用例</el-menu-item>
+            <el-menu-item index="2-3">web端测试用例</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="3"><a href="/index">接口自动化管理</a></el-menu-item>
+        <el-menu-item index="5">测试计划管理</el-menu-item>
+        <el-menu-item index="6">缺陷统计</el-menu-item>
+        <el-menu-item index="7">测试报告</el-menu-item>
+        <el-menu-item index="8"><a href="/sqlIndex">SqL操作</a></el-menu-item>
+        <el-menu-item index="9">Redis操作</el-menu-item>
+        <el-menu-item index="10">测试资源</el-menu-item>
+        <el-menu-item index="11">测试技术分享</el-menu-item>
+        <button type="button" class="btn btn-danger" style="line-height: 2.8;position: absolute;right: 1px;">退出登陆
+        </button>
+    </el-menu>
+    <el-row style="margin: 20px">
+        <el-col :span="12"  style=";border:2px solid #f0903c;border-bottom:0;border-right:0">
+            <el-divider content-position="center"  >用户信息查询</el-divider>
+            <div class="grid-content bg-purple" style="margin: 20px ;border:1px solid #f0ebeb" >
+                <p style="font-weight: bold">
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="phone"></el-input>
+                    <el-button style="margin: 5px" type="success">查询用户信息</el-button>
+                    <span style="display: block;color: #3e50f0">
+                        用户ID：{{UserId}}<br>
+                        昵称：{{UserId}}<br>
+                        绑定邮箱：{{UserId}}<br>
+                        短信验证码：{{UserId}}<br>
+                        邮箱验证码：{{UserId}}<br>
+                        绑定的QQ：{{UserId}}<br>
+                        绑定的微信：{{UserId}}<br>
+                    </span>
+                </p>
+            </div>
+            <div class="grid-content bg-purple" style="margin: 20px;border:1px solid #f0ebeb" >
+                <p style="font-weight: bold">
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入Token" v-model="phone"></el-input>
+                    <el-button style="margin: 5px" type="success">查询用户token</el-button>
+                    <span style="display: none;color: #3e50f0">
+                        UserId：{{UserId}}<br>
+                        deviceTagApp：{{UserId}}<br>
+                        登录时间：{{UserId}}<br>
+                    </span>
+                </p>
+            </div>
+            <el-divider content-position="center"  >账号注册</el-divider>
+            <div class="grid-content bg-purple" style="margin: 20px;border:1px solid #f0ebeb" >
+                <p style="font-weight: bold">
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="phone"></el-input>
+                    <el-button style="margin: 5px" type="success">注册</el-button>
+                    <el-button style="margin: 5px" type="primary">批量注册</el-button>
+                    <span style="display: block;color: #3e50f0">
+                        批量注册成功手机号如下：<br>
+                        {{phoneList}}
+                    </span>
+                </p>
+            </div>
+            <el-divider content-position="center"  >短信获取记录清除</el-divider>
+            <div class="grid-content bg-purple" style="margin: 20px;border:1px solid #f0ebeb" >
+                <p style="font-weight: bold">
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="phone"></el-input>
+                    <el-button style="margin: 5px" type="success">清除手机获取验证码记录</el-button>
+                </p>
+                <p style="font-weight: bold">
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入设备型号" v-model="phone"></el-input>
+                    <el-button style="margin: 5px" type="success">清除设备获取验证码记录</el-button>
+                </p>
+            </div>
+            <el-divider content-position="center"  >事项当日100条限制清除</el-divider>
+            <div class="grid-content bg-purple" style="margin: 20px;border:1px solid #f0ebeb" >
+                <p style="font-weight: bold">
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="phone"></el-input>
+                    <el-button style="margin: 5px" type="success">清除账号每日100条事项限制</el-button>
+                </p>
+            </div>
+        </el-col>
+        <el-col :span="12" style=";border:2px solid #eb9419;border-bottom:0 ">
+            <div class="grid-content bg-purple-light">
+                <el-divider content-position="center"  >事项查询</el-divider>
+                <div class="grid-content bg-purple" style="margin: 20px ;border:1px solid #f0ebeb" >
+                    <p style="font-weight: bold">
+                        <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入日程ID" v-model="phone"></el-input>
+                        <el-button style="margin: 5px" type="success">日程查询</el-button>
+                        <span style="display: none;color: #3e50f0">
+                        用户ID：{{UserId}}<br>
+                        日程标题：{{UserId}}<br>
+                        日程是否在回收站：{{UserId}}<br>
+                        日程是否删除：{{UserId}}<br>
+                        日程类型：{{UserId}}<br>
+                        日程是否打卡：{{UserId}}<br>
+                        日程重要程度：{{UserId}}<br>
+                        日程事项分类：{{UserId}}<br>
+                        日程提前提醒类型：{{UserId}}<br>
+                        日程提醒时间：{{UserId}}<br>
+                        日程创建时间：{{UserId}}<br>
+                    </span>
+                    </p>
+                </div>
+                <div class="grid-content bg-purple" style="margin: 20px ;border:1px solid #f0ebeb" >
+                    <p style="font-weight: bold">
+                        <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入清单ID" v-model="phone"></el-input>
+                        <el-button style="margin: 5px" type="success">清单查询</el-button>
+                        <span style="display: none;color: #3e50f0">
+                        用户ID：{{UserId}}<br>
+                        清单标题：{{UserId}}<br>
+                        清单是否在回收站：{{UserId}}<br>
+                        清单是否删除：{{UserId}}<br>
+                        清单类型：{{UserId}}<br>
+                        清单是否打卡：{{UserId}}<br>
+                        清单重要程度：{{UserId}}<br>
+                        清单事项分类：{{UserId}}<br>
+                    </span>
+                    </p>
+                </div>
+                <div class="grid-content bg-purple" style="margin: 20px ;border:1px solid #f0ebeb" >
+                    <p style="font-weight: bold">
+                        <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入子任务ID" v-model="phone"></el-input>
+                        <el-button style="margin: 5px" type="success">子任务查询</el-button>
+                        <span style="display: none;color: #3e50f0">
+                        用户ID：{{UserId}}<br>
+                        母任务ID：{{UserId}}<br>
+                        子任务标题：{{UserId}}<br>
+                        子任务是否删除：{{UserId}}<br>
+                        子任务是否打卡：{{UserId}}<br>
+                        子任务提醒时间：{{UserId}}<br>
+                    </span>
+                    </p>
+                </div>
+            </div>
+        </el-col>
+    </el-row>
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                url:'http://172.16.10.172:8000',
+                activeIndex: '8',
+                phone: "",
+                email: "",
+                phoneCode: "",
+                emailCode: "",
+                UserId: ""
+            }
+        },
+        methods: {
+            onSubmit() {
+                console.log('submit!');
+            },
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+
+        }
+    })
+</script>
 
 </body>
 </html>
