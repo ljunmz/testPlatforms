@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = '_vp2f(&o*2s32-wap(=4px9_1)07v3%zafk)+ddg_5w4sh$#u#'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -71,7 +69,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'testPlatforms.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -93,9 +90,33 @@ DATABASES = {
         'HOST': '47.112.0.183',
         'PORT': '3306'
 
+    },
+    'thirdparty': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'thirdparty',
+        'USER': 'planadmin',
+        'PASSWORD': 'pL%5^an3a$4in',
+        'HOST': '47.112.0.183',
+        'PORT': '3306'
+    },
+    'user': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'user',
+        'USER': 'planadmin',
+        'PASSWORD': 'pL%5^an3a$4in',
+        'HOST': '47.112.0.183',
+        'PORT': '3306'
+    },
+    'plan': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'plan',
+        'USER': 'planadmin',
+        'PASSWORD': 'pL%5^an3a$4in',
+        'HOST': '47.112.0.183',
+        'PORT': '3306'
     }
-}
 
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -115,7 +136,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -130,7 +150,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/

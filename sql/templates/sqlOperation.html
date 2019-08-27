@@ -99,20 +99,20 @@
         </button>
     </el-menu>
     <el-row style="margin: 20px">
-        <el-col :span="12"  style=";border:2px solid #f0903c;border-bottom:0;border-right:0">
+        <el-col :span="12"  style=";border:2px solid #f0903c" v-loading="actionLoading" element-loading-text="加载中，请稍后" >
             <el-divider content-position="center"  >用户信息查询</el-divider>
             <div class="grid-content bg-purple" style="margin: 20px ;border:1px solid #f0ebeb" >
                 <p style="font-weight: bold">
-                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="phone"></el-input>
-                    <el-button style="margin: 5px" type="success">查询用户信息</el-button>
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="userPhone"></el-input>
+                    <el-button style="margin: 5px" type="success" @click="getUserInfo">查询用户信息</el-button>
                     <span style="display: block;color: #3e50f0">
-                        用户ID：{{UserId}}<br>
-                        昵称：{{UserId}}<br>
-                        绑定邮箱：{{UserId}}<br>
-                        短信验证码：{{UserId}}<br>
-                        邮箱验证码：{{UserId}}<br>
-                        绑定的QQ：{{UserId}}<br>
-                        绑定的微信：{{UserId}}<br>
+                        {%verbatim%}
+                            用户ID：{{userInfo.user_id}}<br>
+                            昵称：{{userInfo.user_name}}<br>
+                            绑定邮箱：{{userInfo.email}}<br>
+                            短信验证码：{{userInfo.phoneCode}}<br>
+                            邮箱验证码：{{userInfo.emailCode}}<br>
+                        {%endverbatim%}
                     </span>
                 </p>
             </div>
@@ -128,10 +128,10 @@
                 </p>
             </div>
             <el-divider content-position="center"  >账号注册</el-divider>
-            <div class="grid-content bg-purple" style="margin: 20px;border:1px solid #f0ebeb" >
-                <p style="font-weight: bold">
-                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="phone"></el-input>
-                    <el-button style="margin: 5px" type="success">注册</el-button>
+            <div class="grid-content bg-purple" style="margin: 20px;border:1px solid #f0ebeb"  >
+                <p style="font-weight: bold" >
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="registerPhone"></el-input>
+                    <el-button style="margin: 5px" type="success" @click="register">注册</el-button>
                     <el-button style="margin: 5px" type="primary">批量注册</el-button>
                     <span style="display: block;color: #3e50f0">
                         批量注册成功手机号如下：<br>
@@ -142,23 +142,23 @@
             <el-divider content-position="center"  >短信获取记录清除</el-divider>
             <div class="grid-content bg-purple" style="margin: 20px;border:1px solid #f0ebeb" >
                 <p style="font-weight: bold">
-                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="phone"></el-input>
-                    <el-button style="margin: 5px" type="success">清除手机获取验证码记录</el-button>
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="clearPhone"></el-input>
+                    <el-button style="margin: 5px" type="success" @click="clearPhoneCodeRecords">清除手机获取验证码记录</el-button>
                 </p>
                 <p style="font-weight: bold">
-                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入设备型号" v-model="phone"></el-input>
-                    <el-button style="margin: 5px" type="success">清除设备获取验证码记录</el-button>
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入设备型号" v-model="clearModel"></el-input>
+                    <el-button style="margin: 5px" type="success" @click="clearModelCodeRecords">清除设备获取验证码记录</el-button>
                 </p>
             </div>
             <el-divider content-position="center"  >事项当日100条限制清除</el-divider>
             <div class="grid-content bg-purple" style="margin: 20px;border:1px solid #f0ebeb" >
                 <p style="font-weight: bold">
-                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="phone"></el-input>
-                    <el-button style="margin: 5px" type="success">清除账号每日100条事项限制</el-button>
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入手机号" v-model="clearItemPhone"></el-input>
+                    <el-button style="margin: 5px" type="success" @click="changeCreatedTime">清除账号每日100条事项限制</el-button>
                 </p>
             </div>
         </el-col>
-        <el-col :span="12" style=";border:2px solid #eb9419;border-bottom:0 ">
+        <el-col :span="12" style=";border:2px solid #eb9419;border-left:0">
             <div class="grid-content bg-purple-light">
                 <el-divider content-position="center"  >事项查询</el-divider>
                 <div class="grid-content bg-purple" style="margin: 20px ;border:1px solid #f0ebeb" >
@@ -221,11 +221,27 @@
             return {
                 url:'http://172.16.10.172:8000',
                 activeIndex: '8',
+                registerPhone: "",
+                clearPhone: "",
+                clearModel: "",
                 phone: "",
+                clearItemPhone: "",
                 email: "",
                 phoneCode: "",
+                userPhone: "",
                 emailCode: "",
-                UserId: ""
+                userInfo: {
+                    user_id:"",
+                    user_name:"",
+                    email:"",
+                    phoneCode:"",
+                    emailCode:"",
+                    isbindQQ:"",
+                    isbindW:""
+
+                },
+                UserId: "",
+                actionLoading: false
             }
         },
         methods: {
@@ -234,6 +250,139 @@
             },
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
+            },
+            clearPhoneCodeRecords(){
+                var dataPost = {
+                    "mobile": this.clearPhone,
+                };
+                this.$http.post(this.url+'/clearPhoneCodeRecords', dataPost).then(
+                    function (data) {
+                        var responData = data.status;
+                        if (responData === 200 || responData === '200') {
+                            this.$message({
+                                showClose: true,
+                                message: '恭喜你，手机号获取验证码记录清除成功',
+                                type: 'success'
+                            });
+                            this.actionLoading = false;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，数据清除失败',
+                                type: 'error'
+                            });
+                            this.actionLoading = false;
+                        }
+                    }
+                );
+
+            },
+            changeCreatedTime(){
+                var dataPost = {
+                    "mobile": this.clearItemPhone,
+                };
+                this.$http.post(this.url+'/changeCreatedTime', dataPost).then(
+                    function (data) {
+                        var responData = data.status;
+                        if (responData === 200 || responData === '200') {
+                            this.$message({
+                                showClose: true,
+                                message: '恭喜你，事项100条限制清除成功',
+                                type: 'success'
+                            });
+                            this.actionLoading = false;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，数据清除失败',
+                                type: 'error'
+                            });
+                            this.actionLoading = false;
+                        }
+                    }
+                );
+            },
+            clearModelCodeRecords(){
+                var dataPost = {
+                    "device_model": this.clearModel,
+                };
+                this.$http.post(this.url+'/clearModelCodeRecords', dataPost).then(
+                    function (data) {
+                        var responData = data.status;
+                        if (responData === 200 || responData === '200') {
+                            this.$message({
+                                showClose: true,
+                                message: '恭喜你，设备获取验证码记录清除成功',
+                                type: 'success'
+                            });
+                            this.actionLoading = false;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，数据清除失败',
+                                type: 'error'
+                            });
+                            this.actionLoading = false;
+                        }
+                    }
+                );
+            },
+            register() {
+                this.actionLoading = true;
+                var dataPost = {
+                    "mobile": this.registerPhone,
+                };
+                this.$http.post(this.url+'/register', dataPost).then(
+                    function (data) {
+                        var responData = data.status;
+                        if (responData === 200 || responData === '200') {
+                            this.$message({
+                                showClose: true,
+                                message: '恭喜你，注册成功,账号密码：123456',
+                                type: 'success'
+                            });
+                            this.actionLoading = false;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，注册失败',
+                                type: 'error'
+                            });
+                            this.actionLoading = false;
+                        }
+                    }
+                );
+
+            },
+            getUserInfo() {
+                this.actionLoading = true;
+                var dataPost = {
+                    "mobile": this.userPhone,
+                };
+                this.$http.post(this.url+'/getUserInfo', dataPost).then(
+                    function (data) {
+                        var responStatu = data.status;
+                        var responData = data.body;
+                        if (responStatu === 200 || responStatu === '200') {
+                            this.userInfo = responData[0].data;
+                            console.log(responData[0].data);
+                            this.$message({
+                                showClose: true,
+                                message: '恭喜你，用户信息获取成功',
+                                type: 'success'
+                            });
+                            this.actionLoading = false;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，用户信息获取失败',
+                                type: 'error'
+                            });
+                            this.actionLoading = false;
+                        }
+                    }
+                );
+
             },
 
         }
