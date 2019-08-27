@@ -118,12 +118,15 @@
             </div>
             <div class="grid-content bg-purple" style="margin: 20px;border:1px solid #f0ebeb" >
                 <p style="font-weight: bold">
-                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入Token" v-model="phone"></el-input>
-                    <el-button style="margin: 5px" type="success">查询用户token</el-button>
-                    <span style="display: none;color: #3e50f0">
-                        UserId：{{UserId}}<br>
-                        deviceTagApp：{{UserId}}<br>
-                        登录时间：{{UserId}}<br>
+                    <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入Token" v-model="token"></el-input>
+                    <el-button style="margin: 5px" type="success" @click="getTokenInfo">查询用户token</el-button>
+                    <span style="display: block;color: #3e50f0">
+                     {%verbatim%}
+                        UserId：{{tokenInfo.user_id}}<br>
+                        deviceTagApp：{{tokenInfo.device_tag_app}}<br>
+                        moblie：{{tokenInfo.moblie}}<br>
+                        登录时间：{{tokenInfo.updated}}<br>
+                     {%endverbatim%}
                     </span>
                 </p>
             </div>
@@ -224,6 +227,7 @@
                 registerPhone: "",
                 clearPhone: "",
                 clearModel: "",
+                token: "",
                 phone: "",
                 clearItemPhone: "",
                 email: "",
@@ -240,6 +244,12 @@
                     isbindW:""
 
                 },
+                tokenInfo:{
+                    user_id:"",
+                    device_tag_app:"",
+                    moblie:"",
+                    updated:"",
+                },
                 UserId: "",
                 actionLoading: false
             }
@@ -250,6 +260,33 @@
             },
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
+            },
+            getTokenInfo(){
+                this.actionLoading = true;
+                var dataPost = {
+                    "token": this.token,
+                };
+                this.$http.post(this.url+'/getTokenInfo', dataPost).then(
+                    function (data) {
+                        var responData = data.body;
+                        if (responData[0].code === 200 || responData[0].code === '200') {
+                            this.tokenInfo = responData[0].data;
+                            this.$message({
+                                showClose: true,
+                                message: '恭喜你，token信息获取成功',
+                                type: 'success'
+                            });
+                            this.actionLoading = false;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，token信息获取失败',
+                                type: 'error'
+                            });
+                            this.actionLoading = false;
+                        }
+                    }
+                );
             },
             clearPhoneCodeRecords(){
                 var dataPost = {
@@ -361,9 +398,8 @@
                 };
                 this.$http.post(this.url+'/getUserInfo', dataPost).then(
                     function (data) {
-                        var responStatu = data.status;
                         var responData = data.body;
-                        if (responStatu === 200 || responStatu === '200') {
+                        if (responData[0].code === 200 || responData[0].code === '200') {
                             this.userInfo = responData[0].data;
                             console.log(responData[0].data);
                             this.$message({
@@ -375,7 +411,7 @@
                         } else {
                             this.$message({
                                 showClose: true,
-                                message: '很遗憾，用户信息获取失败',
+                                message: '很遗憾，用户未注册',
                                 type: 'error'
                             });
                             this.actionLoading = false;

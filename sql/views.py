@@ -8,7 +8,7 @@ from django.shortcuts import render, render_to_response
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 
-from sql.models import VerificationCode, User, Todo, Checklist, VerificationEmailCode
+from sql.models import VerificationCode, User, Todo, Checklist, VerificationEmailCode, UserLoginLog
 from sql.requestUitls import doRequest
 
 
@@ -88,35 +88,58 @@ def changeCreatedTime(request):
     )
     response = [{"code": "200", "msg": "事项当日100条限制清除成功"}]
     return JsonResponse(response, safe=False)
-
+    
 
 @csrf_exempt
 def getUserInfo(request):
     mobile = json.loads(request.body)["mobile"]
-    user = User.objects.using("user").filter(mobile=mobile)[0]
-    print(user.email)
-    phoneCode = VerificationCode.objects.using("thirdparty").filter(mobile=mobile).order_by("-created")[0].code
-    if user.email is None:
-        emailCode = VerificationEmailCode.objects.using("thirdparty").all().order_by("-created")[0].code
-        email = '未绑定邮箱'
+    if not User.objects.using("user").filter(mobile=mobile).exists():
+        response = [{"code": "600", "msg": "手机号未注册", "data": ""}]
+        return JsonResponse(response, safe=False)  
     else:
-        email = user.email
-        print(VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created").count())
-        print(VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created").exists())
-        print(VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created"))
-        if not VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created").exists():
-            emailCode = '无邮箱验证码'
+        user = User.objects.using("user").filter(mobile=mobile)[0]
+    
+    
+        print(user.email)
+    
+        if not VerificationCode.objects.using("thirdparty").filter(mobile=mobile).order_by("-created").exists():
+            phoneCode = '无手机验证码'
         else:
-            emailCode = VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created")[0].code
+            phoneCode = VerificationCode.objects.using("thirdparty").filter(mobile=mobile).order_by("-created")[0].code
+        
+        if user.email is None:
+            emailCode = VerificationEmailCode.objects.using("thirdparty").all().order_by("-created")[0].code
+            email = '未绑定邮箱'
+        else:
+            email = user.email
+            if not VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created").exists():
+                emailCode = '无邮箱验证码'
+            else:
+                emailCode = VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created")[0].code
+    
+        userInfo = {
+            "user_id": str(user.pk),
+            "user_name": user.user_name,
+            "email": email,
+            "phoneCode": phoneCode,
+            "emailCode": emailCode,
+    
+        }
+        print(userInfo)
+        response = [{"code": "200", "msg": "获取信息成功", "data": userInfo}]
+        return JsonResponse(response, safe=False)
 
-    userInfo = {
-        "user_id": user.id,
-        "user_name": user.user_name,
-        "email": email,
-        "phoneCode": phoneCode,
-        "emailCode": emailCode,
 
+@csrf_exempt
+def getTokenInfo(request):
+    token = json.loads(request.body)["token"]
+    loginLog = UserLoginLog.objects.using("user").filter(token=token)[0]
+    moblie = User.objects.using("user").filter(id=loginLog.user_id)[0].mobile
+    tokenInfo = {
+        "user_id": str(loginLog.user_id),
+        "device_tag_app": loginLog.device_tag_app,
+        "moblie": moblie,
+        "updated": loginLog.updated,
     }
-    print(userInfo)
-    response = [{"code": "200", "msg": "获取信息成功", "data": userInfo}]
+    response = [{"code": "200", "msg": "事项当日100条限制清除成功","data":tokenInfo}]
     return JsonResponse(response, safe=False)
