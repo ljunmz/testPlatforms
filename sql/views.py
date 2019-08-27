@@ -8,7 +8,8 @@ from django.shortcuts import render, render_to_response
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 
-from sql.models import VerificationCode, User, Todo, Checklist, VerificationEmailCode, UserLoginLog
+from sql.models import VerificationCode, User, Todo, Checklist, VerificationEmailCode, UserLoginLog, TodoFinish, \
+    TodoRepeatRule
 from sql.requestUitls import doRequest
 
 
@@ -88,25 +89,24 @@ def changeCreatedTime(request):
     )
     response = [{"code": "200", "msg": "事项当日100条限制清除成功"}]
     return JsonResponse(response, safe=False)
-    
+
 
 @csrf_exempt
 def getUserInfo(request):
     mobile = json.loads(request.body)["mobile"]
     if not User.objects.using("user").filter(mobile=mobile).exists():
         response = [{"code": "600", "msg": "手机号未注册", "data": ""}]
-        return JsonResponse(response, safe=False)  
+        return JsonResponse(response, safe=False)
     else:
         user = User.objects.using("user").filter(mobile=mobile)[0]
-    
-    
+
         print(user.email)
-    
+
         if not VerificationCode.objects.using("thirdparty").filter(mobile=mobile).order_by("-created").exists():
             phoneCode = '无手机验证码'
         else:
             phoneCode = VerificationCode.objects.using("thirdparty").filter(mobile=mobile).order_by("-created")[0].code
-        
+
         if user.email is None:
             emailCode = VerificationEmailCode.objects.using("thirdparty").all().order_by("-created")[0].code
             email = '未绑定邮箱'
@@ -115,15 +115,16 @@ def getUserInfo(request):
             if not VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created").exists():
                 emailCode = '无邮箱验证码'
             else:
-                emailCode = VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created")[0].code
-    
+                emailCode = VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created")[
+                    0].code
+
         userInfo = {
             "user_id": str(user.pk),
             "user_name": user.user_name,
             "email": email,
             "phoneCode": phoneCode,
             "emailCode": emailCode,
-    
+
         }
         print(userInfo)
         response = [{"code": "200", "msg": "获取信息成功", "data": userInfo}]
@@ -141,5 +142,34 @@ def getTokenInfo(request):
         "moblie": moblie,
         "updated": loginLog.updated,
     }
-    response = [{"code": "200", "msg": "事项当日100条限制清除成功","data":tokenInfo}]
+    response = [{"code": "200", "msg": "事项当日100条限制清除成功", "data": tokenInfo}]
+    return JsonResponse(response, safe=False)
+
+
+@csrf_exempt
+def getTodoInfo(request):
+    todo_id = json.loads(request.body)["todo_id"]
+    todo = Todo.objects.using("plan").filter(id=todo_id)[0]
+    rule = TodoRepeatRule.objects.using("plan").filter(Q(todo_id=todo_id) | Q(repeat_type=0)).order_by('-updated')[0]
+    print(rule.todo_time)
+    print(rule.next_time)
+    print(rule.todo_time)
+    print(TodoFinish.objects.using("plan").filter(todo_id=todo_id))
+    if not TodoFinish.objects.using("plan").filter(todo_id=todo_id).exists():
+        finish_State = '0'
+    else:
+        finish_State = TodoFinish.objects.using("plan").filter(todo_id=todo_id).order_by('-updated')[0].finish_state
+    todoInfo = {
+        "user_id": str(todo.user_id),
+        "short_title": todo.short_title,
+        "todo_type": todo.todo_type,
+        "status": todo.status,
+        "finish_state": finish_State,
+        "deleted": todo.deleted,
+        "todo_time": rule.todo_time,
+        "next_time": rule.next_time,
+        "created": todo.created,
+        "ahead_type": todo.ahead_type,
+    }
+    response = [{"code": "200", "msg": "日程信息查询成功", "data": todoInfo}]
     return JsonResponse(response, safe=False)

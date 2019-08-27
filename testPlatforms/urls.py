@@ -22,7 +22,7 @@ from apitest.views import apitest, getFlowData, getNodeData, getOutSql, getPreSq
     editFlow, deleteFlow, addNode, editNode, savePostKey, editParameter, deleteNode, editOutSql, editPreSql, getCreater, \
     actionFlow
 from sql.views import sqlIndex, register, clearModelCodeRecords, clearPhoneCodeRecords, changeCreatedTime, getUserInfo, \
-    getTokenInfo
+    getTokenInfo, getTodoInfo
 from testPlatforms import settings
 
 urlpatterns = [
@@ -53,5 +53,6 @@ urlpatterns = [
     url(r'^changeCreatedTime', changeCreatedTime),
     url(r'^getUserInfo', getUserInfo),
     url(r'^getTokenInfo', getTokenInfo),
+    url(r'^getTodoInfo', getTodoInfo),
     # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_URL}),
 ]

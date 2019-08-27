@@ -161,25 +161,26 @@
                 </p>
             </div>
         </el-col>
-        <el-col :span="12" style=";border:2px solid #eb9419;border-left:0">
+        <el-col :span="12" style=";border:2px solid #eb9419;border-left:0" v-loading="actionLoading2" element-loading-text="加载中，请稍后">
             <div class="grid-content bg-purple-light">
                 <el-divider content-position="center"  >事项查询</el-divider>
                 <div class="grid-content bg-purple" style="margin: 20px ;border:1px solid #f0ebeb" >
                     <p style="font-weight: bold">
-                        <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入日程ID" v-model="phone"></el-input>
-                        <el-button style="margin: 5px" type="success">日程查询</el-button>
-                        <span style="display: none;color: #3e50f0">
-                        用户ID：{{UserId}}<br>
-                        日程标题：{{UserId}}<br>
-                        日程是否在回收站：{{UserId}}<br>
-                        日程是否删除：{{UserId}}<br>
-                        日程类型：{{UserId}}<br>
-                        日程是否打卡：{{UserId}}<br>
-                        日程重要程度：{{UserId}}<br>
-                        日程事项分类：{{UserId}}<br>
-                        日程提前提醒类型：{{UserId}}<br>
-                        日程提醒时间：{{UserId}}<br>
-                        日程创建时间：{{UserId}}<br>
+                        <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入日程ID" v-model="todo_id"></el-input>
+                        <el-button style="margin: 5px" type="success" @click="getTodoInfo">日程查询</el-button>
+                        <span style="display: block;color: #3e50f0">
+                        {%verbatim%}
+                        用户ID：{{todoInfo.user_id}}<br>
+                        日程标题：{{todoInfo.short_title}}<br>
+                        日程是否在回收站(1:正常/0：回收站)：{{todoInfo.status}}<br>
+                        日程是否删除（0:未删除/1:已删除）：{{todoInfo.deleted}}<br>
+                        日程类型：{{todoInfo.todo_type}}<br>
+                        日程是否打卡（1:已打卡/0:未打卡）：{{todoInfo.finish_state}}<br>
+                        日程提前提醒类型：{{todoInfo.ahead_type}}<br>
+                        日程提醒时间：{{todoInfo.todo_time}}<br>
+                        下次提醒时间：{{todoInfo.next_time}}<br>
+                        日程创建时间：{{todoInfo.created}}<br>
+                        {%endverbatim%}
                     </span>
                     </p>
                 </div>
@@ -228,11 +229,24 @@
                 clearPhone: "",
                 clearModel: "",
                 token: "",
+                todo_id: "",
                 phone: "",
                 clearItemPhone: "",
                 email: "",
                 phoneCode: "",
                 userPhone: "",
+                todoInfo: {
+                    user_id:'',
+                    short_title:'',
+                    status:'',
+                    deleted:'',
+                    todo_type:'',
+                    finish_state:'',
+                    ahead_type:'',
+                    todo_time:'',
+                    next_time:'',
+                    created:'',
+                },
                 emailCode: "",
                 userInfo: {
                     user_id:"",
@@ -251,7 +265,8 @@
                     updated:"",
                 },
                 UserId: "",
-                actionLoading: false
+                actionLoading: false,
+                actionLoading2: false
             }
         },
         methods: {
@@ -260,6 +275,33 @@
             },
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
+            },
+            getTodoInfo(){
+                this.actionLoading2 = true;
+                var dataPost = {
+                    "todo_id": this.todo_id,
+                };
+                this.$http.post(this.url+'/getTodoInfo', dataPost).then(
+                    function (data) {
+                        var responData = data.body;
+                        if (responData[0].code === 200 || responData[0].code === '200') {
+                            this.todoInfo = responData[0].data;
+                            this.$message({
+                                showClose: true,
+                                message: '恭喜你，日程信息获取成功',
+                                type: 'success'
+                            });
+                            this.actionLoading2 = false;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，日程信息获取失败',
+                                type: 'error'
+                            });
+                            this.actionLoading2 = false;
+                        }
+                    }
+                );
             },
             getTokenInfo(){
                 this.actionLoading = true;

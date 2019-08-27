@@ -1080,27 +1080,27 @@ class TodoDayCheckin(models.Model):
 #         db_table = 'todo_ext'
 #
 #
-# class TodoFinish(models.Model):
-#     id = models.BigIntegerField(primary_key=True)
-#     user_id = models.BigIntegerField()
-#     todo_id = models.BigIntegerField()
-#     todo_time = models.DateTimeField(blank=True, null=True)
-#     finish_state = models.IntegerField()
-#     finish_time = models.DateTimeField(blank=True, null=True)
-#     ahead_type = models.CharField(max_length=512, blank=True, null=True)
-#     durations = models.IntegerField(blank=True, null=True)
-#     complete_time = models.IntegerField(blank=True, null=True)
-#     remark = models.TextField(blank=True, null=True)
-#     ip = models.CharField(max_length=255, blank=True, null=True)
-#     version = models.BigIntegerField()
-#     deleted = models.IntegerField()
-#     created = models.DateTimeField()
-#     updated = models.DateTimeField()
-#
-#     class Meta:
-#         managed = False
-#         db_table = 'todo_finish'
-#         unique_together = (('todo_id', 'todo_time', 'created'),)
+class TodoFinish(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    user_id = models.BigIntegerField()
+    todo_id = models.BigIntegerField()
+    todo_time = models.DateTimeField(blank=True, null=True)
+    finish_state = models.IntegerField()
+    finish_time = models.DateTimeField(blank=True, null=True)
+    ahead_type = models.CharField(max_length=512, blank=True, null=True)
+    durations = models.IntegerField(blank=True, null=True)
+    complete_time = models.IntegerField(blank=True, null=True)
+    remark = models.TextField(blank=True, null=True)
+    ip = models.CharField(max_length=255, blank=True, null=True)
+    version = models.BigIntegerField()
+    deleted = models.IntegerField()
+    created = models.DateTimeField()
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'todo_finish'
+        unique_together = (('todo_id', 'todo_time', 'created'),)
 
 
 class TodoIgnore(models.Model):
