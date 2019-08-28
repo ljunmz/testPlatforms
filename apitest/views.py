@@ -60,7 +60,6 @@ def getNodeData(request):
             'post_keys': e.post_keys,
             'post_keys_extractor': e.post_keys_extractor,
             'post_keys_default': e.post_keys_default})
-    print(nodeDataList)
     return JsonResponse(nodeDataList, safe=False)
 
 
@@ -69,7 +68,6 @@ def getOutSql(request):
     node_id = json.loads(request.body)["node_id"]
     data = TestdataNode.objects.filter(node_id__exact=node_id)
     outSqlDataList = []
-    print(data)
     outSqlDataList.insert(10000, {
         "pk": data[0].pk,
         "flow_id": data[0].flow_id,
@@ -79,13 +77,11 @@ def getOutSql(request):
         "expect_db": data[0].expect_db,
 
     })
-    print(outSqlDataList)
     return JsonResponse(outSqlDataList, safe=False)
 
 
 @csrf_exempt
 def editOutSql(request):
-    print(json.loads(request.body)["ischechdb"])
     node_id = json.loads(request.body)["node_id"]
     ischechdb = json.loads(request.body)["ischechdb"]
     sql_str = json.loads(request.body)["sql_str"]
@@ -107,7 +103,6 @@ def getPreSql(request):
     print(node_id)
     data = TestdataNode.objects.filter(node_id__exact=node_id)
     preSqlDataList = []
-    print(data)
     preSqlDataList.insert(10000, {
         "pk": data[0].pk,
         "flow_id": data[0].flow_id,
@@ -143,12 +138,8 @@ def editPreSql(request):
 def savePostKey(request):
     node_id = json.loads(request.body)["node_id"]
     post_keys = json.loads(request.body)["post_keys"]
-    print(post_keys)
     post_keys_extractor = json.loads(request.body)["post_keys_extractor"]
-    print(post_keys_extractor)
     post_keys_default = json.loads(request.body)["post_keys_default"]
-    print(post_keys_default)
-
     TestdataNode.objects.filter(node_id=node_id).update(
         post_keys=post_keys,
         post_keys_extractor=post_keys_extractor,
@@ -163,7 +154,6 @@ def getPostKey(request):
     node_id = json.loads(request.body)["node_id"]
     data = TestdataNode.objects.filter(node_id__exact=node_id)
     postKeyDataList = []
-    print(data)
     postKeyDataList.insert(10000, {
         "pk": data[0].pk,
         "flow_id": data[0].flow_id,
@@ -171,7 +161,6 @@ def getPostKey(request):
         "post_keys_extractor": data[0].post_keys_extractor,
         "post_keys_default": data[0].post_keys_default,
     })
-    print(postKeyDataList)
     return JsonResponse(postKeyDataList, safe=False)
 
 
@@ -195,7 +184,6 @@ def getCreater(request):
                                           'creater': e.creater,
                                           'state': e.state,
                                           'operation': 1})
-    print(flowDataListForCreater)
     return JsonResponse(flowDataListForCreater, safe=False)
 
 
@@ -204,13 +192,11 @@ def getParameter(request):
     node_id = json.loads(request.body)["node_id"]
     data = TestdataNode.objects.filter(node_id__exact=node_id)
     parameterDataList = []
-    print(data)
     parameterDataList.insert(10000, {
         "pk": data[0].pk,
         "flow_id": data[0].flow_id,
         "parameter": data[0].parameter,
     })
-    print(parameterDataList)
     return JsonResponse(parameterDataList, safe=False)
 
 
@@ -252,7 +238,6 @@ def addFlow(request):
         create_time=create_time,
         update_time=update_time
     )
-    print(addFlowData)
     response = [{"code": "200", "msg": "测试流添加成功"}]
     return JsonResponse(response, safe=False)
 
@@ -318,14 +303,6 @@ def addNode(request):
     create_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     update_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    print(type(flow_id))
-    print(type(order_id))
-    print(type(node_id))
-    print(type(method))
-    print(type(sleep_time))
-    print(type(state))
-    print(type(isexcute_pre_sql))
-    print(type(ischechdb))
     TestdataNode.objects.create(
         node_id=node_id,
         order_id=int(order_id),
