@@ -20,7 +20,7 @@ from django.views.static import serve
 
 from apitest.views import apitest, getFlowData, getNodeData, getOutSql, getPreSql, getPostKey, getParameter, addFlow, \
     editFlow, deleteFlow, addNode, editNode, savePostKey, editParameter, deleteNode, editOutSql, editPreSql, getCreater, \
-    actionFlow
+    actionFlow, getEmail, emailChange, actionAllFlow, changeFlowState, changeNodeState
 from sql.views import sqlIndex, register, clearModelCodeRecords, clearPhoneCodeRecords, changeCreatedTime, getUserInfo, \
     getTokenInfo, getTodoInfo
 from testPlatforms import settings
@@ -54,5 +54,10 @@ urlpatterns = [
     url(r'^getUserInfo', getUserInfo),
     url(r'^getTokenInfo', getTokenInfo),
     url(r'^getTodoInfo', getTodoInfo),
+    url(r'^getEmail', getEmail),
+    url(r'^emailChange', emailChange),
+    url(r'^actionAllFlow', actionAllFlow),
+    url(r'^changeFlowState', changeFlowState),
+    url(r'^changeNodeState', changeNodeState),
     # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_URL}),
 ]

@@ -6,7 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from apitest.models import TestdataNode, TestdataFlow
-from apitest.readJmx import changeAciton
+from apitest.readJmx import changeAciton, getEmailList, changeEmail
 
 
 @csrf_exempt
@@ -26,9 +26,27 @@ def getFlowData(request):
                                 'password': e.password,
                                 'priority': e.priority,
                                 'creater': e.creater,
-                                'state': e.state,
+                                'state': str(e.state),
                                 'operation': "1"})
     return JsonResponse(flowDataList, safe=False)
+
+
+@csrf_exempt
+def getEmail(request):
+    path = "G:\\svn\\自动化测试\\API-Test\\"
+    email = getEmailList(path)
+    print(email)
+    response = [{"code": "200", "msg": "邮箱获取成功", "email": email}]
+    return JsonResponse(response, safe=False)
+
+
+@csrf_exempt
+def emailChange(request):
+    email = json.loads(request.body)["email"]
+    path = "G:\\svn\\自动化测试\\API-Test\\"
+    changeEmail(email, path)
+    response = [{"code": "200", "msg": "邮箱修改成功"}]
+    return JsonResponse(response, safe=False)
 
 
 @csrf_exempt
@@ -131,6 +149,26 @@ def editPreSql(request):
         pre_sql_out=pre_sql_out
     )
     response = [{"code": "200", "msg": "前置SQL查询配置成功"}]
+    return JsonResponse(response, safe=False)
+
+@csrf_exempt
+def changeFlowState(request):
+    state = json.loads(request.body)["state"]
+    flow_id = json.loads(request.body)["flow_id"]
+    TestdataFlow.objects.filter(flow_id=flow_id).update(
+        state=state
+    )
+    response = [{"code": "200", "msg": "测试流状态修改成功"}]
+    return JsonResponse(response, safe=False)
+
+@csrf_exempt
+def changeNodeState(request):
+    state = json.loads(request.body)["state"]
+    node_id = json.loads(request.body)["node_id"]
+    TestdataNode.objects.filter(node_id=node_id).update(
+        state=state
+    )
+    response = [{"code": "200", "msg": "接口状态修改成功"}]
     return JsonResponse(response, safe=False)
 
 
@@ -281,13 +319,14 @@ def addNode(request):
     flow_id = json.loads(request.body)["flow_id"]
     order_id = json.loads(request.body)["order_id"]
     node_id = TestdataNode.objects.all().order_by("-node_id")[0].node_id + 1
-    node_code = TestdataFlow.objects.filter(flow_id=flow_id)[0].flow_code.replace("TEST_", "") + "NODE_0" + order_id
+    node_code = TestdataFlow.objects.filter(flow_id=flow_id)[0].flow_code.replace("TEST_", "") +"_"+ "NODE_0" + order_id
     node_name = json.loads(request.body)["node_name"]
     method = json.loads(request.body)["method"]
     path = json.loads(request.body)["path"]
     parameter = json.loads(request.body)["parameter"]
     pre_keys = json.loads(request.body)["pre_keys"]
     sleep_time = json.loads(request.body)["sleep_time"]
+    expect_response = json.loads(request.body)["expect_response"]
     state = json.loads(request.body)["state"]
     isexcute_pre_sql = json.loads(request.body)["isexcute_pre_sql"]
     pre_sql_out = json.loads(request.body)["pre_sql_out"]
@@ -314,6 +353,7 @@ def addNode(request):
         parameter=parameter,
         pre_keys=pre_keys,
         sleep_time=sleep_time,
+        expect_response=expect_response,
         state=state,
         isexcute_pre_sql=isexcute_pre_sql,
         pre_sql_out=pre_sql_out,
@@ -373,6 +413,17 @@ def editNode(request):
 def actionFlow(request):
     flow_id = json.loads(request.body)["flow_id"]
     newStr = 'flow_id = ' + str(flow_id)
+    path = "G:\\svn\\自动化测试\\API-Test\\"
+    changeAciton(newStr, path)
+    os.chdir(path)
+    os.system("ant")
+    response = [{"code": "200", "msg": "接口触发允许成功，请查收邮件"}]
+    return JsonResponse(response, safe=False)
+
+
+@csrf_exempt
+def actionAllFlow(request):
+    newStr = "1=1"
     path = "G:\\svn\\自动化测试\\API-Test\\"
     changeAciton(newStr, path)
     os.chdir(path)

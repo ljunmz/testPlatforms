@@ -17,11 +17,10 @@ def changeAciton(newStr, path):
         ww.write(fileData)
 
 
-def addEmail(email, path):
+def changeEmail(email, path):
     tree = ET.parse(path + 'build.xml')
     root = tree.getroot()
     print('tag:', root.tag, 'attrib:', root.attrib, 'text:', root.text)
-
     for elm in root:
         if elm.attrib.get("name") == "mail_to":
             print(elm.attrib.get("value"))
@@ -29,6 +28,15 @@ def addEmail(email, path):
             print(elm.attrib.get("value"))
     tree.write(path + 'build.xml')
 
+
+def getEmailList(path):
+    tree = ET.parse(path + 'build.xml')
+    root = tree.getroot()
+    print('tag:', root.tag, 'attrib:', root.attrib, 'text:', root.text)
+
+    for elm in root:
+        if elm.attrib.get("name") == "mail_to":
+            return elm.attrib.get("value")
 
 
 
