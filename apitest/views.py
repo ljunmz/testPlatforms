@@ -219,8 +219,8 @@ def getCreater(request):
                                           'account': e.account,
                                           'password': e.password,
                                           'priority': e.priority,
-                                          'creater': str(e.creater),
-                                          'state': e.state,
+                                          'creater': e.creater,
+                                          'state': str(e.state),
                                           'operation': 1})
     print(flowDataListForCreater)
     return JsonResponse(flowDataListForCreater, safe=False)
