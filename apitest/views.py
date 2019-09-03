@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from apitest.models import TestdataNode, TestdataFlow
 from apitest.readJmx import changeAciton, getEmailList, changeEmail
 
-
+paths = 'D:\\时光序\\自动化测试\\API-Test\\'
 @csrf_exempt
 def apitest(request):
     return render_to_response('apitest.html', {})
@@ -33,7 +33,7 @@ def getFlowData(request):
 
 @csrf_exempt
 def getEmail(request):
-    path = "G:\\svn\\自动化测试\\API-Test\\"
+    path = paths
     email = getEmailList(path)
     print(email)
     response = [{"code": "200", "msg": "邮箱获取成功", "email": email}]
@@ -43,7 +43,7 @@ def getEmail(request):
 @csrf_exempt
 def emailChange(request):
     email = json.loads(request.body)["email"]
-    path = "G:\\svn\\自动化测试\\API-Test\\"
+    path = paths
     changeEmail(email, path)
     response = [{"code": "200", "msg": "邮箱修改成功"}]
     return JsonResponse(response, safe=False)
@@ -413,7 +413,7 @@ def editNode(request):
 def actionFlow(request):
     flow_id = json.loads(request.body)["flow_id"]
     newStr = 'flow_id = ' + str(flow_id)
-    path = "G:\\svn\\自动化测试\\API-Test\\"
+    path = paths
     changeAciton(newStr, path)
     os.chdir(path)
     os.system("ant")
@@ -424,7 +424,7 @@ def actionFlow(request):
 @csrf_exempt
 def actionAllFlow(request):
     newStr = "1=1"
-    path = "G:\\svn\\自动化测试\\API-Test\\"
+    path = paths
     changeAciton(newStr, path)
     os.chdir(path)
     os.system("ant")
