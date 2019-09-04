@@ -59,6 +59,8 @@
           <option value="E302" />
           <option value="E122" />
           <option value="E225" />
+          <option value="E124" />
+          <option value="E501" />
         </list>
       </option>
     </inspection_tool>
@@ -67,6 +69,7 @@
         <list>
           <option value="N806" />
           <option value="N802" />
+          <option value="N803" />
         </list>
       </option>
     </inspection_tool>

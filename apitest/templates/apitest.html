@@ -73,7 +73,7 @@
     </style>
     <title>时光序接口测试管理</title>
 </head>
-<body style="background-color: #b4c1c1">
+<body style="background-color: #c8c6d4">
 <div id="app" style="margin: 0">
     <el-menu
             :default-active="activeIndex2"
@@ -102,7 +102,7 @@
         <button type="button" class="btn btn-danger" style="line-height: 2.8;position: absolute;right: 1px;">退出登陆
         </button>
     </el-menu>
-    <div style="margin: 0 20px 0 20px;padding: 1px">
+    <div style="margin: 0 10px 0 10px;padding: 1px">
         <el-button size="small" type="primary" @click="dialogFormVisible = true" style="margin: 10px">+添加接口测试流
         </el-button>
         <template>
@@ -119,6 +119,8 @@
         </el-button>
         <el-button size="small" type="warning" @click="actionAllFlow()" style="margin: 10px">运行所有测试流
         </el-button>
+        <el-button size="small" type="primary" @click="dialogDefaultVar = true;getDefaultVar()" style="margin: 10px">配置全局默认变量
+        </el-button>
         <div>
             <template>
                 <el-table
@@ -129,7 +131,7 @@
                         :data="flowData"
                         :header-cell-style="{background:'#836FFF',color:'#F0FFFF',padding:'3px'}"
                         border
-                        height="800px"
+                        height="85vh"
                         stripe
                         size="mini"
                         highlight-current-row="true"
@@ -693,6 +695,66 @@
             <el-button type="primary" @click="addFlowOk(flowDataDefault)">确 定</el-button>
         </div>
     </el-dialog>
+    <el-dialog title="配置全局默认变量" :visible.sync="dialogDefaultVar">
+        <el-button size="mini" class="save"
+                   style="display: block;margin: 2px;padding: 5px;float: left"
+                   type="success">+添加全局变量
+        </el-button>
+        <el-table
+                :data="varListData"
+                :header-cell-style="{background:'#606266',color:'#FFFFFF',padding:0}"
+                border>
+            <el-table-column property="date" label="变量名称" width="250px" >
+                <template slot-scope="scope">
+                    <el-input style="display: none;margin: 0;padding: 0" :placeholder="scope.row.argumentName"
+                              v-model="scope.row.argumentName"></el-input>
+                    <span class="span" style="display: block;font-weight: bold;color: #3557ff">
+                                {%verbatim%}
+                                {{scope.row.argumentName}}
+                                {%endverbatim%}
+                            </span>
+                </template>
+            </el-table-column>
+            <el-table-column property="date" label="变量值" >
+                <template slot-scope="scope">
+                    <el-input style="display: none;margin: 0;padding: 0" :placeholder="scope.row.argumentValue"
+                              v-model="scope.row.argumentValue"></el-input>
+                    <span class="span" style="display: block;color: #0e0513">
+                                {%verbatim%}
+                                {{scope.row.argumentValue}}
+                                {%endverbatim%}
+                            </span>
+                </template>
+            </el-table-column>
+            <el-table-column property="date" label="操作" width="170px" >
+                <template slot-scope="scope">
+                    <el-button size="mini" class="save"
+                               style="display: block;margin: 2px;padding: 5px;float: left"
+                               type="success"
+                                >添加
+                    </el-button>
+                    <el-button size="mini" class="save"
+                               style="display: block;margin: 2px;padding: 5px;float: left"
+                               type="primary"
+                               >编辑
+                    </el-button>
+                    <el-button size="mini" class="save"
+                               style="display: none;margin: 2px;padding: 5px;float: left"
+                               type="warning"
+                               >保存
+                    </el-button>
+                    <el-button size="mini" class="save"
+                               style="display: block;margin: 2px;padding: 5px;float: left"
+                               type="danger"
+                               >删除
+                    </el-button>
+                </template>
+
+            </el-table-column>
+        </el-table>
+
+
+    </el-dialog>
     <el-dialog style="font-weight: bold" title="邮箱收件人配置(多个收件人以逗号隔开)" :visible.sync="dialogEmailChange">
         <el-form :model="flowDataDefault">
             <el-form-item label="" :label-width="formLabelWidth">
@@ -886,7 +948,8 @@
         },
         data() {
             return {
-                url: 'http://172.16.11.185:8000',
+                url: 'http://172.16.10.172:8000',
+                // url: 'http://172.16.11.185:8000',
                 filtrate: '',
                 recipients: '',
                 creater: [
@@ -946,6 +1009,10 @@
                     "state": "1"
                 },
                 activeIndex2: '3',
+                varListData: [{
+                    "argumentName":"示例1:变量名称",
+                    "argumentValue":"示例1:变量值",
+                }],
                 modal1: false,
                 search: '',
                 modal2: false,
@@ -962,12 +1029,20 @@
                 dialogEmailChange: false,
                 deleteFlowDialogVisible: false,
                 deleteNodeDialogVisible: false,
+                dialogDefaultVar: false,
                 dialogTableVisible: false,
                 formLabelWidth: '120px',
                 actionLoading: false
             }
         },
         methods: {
+            getDefaultVar(){
+                this.$http.get(this.url + '/getDefaultVar').then(
+                    function (data) {
+                        this.varListData = data.body[0].varList;
+                    }
+                );
+            },
             handleOpen(key, keyPath) {
                 console.log(key, keyPath);
             },

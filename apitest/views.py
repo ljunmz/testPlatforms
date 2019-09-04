@@ -6,9 +6,13 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from apitest.models import TestdataNode, TestdataFlow
-from apitest.readJmx import changeAciton, getEmailList, changeEmail
+from apitest.readJmx import changeAciton, getEmailList, changeEmail, getDefaultVariable, addDefaultVariable, \
+    formElementProp, editDefaultVariable, deleteDefaultVariable
 
-paths = 'D:\\时光序\\自动化测试\\API-Test\\'
+# paths = 'D:\\时光序\\自动化测试\\API-Test\\'
+paths = 'G:\\svn\\自动化测试\\API-Test\\'
+
+
 @csrf_exempt
 def apitest(request):
     return render_to_response('apitest.html', {})
@@ -33,8 +37,7 @@ def getFlowData(request):
 
 @csrf_exempt
 def getEmail(request):
-    path = paths
-    email = getEmailList(path)
+    email = getEmailList(paths)
     print(email)
     response = [{"code": "200", "msg": "邮箱获取成功", "email": email}]
     return JsonResponse(response, safe=False)
@@ -43,8 +46,7 @@ def getEmail(request):
 @csrf_exempt
 def emailChange(request):
     email = json.loads(request.body)["email"]
-    path = paths
-    changeEmail(email, path)
+    changeEmail(email, paths)
     response = [{"code": "200", "msg": "邮箱修改成功"}]
     return JsonResponse(response, safe=False)
 
@@ -151,6 +153,7 @@ def editPreSql(request):
     response = [{"code": "200", "msg": "前置SQL查询配置成功"}]
     return JsonResponse(response, safe=False)
 
+
 @csrf_exempt
 def changeFlowState(request):
     state = json.loads(request.body)["state"]
@@ -160,6 +163,7 @@ def changeFlowState(request):
     )
     response = [{"code": "200", "msg": "测试流状态修改成功"}]
     return JsonResponse(response, safe=False)
+
 
 @csrf_exempt
 def changeNodeState(request):
@@ -320,7 +324,8 @@ def addNode(request):
     flow_id = json.loads(request.body)["flow_id"]
     order_id = json.loads(request.body)["order_id"]
     node_id = TestdataNode.objects.all().order_by("-node_id")[0].node_id + 1
-    node_code = TestdataFlow.objects.filter(flow_id=flow_id)[0].flow_code.replace("TEST_", "") +"_"+ "NODE_0" + order_id
+    node_code = TestdataFlow.objects.filter(flow_id=flow_id)[0].flow_code.replace("TEST_",
+                                                                                  "") + "_" + "NODE_0" + order_id
     node_name = json.loads(request.body)["node_name"]
     method = json.loads(request.body)["method"]
     path = json.loads(request.body)["path"]
@@ -414,9 +419,8 @@ def editNode(request):
 def actionFlow(request):
     flow_id = json.loads(request.body)["flow_id"]
     newStr = 'flow_id = ' + str(flow_id)
-    path = paths
-    changeAciton(newStr, path)
-    os.chdir(path)
+    changeAciton(newStr, paths)
+    os.chdir(paths)
     os.system("ant")
     response = [{"code": "200", "msg": "接口触发允许成功，请查收邮件"}]
     return JsonResponse(response, safe=False)
@@ -425,9 +429,52 @@ def actionFlow(request):
 @csrf_exempt
 def actionAllFlow(request):
     newStr = "1=1"
-    path = paths
-    changeAciton(newStr, path)
-    os.chdir(path)
+    changeAciton(newStr, paths)
+    os.chdir(paths)
     os.system("ant")
     response = [{"code": "200", "msg": "接口触发允许成功，请查收邮件"}]
     return JsonResponse(response, safe=False)
+
+
+@csrf_exempt
+def getDefaultVar(request):
+    varList = getDefaultVariable(paths)
+    response = [{"code": "200", "msg": "默认变量获取成功", "varList": varList}]
+    return JsonResponse(response, safe=False)
+
+@csrf_exempt
+def addDefaultVar(request):
+    argumentName = json.loads(request.body)["argumentName"]
+    argumentValue = json.loads(request.body)["argumentValue"]
+    result = addDefaultVariable(argumentName, argumentValue, paths)
+    if result==200:
+        response = [{"code": "200", "msg": "默认变量添加成功"}]
+        return JsonResponse(response, safe=False)
+    elif result==601:
+        response = [{"code": "601", "msg": "变量已存在"}]
+        return JsonResponse(response, safe=False)
+
+@csrf_exempt
+def editDefaultVar(request):
+    oldKey = json.loads(request.body)["argumentName"]
+    newKey = json.loads(request.body)["argumentNameNew"]
+    value = json.loads(request.body)["argumentValue"]
+    result= editDefaultVariable(oldKey, newKey, value, paths)
+    if result==200:
+        response = [{"code": "200", "msg": "默认变量修改成功"}]
+        return JsonResponse(response, safe=False)
+    elif result==601:
+        response = [{"code": "601", "msg": "变量不存在"}]
+        return JsonResponse(response, safe=False)
+
+
+@csrf_exempt
+def deleteDefaultVar(request):
+    argumentName = json.loads(request.body)["argumentName"]
+    result = deleteDefaultVariable(argumentName, paths)
+    if result==200:
+        response = [{"code": "200", "msg": "默认变量删除成功"}]
+        return JsonResponse(response, safe=False)
+    elif result==601:
+        response = [{"code": "601", "msg": "变量不存在"}]
+        return JsonResponse(response, safe=False)
