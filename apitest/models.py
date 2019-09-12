@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class TestdataFlow(models.Model):
-    flow_id = models.IntegerField(primary_key=True, max_length=36)
+    flow_id = models.IntegerField(primary_key=True)
     flow_code = models.CharField(max_length=20)
     flow_name = models.CharField(max_length=255, blank=True, null=True)
     priority = models.IntegerField(blank=True, null=True)
@@ -21,7 +21,7 @@ class TestdataFlow(models.Model):
 
 
 class TestdataNode(models.Model):
-    node_id = models.IntegerField(primary_key=True, max_length=36)
+    node_id = models.IntegerField(primary_key=True)
     flow_id = models.CharField(max_length=36)
     node_code = models.CharField(max_length=20)
     node_name = models.CharField(max_length=255, blank=True, null=True)

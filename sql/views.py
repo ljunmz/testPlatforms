@@ -9,7 +9,7 @@ from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 
 from sql.models import VerificationCode, User, Todo, Checklist, VerificationEmailCode, UserLoginLog, TodoFinish, \
-    TodoRepeatRule
+    TodoRepeatRule, UserBehaviorLog
 from sql.requestUitls import doRequest
 
 
@@ -172,4 +172,48 @@ def getTodoInfo(request):
         "ahead_type": todo.ahead_type,
     }
     response = [{"code": "200", "msg": "日程信息查询成功", "data": todoInfo}]
+    return JsonResponse(response, safe=False)
+
+@csrf_exempt
+def getBuriedInfo(request):
+    print("aaaaaaaaaaaa")
+    mobile = json.loads(request.body)["phone"]
+    user_id = User.objects.using("user").filter(mobile=mobile)[0].id
+    buriedInfoList = UserBehaviorLog.objects.using("user").filter(user_id=user_id).order_by('-created')[0]
+    buriedInfo = {
+        "user_id": str(buriedInfoList.user_id),
+        "device_tag": buriedInfoList.device_tag,
+        "event_type": buriedInfoList.event_type,
+        "event_param": buriedInfoList.event_param,
+        "ip": buriedInfoList.ip,
+        "channel": buriedInfoList.channel,
+        "os_type": buriedInfoList.os_type,
+        "network_type": buriedInfoList.network_type,
+        "created": buriedInfoList.created,
+        "app_version": buriedInfoList.app_version
+    }
+    response = [{"code": "200", "msg": "埋点信息查询成功", "data": buriedInfo}]
+    return JsonResponse(response, safe=False)
+
+
+@csrf_exempt
+def getDevice(request):
+    print("sssssssssssssssssssss")
+    device_tag = json.loads(request.body)["device_tag"]
+    buriedInfoList = UserBehaviorLog.objects.using("user").filter(device_tag=device_tag).order_by('-created')[0]
+    mobile = User.objects.using("user").filter(id=buriedInfoList.user_id)[0].mobile
+    buriedInfoByDevice = {
+        "user_id": str(buriedInfoList.user_id),
+        "mobile": mobile,
+        "device_tag": buriedInfoList.device_tag,
+        "event_type": buriedInfoList.event_type,
+        "event_param": buriedInfoList.event_param,
+        "ip": buriedInfoList.ip,
+        "channel": buriedInfoList.channel,
+        "os_type": buriedInfoList.os_type,
+        "network_type": buriedInfoList.network_type,
+        "created": buriedInfoList.created,
+        "app_version": buriedInfoList.app_version
+    }
+    response = [{"code": "200", "msg": "埋点信息查询成功", "data": buriedInfoByDevice}]
     return JsonResponse(response, safe=False)

@@ -59,7 +59,7 @@ def getDefaultVariable(path):
     print(variableList)
     return variableList
 
-getDefaultVariable("G:\\svn\\自动化测试\\API-Test\\")
+# getDefaultVariable("G:\\svn\\自动化测试\\API-Test\\")
 
 
 def formElementProp(argumentName, argumentValue):

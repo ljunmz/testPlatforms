@@ -23,7 +23,7 @@ from apitest.views import apitest, getFlowData, getNodeData, getOutSql, getPreSq
     actionFlow, getEmail, emailChange, actionAllFlow, changeFlowState, changeNodeState, editDefaultVar, getDefaultVar, \
     deleteDefaultVar, addDefaultVar
 from sql.views import sqlIndex, register, clearModelCodeRecords, clearPhoneCodeRecords, changeCreatedTime, getUserInfo, \
-    getTokenInfo, getTodoInfo
+    getTokenInfo, getTodoInfo, getBuriedInfo, getDevice
 from testPlatforms import settings
 
 urlpatterns = [
@@ -64,5 +64,7 @@ urlpatterns = [
     url(r'^addDefaultVar', addDefaultVar),
     url(r'^editDefaultVar', editDefaultVar),
     url(r'^getDefaultVar', getDefaultVar),
+    url(r'^getBuriedInfo', getBuriedInfo),
+    url(r'^getBuriedInfoByDevice', getDevice),
     # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_URL}),
 ]

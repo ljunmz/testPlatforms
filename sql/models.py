@@ -1208,3 +1208,26 @@ class TodoTaskSort(models.Model):
     class Meta:
         managed = False
         db_table = 'todo_task_sort'
+
+
+class UserBehaviorLog(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user_id = models.BigIntegerField(blank=True, null=True)
+    device_tag = models.CharField(max_length=50, blank=True, null=True)
+    event_type = models.CharField(max_length=100)
+    event_param = models.CharField(max_length=300, blank=True, null=True)
+    referrer = models.CharField(max_length=100, blank=True, null=True)
+    ip = models.CharField(max_length=20, blank=True, null=True)
+    channel = models.CharField(max_length=30, blank=True, null=True)
+    network_type = models.CharField(max_length=20, blank=True, null=True)
+    os_type = models.CharField(max_length=10, blank=True, null=True)
+    os_version = models.CharField(max_length=20, blank=True, null=True)
+    user_agent = models.CharField(max_length=500, blank=True, null=True)
+    event_time = models.DateTimeField(blank=True, null=True)
+    gyro = models.CharField(max_length=50, blank=True, null=True)
+    app_version = models.CharField(max_length=10, blank=True, null=True)
+    created = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'user_behavior_log'

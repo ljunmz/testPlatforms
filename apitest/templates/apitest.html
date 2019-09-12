@@ -131,7 +131,6 @@
                         :data="flowData"
                         :header-cell-style="{background:'#836FFF',color:'#F0FFFF',padding:'3px'}"
                         border
-                        height="85vh"
                         stripe
                         size="mini"
                         highlight-current-row="true"
@@ -660,9 +659,24 @@
                             </div>
                         </template>
                     </el-table-column>
+
                 </el-table>
+
             </template>
+
         </div>
+    </div>
+    <div class="block" style="color:#faf8ff;margin-top:5px ">
+        <el-pagination
+                background
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[20, 30, 50, 100]"
+                :page-size="20"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total=FlowlistSize>
+        </el-pagination>
     </div>
     <el-dialog style="font-weight: bold" title="新增接口测试流" :visible.sync="dialogFormVisible">
         <el-form :model="flowDataDefault">
@@ -934,8 +948,11 @@
     var vm = new Vue({
         el: '#app',
         mounted: function () {
-            this.$http.get(this.url + '/getFlowData').then(
+            var dataPost = {"page_id": 1};
+            this.$http.post(this.url + '/getFlowData', dataPost).then(
                 function (data) {
+                    this.FlowlistSize = data.body.length;
+                    // this.flowData = data.body.splice(0,20);
                     this.flowData = data.body;
                 }
             );
@@ -952,6 +969,8 @@
                 // url: 'http://172.16.11.185:8000',
                 filtrate: '',
                 recipients: '',
+                FlowlistSize: 100,
+                currentPage: 1,
                 creater: [
                     {
                         "creater": "全部负责人"
@@ -1018,6 +1037,7 @@
                 modal2: false,
                 flowData: [],
                 nodeData: [],
+                nodeDataALL: [],
                 outSqlData: [],
                 postKeyData: [],
                 preSqlData: [],
@@ -1036,6 +1056,31 @@
             }
         },
         methods: {
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+
+
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+                var dataPost = {"page_id": val};
+                this.$http.post(this.url + '/getFlowData', dataPost).then(
+                    function (data) {
+                        var responData = data.status;
+                        if (responData === 200 || responData === '200') {
+                            this.flowData = data.body;
+                        } else {
+                            row.parameter = this.parameterData[0].value;
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，切换分页失败',
+                                type: 'error'
+                            });
+                        }
+
+                    }
+                );
+            },
             getDefaultVar(){
                 this.$http.get(this.url + '/getDefaultVar').then(
                     function (data) {

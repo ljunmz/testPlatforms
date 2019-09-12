@@ -20,6 +20,7 @@ def apitest(request):
 
 @csrf_exempt
 def getFlowData(request):
+    page_id = json.loads(request.body)["page_id"]
     flowDataList = []
     for e in TestdataFlow.objects.all():
         flowDataList.insert(10000,
@@ -442,28 +443,30 @@ def getDefaultVar(request):
     response = [{"code": "200", "msg": "默认变量获取成功", "varList": varList}]
     return JsonResponse(response, safe=False)
 
+
 @csrf_exempt
 def addDefaultVar(request):
     argumentName = json.loads(request.body)["argumentName"]
     argumentValue = json.loads(request.body)["argumentValue"]
     result = addDefaultVariable(argumentName, argumentValue, paths)
-    if result==200:
+    if result == 200:
         response = [{"code": "200", "msg": "默认变量添加成功"}]
         return JsonResponse(response, safe=False)
-    elif result==601:
+    elif result == 601:
         response = [{"code": "601", "msg": "变量已存在"}]
         return JsonResponse(response, safe=False)
+
 
 @csrf_exempt
 def editDefaultVar(request):
     oldKey = json.loads(request.body)["argumentName"]
     newKey = json.loads(request.body)["argumentNameNew"]
     value = json.loads(request.body)["argumentValue"]
-    result= editDefaultVariable(oldKey, newKey, value, paths)
-    if result==200:
+    result = editDefaultVariable(oldKey, newKey, value, paths)
+    if result == 200:
         response = [{"code": "200", "msg": "默认变量修改成功"}]
         return JsonResponse(response, safe=False)
-    elif result==601:
+    elif result == 601:
         response = [{"code": "601", "msg": "变量不存在"}]
         return JsonResponse(response, safe=False)
 
@@ -472,9 +475,9 @@ def editDefaultVar(request):
 def deleteDefaultVar(request):
     argumentName = json.loads(request.body)["argumentName"]
     result = deleteDefaultVariable(argumentName, paths)
-    if result==200:
+    if result == 200:
         response = [{"code": "200", "msg": "默认变量删除成功"}]
         return JsonResponse(response, safe=False)
-    elif result==601:
+    elif result == 601:
         response = [{"code": "601", "msg": "变量不存在"}]
         return JsonResponse(response, safe=False)
