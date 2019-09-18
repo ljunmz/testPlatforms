@@ -9,8 +9,8 @@ from apitest.models import TestdataNode, TestdataFlow
 from apitest.readJmx import changeAciton, getEmailList, changeEmail, getDefaultVariable, addDefaultVariable, \
     formElementProp, editDefaultVariable, deleteDefaultVariable
 
-# paths = 'D:\\时光序\\自动化测试\\API-Test\\'
-paths = 'G:\\svn\\自动化测试\\API-Test\\'
+paths = 'D:\\时光序\\自动化测试\\API-Test\\'
+# paths = 'G:\\svn\\自动化测试\\API-Test\\'
 
 
 @csrf_exempt
@@ -21,8 +21,9 @@ def apitest(request):
 @csrf_exempt
 def getFlowData(request):
     page_id = json.loads(request.body)["page_id"]
+    page_size = json.loads(request.body)["page_size"]
     flowDataList = []
-    for e in TestdataFlow.objects.all():
+    for e in TestdataFlow.objects.all().order_by("pk"):
         flowDataList.insert(10000,
                             {
                                 'pk': e.pk,
@@ -33,7 +34,11 @@ def getFlowData(request):
                                 'creater': e.creater,
                                 'state': str(e.state),
                                 'operation': "1"})
-    return JsonResponse(flowDataList, safe=False)
+    flowData = flowDataList[(page_id-1)*page_size:page_id*page_size]
+    flowlistSize = len(TestdataFlow.objects.all().order_by("pk"))
+    print(flowlistSize)
+    response = [{"code": "200", "msg": "邮箱获取成功", "flowData": flowData, "size": flowlistSize}]
+    return JsonResponse(response, safe=False)
 
 
 @csrf_exempt

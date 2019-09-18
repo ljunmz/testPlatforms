@@ -205,28 +205,28 @@
                     </span>
                     </p>
                 </div>
-                <div class="grid-content bg-purple" style="margin: 20px " >
-                    <p style="font-weight: bold">
-                        <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入device_tag" v-model="deviceTag"></el-input>
-                        <el-button style="margin: 5px" type="success" @click="getBuriedInfoByDevice">通过设备查询埋点</el-button>
-                        <span style="display: block;color: #3e50f0">
-                       {%verbatim%}
-                            用户ID：{{buriedInfoByDevice.user_id}}<br>
-                            mobile：{{buriedInfoByDevice.mobile}}<br>
-                            device_tag：{{buriedInfoByDevice.device_tag}}<br>
-                            event_type：{{buriedInfoByDevice.event_type}}<br>
-                            event_param：{{buriedInfoByDevice.event_param}}<br>
-                            referrer：{{buriedInfoByDevice.referrer}}<br>
-                            ip：{{buriedInfoByDevice.ip}}<br>
-                            channel：{{buriedInfoByDevice.channel}}<br>
-                            network_type：{{buriedInfoByDevice.network_type}}<br>
-                            os_type：{{buriedInfoByDevice.os_type}}<br>
-                            created：{{buriedInfoByDevice.created}}<br>
-                            app_version：{{buriedInfoByDevice.app_version}}<br>
-                        {%endverbatim%}
-                    </span>
-                    </p>
-                </div>
+<!--                <div class="grid-content bg-purple" style="margin: 20px " >-->
+<!--                    <p style="font-weight: bold">-->
+<!--                        <el-input  style="float:left;margin: 5px;width: 65%" placeholder="请输入device_tag" v-model="deviceTag"></el-input>-->
+<!--                        <el-button style="margin: 5px" type="success" @click="getBuriedInfoByDevice">通过设备查询埋点</el-button>-->
+<!--                        <span style="display: block;color: #3e50f0">-->
+<!--                       {%verbatim%}-->
+<!--                            用户ID：{{buriedInfoByDevice.user_id}}<br>-->
+<!--                            mobile：{{buriedInfoByDevice.mobile}}<br>-->
+<!--                            device_tag：{{buriedInfoByDevice.device_tag}}<br>-->
+<!--                            event_type：{{buriedInfoByDevice.event_type}}<br>-->
+<!--                            event_param：{{buriedInfoByDevice.event_param}}<br>-->
+<!--                            referrer：{{buriedInfoByDevice.referrer}}<br>-->
+<!--                            ip：{{buriedInfoByDevice.ip}}<br>-->
+<!--                            channel：{{buriedInfoByDevice.channel}}<br>-->
+<!--                            network_type：{{buriedInfoByDevice.network_type}}<br>-->
+<!--                            os_type：{{buriedInfoByDevice.os_type}}<br>-->
+<!--                            created：{{buriedInfoByDevice.created}}<br>-->
+<!--                            app_version：{{buriedInfoByDevice.app_version}}<br>-->
+<!--                        {%endverbatim%}-->
+<!--                    </span>-->
+<!--                    </p>-->
+<!--                </div>-->
 
             </div>
         </el-col>
@@ -250,7 +250,7 @@
                 email: "",
                 phoneCode: "",
                 buriedPhone : "",
-                deviceTag : "",
+                // deviceTag : "",
                 userPhone: "",
                 buriedInfo:{
                     user_id:"",
@@ -264,19 +264,19 @@
                     created:"",
                     app_version:""
                 },
-                buriedInfoByDevice:{
-                    user_id:"",
-                    mobile:"",
-                    device_tag:"",
-                    event_type:"",
-                    event_param:"",
-                    ip:"",
-                    channel:"",
-                    os_type:"",
-                    network_type:"",
-                    created:"",
-                    app_version:""
-                },
+                // buriedInfoByDevice:{
+                //     user_id:"",
+                //     mobile:"",
+                //     device_tag:"",
+                //     event_type:"",
+                //     event_param:"",
+                //     ip:"",
+                //     channel:"",
+                //     os_type:"",
+                //     network_type:"",
+                //     created:"",
+                //     app_version:""
+                // },
                 todoInfo: {
                     user_id:'',
                     short_title:'',
@@ -338,33 +338,32 @@
                     }
                 );
             },
-            getBuriedInfoByDevice(){
-                var dataPost = {
-                    "device_tag": this.deviceTag,
-                };
-                this.$http.post(this.url+'/getBuriedInfoByDevice', dataPost).then(
-                    function (data) {
-                        var responData = data.body;
-                        if (responData[0].code === 200 || responData[0].code === '200') {
-                            this.buriedInfoByDevice = responData[0].data;
-                            this.$message({
-                                showClose: true,
-                                message: '恭喜你，获取埋点成功',
-                                type: 'success'
-                            });
-                            this.actionLoading2 = false;
-                        } else {
-                            this.$message({
-                                showClose: true,
-                                message: '很遗憾，获取埋点失败',
-                                type: 'error'
-                            });
-                            this.actionLoading2 = false;
-                        }
-                    }
-                );
-            },
-
+            // getBuriedInfoByDevice(){
+            //     var dataPost = {
+            //         "device_tag": this.deviceTag,
+            //     };
+            //     this.$http.post(this.url+'/getBuriedInfoByDevice', dataPost).then(
+            //         function (data) {
+            //             var responData = data.body;
+            //             if (responData[0].code === 200 || responData[0].code === '200') {
+            //                 this.buriedInfoByDevice = responData[0].data;
+            //                 this.$message({
+            //                     showClose: true,
+            //                     message: '恭喜你，获取埋点成功',
+            //                     type: 'success'
+            //                 });
+            //                 this.actionLoading2 = false;
+            //             } else {
+            //                 this.$message({
+            //                     showClose: true,
+            //                     message: '很遗憾，获取埋点失败',
+            //                     type: 'error'
+            //                 });
+            //                 this.actionLoading2 = false;
+            //             }
+            //         }
+            //     );
+            // },
             onSubmit() {
                 console.log('submit!');
             },

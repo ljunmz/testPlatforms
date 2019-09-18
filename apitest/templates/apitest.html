@@ -103,8 +103,7 @@
         </button>
     </el-menu>
     <div style="margin: 0 10px 0 10px;padding: 1px">
-        <el-button size="small" type="primary" @click="dialogFormVisible = true" style="margin: 10px">+添加接口测试流
-        </el-button>
+        <el-button size="small" type="primary" @click="dialogFormVisible = true" style="margin: 10px">+添加接口测试流</el-button>
         <template>
             <el-select size="small" v-model="filtrate" @change="filtrateCreater" placeholder="筛选负责人">
                 <el-option
@@ -115,12 +114,9 @@
                 </el-option>
             </el-select>
         </template>
-        <el-button size="small" type="danger" @click="dialogEmailChange = true" style="margin: 10px">配置邮箱收件人
-        </el-button>
-        <el-button size="small" type="warning" @click="actionAllFlow()" style="margin: 10px">运行所有测试流
-        </el-button>
-        <el-button size="small" type="primary" @click="dialogDefaultVar = true;getDefaultVar()" style="margin: 10px">配置全局默认变量
-        </el-button>
+        <el-button size="small" type="danger" @click="dialogEmailChange = true" style="margin: 10px">配置邮箱收件人</el-button>
+        <el-button size="small" type="warning" @click="actionAllFlow()" style="margin: 10px">运行所有测试流</el-button>
+        <el-button size="small" type="primary" @click="dialogDefaultVar = true;getDefaultVar()" style="margin: 10px">配置全局默认变量</el-button>
         <div>
             <template>
                 <el-table
@@ -289,22 +285,24 @@
                                                       v-model="scope.row.order_id">
                                             </el-input>
                                             <span class="span" style="display: block;font-weight: bold">
-                                        {%verbatim%}
-                                            {{scope.row.order_id}}
-                                        {%endverbatim%}
-                                    </span>
+                                                {%verbatim%}
+                                                    {{scope.row.order_id}}
+                                                {%endverbatim%}
+                                            </span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="接口名称" width="160px" show-overflow-tooltip prop="node_name">
+                                    <el-table-column label="接口名称" width="160px" show-overflow-tooltip="true" prop="node_name">
                                         <template slot-scope="scope">
                                             <el-input size="mini" style="display: none"
                                                       :placeholder="scope.row.node_name"
                                                       v-model="scope.row.node_name"></el-input>
+                                            <el-tooltip class="item" effect="dark" :content="scope.row.node_name" placement="top-start">
                                             <span class="span" style="display: block;font-weight: bold;">
-                                        {%verbatim%}
-                                            {{scope.row.node_name}}
-                                        {%endverbatim%}
-                                    </span>
+                                                {%verbatim%}
+                                                    {{scope.row.node_name}}
+                                                {%endverbatim%}
+                                            </span>
+                                            </el-tooltip>
                                         </template>
                                     </el-table-column>
                                     <el-table-column label="请求方式" width="100px" show-overflow-tooltip
@@ -313,22 +311,24 @@
                                             <el-input size="mini" style="display: none" :placeholder="scope.row.method"
                                                       v-model="scope.row.method"></el-input>
                                             <span class="span" style="display: block">
-                                        {%verbatim%}
-                                            {{scope.row.method}}
-                                        {%endverbatim%}
-                                    </span>
+                                                {%verbatim%}
+                                                    {{scope.row.method}}
+                                                {%endverbatim%}
+                                            </span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="接口路径" show-overflow-tooltip
+                                    <el-table-column label="接口路径" show-overflow-tooltip="true"
                                                      prop="path">
                                         <template slot-scope="scope">
                                             <el-input size="mini" style="display: none" :placeholder="scope.row.path"
                                                       v-model="scope.row.path"></el-input>
+                                            <el-tooltip class="item" effect="dark" :content="scope.row.path" placement="top-start">
                                             <span class="span" style="display: block;font-weight: bold;">
-                                        {%verbatim%}
-                                            {{scope.row.path}}
-                                        {%endverbatim%}
-                                    </span>
+                                                {%verbatim%}
+                                                    {{scope.row.path}}
+                                                {%endverbatim%}
+                                            </span>
+                                            </el-tooltip>
                                         </template>
                                     </el-table-column>
                                     <el-table-column label="请求参数" width="180px" show-overflow-tooltip prop="parameter"
@@ -364,10 +364,10 @@
                                                       style="color: chocolate"
                                                       slot="reference"
                                                       @click="getParameter(scope.$index, scope.row,scope.$event)">
-                                                {%verbatim%}
-                                                {{scope.row.parameter}}
-                                                {%endverbatim%}
-                                            </span>
+                                                    {%verbatim%}
+                                                    {{scope.row.parameter}}
+                                                    {%endverbatim%}
+                                                </span>
                                             </el-popover>
                                         </template>
                                     </el-table-column>
@@ -376,11 +376,13 @@
                                             <el-input size="mini" style="display: none"
                                                       :placeholder="scope.row.pre_keys"
                                                       v-model="scope.row.pre_keys"></el-input>
-                                            <span class="span" style="display: block">
-                                        {%verbatim%}
-                                            {{scope.row.pre_keys}}
-                                        {%endverbatim%}
-                                    </span>
+                                            <el-tooltip class="item" effect="dark" :content="scope.row.pre_keys" placement="top-start">
+                                                <span class="span" style="display: block">
+                                                    {%verbatim%}
+                                                        {{scope.row.pre_keys}}
+                                                    {%endverbatim%}
+                                                </span>
+                                            </el-tooltip>
                                         </template>
                                     </el-table-column>
                                     <el-table-column label="等待时间" width="80px" show-overflow-tooltip prop="sleep_time"
@@ -390,25 +392,27 @@
                                                       :placeholder="scope.row.sleep_time"
                                                       v-model="scope.row.sleep_time"></el-input>
                                             <span class="span" style="display: block">
-                                        {%verbatim%}
-                                            {{scope.row.sleep_time}}
-                                        {%endverbatim%}
-                                    </span>
-                                        </template>
-                                    </el-table-column>
-                                    <el-table-column label="期望结果" show-overflow-tooltip prop="expect_response">
-                                        <template slot-scope="scope">
-                                            <el-input size="mini" style="display: none"
-                                                      :placeholder="scope.row.expect_response"
-                                                      v-model="scope.row.expect_response"></el-input>
-                                            <span class="span" style="display: block">
                                                 {%verbatim%}
-                                                    {{scope.row.expect_response}}
+                                                    {{scope.row.sleep_time}}
                                                 {%endverbatim%}
                                             </span>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column label="接口状态" prop="state" width="80px" id="state">
+                                    <el-table-column label="期望结果" width="140px" show-overflow-tooltip prop="expect_response">
+                                        <template slot-scope="scope">
+                                            <el-input size="mini" style="display: none"
+                                                      :placeholder="scope.row.expect_response"
+                                                      v-model="scope.row.expect_response"></el-input>
+                                            <el-tooltip class="item" effect="dark" :content="scope.row.expect_response" placement="top-start">
+                                            <span class="span" style="display: block" >
+                                                {%verbatim%}
+                                                    {{scope.row.expect_response}}
+                                                {%endverbatim%}
+                                            </span>
+                                            </el-tooltip>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="接口状态" prop="state" width="70px" id="state">
                                         <template slot-scope="scope">
                                             <el-switch
                                                     v-model="scope.row.state"
@@ -659,9 +663,7 @@
                             </div>
                         </template>
                     </el-table-column>
-
                 </el-table>
-
             </template>
 
         </div>
@@ -673,7 +675,7 @@
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
                 :page-sizes="[20, 30, 50, 100]"
-                :page-size="20"
+                :page-size=pageSize
                 layout="total, sizes, prev, pager, next, jumper"
                 :total=FlowlistSize>
         </el-pagination>
@@ -948,12 +950,13 @@
     var vm = new Vue({
         el: '#app',
         mounted: function () {
-            var dataPost = {"page_id": 1};
+            var dataPost = {"page_id": 1,"page_size":20};
             this.$http.post(this.url + '/getFlowData', dataPost).then(
                 function (data) {
-                    this.FlowlistSize = data.body.length;
-                    // this.flowData = data.body.splice(0,20);
-                    this.flowData = data.body;
+                    this.FlowlistSize = data.body[0].size;
+                    this.flowData = data.body[0].flowData;
+                    console.log(this.flowData);
+                    console.log(this.FlowlistSize);
                 }
             );
             this.$http.get(this.url + '/getEmail').then(
@@ -965,11 +968,12 @@
         },
         data() {
             return {
-                url: 'http://172.16.10.172:8000',
-                // url: 'http://172.16.11.185:8000',
+                // url: 'http://172.16.10.172:8000',
+                url: 'http://172.16.11.185:8000',
                 filtrate: '',
                 recipients: '',
-                FlowlistSize: 100,
+                pageSize: 20,
+                FlowlistSize: 20,
                 currentPage: 1,
                 creater: [
                     {
@@ -1056,21 +1060,25 @@
             }
         },
         methods: {
+
+            getDefaultVar(){
+                this.$http.get(this.url + '/getDefaultVar').then(
+                    function (data) {
+                        this.varListData = data.body[0].varList;
+                    }
+                );
+            },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
-
-
-            },
-            handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
-                var dataPost = {"page_id": val};
+                console.log("page_size:",val);
+                this.pageSize = val;
+                var dataPost = {"page_id": 1,"page_size":this.pageSize};
                 this.$http.post(this.url + '/getFlowData', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
-                            this.flowData = data.body;
+                            this.flowData = data.body[0].flowData;
                         } else {
-                            row.parameter = this.parameterData[0].value;
                             this.$message({
                                 showClose: true,
                                 message: '很遗憾，切换分页失败',
@@ -1080,11 +1088,24 @@
 
                     }
                 );
+
             },
-            getDefaultVar(){
-                this.$http.get(this.url + '/getDefaultVar').then(
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+                var dataPost = {"page_id": val,"page_size":this.pageSize};
+                this.$http.post(this.url + '/getFlowData', dataPost).then(
                     function (data) {
-                        this.varListData = data.body[0].varList;
+                        var responData = data.status;
+                        if (responData === 200 || responData === '200') {
+                            this.flowData = data.body[0].flowData;
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: '很遗憾，切换分页失败',
+                                type: 'error'
+                            });
+                        }
+
                     }
                 );
             },
