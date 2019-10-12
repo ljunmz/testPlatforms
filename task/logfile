@@ -1,0 +1,3 @@
+2019-10-10 11:38:01,251 - MainProcess - INFO - process shutting down
+2019-10-10 11:38:01,251 - MainProcess - DEBUG - running all "atexit" finalizers with priority >= 0
+2019-10-10 11:38:01,252 - MainProcess - DEBUG - running the remaining "atexit" finalizers

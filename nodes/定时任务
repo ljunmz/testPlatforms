@@ -1,0 +1,75 @@
+crontab：
+https://www.cnblogs.com/lixiang1993/p/9545589.html
+
+python脚本利用windows计划定时执行
+https://www.cnblogs.com/tiandi/p/5930463.html
+
+Celery
+https://blog.csdn.net/lizhihua0925/article/details/51455346
+https://segmentfault.com/a/1190000007780963(推荐阅读)
+https://blog.csdn.net/sanyuedexuanlv/article/details/88052884
+
+windows下安装Redis并部署成服务(在安装目录下注册windows下的redis服务，避免关闭cmd命令窗口后redis服务端被停掉)
+https://www.cnblogs.com/dingguofeng/p/8709476.html
+windows redis下载地址：https://github.com/microsoftarchive/redis/releases/tag/win-3.2.100
+redis可视化工具下载地址：https://www.newasp.net/soft/391754.html
+
+常用的redis服务命令。
+卸载服务：redis-server --service-uninstall
+开启服务：redis-server --service-start
+停止服务：redis-server --service-stop
+重命名服务：redis-server --service-name name
+
+
+重命名服务，需要写在前三个参数之后，例如：
+The following would install and start three separate instances of Redis as a service:
+以下将会安装并启动三个不同的Redis实例作服务：
+
+redis-server --service-install --service-name redisService1 --port 10001
+
+redis-server --service-start --service-name redisService1
+
+redis-server --service-install --service-name redisService2 --port 10002
+
+redis-server --service-start --service-name redisService2
+
+redis-server --service-install --service-name redisService3 --port 10003
+
+redis-server --service-start --service-name redisService3
+四：测试
+启动服务
+redis-server --service-start
+客户端
+命令：
+精简模式：
+redis-cli.exe
+指定模式：
+redis-cli.exe -h 127.0.0.1 -p 6379 -a requirepass
+(-h 服务器地址  -p 指定端口号 -a 连接数据库的密码[可以在redis.windows.conf中配置]，默认无密码)
+
+
+
+
+启动 Celery Worker
+在当前目录，使用如下方式启动 Celery Worker：
+
+启动beat
+celery -A  task beat -l info
+
+启动worker
+$ celery worker -A tasks --loglevel=info
+celery -A tasks worker -l info -P eventlet
+celery -A task.apitestTask worker -l info -P eventlet
+
+报错解决办法（Celery ValueError: not enough values to unpack）
+https://blog.csdn.net/qq_30242609/article/details/79047660
+
+
+>>> result = add.delay(2, 6)
+>>> result.ready()   # 使用 ready() 判断任务是否执行完毕
+False
+>>> result.ready()
+False
+>>> result.ready()
+True
+>>> result.get()

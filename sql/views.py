@@ -99,24 +99,28 @@ def getUserInfo(request):
         return JsonResponse(response, safe=False)
     else:
         user = User.objects.using("user").filter(mobile=mobile)[0]
-
-        print(user.email)
-
         if not VerificationCode.objects.using("thirdparty").filter(mobile=mobile).order_by("-created").exists():
+            print("无手机验证码")
             phoneCode = '无手机验证码'
         else:
             phoneCode = VerificationCode.objects.using("thirdparty").filter(mobile=mobile).order_by("-created")[0].code
-
+            print("有手机验证码")
         if user.email is None:
-            emailCode = VerificationEmailCode.objects.using("thirdparty").all().order_by("-created")[0].code
+            print("未绑定邮箱")
             email = '未绑定邮箱'
+            if not VerificationEmailCode.objects.using("thirdparty").all().order_by("-created").exists():
+                emailCode = "无邮箱验证码"
+            else:
+                emailCode = VerificationEmailCode.objects.using("thirdparty").all().order_by("-created")[0].code
         else:
+            print("已绑定邮箱")
             email = user.email
             if not VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created").exists():
+                print("无邮箱验证码")
                 emailCode = '无邮箱验证码'
             else:
-                emailCode = VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created")[
-                    0].code
+                print("有邮箱验证码")
+                emailCode = VerificationEmailCode.objects.using("thirdparty").filter(email=email).order_by("-created")[0].code
 
         userInfo = {
             "user_id": str(user.pk),

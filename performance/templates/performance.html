@@ -20,9 +20,21 @@
     <!-- 引入vue-resource -->
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.js" type="text/javascript" charset="utf-8"></script>
     <style lang="scss">
+        .el-input {
+            width: 500px;
+        }
+
+        .el-radio-button__inner, .el-radio-group {
+            display: inline-block;
+            line-height: 1;
+            vertical-align: bottom;
+            margin-left: 5px;
+        }
+
         .el-tooltip__popper {
             max-width: 40%
         }
+
         .el-menu-vertical-demo:not(.el-menu--collapse) {
             width: 200px;
             min-height: 400px;
@@ -70,12 +82,12 @@
         }
 
     </style>
-    <title>时光序接口测试管理</title>
+    <title>接口性能测试管理</title>
 </head>
 <body style="background-color: #c8c6d4">
 <div id="app" style="margin: 0">
     <el-menu
-            :default-active="activeIndex2"
+            :default-active="activeIndex"
             class="el-menu-demo"
             mode="horizontal"
             @select="handleSelect"
@@ -103,9 +115,11 @@
         </button>
     </el-menu>
     <div style="margin: 1px 1px 0 1px ;padding: 0">
-        <el-tabs type="border-card"  v-model="activeName"  @tab-click="handleClick">
-            <el-tab-pane label="接口测试流管理" name="apitest">
-                <el-button size="small"  type="primary" @click="dialogFormVisible = true" style="margin:10px;font-weight: bolder">+添加接口测试流</el-button>
+        <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="性能测试接口管理" name="apitest">
+                <el-button size="small" type="primary" @click="dialogFormVisible = true"
+                           style="margin:10px;font-weight: bolder">+添加性能测试流
+                </el-button>
                 <template>
                     <el-select size="small" v-model="filtrate" @change="filtrateCreater" placeholder="筛选负责人">
                         <el-option
@@ -116,6 +130,9 @@
                         </el-option>
                     </el-select>
                 </template>
+                <el-button size="small" type="primary" @click="dialogDefaultVar = true;getDefaultVar()"
+                           style="margin: 10px">配置全局默认变量
+                </el-button>
                 <el-button size="small" type="warning" @click="actionAllFlow()" style="margin: 10px">运行所有测试流</el-button>
                 <div>
                     <template>
@@ -268,9 +285,8 @@
                                                 :data="nodeData"
                                                 stripe
                                                 height="550px"
-                                                border =true
                                                 size="mini"
-                                                :default-sort = "{prop: 'order_id', order: 'ascending'}"
+                                                :default-sort="{prop: 'order_id', order: 'ascending'}"
                                                 @row-click="rowClick"
                                                 @cell-dblclick="dbEditNodeTable"
                                                 highlight-current-row="true"
@@ -278,7 +294,6 @@
                                                 cell-style="padding:2px,font-size: 10px">
                                             <el-table-column label="步骤" width="80px"
                                                              sortable
-                                                             resizable="true"
                                                              prop="order_id">
                                                 <template slot-scope="scope">
                                                     <el-input size="mini"
@@ -287,31 +302,32 @@
                                                               v-model="scope.row.order_id">
                                                     </el-input>
                                                     <span class="span" style="display: block;font-weight: bold">
-                                                    {%verbatim%}
-                                                        {{scope.row.order_id}}
-                                                    {%endverbatim%}
-                                                    </span>
+                                                {%verbatim%}
+                                                    {{scope.row.order_id}}
+                                                {%endverbatim%}
+                                            </span>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="接口名称" width="160px" prop="node_name" resizable="true">
+                                            <el-table-column label="接口名称" width="160px" prop="node_name">
                                                 <template slot-scope="scope">
                                                     <el-input size="mini" style="display: none"
                                                               :placeholder="scope.row.node_name"
                                                               v-model="scope.row.node_name"></el-input>
-                                                    <el-tooltip class="item" effect="dark" :content="scope.row.node_name" placement="top-start">
-                                                <span class="span" style="display: block;font-weight: bold;">
-                                                    {%verbatim%}
-                                                        {{scope.row.node_name}}
-                                                    {%endverbatim%}
-                                                </span>
+                                                    <el-tooltip class="item" effect="dark"
+                                                                :content="scope.row.node_name" placement="top-start">
+                                            <span class="span" style="display: block;font-weight: bold;">
+                                                {%verbatim%}
+                                                    {{scope.row.node_name}}
+                                                {%endverbatim%}
+                                            </span>
                                                     </el-tooltip>
                                                 </template>
                                             </el-table-column>
                                             <el-table-column label="请求方式" width="100px" show-overflow-tooltip
-                                                             resizable="true"
                                                              prop="method">
                                                 <template slot-scope="scope">
-                                                    <el-input size="mini" style="display: none" :placeholder="scope.row.method"
+                                                    <el-input size="mini" style="display: none"
+                                                              :placeholder="scope.row.method"
                                                               v-model="scope.row.method"></el-input>
                                                     <span class="span" style="display: block">
                                                 {%verbatim%}
@@ -321,12 +337,13 @@
                                                 </template>
                                             </el-table-column>
                                             <el-table-column label="接口路径"
-                                                             resizable="true"
                                                              prop="path">
                                                 <template slot-scope="scope">
-                                                    <el-input size="mini" style="display: none" :placeholder="scope.row.path"
+                                                    <el-input size="mini" style="display: none"
+                                                              :placeholder="scope.row.path"
                                                               v-model="scope.row.path"></el-input>
-                                                    <el-tooltip class="item" effect="dark" :content="scope.row.path" placement="top-start">
+                                                    <el-tooltip class="item" effect="dark" :content="scope.row.path"
+                                                                placement="top-start">
                                             <span class="span" style="display: block;font-weight: bold;">
                                                 {%verbatim%}
                                                     {{scope.row.path}}
@@ -335,8 +352,8 @@
                                                     </el-tooltip>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="请求参数" width="180px" show-overflow-tooltip prop="parameter"
-                                                             resizable="true"
+                                            <el-table-column label="请求参数" width="180px" show-overflow-tooltip
+                                                             prop="parameter"
                                                              style="padding: 0">
                                                 <template slot-scope="scope">
                                                     <el-input size="mini" style="display: none"
@@ -348,7 +365,8 @@
                                                             width="600px"
                                                             placement="left"
                                                             trigger="click">
-                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">接口请求参数配置</p>
+                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">
+                                                            接口请求参数配置</p>
                                                         <el-input class="el-input-parameter" type="textarea"
                                                                   :autosize="{ minRows: 5, maxRows: 20}"
                                                                   style="display: block;width: 600px"
@@ -376,12 +394,13 @@
                                                     </el-popover>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="请求参数变量" prop="pre_keys" resizable="true">
+                                            <el-table-column label="请求参数变量" prop="pre_keys">
                                                 <template slot-scope="scope">
                                                     <el-input size="mini" style="display: none"
                                                               :placeholder="scope.row.pre_keys"
                                                               v-model="scope.row.pre_keys"></el-input>
-                                                    <el-tooltip class="item" effect="dark" :content="scope.row.pre_keys" placement="top-start">
+                                                    <el-tooltip class="item" effect="dark" :content="scope.row.pre_keys"
+                                                                placement="top-start">
                                                 <span class="span" style="display: block">
                                                     {%verbatim%}
                                                         {{scope.row.pre_keys}}
@@ -390,7 +409,8 @@
                                                     </el-tooltip>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="等待时间" width="80px" show-overflow-tooltip prop="sleep_time"
+                                            <el-table-column label="等待时间" width="80px" show-overflow-tooltip
+                                                             prop="sleep_time"
                                                              style="padding: 0">
                                                 <template slot-scope="scope">
                                                     <el-input size="mini" style="display: none"
@@ -403,13 +423,15 @@
                                             </span>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="期望结果" width="140px"  prop="expect_response" resizable="true">
+                                            <el-table-column label="期望结果" width="140px" prop="expect_response">
                                                 <template slot-scope="scope">
                                                     <el-input size="mini" style="display: none"
                                                               :placeholder="scope.row.expect_response"
                                                               v-model="scope.row.expect_response"></el-input>
-                                                    <el-tooltip class="item" effect="dark" :content="scope.row.expect_response" placement="top-start">
-                                            <span class="span" style="display: block" >
+                                                    <el-tooltip class="item" effect="dark"
+                                                                :content="scope.row.expect_response"
+                                                                placement="top-start">
+                                            <span class="span" style="display: block">
                                                 {%verbatim%}
                                                     {{scope.row.expect_response}}
                                                 {%endverbatim%}
@@ -440,10 +462,12 @@
                                                             placement="left"
                                                             width="800px"
                                                             trigger="click">
-                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">前置SQL查询信息配置</p>
+                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">
+                                                            前置SQL查询信息配置</p>
                                                         <p style="font-weight: bold;">
                                                         <p></p>
-                                                        <el-tag style="float:left;margin: 3px;font-weight: bold" size="medium">
+                                                        <el-tag style="float:left;margin: 3px;font-weight: bold"
+                                                                size="medium">
                                                             前置SQL查询开关
                                                         </el-tag>
                                                         <p></p>
@@ -455,7 +479,8 @@
                                                         </el-select>
                                                         </p>
                                                         <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">前置SQL查询语句
+                                                            <el-tag style="float:left;margin: 3px" size="medium">
+                                                                前置SQL查询语句
                                                             </el-tag>
                                                             <el-input class="el-input-parameter" type="textarea"
                                                                       :autosize="{ minRows: 3, maxRows: 20}"
@@ -465,7 +490,8 @@
                                                             </el-input>
                                                         </p>
                                                         <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">前置SQL的变量参数
+                                                            <el-tag style="float:left;margin: 3px" size="medium">
+                                                                前置SQL的变量参数
                                                             </el-tag>
                                                             <el-input class="el-input-parameter" type="textarea"
                                                                       :autosize="{ minRows: 2, maxRows: 20}"
@@ -475,7 +501,8 @@
                                                             </el-input>
                                                         </p>
                                                         <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 1px" size="medium">前置SQl查询结果接收变量
+                                                            <el-tag style="float:left;margin: 1px" size="medium">
+                                                                前置SQl查询结果接收变量
                                                             </el-tag>
                                                             <el-input class="el-input-parameter" type="textarea"
                                                                       :autosize="{ minRows: 2, maxRows: 20}"
@@ -512,10 +539,12 @@
                                                             placement="left"
                                                             width="800px"
                                                             trigger="click">
-                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">后置SQL校验信息配置</p>
+                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">
+                                                            后置SQL校验信息配置</p>
                                                         <p style="font-weight: bold;">
                                                         <p></p>
-                                                        <el-tag style="float:left;margin: 3px;font-weight: bold" size="medium">
+                                                        <el-tag style="float:left;margin: 3px;font-weight: bold"
+                                                                size="medium">
                                                             后置SQL校验开关
                                                         </el-tag>
                                                         <p></p>
@@ -527,7 +556,8 @@
                                                         </el-select>
                                                         </p>
                                                         <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">后置SQL校验语句
+                                                            <el-tag style="float:left;margin: 3px" size="medium">
+                                                                后置SQL校验语句
                                                             </el-tag>
                                                             <el-input class="el-input-parameter" type="textarea"
                                                                       :autosize="{ minRows: 3, maxRows: 20}"
@@ -537,7 +567,8 @@
                                                             </el-input>
                                                         </p>
                                                         <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">后置SQL变量参数
+                                                            <el-tag style="float:left;margin: 3px" size="medium">
+                                                                后置SQL变量参数
                                                             </el-tag>
                                                             <el-input class="el-input-parameter" type="textarea"
                                                                       :autosize="{ minRows: 2, maxRows: 20}"
@@ -547,7 +578,8 @@
                                                             </el-input>
                                                         </p>
                                                         <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 1px" size="medium">后置SQL校验预期结果
+                                                            <el-tag style="float:left;margin: 1px" size="medium">
+                                                                后置SQL校验预期结果
                                                             </el-tag>
                                                             <el-input class="el-input-parameter" type="textarea"
                                                                       :autosize="{ minRows: 2, maxRows: 20}"
@@ -585,7 +617,8 @@
                                                             placement="left"
                                                             width="800px"
                                                             trigger="click">
-                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">后置变量提取信息配置</p>
+                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">
+                                                            后置变量提取信息配置</p>
                                                         <p style="font-weight: bold;">
                                                             <el-tag style="float:left;margin: 3px" size="medium">后置提取变量名
                                                             </el-tag>
@@ -596,7 +629,8 @@
                                                             </el-input>
                                                         </p>
                                                         <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">后置变量提取表达式
+                                                            <el-tag style="float:left;margin: 3px" size="medium">
+                                                                后置变量提取表达式
                                                             </el-tag>
                                                             <el-input class="el-input-parameter" type="textarea"
                                                                       :autosize="{ minRows: 1, maxRows: 20}"
@@ -606,7 +640,8 @@
                                                             </el-input>
                                                         </p>
                                                         <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 1px" size="medium">后置提取变量默认值
+                                                            <el-tag style="float:left;margin: 1px" size="medium">
+                                                                后置提取变量默认值
                                                             </el-tag>
                                                             <el-input class="el-input-parameter" type="textarea"
                                                                       :autosize="{ minRows: 1, maxRows: 20}"
@@ -634,22 +669,26 @@
                                             </el-table-column>
                                             <el-table-column label="操作" width="180px" prop="parameter">
                                                 <template slot-scope="scope">
-                                                    <el-button size="mini" type="success" style="margin: 2px;padding: 5px"
+                                                    <el-button size="mini" type="success"
+                                                               style="margin: 2px;padding: 5px"
                                                                @click.native.prevent="addNodeRow(nodeData,scope.$index, scope.row)">
                                                         添加
                                                     </el-button>
                                                     <el-button size="mini" type="danger"
                                                                style="margin: 2px;padding: 5px"
-                                                               @click="deleteNodeRow(scope.$index,nodeData,scope.row)">删除
+                                                               @click="deleteNodeRow(scope.$index,nodeData,scope.row)">
+                                                        删除
                                                     </el-button>
                                                     <el-button size="mini" class="saveNode"
                                                                style="display: none;margin: 2px;padding: 5px;float: left"
                                                                type="warning"
-                                                               @click="saveNodeEdit(scope.$index, scope.row,scope.$event)">保存
+                                                               @click="saveNodeEdit(scope.$index, scope.row,scope.$event)">
+                                                        保存
                                                     </el-button>
                                                     <el-button size="mini" class="editNode" type="primary"
                                                                style="margin: 2px;padding: 5px;float: left"
-                                                               @click="editNodeTable(scope.$index, scope.row,scope.$event)">编辑
+                                                               @click="editNodeTable(scope.$index, scope.row,scope.$event)">
+                                                        编辑
                                                     </el-button>
                                                     <el-dialog
                                                             title="删除接口"
@@ -685,13 +724,80 @@
                     </el-pagination>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="配置管理" style="font-weight: bolder" name="config">
-                <el-button size="small" type="danger" @click="dialogEmailChange = true" style="margin: 10px">配置邮箱收件人</el-button>
-                <el-button size="small" type="primary" @click="dialogDefaultVar = true;getDefaultVar()" style="margin: 10px">配置全局默认变量</el-button>
+            <el-tab-pane label="配置管理" name="config">
+                <el-form ref="form" :model="form">
+                    <el-form-item>
+                        <p style="float:left;margin: 0px;font-weight: bolder;color: #356dff" size="medium">邮件收件人配置</p><br>
+                        <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
+                              size="medium">收件人</span>
+                        <el-select
+                                v-model="form.recipients"
+                                multiple
+                                filterable
+                                allow-create
+                                default-first-option
+                                placeholder="请输入收件人邮箱">
+                            <el-option
+                                    v-for="item in form.options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <p style="float:left;margin: 0px;font-weight: bolder;color: #356dff" size="medium">服务器信息配置</p><br>
+                        <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
+                              size="medium">协议配置</span>
+                        <el-radio-group v-model="form.protocol">
+                            <el-radio label="http"></el-radio>
+                            <el-radio label="https"></el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                    <el-form-item>
+                        <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
+                              size="medium">运行环境配置</span>
+                        <el-radio-group v-model="form.serverName">
+                            <el-radio label="dev">开发环境(dapi.shiguangxu.com)</el-radio>
+                            <el-radio label="test">测试环境(tapi.shiguangxu.com)</el-radio>
+                            <el-radio label="preproduction">预发布环境(papi.shiguangxu.com)</el-radio>
+                            <el-radio label="production">生产环境(api.shiguagnxu.com)</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                    <el-form-item>
+                        <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
+                              size="medium">端口配置</span>
+                        <el-input v-model="form.port"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <p style="float:left;margin: 0px;font-weight: bolder;color: #356dff" size="medium">性能线程组配置</p><br>
+                        <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
+                              size="medium">线程数</span>
+                        <el-input v-model="form.num_threads"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
+                              size="medium">Ramp-Up时间(秒)</span>
+                        <el-input v-model="form.ramp_time"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                         <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
+                               size="medium">循环次数</span>
+                        <el-input v-model="form.loops"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                         <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
+                               size="medium">是否永久循环</span>
+                        <el-switch v-model="form.continue_forever"></el-switch>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="onSubmit">保存配置</el-button>
+                        <el-button>恢复配置</el-button>
+                    </el-form-item>
+                </el-form>
             </el-tab-pane>
             <el-tab-pane label="定时任务" style="font-weight: bolder" name="task">
-                <el-button size="small" type="danger" @click="dialogEmailChange = true" style="margin: 10px">启动Work服务</el-button>
-                <el-button size="small" type="danger" @click="dialogEmailChange = true" style="margin: 10px">启动Beat服务</el-button>
+                <span>网站建设中，敬请期待</span>
             </el-tab-pane>
         </el-tabs>
     </div>
@@ -735,7 +841,7 @@
                 :data="varListData"
                 :header-cell-style="{background:'#606266',color:'#FFFFFF',padding:0}"
                 border>
-            <el-table-column property="date" label="变量名称" width="250px" >
+            <el-table-column property="date" label="变量名称" width="250px">
                 <template slot-scope="scope">
                     <el-input style="display: none;margin: 0;padding: 0" :placeholder="scope.row.argumentName"
                               v-model="scope.row.argumentName"></el-input>
@@ -746,7 +852,7 @@
                             </span>
                 </template>
             </el-table-column>
-            <el-table-column property="date" label="变量值" >
+            <el-table-column property="date" label="变量值">
                 <template slot-scope="scope">
                     <el-input style="display: none;margin: 0;padding: 0" :placeholder="scope.row.argumentValue"
                               v-model="scope.row.argumentValue"></el-input>
@@ -757,27 +863,27 @@
                             </span>
                 </template>
             </el-table-column>
-            <el-table-column property="date" label="操作" width="170px" >
+            <el-table-column property="date" label="操作" width="170px">
                 <template slot-scope="scope">
                     <el-button size="mini" class="save"
                                style="display: block;margin: 2px;padding: 5px;float: left"
                                type="success"
-                                >添加
+                    >添加
                     </el-button>
                     <el-button size="mini" class="save"
                                style="display: block;margin: 2px;padding: 5px;float: left"
                                type="primary"
-                               >编辑
+                    >编辑
                     </el-button>
                     <el-button size="mini" class="save"
                                style="display: none;margin: 2px;padding: 5px;float: left"
                                type="warning"
-                               >保存
+                    >保存
                     </el-button>
                     <el-button size="mini" class="save"
                                style="display: block;margin: 2px;padding: 5px;float: left"
                                type="danger"
-                               >删除
+                    >删除
                     </el-button>
                 </template>
             </el-table-column>
@@ -962,8 +1068,8 @@
     var vm = new Vue({
         el: '#app',
         mounted: function () {
-            var dataPost = {"page_id": 1,"page_size":18};
-            this.$http.post(this.url + '/getFlowData', dataPost).then(
+            var dataPost = {"page_id": 1, "page_size": 15};
+            this.$http.post(this.url + '/getPerformanceFlowData', dataPost).then(
                 function (data) {
                     this.FlowlistSize = data.body[0].size;
                     this.flowData = data.body[0].flowData;
@@ -971,7 +1077,7 @@
                     console.log(this.FlowlistSize);
                 }
             );
-            this.$http.get(this.url + '/getEmail').then(
+            this.$http.get(this.url + '/getPerformanceEmail').then(
                 function (data) {
                     this.recipients = data.body[0].email;
                 }
@@ -982,11 +1088,32 @@
                 url: 'http://172.16.10.172:8000',
                 // url: 'http://172.16.11.185:8000',
                 filtrate: '',
-                recipients: '',
-                pageSize: 18,
+                form: {
+                    options: [{
+                        value: 'liujun@jielema.com',
+                        label: '柳军'
+                    }, {
+                        value: 'cuiqingyong@jielema.com',
+                        label: '崔庆用'
+                    }, {
+                        value: 'lujinai@jielema.com',
+                        label: '陆金爱'
+                    }],
+                    recipients:[],
+                    protocol: 'http',
+                    serverName: 'test',
+                    port: '80',
+                    num_threads: '1',
+                    ramp_time: "1",
+                    loops: "-1",
+                    continue_forever: false,
+                    desc: ''
+                },
+                recipients: [],
+                pageSize: 15,
                 FlowlistSize: 100,
                 currentPage: 1,
-                activeName:"apitest",
+                activeName: "apitest",
                 creater: [
                     {
                         "creater": "全部负责人"
@@ -1043,10 +1170,10 @@
                     "creater": "",
                     "state": "1"
                 },
-                activeIndex2: '3',
+                activeIndex: '4',
                 varListData: [{
-                    "argumentName":"示例1:变量名称",
-                    "argumentValue":"示例1:变量值",
+                    "argumentName": "示例1:变量名称",
+                    "argumentValue": "示例1:变量值",
                 }],
                 modal1: false,
                 search: '',
@@ -1072,41 +1199,41 @@
             }
         },
         methods: {
-            handleClick(targetName){
-                if (targetName.name === "apitest"){
-                    this.activeName = targetName.name;
-                    console.log(this.activeName);
-                    var dataPost = {"page_id": 1,"page_size":18};
-                    this.$http.post(this.url + '/getFlowData', dataPost).then(
-                        function (data) {
-                            this.FlowlistSize = data.body[0].size;
-                            this.flowData = data.body[0].flowData;
-                            console.log(this.flowData);
-                            console.log(this.FlowlistSize);
-                        }
-                    );
-                } else if (targetName.name === "config"){
-                    this.activeName = targetName.name;
-                    console.log(this.activeName);
-                    var dataPost = {"page_id": 1,"page_size":15};
-                    this.$http.post(this.url + '/getFlowData', dataPost).then(
-                        function (data) {
-                            this.FlowlistSize = data.body[0].size;
-                            this.flowData = data.body[0].flowData;
-                            console.log(this.flowData);
-                            console.log(this.FlowlistSize);
-                        }
-                    );
-                } else if (targetName.name === "task"){
-                    this.activeName = targetName.name;
-                    console.log(this.activeName);
-                } else {
-                    console.log("sssss")
-                }
-
+            onSubmit() {
+                console.log('submit!');
             },
-            getDefaultVar(){
-                this.$http.get(this.url + '/getDefaultVar').then(
+            handleClick(targetName) {
+                if (targetName.name === "apitest") {
+                    this.activeName = targetName.name;
+                    console.log(this.activeName);
+                    var dataPost = {"page_id": 1, "page_size": 15};
+                    this.$http.post(this.url + '/getPerformanceFlowData', dataPost).then(
+                        function (data) {
+                            this.FlowlistSize = data.body[0].size;
+                            this.flowData = data.body[0].flowData;
+                            console.log(this.flowData);
+                            console.log(this.FlowlistSize);
+                        }
+                    );
+                } else if (targetName.name === "config") {
+                    this.activeName = targetName.name;
+                    console.log(this.activeName);
+                    var dataPost = {"page_id": 1, "page_size": 15};
+                    this.$http.post(this.url + '/getPerformanceFlowData', dataPost).then(
+                        function (data) {
+                            this.FlowlistSize = data.body[0].size;
+                            this.flowData = data.body[0].flowData;
+                            console.log(this.flowData);
+                            console.log(this.FlowlistSize);
+                        }
+                    );
+                } else if (targetName.name === "task") {
+                    this.activeName = targetName.name;
+                    console.log(this.activeName);
+                }
+            },
+            getDefaultVar() {
+                this.$http.get(this.url + '/getPerformanceDefaultVar').then(
                     function (data) {
                         this.varListData = data.body[0].varList;
                     }
@@ -1114,10 +1241,10 @@
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
-                console.log("page_size:",val);
+                console.log("page_size:", val);
                 this.pageSize = val;
-                var dataPost = {"page_id": 1,"page_size":this.pageSize};
-                this.$http.post(this.url + '/getFlowData', dataPost).then(
+                var dataPost = {"page_id": 1, "page_size": this.pageSize};
+                this.$http.post(this.url + '/getPerformanceFlowData', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1136,8 +1263,8 @@
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
-                var dataPost = {"page_id": val,"page_size":this.pageSize};
-                this.$http.post(this.url + '/getFlowData', dataPost).then(
+                var dataPost = {"page_id": val, "page_size": this.pageSize};
+                this.$http.post(this.url + '/getPerformanceFlowData', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1169,7 +1296,7 @@
                     "post_keys_extractor": postKeyData.post_keys_extractor,
                     "post_keys_default": postKeyData.post_keys_default
                 };
-                this.$http.post(this.url + '/savePostKey', dataPost).then(
+                this.$http.post(this.url + '/savePerformancePostKey', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         console.log("responData=", responData);
@@ -1212,7 +1339,7 @@
             saveParameter(parameterData, row) {
                 this.loading = true;
                 var dataPost = {"node_id": row.pk, "parameter": row.parameter};
-                this.$http.post(this.url + '/editParameter', dataPost).then(
+                this.$http.post(this.url + '/editPerformanceParameter', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1249,7 +1376,7 @@
                     "sql_para": outSqlData.sql_para,
                     "expect_db": outSqlData.expect_db
                 };
-                this.$http.post(this.url + '/editOutSql', dataPost).then(
+                this.$http.post(this.url + '/editPerformanceOutSql', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1297,7 +1424,7 @@
                     "pre_sql_para": preSqlData.pre_sql_para,
                     "pre_sql_out": preSqlData.pre_sql_out,
                 };
-                this.$http.post(this.url + '/editPreSql', dataPost).then(
+                this.$http.post(this.url + '/editPerformancePreSql', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1367,7 +1494,7 @@
                 this.outSqlData = '';
                 this.loading = true;
                 var dataPost = {"node_id": row.pk};
-                this.$http.post(this.url + '/getOutSql', dataPost).then(
+                this.$http.post(this.url + '/getPerformanceOutSql', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
@@ -1389,7 +1516,7 @@
                 this.loading = true;
                 this.preSqlData = '';
                 var dataPost = {"node_id": row.pk};
-                this.$http.post(this.url + '/getPreSql', dataPost).then(
+                this.$http.post(this.url + '/getPerformancePreSql', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
@@ -1410,7 +1537,7 @@
                 this.postKeyData = '';
                 this.loading = true;
                 var dataPost = {"node_id": row.pk};
-                this.$http.post(this.url + '/getPostKey', dataPost).then(
+                this.$http.post(this.url + '/getPerformancePostKey', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
@@ -1430,7 +1557,7 @@
                 console.log('getParameter-index', index);
                 console.log('getParameter-this.currentRow', this.currentRow);
                 var dataPost = {"node_id": row.pk};
-                this.$http.post(this.url + '/getParameter', dataPost).then(
+                this.$http.post(this.url + '/getPerformanceParameter', dataPost).then(
                     function (data) {
                         var responData = data.body;
                         console.log("responData=", responData);
@@ -1499,7 +1626,7 @@
                     "state": row.state,
                     "pk": row.pk
                 };
-                this.$http.post(this.url + '/editFlow', dataPost).then(
+                this.$http.post(this.url + '/editPerformanceFlow', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1525,7 +1652,7 @@
                     "state": row.state,
                     "flow_id": row.pk
                 };
-                this.$http.post(this.url + '/changeFlowState', dataPost).then(
+                this.$http.post(this.url + '/changePerformanceFlowState', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1549,7 +1676,7 @@
                     "state": row.state,
                     "node_id": row.pk
                 };
-                this.$http.post(this.url + '/changeNodeState', dataPost).then(
+                this.$http.post(this.url + '/changePerformanceNodeState', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1680,7 +1807,7 @@
                     'post_keys_default': row.post_keys_default,
                     "pk": row.pk
                 };
-                this.$http.post(this.url + '/editNode', dataPost).then(
+                this.$http.post(this.url + '/editPerformanceNode', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1707,7 +1834,7 @@
                 var dataPost = {
                     "email": this.recipients
                 };
-                this.$http.post(this.url + '/emailChange', dataPost).then(
+                this.$http.post(this.url + '/performanceEmailChange', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1748,7 +1875,7 @@
                         "state": state,
                         "pk": this.flowData.length + 1
                     };
-                    this.$http.post(this.url + '/addFlow', dataPost).then(
+                    this.$http.post(this.url + '/addPerformanceFlow', dataPost).then(
                         function (data) {
                             var responData = data.status;
                             if (responData === 200 || responData === '200') {
@@ -1803,7 +1930,7 @@
                         'post_keys_default': nodeDataDefault[0].post_keys_default,
                     };
                     console.log("DataPost=", dataPost);
-                    this.$http.post(this.url + '/addNode', dataPost).then(
+                    this.$http.post(this.url + '/addPerformanceNode', dataPost).then(
                         function (data) {
                             console.log(dataPost);
                             var responData = data.status;
@@ -1870,7 +1997,7 @@
                     this.nodeFlowId = row.pk;
                     console.log("expandChange-nodeFlowId", this.nodeFlowId);
                     var dataPost = {"flow_id": row.pk};
-                    this.$http.post(this.url + '/getNodeData', dataPost).then(
+                    this.$http.post(this.url + '/getPerformanceNodeData', dataPost).then(
                         function (data) {
                             this.nodeData = data.body;
                             this.currentRow = '';
@@ -1881,7 +2008,7 @@
                     this.nodeFlowId = row.pk;
                     console.log("expandChange-nodeFlowId", this.nodeFlowId);
                     var dataPost = {"flow_id": row.pk};
-                    this.$http.post(this.url + '/getNodeData', dataPost).then(
+                    this.$http.post(this.url + '/getPerformanceNodeData', dataPost).then(
                         function (data) {
                             this.nodeData = data.body;
                             this.currentRow = '';
@@ -1897,7 +2024,7 @@
                     row.parameter = JSON.stringify(JSON.parse(text), null, 2);
                 }
             },
-            deleteFlowRow(index,rows,row) {
+            deleteFlowRow(index, rows, row) {
                 console.log(row);
                 this.deleteFlowId = row.pk;
                 console.log(this.deleteFlowId);
@@ -1905,7 +2032,7 @@
                 rows.splice(index, 1);
                 this.deleteFlowDialogVisible = true;
             },
-            deleteNodeRow(index, rows,row) {
+            deleteNodeRow(index, rows, row) {
                 this.deleteNodeId = row.pk;
                 console.log(this.deleteNodeId);
                 rows.splice(index, 1);
@@ -1917,7 +2044,7 @@
                 var dataPost = {
                     "flow_id": this.deleteFlowId,
                 };
-                this.$http.post(this.url + '/deleteFlow', dataPost).then(
+                this.$http.post(this.url + '/deletePerformanceFlow', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1942,7 +2069,7 @@
                 var dataPost = {
                     "node_id": this.deleteNodeId,
                 };
-                this.$http.post(this.url + '/deleteNode', dataPost).then(
+                this.$http.post(this.url + '/deletePerformanceNode', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1973,9 +2100,9 @@
             filtrateCreater() {
                 var dataPost = {
                     "creater": this.filtrate,
-                    "page_size":this.pageSize
+                    "page_size": this.pageSize
                 };
-                this.$http.post(this.url + '/getCreater', dataPost).then(
+                this.$http.post(this.url + '/getPerformanceCreater', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -1996,7 +2123,7 @@
                     "flow_id": row.pk,
                 };
                 this.actionLoading = true;
-                this.$http.post(this.url + '/actionFlow', dataPost).then(
+                this.$http.post(this.url + '/actionPerformanceFlow', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
@@ -2022,7 +2149,7 @@
             actionAllFlow() {
                 var dataPost = {};
                 this.actionLoading = true;
-                this.$http.post(this.url + '/actionAllFlow', dataPost).then(
+                this.$http.post(this.url + '/actionPerformanceAllFlow', dataPost).then(
                     function (data) {
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {

@@ -4,10 +4,7 @@
 3.新建app
     1.python manage.py startapp app_name
     或 django-admin.py startapp app_name
-
     2.
-
-
 
 4. 创建数据库表 或 更改数据库表或字段
     # 1. 创建更改的文件

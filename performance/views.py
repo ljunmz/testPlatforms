@@ -1,27 +1,29 @@
 import datetime
 import json
 import os
-from django.http import  JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
-from apitest.models import TestdataNode, TestdataFlow
-from apitest.readJmx import changeAciton, getEmailList, changeEmail, getDefaultVariable, addDefaultVariable, \
+from performance.models import PerformanceFlow, PerformanceNode
+from performance.readJmx import getEmailList, changeEmail, changeAciton, getDefaultVariable, addDefaultVariable, \
     editDefaultVariable, deleteDefaultVariable
 
 # paths = 'D:\\时光序\\自动化测试\\API-Test\\'
+
 paths = 'G:\\svn\\自动化测试\\API-Test\\'
 
 @csrf_exempt
-def apitest(request):
-    return render_to_response('apitest.html', {})
+def performance(request):
+    return render_to_response('performance.html', {})
 
 
 @csrf_exempt
-def getFlowData(request):
+def getPerformanceFlowData(request):
+    print("test=======================>")
     page_id = json.loads(request.body)["page_id"]
     page_size = json.loads(request.body)["page_size"]
     flowDataList = []
-    for e in TestdataFlow.objects.all().order_by("pk"):
+    for e in PerformanceFlow.objects.all().order_by("pk"):
         flowDataList.insert(10000,
                             {
                                 'pk': e.pk,
@@ -33,14 +35,15 @@ def getFlowData(request):
                                 'state': str(e.state),
                                 'operation': "1"})
     flowData = flowDataList[(page_id - 1) * page_size:page_id * page_size]
-    flowlistSize = len(TestdataFlow.objects.all().order_by("pk"))
+    print(flowData)
+    flowlistSize = len(PerformanceFlow.objects.all().order_by("pk"))
     print(flowlistSize)
-    response = [{"code": "200", "msg": "邮箱获取成功", "flowData": flowData, "size": flowlistSize}]
+    response = [{"code": "200", "msg": "操作成功", "flowData": flowData, "size": flowlistSize}]
     return JsonResponse(response, safe=False)
 
 
 @csrf_exempt
-def getEmail(request):
+def getPerformanceEmail(request):
     email = getEmailList(paths)
     print(email)
     response = [{"code": "200", "msg": "邮箱获取成功", "email": email}]
@@ -48,7 +51,7 @@ def getEmail(request):
 
 
 @csrf_exempt
-def emailChange(request):
+def performanceEmailChange(request):
     email = json.loads(request.body)["email"]
     changeEmail(email, paths)
     response = [{"code": "200", "msg": "邮箱修改成功"}]
@@ -56,9 +59,9 @@ def emailChange(request):
 
 
 @csrf_exempt
-def getNodeData(request):
+def getPerformanceNodeData(request):
     flow_id = json.loads(request.body)["flow_id"]
-    data = TestdataNode.objects.filter(flow_id__exact=flow_id).order_by("order_id")
+    data = PerformanceNode.objects.filter(flow_id__exact=flow_id).order_by("order_id")
     nodeDataList = []
     for e in data:
         nodeDataList.insert(10000, {
@@ -88,9 +91,9 @@ def getNodeData(request):
 
 
 @csrf_exempt
-def getOutSql(request):
+def getPerformanceOutSql(request):
     node_id = json.loads(request.body)["node_id"]
-    data = TestdataNode.objects.filter(node_id__exact=node_id)
+    data = PerformanceNode.objects.filter(node_id__exact=node_id)
     outSqlDataList = []
     outSqlDataList.insert(10000, {
         "pk": data[0].pk,
@@ -105,13 +108,13 @@ def getOutSql(request):
 
 
 @csrf_exempt
-def editOutSql(request):
+def editPerformanceOutSql(request):
     node_id = json.loads(request.body)["node_id"]
     ischechdb = json.loads(request.body)["ischechdb"]
     sql_str = json.loads(request.body)["sql_str"]
     sql_para = json.loads(request.body)["sql_para"]
     expect_db = json.loads(request.body)["expect_db"]
-    TestdataNode.objects.filter(node_id=node_id).update(
+    PerformanceNode.objects.filter(node_id=node_id).update(
         ischechdb=ischechdb,
         sql_str=sql_str,
         sql_para=sql_para,
@@ -122,10 +125,10 @@ def editOutSql(request):
 
 
 @csrf_exempt
-def getPreSql(request):
+def getPerformancePreSql(request):
     node_id = json.loads(request.body)["node_id"]
     print(node_id)
-    data = TestdataNode.objects.filter(node_id__exact=node_id)
+    data = PerformanceNode.objects.filter(node_id__exact=node_id)
     preSqlDataList = []
     preSqlDataList.insert(10000, {
         "pk": data[0].pk,
@@ -141,14 +144,14 @@ def getPreSql(request):
 
 
 @csrf_exempt
-def editPreSql(request):
+def editPerformancePreSql(request):
     node_id = json.loads(request.body)["node_id"]
     isexcute_pre_sql = int(json.loads(request.body)["isexcute_pre_sql"])
     print(type(isexcute_pre_sql))
     pre_sql_str = json.loads(request.body)["pre_sql_str"]
     pre_sql_para = json.loads(request.body)["pre_sql_para"]
     pre_sql_out = json.loads(request.body)["pre_sql_out"]
-    TestdataNode.objects.filter(node_id=node_id).update(
+    PerformanceNode.objects.filter(node_id=node_id).update(
         isexcute_pre_sql=isexcute_pre_sql,
         pre_sql_para=pre_sql_para,
         pre_sql_str=pre_sql_str,
@@ -159,10 +162,10 @@ def editPreSql(request):
 
 
 @csrf_exempt
-def changeFlowState(request):
+def changePerformanceFlowState(request):
     state = json.loads(request.body)["state"]
     flow_id = json.loads(request.body)["flow_id"]
-    TestdataFlow.objects.filter(flow_id=flow_id).update(
+    PerformanceFlow.objects.filter(flow_id=flow_id).update(
         state=state
     )
     response = [{"code": "200", "msg": "测试流状态修改成功"}]
@@ -170,10 +173,10 @@ def changeFlowState(request):
 
 
 @csrf_exempt
-def changeNodeState(request):
+def changePerformanceNodeState(request):
     state = json.loads(request.body)["state"]
     node_id = json.loads(request.body)["node_id"]
-    TestdataNode.objects.filter(node_id=node_id).update(
+    PerformanceNode.objects.filter(node_id=node_id).update(
         state=state
     )
     response = [{"code": "200", "msg": "接口状态修改成功"}]
@@ -181,12 +184,12 @@ def changeNodeState(request):
 
 
 @csrf_exempt
-def savePostKey(request):
+def savePerformancePostKey(request):
     node_id = json.loads(request.body)["node_id"]
     post_keys = json.loads(request.body)["post_keys"]
     post_keys_extractor = json.loads(request.body)["post_keys_extractor"]
     post_keys_default = json.loads(request.body)["post_keys_default"]
-    TestdataNode.objects.filter(node_id=node_id).update(
+    PerformanceNode.objects.filter(node_id=node_id).update(
         post_keys=post_keys,
         post_keys_extractor=post_keys_extractor,
         post_keys_default=post_keys_default
@@ -196,9 +199,9 @@ def savePostKey(request):
 
 
 @csrf_exempt
-def getPostKey(request):
+def getPerformancePostKey(request):
     node_id = json.loads(request.body)["node_id"]
-    data = TestdataNode.objects.filter(node_id__exact=node_id)
+    data = PerformanceNode.objects.filter(node_id__exact=node_id)
     postKeyDataList = []
     postKeyDataList.insert(10000, {
         "pk": data[0].pk,
@@ -211,14 +214,14 @@ def getPostKey(request):
 
 
 @csrf_exempt
-def getCreater(request):
+def getPerformanceCreater(request):
     creater = json.loads(request.body)["creater"]
     page_size = json.loads(request.body)["page_size"]
     if creater == "全部负责人":
-        data = TestdataFlow.objects.all()[0:page_size]
+        data = PerformanceFlow.objects.all()[0:page_size]
         print(data)
     else:
-        data = TestdataFlow.objects.filter(creater__exact=creater)[0:page_size]
+        data = PerformanceFlow.objects.filter(creater__exact=creater)[0:page_size]
     flowDataListForCreater = []
     for e in data:
         flowDataListForCreater.insert(10000,
@@ -236,9 +239,9 @@ def getCreater(request):
 
 
 @csrf_exempt
-def getParameter(request):
+def getPerformanceParameter(request):
     node_id = json.loads(request.body)["node_id"]
-    data = TestdataNode.objects.filter(node_id__exact=node_id)
+    data = PerformanceNode.objects.filter(node_id__exact=node_id)
     parameterDataList = []
     parameterDataList.insert(10000, {
         "pk": data[0].pk,
@@ -249,11 +252,11 @@ def getParameter(request):
 
 
 @csrf_exempt
-def editParameter(request):
+def editPerformanceParameter(request):
     node_id = json.loads(request.body)["node_id"]
     parameter = json.loads(request.body)["parameter"]
     update_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    TestdataNode.objects.filter(node_id=node_id).update(
+    PerformanceNode.objects.filter(node_id=node_id).update(
         node_id=node_id,
         parameter=parameter,
         update_time=update_time
@@ -263,8 +266,8 @@ def editParameter(request):
 
 
 @csrf_exempt
-def addFlow(request):
-    flow_id = TestdataFlow.objects.all().order_by("-flow_id")[0].flow_id + 1
+def addPerformanceFlow(request):
+    flow_id = PerformanceFlow.objects.all().order_by("-flow_id")[0].flow_id + 1
     flow_code = "TEST_FLOW_0" + str(flow_id)
     flow_name = json.loads(request.body)["flow_name"]
     password = json.loads(request.body)["password"]
@@ -274,7 +277,7 @@ def addFlow(request):
     account = json.loads(request.body)["account"]
     create_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     update_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    addFlowData = TestdataFlow.objects.create(
+    addFlowData = PerformanceFlow.objects.create(
         flow_id=flow_id,
         flow_code=flow_code,
         flow_name=flow_name,
@@ -291,9 +294,9 @@ def addFlow(request):
 
 
 @csrf_exempt
-def editFlow(request):
+def editPerformanceFlow(request):
     flow_id = json.loads(request.body)["pk"]
-    TestdataFlow.objects.filter(flow_id=flow_id).update(
+    PerformanceFlow.objects.filter(flow_id=flow_id).update(
         flow_name=json.loads(request.body)["flow_name"],
         password=json.loads(request.body)["password"],
         priority=json.loads(request.body)["priority"],
@@ -307,30 +310,30 @@ def editFlow(request):
 
 
 @csrf_exempt
-def deleteFlow(request):
+def deletePerformanceFlow(request):
     flow_id = json.loads(request.body)["flow_id"]
     print('flow_id=', flow_id)
-    TestdataFlow.objects.filter(flow_id=flow_id).delete()
+    PerformanceFlow.objects.filter(flow_id=flow_id).delete()
     response = [{"code": "200", "msg": "测试流删除成功"}]
     return JsonResponse(response, safe=False)
 
 
 @csrf_exempt
-def deleteNode(request):
+def deletePerformanceNode(request):
     node_id = json.loads(request.body)["node_id"]
     print("node_id", node_id)
-    TestdataNode.objects.filter(node_id=node_id).delete()
+    PerformanceNode.objects.filter(node_id=node_id).delete()
     response = [{"code": "200", "msg": "接口删除成功"}]
     return JsonResponse(response, safe=False)
 
 
 @csrf_exempt
-def addNode(request):
+def addPerformanceNode(request):
     flow_id = json.loads(request.body)["flow_id"]
     order_id = json.loads(request.body)["order_id"]
-    node_id = TestdataNode.objects.all().order_by("-node_id")[0].node_id + 1
-    node_code = TestdataFlow.objects.filter(flow_id=flow_id)[0].flow_code.replace("TEST_",
-                                                                                  "") + "_" + "NODE_0" + order_id
+    node_id = PerformanceNode.objects.all().order_by("-node_id")[0].node_id + 1
+    node_code = PerformanceFlow.objects.filter(flow_id=flow_id)[0].flow_code.replace("TEST_",
+                                                                                     "") + "_" + "NODE_0" + order_id
     node_name = json.loads(request.body)["node_name"]
     method = json.loads(request.body)["method"]
     path = json.loads(request.body)["path"]
@@ -353,7 +356,7 @@ def addNode(request):
     create_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     update_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    TestdataNode.objects.create(
+    PerformanceNode.objects.create(
         node_id=node_id,
         order_id=int(order_id),
         flow_id=flow_id,
@@ -385,11 +388,11 @@ def addNode(request):
 
 
 @csrf_exempt
-def editNode(request):
+def editPerformanceNode(request):
     order_id = json.loads(request.body)["order_id"]
     flow_id = json.loads(request.body)["flow_id"]
     node_id = json.loads(request.body)["pk"]
-    node_code = TestdataFlow.objects.filter(flow_id=flow_id)[0].flow_code.replace("TEST_", "") + "NODE_0" + str(
+    node_code = PerformanceFlow.objects.filter(flow_id=flow_id)[0].flow_code.replace("TEST_", "") + "NODE_0" + str(
         order_id)
     node_name = json.loads(request.body)["node_name"]
     method = json.loads(request.body)["method"]
@@ -401,7 +404,7 @@ def editNode(request):
     state = json.loads(request.body)["state"]
     update_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     print("node_id", node_id)
-    TestdataNode.objects.filter(node_id=node_id).update(
+    PerformanceNode.objects.filter(node_id=node_id).update(
         node_id=node_id,
         order_id=order_id,
         flow_id=flow_id,
@@ -421,7 +424,7 @@ def editNode(request):
 
 
 @csrf_exempt
-def actionFlow(request):
+def actionPerformanceFlow(request):
     flow_id = json.loads(request.body)["flow_id"]
     newStr = 'flow_id = ' + str(flow_id)
     changeAciton(newStr, paths)
@@ -432,7 +435,7 @@ def actionFlow(request):
 
 
 @csrf_exempt
-def actionAllFlow(request):
+def actionPerformanceAllFlow(request):
     newStr = "1=1"
     changeAciton(newStr, paths)
     os.chdir(paths)
@@ -442,14 +445,14 @@ def actionAllFlow(request):
 
 
 @csrf_exempt
-def getDefaultVar(request):
+def getPerformanceDefaultVar(request):
     varList = getDefaultVariable(paths)
     response = [{"code": "200", "msg": "默认变量获取成功", "varList": varList}]
     return JsonResponse(response, safe=False)
 
 
 @csrf_exempt
-def addDefaultVar(request):
+def addPerformanceDefaultVar(request):
     argumentName = json.loads(request.body)["argumentName"]
     argumentValue = json.loads(request.body)["argumentValue"]
     result = addDefaultVariable(argumentName, argumentValue, paths)
@@ -462,7 +465,7 @@ def addDefaultVar(request):
 
 
 @csrf_exempt
-def editDefaultVar(request):
+def editPerformanceDefaultVar(request):
     oldKey = json.loads(request.body)["argumentName"]
     newKey = json.loads(request.body)["argumentNameNew"]
     value = json.loads(request.body)["argumentValue"]
@@ -476,7 +479,7 @@ def editDefaultVar(request):
 
 
 @csrf_exempt
-def deleteDefaultVar(request):
+def deletePerformanceDefaultVar(request):
     argumentName = json.loads(request.body)["argumentName"]
     result = deleteDefaultVariable(argumentName, paths)
     if result == 200:

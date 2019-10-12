@@ -14,7 +14,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="29">
+          <list size="36">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -44,6 +44,13 @@
             <item index="26" class="java.lang.String" itemvalue="el-optionc" />
             <item index="27" class="java.lang.String" itemvalue="el-form" />
             <item index="28" class="java.lang.String" itemvalue="el-switch" />
+            <item index="29" class="java.lang.String" itemvalue="el-tabs" />
+            <item index="30" class="java.lang.String" itemvalue="el-tab-pane" />
+            <item index="31" class="java.lang.String" itemvalue="el-checkbox-group" />
+            <item index="32" class="java.lang.String" itemvalue="el-checkbox" />
+            <item index="33" class="java.lang.String" itemvalue="el-date-picker" />
+            <item index="34" class="java.lang.String" itemvalue="el-radio" />
+            <item index="35" class="java.lang.String" itemvalue="el-time-picker" />
           </list>
         </value>
       </option>
@@ -70,6 +77,14 @@
           <option value="N806" />
           <option value="N802" />
           <option value="N803" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="apitest.cornJob.client.*" />
+          <option value="tasks.add" />
         </list>
       </option>
     </inspection_tool>

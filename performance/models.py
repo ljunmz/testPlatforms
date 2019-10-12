@@ -1,8 +1,9 @@
+
 from django.db import models
 
-# Create your models here.
-class TestdataFlow(models.Model):
-    flow_id = models.IntegerField(primary_key=True)
+
+class PerformanceFlow(models.Model):
+    flow_id = models.AutoField(primary_key=True)
     flow_code = models.CharField(max_length=20)
     flow_name = models.CharField(max_length=255, blank=True, null=True)
     priority = models.IntegerField(blank=True, null=True)
@@ -16,11 +17,12 @@ class TestdataFlow(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'testdata_flow'
+        db_table = 'performance_flow'
 
-class TestdataNode(models.Model):
-    node_id = models.IntegerField(primary_key=True)
-    flow_id = models.CharField(max_length=36)
+
+class PerformanceNode(models.Model):
+    node_id = models.AutoField(primary_key=True)
+    flow_id = models.IntegerField()
     node_code = models.CharField(max_length=20)
     node_name = models.CharField(max_length=255, blank=True, null=True)
     order_id = models.IntegerField()
@@ -38,9 +40,9 @@ class TestdataNode(models.Model):
     pre_sql_str = models.TextField(blank=True, null=True)
     pre_sql_para = models.CharField(max_length=255, blank=True, null=True)
     pre_sql_out = models.CharField(max_length=255, blank=True, null=True)
-    post_keys = models.CharField(max_length=255, blank=True, null=True)
-    post_keys_extractor = models.CharField(max_length=255, blank=True, null=True)
-    post_keys_default = models.CharField(max_length=255, blank=True, null=True)
+    post_keys = models.CharField(max_length=1024, blank=True, null=True)
+    post_keys_extractor = models.TextField(blank=True, null=True)
+    post_keys_default = models.CharField(max_length=1024, blank=True, null=True)
     state = models.IntegerField(blank=True, null=True)
     create_time = models.DateTimeField(blank=True, null=True)
     update_time = models.DateTimeField(blank=True, null=True)
@@ -49,5 +51,19 @@ class TestdataNode(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'testdata_node'
+        db_table = 'performance_node'
 
+
+class Task(models.Model):
+    taskid = models.AutoField(db_column='taskId', primary_key=True)  # Field name made lowercase.
+    taskname = models.CharField(db_column='taskName', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    task = models.CharField(max_length=255)
+    schedule = models.CharField(max_length=255, blank=True, null=True)
+    args = models.CharField(max_length=255, blank=True, null=True)
+    status = models.IntegerField()
+    created = models.DateTimeField(blank=True, null=True)
+    updated = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'task'

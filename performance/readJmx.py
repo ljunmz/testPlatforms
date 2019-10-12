@@ -1,17 +1,18 @@
 import xml.etree.ElementTree as ET
 
+fileName = "性能测试.jmx"
 
 def changeAciton(newStr, path):
-    f = open(path + "业务流程-整合.jmx", mode='r', encoding='utf-8').read()
+    f = open(path + fileName, mode='r', encoding='utf-8').read()
     oldStr = f[f.find("获取流程数据"):f.find("order by") - 1][f[f.find("获取流程数据"):f.find("order by")].find("and") + 4:]
     fileData = ''
     print(oldStr)
-    with open(path + "业务流程-整合.jmx", mode='r', encoding='utf-8') as ff:
+    with open(path + fileName, mode='r', encoding='utf-8') as ff:
         for line in ff:
             if oldStr in line:
                 line = line.replace(oldStr, newStr)
             fileData += line
-    with open(path + "业务流程-整合.jmx", mode='w', encoding='utf-8') as ww:
+    with open(path + fileName, mode='w', encoding='utf-8') as ww:
         ww.write(fileData)
 
 
@@ -38,7 +39,8 @@ def getEmailList(path):
 
 
 def getDefaultVariable(path):
-    f = open(path + "业务流程-整合.jmx", mode='r', encoding='utf-8').read()
+    print("/getPerformanceDefaultVar=====================")
+    f = open(path + fileName, mode='r', encoding='utf-8').read()
     oldStr = f[f.find("默认全局变量"):][f[f.find("默认全局变量"):].find("elementProp") - 12:][
              :f[f.find("默认全局变量"):][f[f.find("默认全局变量"):].find("elementProp") - 12:].find("collectionProp") - 2].split(
         "</elementProp>")
@@ -70,7 +72,7 @@ def formElementProp(argumentName, argumentValue):
 
 def addDefaultVariable(argumentName, argumentValue, path):
     keyword = "<elementProp name=" + "\"" + argumentName + "\""
-    f = open(path + "业务流程-整合.jmx", mode='r', encoding='utf-8')
+    f = open(path + fileName, mode='r', encoding='utf-8')
     fr = f.read()
     post = fr.find("testname=\"默认全局变量\" enabled=\"true\">") + fr[
                                                               fr.find("testname=\"默认全局变量\" enabled=\"true\">"):].find(
@@ -79,7 +81,7 @@ def addDefaultVariable(argumentName, argumentValue, path):
     f.close()
     if fr.find(keyword) == -1:
         newStr = fr[:post] + formElementProp(argumentName, argumentValue) + fr[post:]
-        with open(path + "业务流程-整合.jmx", 'w', encoding='utf-8') as ww:
+        with open(path + fileName, 'w', encoding='utf-8') as ww:
             ww.write(newStr)
             ww.close()
         return 200
@@ -94,14 +96,14 @@ def addDefaultVariable(argumentName, argumentValue, path):
 def editDefaultVariable(oldKey, newKey, value, path):
     keyword = "<elementProp name=" + "\"" + oldKey + "\""
     print(keyword)
-    f = open(path + "业务流程-整合.jmx", mode='r', encoding='utf-8')
+    f = open(path + fileName, mode='r', encoding='utf-8')
     fr = f.read()
     post = fr.find(keyword)
     if post != -1:
         newStr = fr[:post] + formElementProp(newKey, value) + fr[post:][fr[post:].find("</elementProp>")+len("</elementProp>"):]
         f.close()
         print(fr[:post])
-        with open(path + "业务流程-整合.jmx", mode='w', encoding='utf-8') as ww:
+        with open(path + fileName, mode='w', encoding='utf-8') as ww:
             ww.truncate()
             ww.write(newStr)
             ww.close()
@@ -116,14 +118,14 @@ def editDefaultVariable(oldKey, newKey, value, path):
 def deleteDefaultVariable(key, path):
     keyword = "<elementProp name=" + "\"" + key + "\""
     print(keyword)
-    f = open(path + "业务流程-整合.jmx", mode='r', encoding='utf-8')
+    f = open(path + fileName, mode='r', encoding='utf-8')
     fr = f.read()
     post = fr.find(keyword)
     if post != -1:
         newStr = fr[:post] + fr[post:][fr[post:].find("</elementProp>")+len("</elementProp>"):]
         f.close()
         print(fr[:post])
-        with open(path + "业务流程-整合.jmx", mode='w', encoding='utf-8') as ww:
+        with open(path + fileName, mode='w', encoding='utf-8') as ww:
             ww.truncate()
             ww.write(newStr)
             ww.close()

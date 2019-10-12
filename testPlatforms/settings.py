@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -29,6 +30,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    # 'django_crontab',  # 定时任务
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apitest',
-    'sql'
+    'sql',
+    'task',
+    'performance'
 ]
 
 MIDDLEWARE = [
@@ -159,3 +163,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), '../static/').replace('\\', '/'),
 )
+
+# CRONJOBS = [
+#     ('*/1 * * * *', "apitest.cornJobs.test", "<<crontab.log")
+# ]
+# from task import celeryconfig
+# BROKER_BACKEND='redis'
+# BOOKER_URL='redis://127.0.0.1:6379/1'
+# CELERY_RESULT_BACKEND='redis://127.0.0.1:6379/2'
