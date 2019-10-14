@@ -690,8 +690,7 @@
                 <el-button size="small" type="primary" @click="dialogDefaultVar = true;getDefaultVar()" style="margin: 10px">配置全局默认变量</el-button>
             </el-tab-pane>
             <el-tab-pane label="定时任务" style="font-weight: bolder" name="task">
-                <el-button size="small" type="danger" @click="dialogEmailChange = true" style="margin: 10px">启动Work服务</el-button>
-                <el-button size="small" type="danger" @click="dialogEmailChange = true" style="margin: 10px">启动Beat服务</el-button>
+                <el-button size="small" type="danger" @click="startTask" style="margin: 10px">开启定时任务（每天早上9点50开始接口自动化）</el-button>
             </el-tab-pane>
         </el-tabs>
     </div>
@@ -1073,6 +1072,37 @@
             }
         },
         methods: {
+            startTask(){
+                this.$http.get(this.url + '/startTask').then(
+                    function (data) {
+                        this.$message({
+                            showClose: true,
+                            message: 'Beat服务启动成功',
+                            type: 'success'
+                        });
+                    }
+                );
+                this.$http.get(this.url + '/startWork').then(
+                    function (data) {
+                        this.$message({
+                            showClose: true,
+                            message: 'Work服务启动成功',
+                            type: 'success'
+                        });
+                    }
+                );
+            },
+            startWork(){
+                this.$http.get(this.url + '/startWork').then(
+                    function (data) {
+                        this.$message({
+                            showClose: true,
+                            message: '恭喜你，Work服务启动成功',
+                            type: 'success'
+                        });
+                    }
+                );
+            },
             handleClick(targetName){
                 if (targetName.name === "apitest"){
                     this.activeName = targetName.name;
