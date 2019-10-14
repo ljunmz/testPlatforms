@@ -730,20 +730,7 @@
                         <p style="float:left;margin: 0px;font-weight: bolder;color: #356dff" size="medium">邮件收件人配置</p><br>
                         <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
                               size="medium">收件人</span>
-                        <el-select
-                                v-model="form.recipients"
-                                multiple
-                                filterable
-                                allow-create
-                                default-first-option
-                                placeholder="请输入收件人邮箱">
-                            <el-option
-                                    v-for="item in form.options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                            </el-option>
-                        </el-select>
+                        <el-input type="textarea" v-model="form.email"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <p style="float:left;margin: 0px;font-weight: bolder;color: #356dff" size="medium">服务器信息配置</p><br>
@@ -757,11 +744,11 @@
                     <el-form-item>
                         <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
                               size="medium">运行环境配置</span>
-                        <el-radio-group v-model="form.serverName">
+                        <el-radio-group v-model="form.serverName" @change="envChange">
                             <el-radio label="dev">开发环境(dapi.shiguangxu.com)</el-radio>
                             <el-radio label="test">测试环境(tapi.shiguangxu.com)</el-radio>
-                            <el-radio label="preproduction">预发布环境(papi.shiguangxu.com)</el-radio>
-                            <el-radio label="production">生产环境(api.shiguagnxu.com)</el-radio>
+                            <el-radio label="pre">预发布环境(papi.shiguangxu.com)</el-radio>
+                            <el-radio label="prod">生产环境(api.shiguagnxu.com)</el-radio>
                         </el-radio-group>
                     </el-form-item>
                     <el-form-item>
@@ -792,7 +779,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">保存配置</el-button>
-                        <el-button>恢复配置</el-button>
+                        <el-button @click="reset">恢复配置</el-button>
                     </el-form-item>
                 </el-form>
             </el-tab-pane>
@@ -889,20 +876,20 @@
             </el-table-column>
         </el-table>
     </el-dialog>
-    <el-dialog style="font-weight: bold" title="邮箱收件人配置(多个收件人以逗号隔开)" :visible.sync="dialogEmailChange">
-        <el-form :model="flowDataDefault">
-            <el-form-item label="" :label-width="formLabelWidth">
-                <el-input v-model="recipients" autocomplete="off" :autosize="{ minRows: 5, maxRows: 20}" size="small"
-                          type="textarea"
-                          style="margin: 1px;width: 85%"
-                          placeholder="请输入收件人邮箱地址(多个收件人时以英文逗号隔开(例如：aaa@jielema.com,bbb@jielema.com))"></el-input>
-            </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogEmailChange = false">取 消</el-button>
-            <el-button type="primary" @click="emailChange(recipients)">确 定</el-button>
-        </div>
-    </el-dialog>
+<!--    <el-dialog style="font-weight: bold" title="邮箱收件人配置(多个收件人以逗号隔开)" :visible.sync="dialogEmailChange">-->
+<!--        <el-form :model="flowDataDefault">-->
+<!--            <el-form-item label="" :label-width="formLabelWidth">-->
+<!--                <el-input v-model="recipients" autocomplete="off" :autosize="{ minRows: 5, maxRows: 20}" size="small"-->
+<!--                          type="textarea"-->
+<!--                          style="margin: 1px;width: 85%"-->
+<!--                          placeholder="请输入收件人邮箱地址(多个收件人时以英文逗号隔开(例如：aaa@jielema.com,bbb@jielema.com))"></el-input>-->
+<!--            </el-form-item>-->
+<!--        </el-form>-->
+<!--        <div slot="footer" class="dialog-footer">-->
+<!--            <el-button @click="dialogEmailChange = false">取 消</el-button>-->
+<!--            <el-button type="primary" @click="emailChange(recipients)">确 定</el-button>-->
+<!--        </div>-->
+<!--    </el-dialog>-->
     <el-dialog style="font-weight: bold" title="新增接口" border :visible.sync="dialogTableVisible" width="1482px">
         <el-table
                 :data="nodeDataDefault"
@@ -1077,11 +1064,6 @@
                     console.log(this.FlowlistSize);
                 }
             );
-            this.$http.get(this.url + '/getPerformanceEmail').then(
-                function (data) {
-                    this.recipients = data.body[0].email;
-                }
-            );
         },
         data() {
             return {
@@ -1089,17 +1071,7 @@
                 // url: 'http://172.16.11.185:8000',
                 filtrate: '',
                 form: {
-                    options: [{
-                        value: 'liujun@jielema.com',
-                        label: '柳军'
-                    }, {
-                        value: 'cuiqingyong@jielema.com',
-                        label: '崔庆用'
-                    }, {
-                        value: 'lujinai@jielema.com',
-                        label: '陆金爱'
-                    }],
-                    recipients:[],
+                    email: "请输入收件人邮箱",
                     protocol: 'http',
                     serverName: 'test',
                     port: '80',
@@ -1107,9 +1079,8 @@
                     ramp_time: "1",
                     loops: "-1",
                     continue_forever: false,
-                    desc: ''
                 },
-                recipients: [],
+                // recipients:[],
                 pageSize: 15,
                 FlowlistSize: 100,
                 currentPage: 1,
@@ -1189,7 +1160,7 @@
                 value: true,
                 visible: false,
                 dialogFormVisible: false,
-                dialogEmailChange: false,
+                // dialogEmailChange: false,
                 deleteFlowDialogVisible: false,
                 deleteNodeDialogVisible: false,
                 dialogDefaultVar: false,
@@ -1199,32 +1170,49 @@
             }
         },
         methods: {
+            envChange(value){
+
+            },
             onSubmit() {
-                console.log('submit!');
+                var dataPost = {"form": this.form};
+                this.$http.post(this.url + '/savePerformanceConfig', dataPost).then(
+                    function (data) {
+                        this.form = data.body[0].formList[0];
+                        this.$message({
+                            showClose: true,
+                            message: '恭喜你，配置信息保存成功',
+                            type: 'success'
+                        });
+                    }
+                );
+            },
+            reset() {
+                this.$http.get(this.url + '/getPerformanceConfig').then(
+                    function (data) {
+                        this.form = data.body[0].formList[0];
+                        this.$message({
+                            showClose: true,
+                            message: '放弃修改，恢复修改前内容',
+                            type: 'success'
+                        });
+                    }
+                );
             },
             handleClick(targetName) {
                 if (targetName.name === "apitest") {
                     this.activeName = targetName.name;
-                    console.log(this.activeName);
                     var dataPost = {"page_id": 1, "page_size": 15};
                     this.$http.post(this.url + '/getPerformanceFlowData', dataPost).then(
                         function (data) {
                             this.FlowlistSize = data.body[0].size;
                             this.flowData = data.body[0].flowData;
-                            console.log(this.flowData);
-                            console.log(this.FlowlistSize);
                         }
                     );
                 } else if (targetName.name === "config") {
                     this.activeName = targetName.name;
-                    console.log(this.activeName);
-                    var dataPost = {"page_id": 1, "page_size": 15};
-                    this.$http.post(this.url + '/getPerformanceFlowData', dataPost).then(
+                    this.$http.get(this.url + '/getPerformanceConfig').then(
                         function (data) {
-                            this.FlowlistSize = data.body[0].size;
-                            this.flowData = data.body[0].flowData;
-                            console.log(this.flowData);
-                            console.log(this.FlowlistSize);
+                            this.form = data.body[0].formList[0];
                         }
                     );
                 } else if (targetName.name === "task") {
@@ -1830,31 +1818,31 @@
                 this.currentRow = currentRow;
                 console.log("saveNodeEdit-this.currentRow2", this.currentRow)
             },
-            emailChange() {
-                var dataPost = {
-                    "email": this.recipients
-                };
-                this.$http.post(this.url + '/performanceEmailChange', dataPost).then(
-                    function (data) {
-                        var responData = data.status;
-                        if (responData === 200 || responData === '200') {
-                            this.$message({
-                                showClose: true,
-                                message: '恭喜你，邮箱修改成功',
-                                type: 'success'
-                            })
-                            this.dialogEmailChange = false;
-                        } else {
-                            this.$message({
-                                showClose: true,
-                                message: '很遗憾，邮箱修改失败',
-                                type: 'error'
-                            });
-                            this.dialogEmailChange = false;
-                        }
-                    }
-                );
-            },
+            // emailChange() {
+            //     var dataPost = {
+            //         "email": this.recipients
+            //     };
+            //     this.$http.post(this.url + '/performanceEmailChange', dataPost).then(
+            //         function (data) {
+            //             var responData = data.status;
+            //             if (responData === 200 || responData === '200') {
+            //                 this.$message({
+            //                     showClose: true,
+            //                     message: '恭喜你，邮箱修改成功',
+            //                     type: 'success'
+            //                 })
+            //                 this.dialogEmailChange = false;
+            //             } else {
+            //                 this.$message({
+            //                     showClose: true,
+            //                     message: '很遗憾，邮箱修改失败',
+            //                     type: 'error'
+            //                 });
+            //                 this.dialogEmailChange = false;
+            //             }
+            //         }
+            //     );
+            // },
             addFlowOk(flowDataDefault) {
                 var account = flowDataDefault.account;
                 var flow_name = flowDataDefault.flow_name;

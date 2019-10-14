@@ -85,6 +85,7 @@
         <list>
           <option value="apitest.cornJob.client.*" />
           <option value="tasks.add" />
+          <option value="performance.views.User" />
         </list>
       </option>
     </inspection_tool>

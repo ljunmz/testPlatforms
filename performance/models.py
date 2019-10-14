@@ -2,6 +2,18 @@
 from django.db import models
 
 
+class Config(models.Model):
+    email = models.CharField(max_length=1024, blank=True, null=True)
+    env_code = models.CharField(max_length=255, blank=True, null=True)
+    numthreads = models.BigIntegerField(db_column='numThreads', blank=True, null=True)  # Field name made lowercase.
+    ramptime = models.BigIntegerField(db_column='rampTime', blank=True, null=True)  # Field name made lowercase.
+    loops = models.BigIntegerField(blank=True, null=True)
+    continueforever = models.IntegerField(db_column='continueForever', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'config'
+
 class PerformanceFlow(models.Model):
     flow_id = models.AutoField(primary_key=True)
     flow_code = models.CharField(max_length=20)
@@ -67,3 +79,29 @@ class Task(models.Model):
     class Meta:
         managed = False
         db_table = 'task'
+
+
+class Testenv(models.Model):
+    id = models.IntegerField(primary_key=True)
+    env_code = models.CharField(max_length=10)
+    env_name = models.CharField(max_length=255, blank=True, null=True)
+    protocol = models.CharField(max_length=10, blank=True, null=True)
+    host = models.CharField(max_length=255, blank=True, null=True)
+    port = models.CharField(max_length=10, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'testenv'
+
+
+
+
+class User(models.Model):
+    id = models.IntegerField(primary_key=True)
+    email = models.CharField(max_length=255)
+    username = models.CharField(db_column='userName', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    password = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'user'

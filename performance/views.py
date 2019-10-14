@@ -4,13 +4,14 @@ import os
 from django.http import JsonResponse
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
-from performance.models import PerformanceFlow, PerformanceNode
+from performance.models import PerformanceFlow, PerformanceNode, Config, Testenv, User
 from performance.readJmx import getEmailList, changeEmail, changeAciton, getDefaultVariable, addDefaultVariable, \
-    editDefaultVariable, deleteDefaultVariable
+    editDefaultVariable, deleteDefaultVariable, changeServiceInfo, changeSThread
 
 # paths = 'D:\\时光序\\自动化测试\\API-Test\\'
 
 paths = 'G:\\svn\\自动化测试\\API-Test\\'
+
 
 @csrf_exempt
 def performance(request):
@@ -488,3 +489,71 @@ def deletePerformanceDefaultVar(request):
     elif result == 601:
         response = [{"code": "601", "msg": "变量不存在"}]
         return JsonResponse(response, safe=False)
+
+
+@csrf_exempt
+def getPerformanceConfig(request):
+    config = Config.objects.filter(id=1).order_by("pk")[0]
+    testenv = Testenv.objects.filter(env_code=config.env_code).order_by("pk")[0]
+    serverName = testenv.host
+    formList = []
+    if config.continueforever == 0 or config.continueforever == "0":
+        continue_forever = False
+        forever = "false"
+    elif config.continueforever == 1 or config.continueforever == "1":
+        continue_forever = True
+        forever = "true"
+    formList.insert(10000, {
+        "pk": config.pk,
+        "email": config.email,
+        "protocol": testenv.protocol,
+        "serverName": testenv.env_code,
+        "port": testenv.port,
+        "num_threads": config.numthreads,
+        "ramp_time": config.ramptime,
+        "loops": config.loops,
+        "continue_forever": continue_forever
+    })
+    changeEmail(config.email, paths)
+    changeServiceInfo(serverName, testenv.port, testenv.protocol, paths)
+    changeSThread(forever, str(config.loops), str(config.numthreads), str(config.ramptime), paths)
+    response = [{"code": "200", "msg": "配置获取成功", "formList": formList}]
+    return JsonResponse(response, safe=False)
+
+
+@csrf_exempt
+def savePerformanceConfig(request):
+    form = json.loads(request.body)["form"]
+    protocol = form["protocol"]
+    email = form["email"]
+    port = form["port"]
+    env_code = form["serverName"]
+    configId = form["pk"]
+    num_threads = form["num_threads"]
+    ramp_time = form["ramp_time"]
+    loops = form["loops"]
+    serverName = Testenv.objects.filter(env_code=env_code)[0].host
+    if form["continue_forever"]:
+        continue_forever = 1
+        forever = "true"
+    else:
+        continue_forever = 0
+        forever = "false"
+    Testenv.objects.filter(env_code=env_code).update(
+        port=port,
+        protocol=protocol,
+        env_code=env_code
+    )
+    Config.objects.filter(id=configId).update(
+        env_code=env_code,
+        loops=loops,
+        numthreads=num_threads,
+        email=email,
+        ramptime=ramp_time,
+        continueforever=continue_forever
+    )
+    changeEmail(email, paths)
+    changeServiceInfo(serverName, str(port), str(protocol), paths)
+    changeSThread(forever, str(loops), str(num_threads), str(ramp_time), paths)
+    response = [{"code": "200", "msg": "配置获取成功", "formList": [form]}]
+    return JsonResponse(response, safe=False)

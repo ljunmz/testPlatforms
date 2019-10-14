@@ -27,7 +27,8 @@ from performance.views import performance, \
     addPerformanceNode, editPerformanceNode, savePerformancePostKey, editPerformanceParameter, editPerformanceOutSql, \
     editPerformancePreSql, getPerformanceCreater, actionPerformanceFlow, getPerformanceEmail, performanceEmailChange, \
     actionPerformanceAllFlow, changePerformanceFlowState, changePerformanceNodeState, deletePerformanceDefaultVar, \
-    addPerformanceDefaultVar, editPerformanceDefaultVar, getPerformanceDefaultVar
+    addPerformanceDefaultVar, editPerformanceDefaultVar, getPerformanceDefaultVar, getPerformanceConfig,  \
+    savePerformanceConfig
 from sql.views import sqlIndex, register, clearModelCodeRecords, clearPhoneCodeRecords, changeCreatedTime, getUserInfo, \
     getTokenInfo, getTodoInfo, getBuriedInfo
 from task.views import startWork, startBeat
@@ -100,5 +101,7 @@ urlpatterns = [
     url(r'addPerformanceDefaultVar', addPerformanceDefaultVar),
     url(r'editPerformanceDefaultVar', editPerformanceDefaultVar),
     url(r'getPerformanceDefaultVar', getPerformanceDefaultVar),
+    url(r'getPerformanceConfig', getPerformanceConfig),
+    url(r'savePerformanceConfig', savePerformanceConfig),
     # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_URL}),
 ]

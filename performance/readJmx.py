@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 
 fileName = "性能测试.jmx"
 
+
 def changeAciton(newStr, path):
     f = open(path + fileName, mode='r', encoding='utf-8').read()
     oldStr = f[f.find("获取流程数据"):f.find("order by") - 1][f[f.find("获取流程数据"):f.find("order by")].find("and") + 4:]
@@ -14,6 +15,57 @@ def changeAciton(newStr, path):
             fileData += line
     with open(path + fileName, mode='w', encoding='utf-8') as ww:
         ww.write(fileData)
+
+
+def changeServiceInfo(newServerName, newPort, newProtocol, path):
+    f = open(path + fileName, mode='r', encoding='utf-8').read()
+    oldStr = f[f.find("<ConfigTestElement"):f.find("</ConfigTestElement>") + len("</ConfigTestElement>")]
+    oldServerName = oldStr[oldStr.find("<stringProp name=\"HTTPSampler.domain\">") + len("<stringProp name=\"HTTPSampler.domain\">"):oldStr.find("</stringProp>")]
+    oldPort = oldStr[oldStr.find("<stringProp name=\"HTTPSampler.port\">") + len("<stringProp name=\"HTTPSampler.port\">"):oldStr.find("<stringProp name=\"HTTPSampler.port\">")+oldStr[oldStr.find("<stringProp name=\"HTTPSampler.port\">"):].find("</stringProp>")]
+    oldProtocol = oldStr[oldStr.find("<stringProp name=\"HTTPSampler.protocol\">") + len("<stringProp name=\"HTTPSampler.protocol\">"):oldStr.find("<stringProp name=\"HTTPSampler.protocol\">")+oldStr[oldStr.find("<stringProp name=\"HTTPSampler.protocol\">"):].find("</stringProp>")]
+    fileData = ''
+    with open(path + fileName, mode='r', encoding='utf-8') as ff:
+        for line in ff:
+            if "<stringProp name=\"HTTPSampler.domain\">"+oldServerName in line:
+                line = line.replace(oldServerName, newServerName)
+            if "<stringProp name=\"HTTPSampler.port\">"+oldPort in line:
+                line = line.replace(oldPort, newPort)
+            if "<stringProp name=\"HTTPSampler.protocol\">"+oldProtocol in line:
+                line = line.replace(oldProtocol, newProtocol)
+            fileData += line
+    with open(path + fileName, mode='w', encoding='utf-8') as ww:
+        ww.write(fileData)
+
+def changeSThread(continue_forever, loops, num_threads, ramp_time,  path):
+    f = open(path + fileName, mode='r', encoding='utf-8').read()
+    oldStr = f[f.find("guiclass=\"ThreadGroupGui\""):f.find("</ThreadGroup>") + len("</ThreadGroup>")]
+    old_continue_forever = oldStr[oldStr.find("<boolProp name=\"LoopController.continue_forever\">") + len("<boolProp name=\"LoopController.continue_forever\">"):oldStr.find("</boolProp>")]
+    old_loops = oldStr[oldStr.find("<intProp name=\"LoopController.loops\">") + len("<intProp name=\"LoopController.loops\">"):oldStr.find("</intProp>")]
+    old_num_threads = oldStr[oldStr.find("<stringProp name=\"ThreadGroup.num_threads\">") + len("<stringProp name=\"ThreadGroup.num_threads\">"):oldStr.find("<stringProp name=\"ThreadGroup.num_threads\">")+oldStr[oldStr.find("<stringProp name=\"ThreadGroup.num_threads\">"):].find("</stringProp>")]
+    old_ramp_time = oldStr[oldStr.find("<stringProp name=\"ThreadGroup.ramp_time\">") + len("<stringProp name=\"ThreadGroup.ramp_time\">"):oldStr.find("<stringProp name=\"ThreadGroup.ramp_time\">")+oldStr[oldStr.find("<stringProp name=\"ThreadGroup.ramp_time\">"):].find("</stringProp>")]
+    fileData = ''
+    print(old_continue_forever)
+    print(old_loops)
+    print(old_ramp_time)
+    print(old_num_threads)
+    print("<boolProp name=\"LoopController.continue_forever\">"+old_continue_forever + "</boolProp>")
+    with open(path + fileName, mode='r', encoding='utf-8') as ff:
+        for line in ff:
+            if "<boolProp name=\"LoopController.continue_forever\">"+old_continue_forever + "</boolProp>" in line:
+                line = line.replace(old_continue_forever, continue_forever)
+            if "<intProp name=\"LoopController.loops\">"+old_loops+"</intProp>" in line:
+                line = line.replace(old_loops, loops)
+            if "<stringProp name=\"ThreadGroup.num_threads\">"+old_num_threads+"</stringProp>" in line:
+                line = line.replace(old_num_threads, num_threads)
+            if "<stringProp name=\"ThreadGroup.ramp_time\">"+old_ramp_time+ "</stringProp>" in line:
+                line = line.replace(old_ramp_time, ramp_time)
+            fileData += line
+    with open(path + fileName, mode='w', encoding='utf-8') as ww:
+        ww.write(fileData)
+
+# changeSThread("false", "111", "3", "2", "G:\\svn\\自动化测试\\API-Test\\")
+
+# changeServiceInfo("172.16.10.172", "8080", "https", "G:\\svn\\自动化测试\\API-Test\\")
 
 
 def changeEmail(email, path):
@@ -58,6 +110,7 @@ def getDefaultVariable(path):
                             )
     return variableList
 
+
 # getDefaultVariable("G:\\svn\\自动化测试\\API-Test\\")
 
 
@@ -67,7 +120,7 @@ def formElementProp(argumentName, argumentValue):
     argumentValueStr = "            <stringProp name=\"Argument.value\">" + argumentValue + "</stringProp>"
     argumentMetadataStr = "            <stringProp name=\"Argument.metadata\">=</stringProp>"
     elementPropStrEnd = "          </elementProp>"
-    return "\n" + elementPropStr + "\n" + argumentNameStr + "\n" + argumentValueStr + "\n" + argumentMetadataStr + "\n" + elementPropStrEnd+ "\n"
+    return "\n" + elementPropStr + "\n" + argumentNameStr + "\n" + argumentValueStr + "\n" + argumentMetadataStr + "\n" + elementPropStrEnd + "\n"
 
 
 def addDefaultVariable(argumentName, argumentValue, path):
@@ -89,6 +142,7 @@ def addDefaultVariable(argumentName, argumentValue, path):
         print("变量已存在")
         return 601
 
+
 #
 # addDefaultVariable("importance11112", "importance1", "G:\\svn\\自动化测试\\API-Test\\")
 
@@ -100,7 +154,8 @@ def editDefaultVariable(oldKey, newKey, value, path):
     fr = f.read()
     post = fr.find(keyword)
     if post != -1:
-        newStr = fr[:post] + formElementProp(newKey, value) + fr[post:][fr[post:].find("</elementProp>")+len("</elementProp>"):]
+        newStr = fr[:post] + formElementProp(newKey, value) + fr[post:][
+                                                              fr[post:].find("</elementProp>") + len("</elementProp>"):]
         f.close()
         print(fr[:post])
         with open(path + fileName, mode='w', encoding='utf-8') as ww:
@@ -112,6 +167,8 @@ def editDefaultVariable(oldKey, newKey, value, path):
         print("不存在该变量")
         f.close()
         return 601
+
+
 # editDefaultVariable("importance", "importance1", "1${__Random(1,4,)}", "G:\\svn\\自动化测试\\API-Test\\")
 
 
@@ -122,7 +179,7 @@ def deleteDefaultVariable(key, path):
     fr = f.read()
     post = fr.find(keyword)
     if post != -1:
-        newStr = fr[:post] + fr[post:][fr[post:].find("</elementProp>")+len("</elementProp>"):]
+        newStr = fr[:post] + fr[post:][fr[post:].find("</elementProp>") + len("</elementProp>"):]
         f.close()
         print(fr[:post])
         with open(path + fileName, mode='w', encoding='utf-8') as ww:
@@ -134,5 +191,3 @@ def deleteDefaultVariable(key, path):
         print("不存在该变量,无法删除")
         f.close()
         return 601
-
-
