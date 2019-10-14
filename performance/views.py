@@ -10,7 +10,7 @@ from performance.readJmx import getEmailList, changeEmail, changeAciton, getDefa
 
 # paths = 'D:\\时光序\\自动化测试\\API-Test\\'
 
-paths = 'G:\\svn\\自动化测试\\API-Test\\'
+paths = os.path.abspath(os.path.dirname(__file__)).split('testPlatforms')[0]+"testPlatforms\\data\\auto\\API-Performance\\"
 
 
 @csrf_exempt
@@ -20,7 +20,6 @@ def performance(request):
 
 @csrf_exempt
 def getPerformanceFlowData(request):
-    print("test=======================>")
     page_id = json.loads(request.body)["page_id"]
     page_size = json.loads(request.body)["page_size"]
     flowDataList = []
@@ -38,7 +37,6 @@ def getPerformanceFlowData(request):
     flowData = flowDataList[(page_id - 1) * page_size:page_id * page_size]
     print(flowData)
     flowlistSize = len(PerformanceFlow.objects.all().order_by("pk"))
-    print(flowlistSize)
     response = [{"code": "200", "msg": "操作成功", "flowData": flowData, "size": flowlistSize}]
     return JsonResponse(response, safe=False)
 
@@ -128,7 +126,6 @@ def editPerformanceOutSql(request):
 @csrf_exempt
 def getPerformancePreSql(request):
     node_id = json.loads(request.body)["node_id"]
-    print(node_id)
     data = PerformanceNode.objects.filter(node_id__exact=node_id)
     preSqlDataList = []
     preSqlDataList.insert(10000, {
@@ -497,12 +494,6 @@ def getPerformanceConfig(request):
     testenv = Testenv.objects.filter(env_code=config.env_code).order_by("pk")[0]
     serverName = testenv.host
     formList = []
-    if config.continueforever == 0 or config.continueforever == "0":
-        continue_forever = False
-        forever = "false"
-    elif config.continueforever == 1 or config.continueforever == "1":
-        continue_forever = True
-        forever = "true"
     formList.insert(10000, {
         "pk": config.pk,
         "email": config.email,
@@ -512,11 +503,10 @@ def getPerformanceConfig(request):
         "num_threads": config.numthreads,
         "ramp_time": config.ramptime,
         "loops": config.loops,
-        "continue_forever": continue_forever
     })
     changeEmail(config.email, paths)
     changeServiceInfo(serverName, testenv.port, testenv.protocol, paths)
-    changeSThread(forever, str(config.loops), str(config.numthreads), str(config.ramptime), paths)
+    changeSThread(str(config.loops), str(config.numthreads), str(config.ramptime), paths)
     response = [{"code": "200", "msg": "配置获取成功", "formList": formList}]
     return JsonResponse(response, safe=False)
 
@@ -533,12 +523,6 @@ def savePerformanceConfig(request):
     ramp_time = form["ramp_time"]
     loops = form["loops"]
     serverName = Testenv.objects.filter(env_code=env_code)[0].host
-    if form["continue_forever"]:
-        continue_forever = 1
-        forever = "true"
-    else:
-        continue_forever = 0
-        forever = "false"
     Testenv.objects.filter(env_code=env_code).update(
         port=port,
         protocol=protocol,
@@ -550,10 +534,9 @@ def savePerformanceConfig(request):
         numthreads=num_threads,
         email=email,
         ramptime=ramp_time,
-        continueforever=continue_forever
     )
     changeEmail(email, paths)
     changeServiceInfo(serverName, str(port), str(protocol), paths)
-    changeSThread(forever, str(loops), str(num_threads), str(ramp_time), paths)
+    changeSThread(str(loops), str(num_threads), str(ramp_time), paths)
     response = [{"code": "200", "msg": "配置获取成功", "formList": [form]}]
     return JsonResponse(response, safe=False)

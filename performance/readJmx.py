@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 
-fileName = "性能测试.jmx"
+fileName = "测试流.jmx"
 
 
 def changeAciton(newStr, path):
@@ -36,28 +36,23 @@ def changeServiceInfo(newServerName, newPort, newProtocol, path):
     with open(path + fileName, mode='w', encoding='utf-8') as ww:
         ww.write(fileData)
 
-def changeSThread(continue_forever, loops, num_threads, ramp_time,  path):
+def changeSThread(loops, num_threads, ramp_time,  path):
     f = open(path + fileName, mode='r', encoding='utf-8').read()
     oldStr = f[f.find("guiclass=\"ThreadGroupGui\""):f.find("</ThreadGroup>") + len("</ThreadGroup>")]
-    old_continue_forever = oldStr[oldStr.find("<boolProp name=\"LoopController.continue_forever\">") + len("<boolProp name=\"LoopController.continue_forever\">"):oldStr.find("</boolProp>")]
-    old_loops = oldStr[oldStr.find("<intProp name=\"LoopController.loops\">") + len("<intProp name=\"LoopController.loops\">"):oldStr.find("</intProp>")]
+    old_loops = oldStr[oldStr.find("name=\"LoopController.loops\">") + len("name=\"LoopController.loops\">"):oldStr.find("name=\"LoopController.loops\">")+oldStr[oldStr.find("name=\"LoopController.loops\">"):].find("</")]
     old_num_threads = oldStr[oldStr.find("<stringProp name=\"ThreadGroup.num_threads\">") + len("<stringProp name=\"ThreadGroup.num_threads\">"):oldStr.find("<stringProp name=\"ThreadGroup.num_threads\">")+oldStr[oldStr.find("<stringProp name=\"ThreadGroup.num_threads\">"):].find("</stringProp>")]
     old_ramp_time = oldStr[oldStr.find("<stringProp name=\"ThreadGroup.ramp_time\">") + len("<stringProp name=\"ThreadGroup.ramp_time\">"):oldStr.find("<stringProp name=\"ThreadGroup.ramp_time\">")+oldStr[oldStr.find("<stringProp name=\"ThreadGroup.ramp_time\">"):].find("</stringProp>")]
     fileData = ''
-    print(old_continue_forever)
     print(old_loops)
     print(old_ramp_time)
     print(old_num_threads)
-    print("<boolProp name=\"LoopController.continue_forever\">"+old_continue_forever + "</boolProp>")
     with open(path + fileName, mode='r', encoding='utf-8') as ff:
         for line in ff:
-            if "<boolProp name=\"LoopController.continue_forever\">"+old_continue_forever + "</boolProp>" in line:
-                line = line.replace(old_continue_forever, continue_forever)
-            if "<intProp name=\"LoopController.loops\">"+old_loops+"</intProp>" in line:
+            if "name=\"LoopController.loops\">"+old_loops+"</" in line:
                 line = line.replace(old_loops, loops)
-            if "<stringProp name=\"ThreadGroup.num_threads\">"+old_num_threads+"</stringProp>" in line:
+            if "<stringProp name=\"ThreadGroup.num_threads\">"+old_num_threads+"</" in line:
                 line = line.replace(old_num_threads, num_threads)
-            if "<stringProp name=\"ThreadGroup.ramp_time\">"+old_ramp_time+ "</stringProp>" in line:
+            if "<stringProp name=\"ThreadGroup.ramp_time\">"+old_ramp_time+ "</" in line:
                 line = line.replace(old_ramp_time, ramp_time)
             fileData += line
     with open(path + fileName, mode='w', encoding='utf-8') as ww:

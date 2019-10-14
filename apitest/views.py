@@ -9,7 +9,8 @@ from apitest.readJmx import changeAciton, getEmailList, changeEmail, getDefaultV
     editDefaultVariable, deleteDefaultVariable
 
 # paths = 'D:\\时光序\\自动化测试\\API-Test\\'
-paths = 'G:\\svn\\自动化测试\\API-Test\\'
+# paths = 'F:\\code\\testPlatforms\\data\\auto\\API-Test'
+paths = os.path.abspath(os.path.dirname(__file__)).split('testPlatforms')[0]+"testPlatforms\\data\\auto\\API-Test\\"
 
 @csrf_exempt
 def apitest(request):

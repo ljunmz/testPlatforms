@@ -773,11 +773,6 @@
                         <el-input v-model="form.loops"></el-input>
                     </el-form-item>
                     <el-form-item>
-                         <span style="float:left;margin-right: 20px;vertical-align: middle;font-weight: bolder"
-                               size="medium">是否永久循环</span>
-                        <el-switch v-model="form.continue_forever"></el-switch>
-                    </el-form-item>
-                    <el-form-item>
                         <el-button type="primary" @click="onSubmit">保存配置</el-button>
                         <el-button @click="reset">恢复配置</el-button>
                     </el-form-item>
@@ -1067,7 +1062,8 @@
         },
         data() {
             return {
-                url: 'http://172.16.10.172:8000',
+                // url: 'http://172.16.10.172:8000',
+                url: 'http://apitest.shiguangxu.com:8000',
                 // url: 'http://172.16.11.185:8000',
                 filtrate: '',
                 form: {
@@ -1077,8 +1073,7 @@
                     port: '80',
                     num_threads: '1',
                     ramp_time: "1",
-                    loops: "-1",
-                    continue_forever: false,
+                    loops: "-1"
                 },
                 // recipients:[],
                 pageSize: 15,
