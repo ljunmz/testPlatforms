@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testResults version="1.2">
+<sample t="459" it="0" lt="457" ct="442" ts="1571054644631" s="true" lb="获取流程数据" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="69" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <responseHeader class="java.lang.String">shared:false, driver:com.mysql.jdbc.Driver, url:jdbc:mysql://47.112.0.183:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true, user:planadmin</responseHeader>
+  <requestHeader class="java.lang.String"></requestHeader>
+  <responseData class="java.lang.String">flow_id	flow_name	account	password
+5	登陆注册	13610150696	666666
+</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <samplerData class="java.lang.String">[Select Statement] select flow_id,flow_name,account,password from automation.testdata_flow where state = 1 and flow_id = 5 order by flow_code
+
+</samplerData>
+</sample>
+<sample t="179" it="143" lt="0" ct="0" ts="1571054645107" s="true" lb="流程初始化预处理--1-登陆注册" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="流程测试引擎 1-1" dt="" by="24151" sby="538" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <sample t="48" it="0" lt="42" ct="0" ts="1571054645107" s="true" lb="获取节点数据" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="22802" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+    <responseHeader class="java.lang.String">shared:false, driver:com.mysql.jdbc.Driver, url:jdbc:mysql://47.112.0.183:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true, user:planadmin</responseHeader>
+    <requestHeader class="java.lang.String"></requestHeader>
+    <responseData class="java.lang.String">node_id	node_code	node_name	method	path	parameter	expect_response	pre_keys	post_keys	post_keys_extractor	post_keys_default	ischechdb	sql_str	sql_para	expect_db	sleep_time	isexcute_pre_sql	pre_sql_str	pre_sql_para	pre_sql_out
+47	FLOW_005NODE_01	手机号判断	POST	/base/user/validateUserNewOrOld	{&quot;mobile&quot;:14400001111}	&quot;code&quot;:200,&quot;msg&quot;:&quot;用户未注册,请注册&quot;|&quot;type&quot;:&quot;new&quot;	device_model				0	null		null	0	1	DELETE FROM user.user where mobile=&quot;14400001111&quot;;
+DELETE FROM thirdparty.verification_code where device_model=&quot;$device_model$&quot;;
+DELETE FROM thirdparty.verification_code where mobile=&quot;14400001111&quot;;	device_model	null
+48	FLOW_005NODE_02	注册-发送短信验证码	POST	/web/thirdparty/sendSmsMessage	{
+    &quot;mobile&quot;:&quot;14400001111&quot;,
+    &quot;type&quot;:&quot;3&quot;,
+    &quot;device&quot;:$device$,
+    &quot;productName&quot;:&quot;时光序&quot;
+}	&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;|&quot;type&quot;:&quot;new&quot;	device	code;msg;type	$.code;$.msg;$.data.type	0;0;0	0				3000	0			
+49	FLOW_005NODE_03	完成注册并登陆	POST	/base/user/register	{
+    &quot;shareCode&quot;:&quot;I68aSw&quot;,
+    &quot;password&quot;:&quot;$password$&quot;,
+    &quot;code&quot;:&quot;$Vcode_1$&quot;,
+    &quot;appType&quot;:&quot;1&quot;,
+    &quot;mobile&quot;:&quot;14400001111&quot;,
+    &quot;type&quot;:&quot;3&quot;,
+    &quot;device&quot;:$device$
+}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	password;Vcode_1;device	token;id	$.data.token;$.data.id	0;0	0	select count(*) as count from user.user where mobile=$mobile$;	mobile	{&quot;count&quot;:1}	3000	1	SELECT code FROM thirdparty.verification_code where mobile=&quot;14400001111&quot; order by created desc limit 1;		Vcode
+50	FLOW_005_NODE_004	绑定邮箱-发送邮箱验证码	POST	/web/thirdparty/sendEmailCode	{&#xd;
+    &quot;type&quot;:&quot;1&quot;,&#xd;
+    &quot;device&quot;:$device$,&#xd;
+    &quot;email&quot;:&quot;$email$&quot;,&#xd;
+    &quot;productName&quot;:&quot;时光序&quot;&#xd;
+}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	email;device				0			null	0	0	null	null	null
+51	FLOW_005_NODE_005	绑定邮箱	POST	/base/user/changeEmail	{&#xd;
+    &quot;code&quot;:&quot;$Ecode_1$&quot;,&#xd;
+    &quot;device&quot;:$device$,&#xd;
+    &quot;email&quot;:&quot;$email$&quot;&#xd;
+}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	email;device;Ecode_1				0	null		null	3000	1	SELECT code FROM thirdparty.verification_email_code where email=&quot;$email$&quot; order by created desc limit 1;	email	Ecode
+52	FLOW_005_NODE_006	获取用户信息	POST	/base/user/getUserInfo		&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;email&quot;:&quot;testbind@qq.com&quot;	token				0	null		null	0	0	null	null	null
+53	FLOW_005NODE_07	退出登陆	POST	/base/user/logout	{&quot;device&quot;:$device$}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	token;device	code;msg	$.code;$.msg	0;0	0			null	0	null		null	null
+54	FLOW_005NODE_08	找回密码-发送短信验证码	POST	/web/thirdparty/sendSmsMessage	{&quot;mobile&quot;:&quot;14400001111&quot;,&quot;type&quot;:&quot;2&quot;,&quot;device&quot;:$device$,&quot;productName&quot;:&quot;时光序&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;|&quot;type&quot;:&quot;old&quot;	device	code;msg;type	$.code;$.msg;$.data.type	0;0;0	0			null	0	1	DELETE FROM thirdparty.verification_code where mobile=&quot;14400001111&quot;;		
+55	FLOW_005NODE_09	找回密码并登陆	POST	/base/user/resetPassword	{&quot;password&quot;:&quot;666666&quot;,&quot;code&quot;:&quot;$Vcode_1$&quot;,&quot;mobile&quot;:&quot;14400001111&quot;,&quot;device&quot;:$device$}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	Vcode_1;device	code;msg;token	$.code;$.msg;$.data.token	0;0;0	0	null		null	3000	1	SELECT code FROM thirdparty.verification_code where mobile=&quot;14400001111&quot; order by created desc limit 1;		Vcode
+56	FLOW_005_NODE_010	退出登陆	POST	/base/user/logout	{&quot;device&quot;:$device$}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	token;device	code;msg	$.code;$.msg	0;0	0				0	0	null	null	null
+57	FLOW_005_NODE_011	邮箱登陆	POST	/base/user/login	{&quot;password&quot;:&quot;666666&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;$email$&quot;,&quot;type&quot;:&quot;1&quot;,&quot;device&quot;:$device$}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	device;email	code;msg;token	$.code;$.msg;$.data.token	0;0;0	0	null		null	0	0	null	null	null
+428	FLOW_005NODE_012	账号登陆（错误密码）	POST	/base/user/login	{&quot;password&quot;:&quot;1234561111111&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;$email$&quot;,&quot;type&quot;:&quot;1&quot;,&quot;device&quot;:$device$}	{&quot;code&quot;:5009002,&quot;msg&quot;:&quot;密码不正确&quot;,&quot;data&quot;:{}}	device;email				0				0	0			
+58	FLOW_005NODE_013	退出登陆	POST	/base/user/logout	{&quot;device&quot;:$device$}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	token;device	code;msg	$.code;$.msg	0;0	0				0	0	DELETE FROM user.user where mobile=&quot;14400001111&quot;;
+DELETE FROM thirdparty.verification_code where mobile=&quot;14400001111&quot;;		null
+422	FLOW_005NODE_014	发送短信验证码（无邀请码注册）	POST	/web/thirdparty/sendSmsMessage	{    &quot;mobile&quot;:&quot;14400001111&quot;,    &quot;type&quot;:&quot;3&quot;,    &quot;device&quot;:$device$,    &quot;productName&quot;:&quot;时光序&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;|&quot;type&quot;:&quot;new&quot;	device	code;msg;type	$.code;$.msg;$.data.type	0;0;0	0				2000	1	DELETE FROM user.user where mobile=&quot;14400001111&quot;;
+DELETE FROM thirdparty.verification_code where device_model=&quot;$device_model$&quot;;
+DELETE FROM thirdparty.verification_code where mobile=&quot;$14400001111$&quot;;	device_model	
+425	FLOW_005NODE_015	注册（错误验证码）	POST	/base/user/register	{
+    &quot;shareCode&quot;:&quot;&quot;,
+    &quot;password&quot;:&quot;$password$&quot;,
+    &quot;code&quot;:&quot;123456&quot;,
+    &quot;appType&quot;:&quot;1&quot;,
+    &quot;mobile&quot;:&quot;14400001111&quot;,
+    &quot;type&quot;:&quot;3&quot;,
+    &quot;device&quot;:$device$
+}	&quot;code&quot;:5009004,&quot;msg&quot;:&quot;短信验证码不正确&quot;	password;device				0				0	0			
+424	FLOW_005NODE_016	注册（无邀请码）	POST	/base/user/register	{
+    &quot;shareCode&quot;:&quot;&quot;,
+    &quot;password&quot;:&quot;$password$&quot;,
+    &quot;code&quot;:&quot;$Vcode_1$&quot;,
+    &quot;appType&quot;:&quot;1&quot;,
+    &quot;mobile&quot;:&quot;14400001111&quot;,
+    &quot;type&quot;:&quot;3&quot;,
+    &quot;device&quot;:$device$
+}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;token&quot;	password;Vcode_1;device	code;msg;type	$.code;$.msg;$.data.type	0;0;0	0	DELETE FROM user.user where mobile=$mobile$;
+DELETE FROM thirdparty.verification_code where device_model=&quot;$device_model$&quot;;
+DELETE FROM thirdparty.verification_code where mobile=$mobile$;	mobile;device_model		3000	1	SELECT code FROM thirdparty.verification_code where mobile=&quot;14400001111&quot; order by created desc limit 1;		Vcode
+437	FLOW_005NODE_017	找回密码（手机号未注册）	POST	/web/thirdparty/sendSmsMessage	{&quot;mobile&quot;:&quot;16688558855&quot;,&quot;type&quot;:&quot;2&quot;,&quot;device&quot;:$device$,&quot;productName&quot;:&quot;时光序&quot;}	{&quot;code&quot;:5018002,&quot;msg&quot;:&quot;该用户未注册,请先注册&quot;,&quot;data&quot;:{}}	device				0				0	0			
+475	FLOW_005NODE_018	QQ授权登录并绑定(QQ未绑定)	POST	/base/user/qqLogin	{
+  &quot;msg&quot;: &quot;&quot;,
+  &quot;ret&quot;: &quot;0&quot;,
+  &quot;unionid&quot;: &quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;,
+  &quot;gender&quot;: &quot;男&quot;,
+  &quot;is_yellow_vip&quot;: &quot;0&quot;,
+  &quot;city&quot;: &quot;波萨达斯&quot;,
+  &quot;level&quot;: &quot;0&quot;,
+  &quot;openid&quot;: &quot;A12A5E02B3F08EFBD9289A5E151611C9&quot;,
+  &quot;profile_image_url&quot;: &quot;http://thirdqq.qlogo.cn/g?b=oidb&amp;k=9nnbIw3u2IoqQib2MjJeX0g&amp;s=100&amp;t=1556470732&quot;,
+  &quot;accessToken&quot;: &quot;A013266210E863CDFC7D898174BBE0B2&quot;,
+  &quot;access_token&quot;: &quot;A013266210E863CDFC7D898174BBE0B2&quot;,
+  &quot;uid&quot;: &quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;,
+  &quot;is_yellow_year_vip&quot;: &quot;0&quot;,
+  &quot;province&quot;: &quot;&quot;,
+  &quot;screen_name&quot;: &quot;AAAAA&quot;,
+  &quot;name&quot;: &quot;AAAAA&quot;,
+  &quot;iconurl&quot;: &quot;http://thirdqq.qlogo.cn/g?b=oidb&amp;k=9nnbIw3u2IoqQib2MjJeX0g&amp;s=100&amp;t=1556470732&quot;,
+  &quot;yellow_vip_level&quot;: &quot;0&quot;,
+  &quot;expiration&quot;: &quot;1576053942339&quot;,
+  &quot;vip&quot;: &quot;0&quot;,
+  &quot;expires_in&quot;: &quot;1576053942339&quot;,
+  &quot;device&quot;: $device$
+}	&quot;code&quot;:200,&quot;msg&quot;:&quot;QQ登录成功,请绑定手机号&quot;	device				0				0	1	UPDATE `user`.user_third_party SET deleted = 1 WHERE unique_id=&quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;		
+479	FLOW_005NODE_019	发送短信（qq登陆并绑定-手机号未绑定QQ）	POST	/web/thirdparty/sendSmsMessage	{&quot;mobile&quot;:&quot;14400001112&quot;,&quot;type&quot;:&quot;6&quot;,&quot;device&quot;:$device$,&quot;productName&quot;:&quot;时光序&quot;}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;,&quot;data&quot;:{&quot;type&quot;:&quot;new&quot;}}	device				0				2000	1	DELETE FROM user.user where mobile=&quot;14400001112&quot;;
+DELETE FROM thirdparty.verification_code where device_model=&quot;$device_model$&quot;;
+DELETE FROM thirdparty.verification_code where mobile=&quot;14400001112&quot;;	device_model	
+480	FLOW_005NODE_020	QQ绑定手机号(错误验证码)	POST	/base/user/qqLoginBind	{
+    &quot;password&quot;:&quot;666666&quot;,
+    &quot;code&quot;:&quot;1234&quot;,
+    &quot;appType&quot;:&quot;1&quot;,
+    &quot;mobile&quot;:&quot;14400001112&quot;,
+    &quot;type&quot;:&quot;11&quot;,
+    &quot;device&quot;:$device$,
+    &quot;uniqueid&quot;:&quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;
+}	code&quot;:5009004,&quot;msg&quot;:&quot;短信验证码不正确	device				0				0	0			
+482	FLOW_005NODE_021	QQ绑定手机号并注册登陆(正确验证码)	POST	/base/user/qqLoginBind	{
+    &quot;password&quot;:&quot;666666&quot;,
+    &quot;code&quot;:&quot;$Vcode_1$&quot;,
+    &quot;appType&quot;:&quot;1&quot;,
+    &quot;mobile&quot;:&quot;14400001112&quot;,
+    &quot;type&quot;:&quot;11&quot;,
+    &quot;device&quot;:$device$,
+    &quot;uniqueid&quot;:&quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;
+}	code&quot;:200	device;Vcode_1	token	$.data.token	0	1	SELECT deleted FROM user.user_third_party where unique_id=&quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;		{&quot;deleted&quot;:0}	0	1	SELECT code FROM thirdparty.verification_code where mobile=&quot;14400001112&quot; order by created desc limit 1;		Vcode
+483	FLOW_005NODE_022	QQ解绑	POST	/base-user/base/user/qq-unbind	{&quot;type&quot;:&quot;qq&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;qqBind&quot;:&quot;0&quot;	token				1	SELECT deleted FROM user.user_third_party where unique_id=&quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;		{&quot;deleted&quot;:1}	0	0			
+484	FLOW_005NODE_023	发送短信（QQ绑定并登陆-手机号已注册）	POST	/web/thirdparty/sendSmsMessage	{&quot;mobile&quot;:&quot;14400001112&quot;,&quot;type&quot;:&quot;6&quot;,&quot;device&quot;:$device$,&quot;productName&quot;:&quot;时光序&quot;}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;,&quot;data&quot;:{&quot;type&quot;:&quot;old&quot;}}	device;device_model				0				2000	1	DELETE FROM thirdparty.verification_code where device_model=&quot;$device_model$&quot;;
+DELETE FROM thirdparty.verification_code where mobile=&quot;14400001112&quot;;	device_model	
+485	FLOW_005NODE_024	QQ绑定并登陆（手机号已注册）	POST	/base/user/qqLoginBind	{
+  &quot;code&quot;: &quot;$Vcode_1$&quot;,
+  &quot;appType&quot;: &quot;1&quot;,
+  &quot;mobile&quot;: &quot;14400001112&quot;,
+  &quot;type&quot;: &quot;11&quot;,
+  &quot;device&quot;: $device$,
+  &quot;uniqueid&quot;: &quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;
+}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;|&quot;qqBind&quot;:&quot;1&quot;|&quot;mobile&quot;:&quot;14400001112&quot;	device;Vcode_1	token	$.data.token	0	0				2000	1	SELECT code FROM thirdparty.verification_code where mobile=&quot;14400001112&quot; order by created desc limit 1;		Vcode
+486	FLOW_005NODE_025	发送短信（手机号已被绑定）	POST	/web/thirdparty/sendSmsMessage	{&quot;mobile&quot;:&quot;14400001112&quot;,&quot;type&quot;:&quot;6&quot;,&quot;device&quot;:$device$,&quot;productName&quot;:&quot;时光序&quot;}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;,&quot;data&quot;:{&quot;type&quot;:&quot;old&quot;}}	device				0				2000	1	DELETE FROM thirdparty.verification_code where device_model=&quot;$device_model$&quot;;
+DELETE FROM thirdparty.verification_code where mobile=&quot;14400001112&quot;;	device_model	
+487	FLOW_005NODE_026	QQ绑定并登陆（手机号已被绑定）	POST	/base/user/qqLoginBind	{
+  &quot;code&quot;: &quot;$Vcode_1$&quot;,
+  &quot;appType&quot;: &quot;1&quot;,
+  &quot;mobile&quot;: &quot;14400001112&quot;,
+  &quot;type&quot;: &quot;11&quot;,
+  &quot;device&quot;: $device$,
+  &quot;uniqueid&quot;: &quot;UID_746F233642E560B6B9672D18DF185BC7&quot;
+}	{&quot;code&quot;:5009023,&quot;msg&quot;:&quot;该手机号已被绑定&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;0&quot;,&quot;pwdErrorCount&quot;:0,&quot;gender&quot;:0,&quot;birthYear&quot;:0,&quot;birthMonth&quot;:0,&quot;birthDay&quot;:0}}	device;Vcode_1				0				2000	1	SELECT code FROM thirdparty.verification_code where mobile=&quot;14400001112&quot; order by created desc limit 1;		Vcode
+488	FLOW_005_NODE_027	QQ授权登陆（QQ已绑定手机号）	POST	/base/user/qqLogin	{
+  &quot;msg&quot;: &quot;&quot;,
+  &quot;ret&quot;: &quot;0&quot;,
+  &quot;unionid&quot;: &quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;,
+  &quot;gender&quot;: &quot;男&quot;,
+  &quot;is_yellow_vip&quot;: &quot;0&quot;,
+  &quot;city&quot;: &quot;波萨达斯&quot;,
+  &quot;level&quot;: &quot;0&quot;,
+  &quot;openid&quot;: &quot;A12A5E02B3F08EFBD9289A5E151611C9&quot;,
+  &quot;profile_image_url&quot;: &quot;http://thirdqq.qlogo.cn/g?b=oidb&amp;k=9nnbIw3u2IoqQib2MjJeX0g&amp;s=100&amp;t=1556470732&quot;,
+  &quot;accessToken&quot;: &quot;A013266210E863CDFC7D898174BBE0B2&quot;,
+  &quot;access_token&quot;: &quot;A013266210E863CDFC7D898174BBE0B2&quot;,
+  &quot;uid&quot;: &quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;,
+  &quot;is_yellow_year_vip&quot;: &quot;0&quot;,
+  &quot;province&quot;: &quot;&quot;,
+  &quot;screen_name&quot;: &quot;AAAAA&quot;,
+  &quot;name&quot;: &quot;AAAAA&quot;,
+  &quot;iconurl&quot;: &quot;http://thirdqq.qlogo.cn/g?b=oidb&amp;k=9nnbIw3u2IoqQib2MjJeX0g&amp;s=100&amp;t=1556470732&quot;,
+  &quot;yellow_vip_level&quot;: &quot;0&quot;,
+  &quot;expiration&quot;: &quot;1576053942339&quot;,
+  &quot;vip&quot;: &quot;0&quot;,
+  &quot;expires_in&quot;: &quot;1576053942339&quot;,
+  &quot;device&quot;: $device$
+}	&quot;code&quot;:200,&quot;msg&quot;:	device	token	$.data.token	0	0				0	0			
+478	FLOW_005NODE_028	QQ绑定(QQ已被绑定)	POST	/base/user/qq-bind	{
+  &quot;msg&quot;: &quot;&quot;,
+  &quot;ret&quot;: &quot;0&quot;,
+  &quot;unionid&quot;: &quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;,
+  &quot;gender&quot;: &quot;男&quot;,
+  &quot;is_yellow_vip&quot;: &quot;0&quot;,
+  &quot;city&quot;: &quot;波萨达斯&quot;,
+  &quot;level&quot;: &quot;0&quot;,
+  &quot;openid&quot;: &quot;A12A5E02B3F08EFBD9289A5E151611C9&quot;,
+  &quot;profile_image_url&quot;: &quot;http://thirdqq.qlogo.cn/g?b=oidb&amp;k=9nnbIw3u2IoqQib2MjJeX0g&amp;s=100&amp;t=1556470732&quot;,
+  &quot;accessToken&quot;: &quot;A013266210E863CDFC7D898174BBE0B2&quot;,
+  &quot;access_token&quot;: &quot;A013266210E863CDFC7D898174BBE0B2&quot;,
+  &quot;uid&quot;: &quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;,
+  &quot;is_yellow_year_vip&quot;: &quot;0&quot;,
+  &quot;province&quot;: &quot;&quot;,
+  &quot;screen_name&quot;: &quot;AAAAA&quot;,
+  &quot;name&quot;: &quot;AAAAA&quot;,
+  &quot;iconurl&quot;: &quot;http://thirdqq.qlogo.cn/g?b=oidb&amp;k=9nnbIw3u2IoqQib2MjJeX0g&amp;s=100&amp;t=1556470732&quot;,
+  &quot;yellow_vip_level&quot;: &quot;0&quot;,
+  &quot;expiration&quot;: &quot;1576652977398&quot;,
+  &quot;vip&quot;: &quot;0&quot;,
+  &quot;expires_in&quot;: &quot;1576652977398&quot;,
+  &quot;device&quot;: {
+    &quot;deviceType&quot;: &quot;1&quot;,
+    &quot;appVersion&quot;: &quot;2.0.0&quot;,
+    &quot;deviceTag&quot;: &quot;90:f0:52:5d:75:a4&quot;,
+    &quot;isRoot&quot;: false,
+    &quot;osVersion&quot;: 27,
+    &quot;ip&quot;: &quot;172.16.10.31&quot;,
+    &quot;channel&quot;: &quot;_360&quot;,
+    &quot;deviceModel&quot;: &quot;Meizu-16th Plus&quot;,
+    &quot;channelName&quot;: &quot;android&quot;,
+    &quot;channelType&quot;: &quot;sgx&quot;,
+    &quot;deviceTagApp&quot;: &quot;90:f0:52:5d:75:a4&quot;
+  }
+}	{&quot;code&quot;:5009008,&quot;msg&quot;:&quot;该qq号已被其他账号绑定&quot;,&quot;data&quot;:{}}	token				0	select deleted from user.user_third_party where unique_id=&quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;;		{&quot;deleted&quot;:1}	0	0			
+489	FLOW_005_NODE_029	QQ解绑	POST	/base-user/base/user/qq-unbind	{&quot;type&quot;:&quot;qq&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;qqBind&quot;:&quot;0&quot;	token				1	SELECT deleted FROM user.user_third_party where unique_id=&quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;		{&quot;deleted&quot;:1}	0	0			
+490	FLOW_005NODE_030	QQ绑定（QQ未被绑定）	POST	/base/user/qq-bind	{
+  &quot;msg&quot;: &quot;&quot;,
+  &quot;ret&quot;: &quot;0&quot;,
+  &quot;unionid&quot;: &quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;,
+  &quot;gender&quot;: &quot;男&quot;,
+  &quot;is_yellow_vip&quot;: &quot;0&quot;,
+  &quot;city&quot;: &quot;波萨达斯&quot;,
+  &quot;level&quot;: &quot;0&quot;,
+  &quot;openid&quot;: &quot;A12A5E02B3F08EFBD9289A5E151611C9&quot;,
+  &quot;profile_image_url&quot;: &quot;http://thirdqq.qlogo.cn/g?b=oidb&amp;k=9nnbIw3u2IoqQib2MjJeX0g&amp;s=100&amp;t=1556470732&quot;,
+  &quot;accessToken&quot;: &quot;A013266210E863CDFC7D898174BBE0B2&quot;,
+  &quot;access_token&quot;: &quot;A013266210E863CDFC7D898174BBE0B2&quot;,
+  &quot;uid&quot;: &quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;,
+  &quot;is_yellow_year_vip&quot;: &quot;0&quot;,
+  &quot;province&quot;: &quot;&quot;,
+  &quot;screen_name&quot;: &quot;AAAAA&quot;,
+  &quot;name&quot;: &quot;AAAAA&quot;,
+  &quot;iconurl&quot;: &quot;http://thirdqq.qlogo.cn/g?b=oidb&amp;k=9nnbIw3u2IoqQib2MjJeX0g&amp;s=100&amp;t=1556470732&quot;,
+  &quot;yellow_vip_level&quot;: &quot;0&quot;,
+  &quot;expiration&quot;: &quot;1576652977398&quot;,
+  &quot;vip&quot;: &quot;0&quot;,
+  &quot;expires_in&quot;: &quot;1576652977398&quot;,
+  &quot;device&quot;: {
+    &quot;deviceType&quot;: &quot;1&quot;,
+    &quot;appVersion&quot;: &quot;2.0.0&quot;,
+    &quot;deviceTag&quot;: &quot;90:f0:52:5d:75:a4&quot;,
+    &quot;isRoot&quot;: false,
+    &quot;osVersion&quot;: 27,
+    &quot;ip&quot;: &quot;172.16.10.31&quot;,
+    &quot;channel&quot;: &quot;_360&quot;,
+    &quot;deviceModel&quot;: &quot;Meizu-16th Plus&quot;,
+    &quot;channelName&quot;: &quot;android&quot;,
+    &quot;channelType&quot;: &quot;sgx&quot;,
+    &quot;deviceTagApp&quot;: &quot;90:f0:52:5d:75:a4&quot;
+  }
+}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;qqBind&quot;:&quot;1&quot;	token				1	SELECT deleted FROM user.user_third_party where unique_id=&quot;UID_83A9DE941F1FAB2DBFF4F16E21F36C92&quot;		{&quot;deleted&quot;:0}	0	0			
+491	FLOW_005_NODE_031	微信绑定（微信未绑定手机号）	POST	/base/user/wxLogin	{
+    &quot;uid&quot;:&quot;ojdMa0z1w81XIoJa8UbLsDTUZMe0&quot;,
+    &quot;as&quot;:&quot;4591106b28bfc6c8333753747b1b172e&quot;,
+    &quot;unionid&quot;:&quot;oie8Z1G6Ofs7_b9rVYluis362ZdM&quot;,
+    &quot;openid&quot;:&quot;ojdMa0z1w81XIoJa8UbLsDTUZMe0&quot;,
+    &quot;scope&quot;:&quot;snsapi_userinfo&quot;,
+    &quot;expires_in&quot;:&quot;7200&quot;,
+    &quot;aid&quot;:&quot;wxe31880a6a924b0ac&quot;,
+    &quot;device&quot;:{
+        &quot;deviceType&quot;:&quot;1&quot;,
+        &quot;appVersion&quot;:&quot;2.0.0&quot;,
+        &quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,
+        &quot;isRoot&quot;:false,
+        &quot;osVersion&quot;:27,
+        &quot;ip&quot;:&quot;172.16.10.31&quot;,
+        &quot;channel&quot;:&quot;_360&quot;,
+        &quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,
+        &quot;channelName&quot;:&quot;android&quot;,
+        &quot;channelType&quot;:&quot;sgx&quot;,
+        &quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;
+    }
+}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;微信登录成功,请绑定手机号&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;0&quot;,&quot;pwdErrorCount&quot;:0,&quot;gender&quot;:0,&quot;unionid&quot;:&quot;oie8Z1G6Ofs7_b9rVYluis362ZdM&quot;,&quot;birthYear&quot;:0,&quot;birthMonth&quot;:0,&quot;birthDay&quot;:0,&quot;type&quot;:&quot;new&quot;}}	token				0				0	1	UPDATE `user`.user_third_party SET deleted = 1 WHERE unique_id=&quot;oie8Z1G6Ofs7_b9rVYluis362ZdM&quot;		
+492	FLOW_005NODE_032	发送短信（微信绑定并注册）	POST	/web/thirdparty/sendSmsMessage	{&quot;mobile&quot;:&quot;14400001112&quot;,&quot;type&quot;:&quot;6&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.0.0&quot;,&quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.31&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;},&quot;productName&quot;:&quot;时光序&quot;}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;,&quot;data&quot;:{&quot;type&quot;:&quot;new&quot;}}					0				2000	1	DELETE FROM user.user where mobile=&quot;14400001112&quot;;
+DELETE FROM thirdparty.verification_code where device_model=&quot;$device_model$&quot;;
+DELETE FROM thirdparty.verification_code where mobile=&quot;14400001112&quot;;	device_model	
+493	FLOW_005NODE_033	微信登陆并注册绑定（验证码错误）	POST	/base/user/wxLoginBind	{&quot;password&quot;:&quot;666666&quot;,&quot;code&quot;:&quot;1234&quot;,&quot;unionid&quot;:&quot;oie8Z1G6Ofs7_b9rVYluis362ZdM&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;14400001112&quot;,&quot;type&quot;:&quot;3&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.0.0&quot;,&quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.31&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;}}	{&quot;code&quot;:5009004,&quot;msg&quot;:&quot;短信验证码不正确&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;0&quot;,&quot;pwdErrorCount&quot;:0,&quot;gender&quot;:0,&quot;birthYear&quot;:0,&quot;birthMonth&quot;:0,&quot;birthDay&quot;:0}}					0				0	0			
+494	FLOW_005NODE_034	微信登陆并注册绑定（验证码正确）	POST	/base/user/wxLoginBind	{&quot;password&quot;:&quot;666666&quot;,&quot;code&quot;:&quot;$Vcode_1$&quot;,&quot;unionid&quot;:&quot;oie8Z1G6Ofs7_b9rVYluis362ZdM&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;14400001112&quot;,&quot;type&quot;:&quot;3&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.0.0&quot;,&quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.31&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;}}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;	Vcode_1	token	$.data.token	0	0				0	1	SELECT code FROM thirdparty.verification_code where mobile=&quot;14400001112&quot; order by created desc limit 1;		Vcode
+495	FLOW_005NODE_035	微信解绑	POST	/base/user/unbindWeChat	{&quot;type&quot;:&quot;wx&quot;}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;result&quot;:true}}	token				1	SELECT deleted FROM user.user_third_party where unique_id=&quot;oie8Z1G6Ofs7_b9rVYluis362ZdM&quot;		{&quot;deleted&quot;:1}	0	0			
+496	FLOW_005NODE_036	发送短信(微信登陆并绑定-手机号已注册）	POST	/web/thirdparty/sendSmsMessage	{&quot;mobile&quot;:&quot;14400001112&quot;,&quot;type&quot;:&quot;6&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.0.0&quot;,&quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.31&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;},&quot;productName&quot;:&quot;时光序&quot;}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;,&quot;data&quot;:{&quot;type&quot;:&quot;old&quot;}}					0				2000	1	DELETE FROM thirdparty.verification_code where device_model=&quot;$device_model$&quot;;
+DELETE FROM thirdparty.verification_code where mobile=&quot;14400001112&quot;;	device_model	
+497	FLOW_005NODE_037	微信绑定并登陆（手机号已注册）	POST	/base/user/wxLoginBind	{&quot;code&quot;:&quot;$Vcode_1$&quot;,&quot;unionid&quot;:&quot;oie8Z1G6Ofs7_b9rVYluis362ZdM&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;14400001112&quot;,&quot;type&quot;:&quot;3&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.0.0&quot;,&quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.31&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;}}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data|&quot;mobile&quot;:&quot;14400001112|&quot;wxBind&quot;:&quot;1&quot;	Vcode_1				0				0	1	SELECT code FROM thirdparty.verification_code where mobile=&quot;14400001112&quot; order by created desc limit 1;		Vcode
+498	FLOW_005NODE_038	发送短信（手机号已被绑定）	POST	/web/thirdparty/sendSmsMessage	{&quot;mobile&quot;:&quot;14400001112&quot;,&quot;type&quot;:&quot;6&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.0.0&quot;,&quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.31&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;},&quot;productName&quot;:&quot;时光序&quot;}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;,&quot;data&quot;:{&quot;type&quot;:&quot;old&quot;}}					0				2000	1	DELETE FROM thirdparty.verification_code where device_model=&quot;$device_model$&quot;;
+DELETE FROM thirdparty.verification_code where mobile=&quot;14400001112&quot;;
+UPDATE `user`.user_third_party SET deleted = 1 WHERE unique_id=&quot;oie8Z1LhghKF2tsqLs2Y9_jzRnXI&quot;;		device_model
+499	FLOW_005NODE_039	微信绑定并登陆（手机号已绑定微信）	POST	/base/user/wxLoginBind	{&quot;code&quot;:&quot;$Vcode_1$&quot;,&quot;unionid&quot;:&quot;oie8Z1LhghKF2tsqLs2Y9_jzRnXI&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;14400001112&quot;,&quot;type&quot;:&quot;3&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.0.0&quot;,&quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.31&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;}}	{&quot;code&quot;:5009023,&quot;msg&quot;:&quot;该手机号已被绑定&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;0&quot;,&quot;pwdErrorCount&quot;:0,&quot;gender&quot;:0,&quot;birthYear&quot;:0,&quot;birthMonth&quot;:0,&quot;birthDay&quot;:0}}	Vcode_1				0				0	1	SELECT code FROM thirdparty.verification_code where mobile=&quot;14400001112&quot; order by created desc limit 1;		Vcode
+500	FLOW_005NODE_040	微信授权登陆（已绑定手机号）	POST	/base/user/wxLogin	{&quot;uid&quot;:&quot;ojdMa0z1w81XIoJa8UbLsDTUZMe0&quot;,&quot;as&quot;:&quot;4591106b28bfc6c8333753747b1b172e&quot;,&quot;unionid&quot;:&quot;oie8Z1G6Ofs7_b9rVYluis362ZdM&quot;,&quot;openid&quot;:&quot;ojdMa0z1w81XIoJa8UbLsDTUZMe0&quot;,&quot;scope&quot;:&quot;snsapi_userinfo&quot;,&quot;expires_in&quot;:&quot;7200&quot;,&quot;aid&quot;:&quot;wxe31880a6a924b0ac&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.0.0&quot;,&quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.31&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;}}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data|&quot;wxBind&quot;:&quot;1&quot;	token	token	$.data.token	0	0				0	0			
+501	FLOW_005NODE_041	微信绑定(微信已被其他手机号绑定)	POST	/base/user/bindWeChat	{&quot;uid&quot;:&quot;ojdMa0z1w81XIoJa8UbLsDTUZMe0&quot;,&quot;as&quot;:&quot;4591106b28bfc6c8333753747b1b172e&quot;,&quot;unionid&quot;:&quot;oie8Z1G6Ofs7_b9rVYluis362ZdM&quot;,&quot;openid&quot;:&quot;ojdMa0z1w81XIoJa8UbLsDTUZMe0&quot;,&quot;scope&quot;:&quot;snsapi_userinfo&quot;,&quot;expires_in&quot;:&quot;7200&quot;,&quot;aid&quot;:&quot;wxe31880a6a924b0ac&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.0.0&quot;,&quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.31&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;}}	{&quot;code&quot;:5009013,&quot;msg&quot;:&quot;微信号已绑定其他账号&quot;,&quot;data&quot;:{&quot;wxconcerns&quot;:0}}	token				0				0	0			
+502	FLOW_005NODE_042	微信解绑	POST	/base/user/unbindWeChat	{&quot;type&quot;:&quot;wx&quot;}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;result&quot;:true}}	token				0				0	0			
+503	FLOW_005NODE_043	微信绑定（手机号未绑定微信且微信未绑定其他手机号）	POST	/base/user/bindWeChat	{&quot;uid&quot;:&quot;ojdMa0z1w81XIoJa8UbLsDTUZMe0&quot;,&quot;as&quot;:&quot;4591106b28bfc6c8333753747b1b172e&quot;,&quot;unionid&quot;:&quot;oie8Z1G6Ofs7_b9rVYluis362ZdM&quot;,&quot;openid&quot;:&quot;ojdMa0z1w81XIoJa8UbLsDTUZMe0&quot;,&quot;scope&quot;:&quot;snsapi_userinfo&quot;,&quot;expires_in&quot;:&quot;7200&quot;,&quot;aid&quot;:&quot;wxe31880a6a924b0ac&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.0.0&quot;,&quot;deviceTag&quot;:&quot;90:f0:52:5d:75:a4&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.31&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;90:f0:52:5d:75:a4&quot;}}	{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;wxconcerns&quot;:1}}	token				0				0	0			
+</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <samplerData class="java.lang.String">[Prepared Select Statement] select node_id,node_code,node_name,method,path,parameter,expect_response,pre_keys,post_keys,post_keys_extractor,post_keys_default,ischechdb,sql_str,sql_para,expect_db,sleep_time,isexcute_pre_sql,pre_sql_str,pre_sql_para,pre_sql_out from automation.testdata_node where flow_id = ? and state = 1 order by order_id
+
+5
+varchar</samplerData>
+  </sample>
+  <httpSample t="113" it="0" lt="113" ct="31" ts="1571054645257" s="true" lb="登录" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1349" sby="538" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+    <assertionResult>
+      <name>Response Assertion</name>
+      <failure>false</failure>
+      <error>false</error>
+    </assertionResult>
+    <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:06 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1227
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: 
+User-Agent: okhttp/3.3.0
+Content-Length: 330
+Host: 47.112.0.183:8801
+</requestHeader>
+    <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435568345088&quot;,&quot;mobile&quot;:&quot;13610150696&quot;,&quot;userName&quot;:&quot;\uD83D\uDC40\uD83D\uDE2F\uD83C\uDE36️\uD83C\uDE1A️自动化测试&quot;,&quot;uniqueKey&quot;:&quot;768981c9a23d4106ad60d452634b7e50&quot;,&quot;oldMobile&quot;:&quot;13610150696&quot;,&quot;email&quot;:&quot;cuiqingyong@jielema.com&quot;,&quot;userImage&quot;:&quot;https://livelihood.oss-cn-shenzhen.aliyuncs.com/livelihood/userhead/13610150696/18620090165_2_1567507617000.jpeg&quot;,&quot;deviceType&quot;:&quot;2&quot;,&quot;pwdErrorCount&quot;:0,&quot;gender&quot;:1,&quot;signature&quot;:&quot;每天都要过得有仪式感，热爱生活，热爱自由&quot;,&quot;telecomOperators&quot;:&quot;yd&quot;,&quot;lunar&quot;:&quot;1&quot;,&quot;birthYear&quot;:1999,&quot;birthMonth&quot;:7,&quot;birthDay&quot;:7,&quot;job&quot;:&quot;02&quot;,&quot;leapMonth&quot;:&quot;false&quot;,&quot;appVersion&quot;:&quot;1.4.6&quot;,&quot;lastLoginTime&quot;:1571054646080,&quot;channelName&quot;:&quot;时光序_ios&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTag&quot;:&quot;3F8F4920-D468-4C93-B3DB-414AA8C9A95B&quot;,&quot;created&quot;:1558404780000,&quot;updated&quot;:1571054646080,&quot;pushToken&quot;:&quot;e3ded3a01ae653c3945dc72d902610b8&quot;,&quot;userToken&quot;:&quot;ec5789f633051bdf400364cc925a8f9a513bfefb484f75dd2d9562d31f38ad0c97f6a11e0cc705ad&quot;,&quot;token&quot;:&quot;b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e19a22355351a2979ca05c0b18b65e1c9&quot;,&quot;wxConcerns&quot;:&quot;0&quot;,&quot;wxBind&quot;:&quot;0&quot;,&quot;type&quot;:&quot;old&quot;,&quot;qqBind&quot;:&quot;0&quot;}}</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <cookies class="java.lang.String"></cookies>
+    <method class="java.lang.String">POST</method>
+    <queryString class="java.lang.String">{&quot;password&quot;:&quot;666666&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;13610150696&quot;,&quot;type&quot;:&quot;1&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.4.7&quot;,&quot;deviceTag&quot;:&quot;ec:51:bc:a6:a2:d5&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.11.200&quot;,&quot;channel&quot;:&quot;xiaomi&quot;,&quot;deviceModel&quot;:&quot;OPPO-OPPO R11s&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;ec:51:bc:a6:a2:d5&quot;}}</queryString>
+    <java.net.URL>http://47.112.0.183:8801/base/user/login</java.net.URL>
+  </httpSample>
+  <sample t="18" it="0" lt="0" ct="0" ts="1571054645411" s="true" lb="重置节点计数器" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+    <responseHeader class="java.lang.String"></responseHeader>
+    <requestHeader class="java.lang.String"></requestHeader>
+    <responseData class="java.lang.String"></responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <samplerData class="java.lang.String">import java.util.Date;
+import java.text.SimpleDateFormat;
+
+vars.put(&quot;N&quot;,&quot;0&quot;);//节点循环外计数器重置为0,节点循环时每个节点执行前计数器加1
+
+SimpleDateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+System.out.println(df.format(new Date()) + &quot;: 执行流程--&quot;+vars.get(&quot;flow_name_&quot;+vars.get(&quot;M&quot;)));
+
+vars.put(&quot;currentMin_add1&quot;, vars.get(&quot;currentMin&quot;)+&quot;00&quot;);
+vars.put(&quot;currentMin_add6&quot;, vars.get(&quot;todotime_add6&quot;)+&quot;00&quot;);
+vars.put(&quot;currentMin_add2&quot;, vars.get(&quot;todotime_add2&quot;)+&quot;00&quot;);
+
+String time = vars.get(&quot;currentMin&quot;)+&quot;00&quot;;
+String time6 = vars.get(&quot;todotime_add6&quot;)+&quot;00&quot;;
+String time2 = vars.get(&quot;todotime_add2&quot;)+&quot;00&quot;;
+String day3 = vars.get(&quot;todoDay_add3&quot;)+&quot;00&quot;;
+
+String todoDay3 = day3.substring(6,8);
+if(todoDay3.substring(0,1).equals(&quot;0&quot;)){
+	todoDay3 = todoDay3.substring(1);
+}
+
+String todoDay = time.substring(6,8);
+if(todoDay.substring(0,1).equals(&quot;0&quot;)){
+	todoDay = todoDay.substring(1);
+}
+
+
+String todoMonth = time.substring(4,6);
+if(todoMonth.substring(0,1).equals(&quot;0&quot;)){
+	todoMonth = todoMonth.substring(1);
+}
+
+
+String todoHH = time.substring(8,10);
+if(todoHH.substring(0,1).equals(&quot;0&quot;)){
+	todoHH = todoHH.substring(1);
+}
+
+String todomm = time.substring(10,12);
+if(todomm.substring(0,1).equals(&quot;0&quot;)){
+	todomm = todomm.substring(1);
+}
+
+String todoHH2 = time2.substring(8,10);
+if(todoHH2.substring(0,1).equals(&quot;0&quot;)){
+	todoHH2 = todoHH2.substring(1);
+}
+
+String todomm2 = time2.substring(10,12);
+if(todomm2.substring(0,1).equals(&quot;0&quot;)){
+	todomm2 = todomm2.substring(1);
+}
+
+String todoHH6 = time6.substring(8,10);
+if(todoHH6.substring(0,1).equals(&quot;0&quot;)){
+	todoHH6 = todoHH6.substring(1);
+}
+
+String todomm6 = time6.substring(10,12);
+if(todomm6.substring(0,1).equals(&quot;0&quot;)){
+	todomm6 = todomm6.substring(1);
+}
+
+
+vars.put(&quot;todoMonth&quot;,todoMonth);
+
+vars.put(&quot;todoDay&quot;,todoDay);
+vars.put(&quot;todoDay3&quot;,todoDay3);
+
+vars.put(&quot;todoHH2&quot;,todoHH2);
+vars.put(&quot;todomm2&quot;,todomm2);
+
+vars.put(&quot;todoHH6&quot;,todoHH6);
+vars.put(&quot;todomm6&quot;,todomm6);
+
+vars.put(&quot;todoHH&quot;,todoHH);
+vars.put(&quot;todomm&quot;,todomm);
+
+
+String todoHHRepeat = time.substring(8,10);
+if(todoHHRepeat.substring(0,1).equals(&quot;0&quot;)){
+	todoHHRepeat = todoHHRepeat.substring(1);
+}
+
+String todommRepeat = time.substring(10,12);
+if(todommRepeat.substring(0,1).equals(&quot;0&quot;)){
+	todommRepeat = todommRepeat.substring(1);
+}
+
+String todoHHRepeat2 = time2.substring(8,10);
+if(todoHHRepeat2.substring(0,1).equals(&quot;0&quot;)){
+	todoHHRepeat2 = todoHHRepeat2.substring(1);
+}
+
+String todommRepeat2 = time2.substring(10,12);
+if(todommRepeat2.substring(0,1).equals(&quot;0&quot;)){
+	todommRepeat2 = todommRepeat2.substring(1);
+}
+
+
+String todoHHRepeat6 = time6.substring(8,10);
+if(todoHHRepeat6.substring(0,1).equals(&quot;0&quot;)){
+	todoHHRepeat6 = todoHHRepeat6.substring(1);
+}
+
+String todommRepeat6 = time6.substring(10,12);
+if(todommRepeat6.substring(0,1).equals(&quot;0&quot;)){
+	todommRepeat6 = todommRepeat6.substring(1);
+}
+
+vars.put(&quot;todoHHRepeat2&quot;,todoHHRepeat2);
+vars.put(&quot;todommRepeat2&quot;,todommRepeat2);
+
+vars.put(&quot;todoHHRepeat6&quot;,todoHHRepeat6);
+vars.put(&quot;todommRepeat6&quot;,todommRepeat6);
+
+vars.put(&quot;todommRepeat&quot;,todommRepeat);
+vars.put(&quot;todoHHRepeat&quot;,todoHHRepeat);
+
+
+
+
+
+
+
+
+
+
+</samplerData>
+  </sample>
+  <responseHeader class="java.lang.String"></responseHeader>
+  <requestHeader class="java.lang.String"></requestHeader>
+  <responseData class="java.lang.String">Non-TEXT response data, cannot record: ()</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+</sample>
+<httpSample t="79" it="0" lt="79" ct="0" ts="1571054645488" s="false" lb="1-手机号判断" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="188" sby="420" sc="1" ec="1" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>true</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配失败:&quot;code&quot;:200,&quot;msg&quot;:&quot;用户未注册,请注册&quot;|&quot;type&quot;:&quot;new&quot;</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:06 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 68
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e19a22355351a2979ca05c0b18b65e1c9
+User-Agent: okhttp/3.3.0
+Content-Length: 22
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;用户已注册,请登录&quot;,&quot;data&quot;:{&quot;type&quot;:&quot;old&quot;}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;mobile&quot;:14400001111}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/user/validateUserNewOrOld</java.net.URL>
+</httpSample>
+<httpSample t="85" it="0" lt="85" ct="0" ts="1571054645633" s="false" lb="2-注册-发送短信验证码" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="189" sby="737" sc="1" ec="1" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>true</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配失败:&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;|&quot;type&quot;:&quot;new&quot;</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:06 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 69
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e19a22355351a2979ca05c0b18b65e1c9
+User-Agent: okhttp/3.3.0
+Content-Length: 339
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:5018001,&quot;msg&quot;:&quot;该用户已注册,请直接登录&quot;,&quot;data&quot;:{}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{
+    &quot;mobile&quot;:&quot;14400001111&quot;,
+    &quot;type&quot;:&quot;3&quot;,
+    &quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;},
+    &quot;productName&quot;:&quot;时光序&quot;
+}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/web/thirdparty/sendSmsMessage</java.net.URL>
+</httpSample>
+<httpSample t="68" it="0" lt="68" ct="9" ts="1571054648780" s="false" lb="3-完成注册并登陆" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="561" sby="726" sc="1" ec="1" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>true</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配失败:&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:09 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 440
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e19a22355351a2979ca05c0b18b65e1c9
+User-Agent: okhttp/3.3.0
+Content-Length: 339
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:601,&quot;msg&quot;:&quot;短信验证码不能为空&quot;,&quot;data&quot;:{&quot;fieldErrors&quot;:[{&quot;bindingFailure&quot;:&quot;false&quot;,&quot;code&quot;:&quot;NotBlank&quot;,&quot;field&quot;:&quot;code&quot;,&quot;message&quot;:&quot;短信验证码不能为空&quot;,&quot;rejectedValue&quot;:&quot;&quot;},{&quot;bindingFailure&quot;:&quot;false&quot;,&quot;code&quot;:&quot;NotBlank&quot;,&quot;field&quot;:&quot;appType&quot;,&quot;message&quot;:&quot;设备类型不能为空&quot;,&quot;rejectedValue&quot;:&quot;&quot;},{&quot;bindingFailure&quot;:&quot;false&quot;,&quot;code&quot;:&quot;NotBlank&quot;,&quot;field&quot;:&quot;password&quot;,&quot;message&quot;:&quot;密码不能为空&quot;,&quot;rejectedValue&quot;:&quot;&quot;}],&quot;errorCount&quot;:3}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{
+    &quot;mobile&quot;:&quot;14400001111&quot;,
+    &quot;type&quot;:&quot;3&quot;,
+    &quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;},
+    &quot;productName&quot;:&quot;时光序&quot;
+}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/user/register</java.net.URL>
+</httpSample>
+<httpSample t="638" it="0" lt="637" ct="10" ts="1571054651986" s="true" lb="4-绑定邮箱-发送邮箱验证码" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="163" sby="569" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:13 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 43
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: 0
+User-Agent: okhttp/3.3.0
+Content-Length: 347
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&#xd;
+    &quot;type&quot;:&quot;1&quot;,&#xd;
+    &quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;},&#xd;
+    &quot;email&quot;:&quot;testbind@qq.com&quot;,&#xd;
+    &quot;productName&quot;:&quot;时光序&quot;&#xd;
+}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/web/thirdparty/sendEmailCode</java.net.URL>
+</httpSample>
+<httpSample t="65" it="0" lt="65" ct="0" ts="1571054652711" s="false" lb="5-绑定邮箱" rc="401" rm="" tn="流程测试引擎 1-1" dt="" by="137" sby="533" sc="1" ec="1" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>true</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配失败:&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 401 
+Date: Mon, 14 Oct 2019 12:04:13 GMT
+Content-Length: 63
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: 0
+User-Agent: okhttp/3.3.0
+Content-Length: 318
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">Non-TEXT response data, cannot record: ()</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&#xd;
+    &quot;code&quot;:&quot;9810&quot;,&#xd;
+    &quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;},&#xd;
+    &quot;email&quot;:&quot;testbind@qq.com&quot;&#xd;
+}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/user/changeEmail</java.net.URL>
+</httpSample>
+<httpSample t="43" it="0" lt="43" ct="11" ts="1571054655873" s="false" lb="6-获取用户信息" rc="401" rm="" tn="流程测试引擎 1-1" dt="" by="137" sby="213" sc="1" ec="1" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>true</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配失败:&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;email&quot;:&quot;testbind@qq.com&quot;</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 401 
+Date: Mon, 14 Oct 2019 12:04:16 GMT
+Content-Length: 63
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: 0
+User-Agent: okhttp/3.3.0
+Content-Length: 0
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">Non-TEXT response data, cannot record: ()</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/user/getUserInfo</java.net.URL>
+</httpSample>
+<httpSample t="49" it="0" lt="49" ct="0" ts="1571054655965" s="true" lb="7-退出登陆" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="163" sby="468" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:16 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 43
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: 0
+User-Agent: okhttp/3.3.0
+Content-Length: 258
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;}}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/user/logout</java.net.URL>
+</httpSample>
+<httpSample t="229" it="0" lt="229" ct="0" ts="1571054656175" s="true" lb="8-找回密码-发送短信验证码" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="190" sby="541" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:17 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 70
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: 0
+User-Agent: okhttp/3.3.0
+Content-Length: 318
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;短信验证码发送成功&quot;,&quot;data&quot;:{&quot;type&quot;:&quot;old&quot;}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;mobile&quot;:&quot;14400001111&quot;,&quot;type&quot;:&quot;2&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;},&quot;productName&quot;:&quot;时光序&quot;}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/web/thirdparty/sendSmsMessage</java.net.URL>
+</httpSample>
+<httpSample t="208" it="0" lt="208" ct="0" ts="1571054656569" s="true" lb="9-找回密码并登陆" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="972" sby="532" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:17 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 851
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: 0
+User-Agent: okhttp/3.3.0
+Content-Length: 315
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;6737385042548281016&quot;,&quot;mobile&quot;:&quot;14400001111&quot;,&quot;uniqueKey&quot;:&quot;1c9f4efa75914a82aa0056ebc7cebfc9&quot;,&quot;oldMobile&quot;:&quot;14400001111&quot;,&quot;deviceType&quot;:&quot;1&quot;,&quot;pwdErrorCount&quot;:1,&quot;gender&quot;:2,&quot;telecomOperators&quot;:&quot;&quot;,&quot;birthYear&quot;:0,&quot;birthMonth&quot;:0,&quot;birthDay&quot;:0,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;lastLoginTime&quot;:1570764352000,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;created&quot;:1570764352000,&quot;updated&quot;:1571054657459,&quot;pushToken&quot;:&quot;8f00e47d05b17580f772c9608f6528da&quot;,&quot;userToken&quot;:&quot;a5a95f8ea8fe91816d5a79abdafc12d17335a2ec8870220611984e0bf44ee8f097f6a11e0cc705ad&quot;,&quot;token&quot;:&quot;f7d0bf05dbbd7b1e019306d7bff87ab9ed820482a1fbf65886b1ff7ecd8b71b187725c3068cab30c1cd86a7b02e6278409dc94b175921b01171b5326819a8a189a9b28350fc788480e29c142d17259ebf7e53dc6490c243c&quot;,&quot;wxConcerns&quot;:&quot;0&quot;,&quot;wxBind&quot;:&quot;0&quot;,&quot;type&quot;:&quot;old&quot;,&quot;qqBind&quot;:&quot;0&quot;}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;password&quot;:&quot;666666&quot;,&quot;code&quot;:&quot;0935&quot;,&quot;mobile&quot;:&quot;14400001111&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;}}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/user/resetPassword</java.net.URL>
+</httpSample>
+<httpSample t="79" it="0" lt="79" ct="17" ts="1571054659820" s="true" lb="10-退出登陆" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="163" sby="643" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:20 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 43
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: f7d0bf05dbbd7b1e019306d7bff87ab9ed820482a1fbf65886b1ff7ecd8b71b187725c3068cab30c1cd86a7b02e6278409dc94b175921b01171b5326819a8a189a9b28350fc788480e29c142d17259ebf7e53dc6490c243c
+User-Agent: okhttp/3.3.0
+Content-Length: 258
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;}}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/user/logout</java.net.URL>
+</httpSample>
+<httpSample t="80" it="0" lt="80" ct="0" ts="1571054659959" s="false" lb="11-邮箱登陆" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="272" sby="714" sc="1" ec="1" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>true</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配失败:&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:20 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 151
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: f7d0bf05dbbd7b1e019306d7bff87ab9ed820482a1fbf65886b1ff7ecd8b71b187725c3068cab30c1cd86a7b02e6278409dc94b175921b01171b5326819a8a189a9b28350fc788480e29c142d17259ebf7e53dc6490c243c
+User-Agent: okhttp/3.3.0
+Content-Length: 330
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;用户不存在,请先注册&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;0&quot;,&quot;pwdErrorCount&quot;:0,&quot;gender&quot;:0,&quot;birthYear&quot;:0,&quot;birthMonth&quot;:0,&quot;birthDay&quot;:0,&quot;type&quot;:&quot;new&quot;}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;password&quot;:&quot;666666&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;testbind@qq.com&quot;,&quot;type&quot;:&quot;1&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;}}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/user/login</java.net.URL>
+</httpSample>
+<httpSample t="76" it="0" lt="76" ct="0" ts="1571054660079" s="false" lb="12-账号登陆（错误密码）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="272" sby="546" sc="1" ec="1" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>true</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配失败:{&quot;code&quot;:5009002,&quot;msg&quot;:&quot;密码不正确&quot;,&quot;data&quot;:{}}</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:20 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 151
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: 0
+User-Agent: okhttp/3.3.0
+Content-Length: 337
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;用户不存在,请先注册&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;0&quot;,&quot;pwdErrorCount&quot;:0,&quot;gender&quot;:0,&quot;birthYear&quot;:0,&quot;birthMonth&quot;:0,&quot;birthDay&quot;:0,&quot;type&quot;:&quot;new&quot;}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;password&quot;:&quot;1234561111111&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;testbind@qq.com&quot;,&quot;type&quot;:&quot;1&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;}}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/user/login</java.net.URL>
+</httpSample>
+<httpSample t="50" it="0" lt="50" ct="0" ts="1571054660206" s="true" lb="13-退出登陆" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="163" sby="468" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Mon, 14 Oct 2019 12:04:20 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 43
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: 0
+User-Agent: okhttp/3.3.0
+Content-Length: 258
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;}}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/user/logout</java.net.URL>
+</httpSample>

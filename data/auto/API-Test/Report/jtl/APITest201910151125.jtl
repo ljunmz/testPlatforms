@@ -1,0 +1,1669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testResults version="1.2">
+<sample t="465" it="0" lt="463" ct="447" ts="1571109944200" s="true" lb="获取流程数据" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="69" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <responseHeader class="java.lang.String">shared:false, driver:com.mysql.jdbc.Driver, url:jdbc:mysql://47.112.0.183:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true, user:planadmin</responseHeader>
+  <requestHeader class="java.lang.String"></requestHeader>
+  <responseData class="java.lang.String">flow_id	flow_name	account	password
+1	日程编辑	13610150696	666666
+</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <samplerData class="java.lang.String">[Select Statement] select flow_id,flow_name,account,password from automation.testdata_flow where state = 1 and flow_id = 1 order by flow_code
+
+</samplerData>
+</sample>
+<sample t="190" it="131" lt="0" ct="0" ts="1571109944681" s="true" lb="流程初始化预处理--1-日程编辑" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="流程测试引擎 1-1" dt="" by="14900" sby="538" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <sample t="46" it="0" lt="42" ct="0" ts="1571109944681" s="true" lb="获取节点数据" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="13489" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+    <responseHeader class="java.lang.String">shared:false, driver:com.mysql.jdbc.Driver, url:jdbc:mysql://47.112.0.183:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true, user:planadmin</responseHeader>
+    <requestHeader class="java.lang.String"></requestHeader>
+    <responseData class="java.lang.String">node_id	node_code	node_name	method	path	parameter	expect_response	pre_keys	post_keys	post_keys_extractor	post_keys_default	ischechdb	sql_str	sql_para	expect_db	sleep_time	isexcute_pre_sql	pre_sql_str	pre_sql_para	pre_sql_out
+66	FLOW_001NODE_01	日程添加（时间点+默认分类+准时提醒）	POST	/base/plan/schedule/batchadd	{&quot;todos&quot;: [{&quot;title&quot;: &quot;测试日程编辑流程&quot;, &quot;localId&quot;: -1563241933492017464, &quot;duration&quot;: 0, &quot;todoTime&quot;: &quot;20190716144000&quot;, &quot;aheadType&quot;: [{&quot;offset&quot;: 0}], &quot;importance&quot;: 1, &quot;shortTitle&quot;: &quot;测试日程编辑流程&quot;, &quot;intervalType&quot;: 1, &quot;todoClassifyId&quot;: 1001}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;shortTitle&quot;:&quot;测试日程编辑流程&quot;|&quot;expression&quot;:&quot;0 40 14 * * ?&quot;	null	id	$.data.todos[0].id	0	0	select short_title,todo_type,importance,classify_id,ahead_type, DATE_FORMAT(r.start_datetime,&apos;%Y%m%d%H%i%s&apos;) as start_datetime,DATE_FORMAT(r.end_datetime,&apos;%Y%m%d%H%i%s&apos;) as end_datetime,rules_json,status from plan.todo t INNER JOIN plan.todo_repeat_rule r on t.id = r.todo_id where t.id = $id$	id	{&quot;short_title&quot;:&quot;测试日程编辑流程&quot;,&quot;importance&quot;:1,&quot;ahead_type&quot;:&quot;[{\&quot;offset\&quot;:0}]&quot;,&quot;classify_id&quot;:1001,&quot;todo_type&quot;:1,&quot;start_datetime&quot;:&quot;20190716000000&quot;,&quot;end_datetime&quot;:&quot;20190716235959&quot;,&quot;rules_json&quot;:&quot;[{\&quot;type\&quot;:\&quot;Solar\&quot;,\&quot;expression\&quot;:\&quot;0 40 14 * * ?\&quot;}]&quot;,&quot;status&quot;:1}	0	0	null	null	null
+79	FLOW_001_NODE_002	日程修改	POST	/base/plan/schedule/edit	{&quot;duration&quot;: 0,&quot;importance&quot;: 2,&quot;intervalType&quot;: 1,&quot;localId&quot;: 126100789566398197,&quot;id&quot;: &quot;$id$&quot;,&quot;todoClassifyId&quot;: 1002,&quot;shortTitle&quot;: &quot;测试日程编辑流程new&quot;,&quot;title&quot;: &quot;测试日程编辑流程new&quot;,&quot;newTodoTime&quot;: &quot;20190717144000&quot;,&quot;todoTime&quot;: &quot;20190716144000&quot;,&quot;address&quot;: &quot;高德置地广场(冬商场)&quot;,&quot;city&quot;: &quot;广州市&quot;,&quot;country&quot;: &quot;&quot;,&quot;district&quot;: &quot;天河区&quot;,&quot;latitude&quot;: &quot;23.125756730662990&quot;,&quot;longitude&quot;: &quot;113.333537851804800&quot;,&quot;province&quot;: &quot;广东省&quot;,&quot;remark&quot;: &quot;备注测试&quot;,&quot;aheadType&quot;: [{&quot;offset&quot;: 0}, {&quot;offset&quot;: 300}],&quot;attachments&quot;: [{&quot;mediaType&quot;: &quot;0&quot;,&quot;url&quot;: &quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;	id	id;ruleId	$.data.id;$.data.ruleInfo[0].id	0;0	0	select short_title,todo_type,importance,classify_id,f.ahead_type, DATE_FORMAT(r.start_datetime,&apos;%Y%m%d%H%i%s&apos;) as start_datetime,DATE_FORMAT(r.end_datetime,&apos;%Y%m%d%H%i%s&apos;) as end_datetime,rules_json,status from plan.todo t LEFT JOIN plan.todo_repeat_rule r on t.id = r.todo_id LEFT JOIN plan.todo_finish f on t.id = f.todo_id where t.id = $id$;	id	{&quot;short_title&quot;:&quot;测试日程编辑流程new&quot;,&quot;importance&quot;:2,&quot;ahead_type&quot;:&quot;[{\&quot;offset\&quot;:0},{\&quot;offset\&quot;:300}]&quot;,&quot;classify_id&quot;:1002,&quot;todo_type&quot;:1,&quot;start_datetime&quot;:&quot;20190717000000&quot;,&quot;end_datetime&quot;:&quot;20190717235959&quot;,&quot;rules_json&quot;:&quot;[{\&quot;type\&quot;:\&quot;Solar\&quot;,\&quot;expression\&quot;:\&quot;0 40 14 * * ?\&quot;}]&quot;,&quot;status&quot;:1}	0	0	null	null	null
+68	FLOW_001_NODE_003	日程打卡	POST	/base/plan/allCheckin	{
+  &quot;todoId&quot;: &quot;$id$&quot;,
+  &quot;finishState&quot;: 1,
+  &quot;ruleId&quot;: &quot;$ruleId$&quot;,
+  &quot;todoTime&quot;: &quot;20190717144000&quot;
+}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;finishState&quot;:1	id;ruleId	id	$.data.id	0	0	select finish_state from plan.todo t LEFT JOIN plan.todo_finish f on t.id = f.todo_id where t.id = $id$;	id	{&quot;finish_state&quot;:1}	0	0	null	null	null
+69	FLOW_001_NODE_004	日程取消打卡	POST	/base/plan/checkin	{&quot;todoId&quot;:$id$,&quot;finishState&quot;:0,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;finishState&quot;:0	id;ruleId	id	$.data.id	0	0	select finish_state from plan.todo t LEFT JOIN plan.todo_finish f on t.id = f.todo_id where t.id = $id$;	id	{&quot;finish_state&quot;:0}	0	0	null	null	null
+41	FLOW_001_NODE_005	日程子任务添加	POST	/base/plan/schedule/edit	{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:$id$,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonAddList&quot;:[{&quot;localId&quot;:-1802564779,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务1&quot;}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;title&quot;:&quot;子任务1&quot;	id	id;ruleId;taskId	$.data.id;$.data.ruleInfo[0].id;$.data.task[0].id	0;0;0	0	select title,DATE_FORMAT(start_datetime,&apos;%Y%m%d%H%i%s&apos;) as start_datetime,DATE_FORMAT(end_datetime,&apos;%Y%m%d%H%i%s&apos;) as end_datetime,DATE_FORMAT(todo_time,&apos;%Y%m%d%H%i%s&apos;) as todo_time from plan.todo_task where id = $taskId$ and todo_id = $id$	id;taskId	{&quot;title&quot;:&quot;子任务1&quot;,&quot;start_datetime&quot;:&quot;20190717000000&quot;,&quot;end_datetime&quot;:&quot;20190717235959&quot;,&quot;todo_time&quot;:&quot;20190722143000&quot;}	0	0	null	null	null
+42	FLOW_001_NODE_006	日程子任务编辑	POST	/base/plan/schedule/edit	{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:$id$,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonUpdateList&quot;:[{&quot;localId&quot;:2504001392817995776,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;id&quot;:$taskId$}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;title&quot;:&quot;子任务11&quot;	id;taskId	id;ruleId;taskId	$.data.id;$.data.ruleInfo[0].id;$.data.task[0].id	0;0;0	0	select title,DATE_FORMAT(start_datetime,&apos;%Y%m%d%H%i%s&apos;) as start_datetime,DATE_FORMAT(end_datetime,&apos;%Y%m%d%H%i%s&apos;) as end_datetime,DATE_FORMAT(todo_time,&apos;%Y%m%d%H%i%s&apos;) as todo_time from plan.todo_task where id = $taskId$ and todo_id = $id$	id;taskId	{&quot;title&quot;:&quot;子任务11&quot;,&quot;start_datetime&quot;:&quot;20190717000000&quot;,&quot;end_datetime&quot;:&quot;20190717235959&quot;,&quot;todo_time&quot;:&quot;20190722143000&quot;}	0	0	null	null	null
+43	FLOW_001_NODE_007	日程子任务打卡	POST	/base/plan/checkin	{&quot;todoId&quot;:$id$,&quot;finishState&quot;:1,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;todoTaskId&quot;:$taskId$}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;finishState&quot;:1	id;ruleId;taskId				0	select finish_state from plan.todo_task_finish where todo_task_id = $taskId$	taskId	{&quot;finish_state&quot;:1}	0	0	null	null	null
+44	FLOW_001_NODE_008	日程子任务取消打卡	POST	/base/plan/checkin	{&quot;todoId&quot;:$id$,&quot;finishState&quot;:0,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;todoTaskId&quot;:$taskId$}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;finishState&quot;:0	id;ruleId;taskId				0	select finish_state from plan.todo_task_finish where todo_task_id = $taskId$	taskId	{&quot;finish_state&quot;:0}	0	0	null	null	null
+104	FLOW_001_NODE_009	日程打卡（含子任务）	POST	/base/plan/allCheckin	{&quot;todoId&quot;:$id$,&quot;finishState&quot;:1,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id;ruleId				0		null		0	0	null	null	null
+105	FLOW_001_NODE_010	日程取消打卡（含子任务）	POST	/base/plan/checkin	{&quot;todoId&quot;:$id$,&quot;finishState&quot;:0,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id;ruleId				0		null		0	0	null	null	null
+45	FLOW_001_NODE_011	日程子任务删除	POST	/base/plan/schedule/edit	{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:$id$,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonDeleteList&quot;:[{&quot;localId&quot;:2504001392817995776,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;id&quot;:$taskId$}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;endDatetime&quot;:&quot;20190716235959&quot;	id;taskId	id;ruleId;taskId	$.data.id;$.data.ruleInfo[0].id;$.data.task[0].id	0;0;0	0	select DATE_FORMAT(start_datetime,&apos;%Y%m%d%H%i%s&apos;) as start_datetime,DATE_FORMAT(end_datetime,&apos;%Y%m%d%H%i%s&apos;) as end_datetime from plan.todo_task where id = $taskId$	taskId	{&quot;start_datetime&quot;:&quot;20190717000000&quot;,&quot;end_datetime&quot;:&quot;20190716235959&quot;}	0	0	null	null	null
+46	FLOW_001_NODE_012	日程删除1	POST	/base/plan/delete	{&quot;deleteInfos&quot;:[{&quot;id&quot;:$id$,&quot;todoTimes&quot;:[&quot;20190717144000&quot;],&quot;ruleIds&quot;:[$ruleId$]}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;status&quot;:0	id;ruleId				0	select status from plan.todo t where t.id = $id$;	id	{&quot;status&quot;:0}	0	0	null	null	null
+96	FLOW_001_NODE_013	日程删除恢复	POST	/base/plan/recycled/recovery	{&quot;todoIds&quot;:[$id$]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id				0		null		0	0	null	null	null
+67	FLOW_001_NODE_014	日程删除2	POST	/base/plan/delete	{&quot;deleteInfos&quot;:[{&quot;id&quot;:$id$,&quot;todoTimes&quot;:[&quot;20190717144000&quot;],&quot;ruleIds&quot;:[$ruleId$]}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;status&quot;:0	id;ruleId				0	select status from plan.todo t where t.id = $id$;	id	{&quot;status&quot;:0}	0	0	null	null	null
+95	FLOW_001_NODE_015	日程永久删除	POST	/base/plan/recycled/delete	{&quot;todoIds&quot;:[$id$]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id				0		null		0	0	null	null	null
+97	FLOW_001_NODE_016	日程添加（时间段+自定义分类+不提醒）	POST	/base/plan/schedule/batchadd	{&quot;todos&quot;:[{&quot;duration&quot;:3600,&quot;importance&quot;:1,&quot;intervalType&quot;:2,&quot;localId&quot;:-303505539,&quot;todoClassifyId&quot;:4404520435570345088,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒$currentMin_add1$&quot;,&quot;title&quot;:&quot;时间段+自定义分类+不提醒$currentMin_add1$&quot;,&quot;remark&quot;:&quot;&quot;}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	currentMin_add1	id;ruleId	$.data.todos[0].id;$.data.todos[0].ruleInfo[0].id	0;0	0		null		0	0	null	null	null
+99	FLOW_001_NODE_017	添加专注	POST	/base/focus/add	{&quot;finishState&quot;:&quot;1&quot;,&quot;linkId&quot;:&quot;$id$&quot;,&quot;useTime&quot;:&quot;5&quot;,&quot;linkType&quot;:&quot;todo&quot;,&quot;fullTime&quot;:&quot;5&quot;,&quot;startTime&quot;:20190807144728,&quot;endTime&quot;:20190807145228,&quot;title&quot;:&quot;时间段+自定义分类+不提醒&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id				0		null		0	0	null	null	null
+100	FLOW_001_NODE_018	设置时长	POST	/base/plan/setCompleteTime	{&quot;completeTime&quot;:300,&quot;id&quot;:$id$,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id;currentMin_add1				0		null		0	0	null	null	null
+101	FLOW_001_NODE_019	专注打卡	POST	/base/plan/allCheckin	{&quot;todoId&quot;:$id$,&quot;finishState&quot;:1,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id;ruleId;currentMin_add1				0		null		0	0	null	null	null
+102	FLOW_001_NODE_020	已打卡修改花费时间	POST	/base/plan/setCompleteTime	{&quot;completeTime&quot;:600,&quot;id&quot;:$id$,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id;currentMin_add1				0		null		0	0	null	null	null
+103	FLOW_001_NODE_021	已打卡修改备注	POST	/base/plan/schedule/edit	{&quot;duration&quot;:3600,&quot;importance&quot;:1,&quot;intervalType&quot;:2,&quot;localId&quot;:4404520435570345092,&quot;id&quot;:$id$,&quot;todoClassifyId&quot;:4404520435570345088,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒$currentMin_add1$&quot;,&quot;title&quot;:&quot;时间段+自定义分类+不提醒$currentMin_add1$&quot;,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;,&quot;address&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;latitude&quot;:&quot;&quot;,&quot;longitude&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;remark&quot;:&quot;完成备注&quot;,&quot;aheadType&quot;:[],&quot;attachments&quot;:[]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id;currentMin_add1				0		null		0	0	null	null	null
+98	FLOW_001_NODE_022	日程添加（全天+提前提醒）	POST	/base/plan/schedule/batchadd	{&quot;todos&quot;:[{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:0,&quot;localId&quot;:-466376764,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;$currentDay$000000&quot;,&quot;shortTitle&quot;:&quot;全天日程$currentMin_add1$&quot;,&quot;title&quot;:&quot;全天日程$currentMin_add1$&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;remark&quot;:&quot;&quot;}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	currentDay;currentMin_add1	id;ruleId	$.data.todos[0].id;$.data.todos[0].ruleInfo[0].id	0;0	0		null		0	0	null	null	null
+106	FLOW_001_NODE_023	日程转清单	POST	/service/aggregation/schedule/tochecklist	{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:4404520435570346090,&quot;id&quot;:$id$,&quot;todoClassifyId&quot;:1001,&quot;shortTitle&quot;:&quot;全天日程$currentMin_add1$&quot;,&quot;title&quot;:&quot;全天日程$currentMin_add1$&quot;,&quot;todoTime&quot;:&quot;$currentDay$000000&quot;,&quot;address&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;latitude&quot;:&quot;&quot;,&quot;longitude&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;remark&quot;:&quot;&quot;,&quot;aheadType&quot;:[],&quot;attachments&quot;:[]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id;currentMin_add1;currentDay				0		null		0	0	null	null	null
+107	FLOW_001_NODE_024	批量添加日程	POST	/base/plan/schedule/batchadd	{&quot;todos&quot;:[{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:-441037804,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第二条&quot;,&quot;title&quot;:&quot;批量添加日程第二条&quot;,&quot;remark&quot;:&quot;&quot;},{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:-1220431593,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第一条&quot;,&quot;title&quot;:&quot;批量添加日程第一条&quot;,&quot;remark&quot;:&quot;&quot;}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	currentMin_add1	id1;id2	$.data.todos[0].id;$.data.todos[1].id	0;0	0		null		0	0	null	null	null
+108	FLOW_001_NODE_025	日程排序	POST	/base/plan/record/sort	{&quot;sorts&quot;:[{&quot;addNode&quot;:$id2$,&quot;addType&quot;:1,&quot;afterNode&quot;:$id1$,&quot;afterType&quot;:1,&quot;deleteNode&quot;:$id2$,&quot;deleteType&quot;:1}]}	&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;	id1;id2				0		null		0	0	null	null	null
+</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <samplerData class="java.lang.String">[Prepared Select Statement] select node_id,node_code,node_name,method,path,parameter,expect_response,pre_keys,post_keys,post_keys_extractor,post_keys_default,ischechdb,sql_str,sql_para,expect_db,sleep_time,isexcute_pre_sql,pre_sql_str,pre_sql_para,pre_sql_out from automation.testdata_node where flow_id = ? and state = 1 order by order_id
+
+1
+varchar</samplerData>
+  </sample>
+  <httpSample t="126" it="0" lt="126" ct="34" ts="1571109944815" s="true" lb="登录" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1411" sby="538" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+    <assertionResult>
+      <name>Response Assertion</name>
+      <failure>false</failure>
+      <error>false</error>
+    </assertionResult>
+    <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:46 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1289
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: 
+User-Agent: okhttp/3.3.0
+Content-Length: 330
+Host: 47.112.0.183:8801
+</requestHeader>
+    <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435568345088&quot;,&quot;mobile&quot;:&quot;13610150696&quot;,&quot;userName&quot;:&quot;自动&quot;,&quot;uniqueKey&quot;:&quot;768981c9a23d4106ad60d452634b7e50&quot;,&quot;oldMobile&quot;:&quot;13610150696&quot;,&quot;email&quot;:&quot;cuiqingyong@jielema.com&quot;,&quot;userImage&quot;:&quot;https://livelihood.oss-cn-shenzhen.aliyuncs.com/livelihood/userhead/13610150696/18620090165_2_1567507617000.jpeg&quot;,&quot;deviceType&quot;:&quot;2&quot;,&quot;pwdErrorCount&quot;:0,&quot;nickname&quot;:&quot;依然坚持&quot;,&quot;gender&quot;:1,&quot;signature&quot;:&quot;每天都要过得有仪式感，热爱生活，热爱自由&quot;,&quot;unionid&quot;:&quot;oie8Z1A8ZVdhrYs9zjuN4lQ_Ni2c&quot;,&quot;openid&quot;:&quot;oKsyD1jJVW36vx4WBuLP27_eu6oE&quot;,&quot;telecomOperators&quot;:&quot;yd&quot;,&quot;lunar&quot;:&quot;1&quot;,&quot;birthYear&quot;:1999,&quot;birthMonth&quot;:7,&quot;birthDay&quot;:7,&quot;job&quot;:&quot;02&quot;,&quot;leapMonth&quot;:&quot;false&quot;,&quot;appVersion&quot;:&quot;1.4.6&quot;,&quot;lastLoginTime&quot;:1571109945972,&quot;channelName&quot;:&quot;时光序_ios&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTag&quot;:&quot;3F8F4920-D468-4C93-B3DB-414AA8C9A95B&quot;,&quot;created&quot;:1558404780000,&quot;updated&quot;:1571109945972,&quot;pushToken&quot;:&quot;e3ded3a01ae653c3945dc72d902610b8&quot;,&quot;userToken&quot;:&quot;ec5789f633051bdf400364cc925a8f9a513bfefb484f75dd2d9562d31f38ad0c97f6a11e0cc705ad&quot;,&quot;token&quot;:&quot;b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd&quot;,&quot;wxConcerns&quot;:&quot;1&quot;,&quot;wxBind&quot;:&quot;1&quot;,&quot;type&quot;:&quot;old&quot;,&quot;qqName&quot;:&quot;薇薇&quot;,&quot;qqBind&quot;:&quot;1&quot;}}</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <cookies class="java.lang.String"></cookies>
+    <method class="java.lang.String">POST</method>
+    <queryString class="java.lang.String">{&quot;password&quot;:&quot;666666&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;13610150696&quot;,&quot;type&quot;:&quot;1&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.4.7&quot;,&quot;deviceTag&quot;:&quot;ec:51:bc:a6:a2:d5&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.11.200&quot;,&quot;channel&quot;:&quot;xiaomi&quot;,&quot;deviceModel&quot;:&quot;OPPO-OPPO R11s&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;ec:51:bc:a6:a2:d5&quot;}}</queryString>
+    <java.net.URL>http://47.112.0.183:8801/base/user/login</java.net.URL>
+  </httpSample>
+  <sample t="18" it="0" lt="0" ct="0" ts="1571109944984" s="true" lb="重置节点计数器" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+    <responseHeader class="java.lang.String"></responseHeader>
+    <requestHeader class="java.lang.String"></requestHeader>
+    <responseData class="java.lang.String"></responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <samplerData class="java.lang.String">import java.util.Date;
+import java.text.SimpleDateFormat;
+
+vars.put(&quot;N&quot;,&quot;0&quot;);//节点循环外计数器重置为0,节点循环时每个节点执行前计数器加1
+
+SimpleDateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+System.out.println(df.format(new Date()) + &quot;: 执行流程--&quot;+vars.get(&quot;flow_name_&quot;+vars.get(&quot;M&quot;)));
+
+vars.put(&quot;currentMin_add1&quot;, vars.get(&quot;currentMin&quot;)+&quot;00&quot;);
+vars.put(&quot;currentMin_add6&quot;, vars.get(&quot;todotime_add6&quot;)+&quot;00&quot;);
+vars.put(&quot;currentMin_add2&quot;, vars.get(&quot;todotime_add2&quot;)+&quot;00&quot;);
+
+String time = vars.get(&quot;currentMin&quot;)+&quot;00&quot;;
+String time6 = vars.get(&quot;todotime_add6&quot;)+&quot;00&quot;;
+String time2 = vars.get(&quot;todotime_add2&quot;)+&quot;00&quot;;
+String day3 = vars.get(&quot;todoDay_add3&quot;)+&quot;00&quot;;
+
+String todoDay3 = day3.substring(6,8);
+if(todoDay3.substring(0,1).equals(&quot;0&quot;)){
+	todoDay3 = todoDay3.substring(1);
+}
+
+String todoDay = time.substring(6,8);
+if(todoDay.substring(0,1).equals(&quot;0&quot;)){
+	todoDay = todoDay.substring(1);
+}
+
+
+String todoMonth = time.substring(4,6);
+if(todoMonth.substring(0,1).equals(&quot;0&quot;)){
+	todoMonth = todoMonth.substring(1);
+}
+
+
+String todoHH = time.substring(8,10);
+if(todoHH.substring(0,1).equals(&quot;0&quot;)){
+	todoHH = todoHH.substring(1);
+}
+
+String todomm = time.substring(10,12);
+if(todomm.substring(0,1).equals(&quot;0&quot;)){
+	todomm = todomm.substring(1);
+}
+
+String todoHH2 = time2.substring(8,10);
+if(todoHH2.substring(0,1).equals(&quot;0&quot;)){
+	todoHH2 = todoHH2.substring(1);
+}
+
+String todomm2 = time2.substring(10,12);
+if(todomm2.substring(0,1).equals(&quot;0&quot;)){
+	todomm2 = todomm2.substring(1);
+}
+
+String todoHH6 = time6.substring(8,10);
+if(todoHH6.substring(0,1).equals(&quot;0&quot;)){
+	todoHH6 = todoHH6.substring(1);
+}
+
+String todomm6 = time6.substring(10,12);
+if(todomm6.substring(0,1).equals(&quot;0&quot;)){
+	todomm6 = todomm6.substring(1);
+}
+
+
+vars.put(&quot;todoMonth&quot;,todoMonth);
+
+vars.put(&quot;todoDay&quot;,todoDay);
+vars.put(&quot;todoDay3&quot;,todoDay3);
+
+vars.put(&quot;todoHH2&quot;,todoHH2);
+vars.put(&quot;todomm2&quot;,todomm2);
+
+vars.put(&quot;todoHH6&quot;,todoHH6);
+vars.put(&quot;todomm6&quot;,todomm6);
+
+vars.put(&quot;todoHH&quot;,todoHH);
+vars.put(&quot;todomm&quot;,todomm);
+
+
+String todoHHRepeat = time.substring(8,10);
+if(todoHHRepeat.substring(0,1).equals(&quot;0&quot;)){
+	todoHHRepeat = todoHHRepeat.substring(1);
+}
+
+String todommRepeat = time.substring(10,12);
+if(todommRepeat.substring(0,1).equals(&quot;0&quot;)){
+	todommRepeat = todommRepeat.substring(1);
+}
+
+String todoHHRepeat2 = time2.substring(8,10);
+if(todoHHRepeat2.substring(0,1).equals(&quot;0&quot;)){
+	todoHHRepeat2 = todoHHRepeat2.substring(1);
+}
+
+String todommRepeat2 = time2.substring(10,12);
+if(todommRepeat2.substring(0,1).equals(&quot;0&quot;)){
+	todommRepeat2 = todommRepeat2.substring(1);
+}
+
+
+String todoHHRepeat6 = time6.substring(8,10);
+if(todoHHRepeat6.substring(0,1).equals(&quot;0&quot;)){
+	todoHHRepeat6 = todoHHRepeat6.substring(1);
+}
+
+String todommRepeat6 = time6.substring(10,12);
+if(todommRepeat6.substring(0,1).equals(&quot;0&quot;)){
+	todommRepeat6 = todommRepeat6.substring(1);
+}
+
+vars.put(&quot;todoHHRepeat2&quot;,todoHHRepeat2);
+vars.put(&quot;todommRepeat2&quot;,todommRepeat2);
+
+vars.put(&quot;todoHHRepeat6&quot;,todoHHRepeat6);
+vars.put(&quot;todommRepeat6&quot;,todommRepeat6);
+
+vars.put(&quot;todommRepeat&quot;,todommRepeat);
+vars.put(&quot;todoHHRepeat&quot;,todoHHRepeat);
+
+
+
+
+
+
+
+
+
+
+</samplerData>
+  </sample>
+  <responseHeader class="java.lang.String"></responseHeader>
+  <requestHeader class="java.lang.String"></requestHeader>
+  <responseData class="java.lang.String">Non-TEXT response data, cannot record: ()</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+</sample>
+<httpSample t="77" it="0" lt="77" ct="0" ts="1571109945105" s="true" lb="1-日程添加（时间点+默认分类+准时提醒）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="823" sby="656" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:46 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 702
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 260
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-1563241933492017464&quot;,&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190716000000&quot;,&quot;endDatetime&quot;:&quot;20190716235959&quot;,&quot;created&quot;:1571109946228,&quot;updated&quot;:1571109946228,&quot;version&quot;:&quot;2930&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369236&quot;,&quot;startDatetime&quot;:&quot;20190716000000&quot;,&quot;endDatetime&quot;:&quot;20190716235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571109946228,&quot;updated&quot;:1571109946228}]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todos&quot;: [{&quot;title&quot;: &quot;测试日程编辑流程&quot;, &quot;localId&quot;: -1563241933492017464, &quot;duration&quot;: 0, &quot;todoTime&quot;: &quot;20190716144000&quot;, &quot;aheadType&quot;: [{&quot;offset&quot;: 0}], &quot;importance&quot;: 1, &quot;shortTitle&quot;: &quot;测试日程编辑流程&quot;, &quot;intervalType&quot;: 1, &quot;todoClassifyId&quot;: 1001}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/batchadd</java.net.URL>
+</httpSample>
+<httpSample t="116" it="0" lt="115" ct="0" ts="1571109945242" s="true" lb="2-日程修改" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1348" sby="1060" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:46 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1226
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 668
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109946374,&quot;version&quot;:&quot;2931&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369236&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109946374}],&quot;task&quot;:[],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369236&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571109946374,&quot;updated&quot;:1571109946374,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;duration&quot;: 0,&quot;importance&quot;: 2,&quot;intervalType&quot;: 1,&quot;localId&quot;: 126100789566398197,&quot;id&quot;: &quot;4404520435570369219&quot;,&quot;todoClassifyId&quot;: 1002,&quot;shortTitle&quot;: &quot;测试日程编辑流程new&quot;,&quot;title&quot;: &quot;测试日程编辑流程new&quot;,&quot;newTodoTime&quot;: &quot;20190717144000&quot;,&quot;todoTime&quot;: &quot;20190716144000&quot;,&quot;address&quot;: &quot;高德置地广场(冬商场)&quot;,&quot;city&quot;: &quot;广州市&quot;,&quot;country&quot;: &quot;&quot;,&quot;district&quot;: &quot;天河区&quot;,&quot;latitude&quot;: &quot;23.125756730662990&quot;,&quot;longitude&quot;: &quot;113.333537851804800&quot;,&quot;province&quot;: &quot;广东省&quot;,&quot;remark&quot;: &quot;备注测试&quot;,&quot;aheadType&quot;: [{&quot;offset&quot;: 0}, {&quot;offset&quot;: 300}],&quot;attachments&quot;: [{&quot;mediaType&quot;: &quot;0&quot;,&quot;url&quot;: &quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/edit</java.net.URL>
+</httpSample>
+<httpSample t="71" it="0" lt="71" ct="0" ts="1571109945433" s="true" lb="3-日程打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="362" sby="513" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:46 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 241
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 124
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371170&quot;,&quot;ruleId&quot;:&quot;4404520435570369236&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112546&quot;,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{
+  &quot;todoId&quot;: &quot;4404520435570369219&quot;,
+  &quot;finishState&quot;: 1,
+  &quot;ruleId&quot;: &quot;4404520435570369236&quot;,
+  &quot;todoTime&quot;: &quot;20190717144000&quot;
+}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/allCheckin</java.net.URL>
+</httpSample>
+<httpSample t="64" it="0" lt="64" ct="0" ts="1571109945559" s="true" lb="4-日程取消打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="362" sby="489" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:46 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 241
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 103
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371170&quot;,&quot;ruleId&quot;:&quot;4404520435570369236&quot;,&quot;finishState&quot;:0,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112546&quot;,&quot;completeTime&quot;:0}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369219,&quot;finishState&quot;:0,&quot;ruleId&quot;:4404520435570369236,&quot;todoTime&quot;:&quot;20190717144000&quot;}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/checkin</java.net.URL>
+</httpSample>
+<httpSample t="107" it="0" lt="107" ct="0" ts="1571109945672" s="true" lb="5-日程子任务添加" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1610" sby="1101" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:46 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1488
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 709
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109946795,&quot;version&quot;:&quot;2932&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369236&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109946795}],&quot;task&quot;:[{&quot;id&quot;:&quot;4404520435570364125&quot;,&quot;title&quot;:&quot;子任务1&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;grade&quot;:0,&quot;deleted&quot;:false,&quot;created&quot;:1571109946795,&quot;updated&quot;:1571109946795}],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369236&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112547&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109946795,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:4404520435570369219,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonAddList&quot;:[{&quot;localId&quot;:-1802564779,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务1&quot;}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/edit</java.net.URL>
+</httpSample>
+<httpSample t="98" it="0" lt="98" ct="0" ts="1571109945822" s="true" lb="6-日程子任务编辑" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1611" sby="1138" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:46 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1489
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 746
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109946946,&quot;version&quot;:&quot;2933&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369236&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109946946}],&quot;task&quot;:[{&quot;id&quot;:&quot;4404520435570364125&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;grade&quot;:0,&quot;deleted&quot;:false,&quot;created&quot;:1571109947000,&quot;updated&quot;:1571109946946}],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369236&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112547&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109946946,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:4404520435570369219,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonUpdateList&quot;:[{&quot;localId&quot;:2504001392817995776,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;id&quot;:4404520435570364125}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/edit</java.net.URL>
+</httpSample>
+<httpSample t="88" it="0" lt="88" ct="0" ts="1571109945965" s="true" lb="7-日程子任务打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="522" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:46 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 340
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 136
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371170&quot;,&quot;ruleId&quot;:&quot;4404520435570369236&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112547&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364125&quot;,&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015112547&quot;}]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369219,&quot;finishState&quot;:1,&quot;ruleId&quot;:4404520435570369236,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;todoTaskId&quot;:4404520435570364125}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/checkin</java.net.URL>
+</httpSample>
+<httpSample t="80" it="0" lt="80" ct="0" ts="1571109946099" s="true" lb="8-日程子任务取消打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="522" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:46 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 340
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 136
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371170&quot;,&quot;ruleId&quot;:&quot;4404520435570369236&quot;,&quot;finishState&quot;:0,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112547&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364125&quot;,&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112547&quot;}]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369219,&quot;finishState&quot;:0,&quot;ruleId&quot;:4404520435570369236,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;todoTaskId&quot;:4404520435570364125}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/checkin</java.net.URL>
+</httpSample>
+<httpSample t="78" it="0" lt="78" ct="0" ts="1571109946222" s="true" lb="9-日程打卡（含子任务）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:47 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 340
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 103
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371170&quot;,&quot;ruleId&quot;:&quot;4404520435570369236&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112547&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364125&quot;,&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015112547&quot;}]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369219,&quot;finishState&quot;:1,&quot;ruleId&quot;:4404520435570369236,&quot;todoTime&quot;:&quot;20190717144000&quot;}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/allCheckin</java.net.URL>
+</httpSample>
+<httpSample t="79" it="0" lt="79" ct="0" ts="1571109946349" s="true" lb="10-日程取消打卡（含子任务）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="489" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:47 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 340
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 103
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371170&quot;,&quot;ruleId&quot;:&quot;4404520435570369236&quot;,&quot;finishState&quot;:0,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112547&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364125&quot;,&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112547&quot;}]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369219,&quot;finishState&quot;:0,&quot;ruleId&quot;:4404520435570369236,&quot;todoTime&quot;:&quot;20190717144000&quot;}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/checkin</java.net.URL>
+</httpSample>
+<httpSample t="93" it="0" lt="93" ct="0" ts="1571109946480" s="true" lb="11-日程子任务删除" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1693" sby="1138" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:47 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1571
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 746
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109947600,&quot;version&quot;:&quot;2934&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369236&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109947600}],&quot;task&quot;:[{&quot;id&quot;:&quot;4404520435570364125&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190716235959&quot;,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;grade&quot;:0,&quot;deleted&quot;:false,&quot;created&quot;:1571109947000,&quot;updated&quot;:1571109947600}],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369236&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112547&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571109946000,&quot;updated&quot;:1571109947600,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364125&quot;,&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112547&quot;}]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:4404520435570369219,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonDeleteList&quot;:[{&quot;localId&quot;:2504001392817995776,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;id&quot;:4404520435570364125}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/edit</java.net.URL>
+</httpSample>
+<httpSample t="69" it="0" lt="69" ct="0" ts="1571109946613" s="true" lb="12-日程删除1" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="287" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:47 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 166
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 107
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;rows&quot;:[{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;todoType&quot;:1,&quot;status&quot;:0,&quot;deleted&quot;:false,&quot;updated&quot;:1571109947733,&quot;personalizedInfo&quot;:[]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;deleteInfos&quot;:[{&quot;id&quot;:4404520435570369219,&quot;todoTimes&quot;:[&quot;20190717144000&quot;],&quot;ruleIds&quot;:[4404520435570369236]}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/delete</java.net.URL>
+</httpSample>
+<httpSample t="70" it="0" lt="70" ct="0" ts="1571109946723" s="true" lb="13-日程删除恢复" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="196" sby="428" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:47 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 76
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 33
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todoIds&quot;:[&quot;4404520435570369219&quot;]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todoIds&quot;:[4404520435570369219]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/recycled/recovery</java.net.URL>
+</httpSample>
+<httpSample t="77" it="0" lt="77" ct="10" ts="1571109946844" s="true" lb="14-日程删除2" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="287" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:47 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 166
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 107
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;rows&quot;:[{&quot;id&quot;:&quot;4404520435570369219&quot;,&quot;todoType&quot;:1,&quot;status&quot;:0,&quot;deleted&quot;:false,&quot;updated&quot;:1571109947973,&quot;personalizedInfo&quot;:[]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;deleteInfos&quot;:[{&quot;id&quot;:4404520435570369219,&quot;todoTimes&quot;:[&quot;20190717144000&quot;],&quot;ruleIds&quot;:[4404520435570369236]}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/delete</java.net.URL>
+</httpSample>
+<httpSample t="59" it="0" lt="59" ct="0" ts="1571109946961" s="true" lb="15-日程永久删除" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="163" sby="426" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:47 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 43
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 33
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todoIds&quot;:[4404520435570369219]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/recycled/delete</java.net.URL>
+</httpSample>
+<httpSample t="72" it="0" lt="72" ct="0" ts="1571109947070" s="true" lb="16-日程添加（时间段+自定义分类+不提醒）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="852" sby="680" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:47 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 731
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 284
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-303505539&quot;,&quot;id&quot;:&quot;4404520435570369220&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015112800&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571109948189,&quot;updated&quot;:1571109948189,&quot;version&quot;:&quot;2939&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369237&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 28 11 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:2,&quot;duration&quot;:{&quot;1128&quot;:3600},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571109948189,&quot;updated&quot;:1571109948189}]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todos&quot;:[{&quot;duration&quot;:3600,&quot;importance&quot;:1,&quot;intervalType&quot;:2,&quot;localId&quot;:-303505539,&quot;todoClassifyId&quot;:4404520435570345088,&quot;todoTime&quot;:&quot;20191015112800&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015112800&quot;,&quot;title&quot;:&quot;时间段+自定义分类+不提醒20191015112800&quot;,&quot;remark&quot;:&quot;&quot;}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/batchadd</java.net.URL>
+</httpSample>
+<httpSample t="70" it="0" lt="70" ct="0" ts="1571109947193" s="true" lb="17-添加专注" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="163" sby="578" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:48 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 43
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 195
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;finishState&quot;:&quot;1&quot;,&quot;linkId&quot;:&quot;4404520435570369220&quot;,&quot;useTime&quot;:&quot;5&quot;,&quot;linkType&quot;:&quot;todo&quot;,&quot;fullTime&quot;:&quot;5&quot;,&quot;startTime&quot;:20190807144728,&quot;endTime&quot;:20190807145228,&quot;title&quot;:&quot;时间段+自定义分类+不提醒&quot;}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/focus/add</java.net.URL>
+</httpSample>
+<httpSample t="62" it="0" lt="62" ct="0" ts="1571109947313" s="true" lb="18-设置时长" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="689" sby="466" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:48 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 568
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 73
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369220&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015112800&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571109948000,&quot;updated&quot;:1571109948000,&quot;version&quot;:&quot;2939&quot;,&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369237&quot;,&quot;todoTime&quot;:&quot;20191015112800&quot;,&quot;aheadType&quot;:[],&quot;deleted&quot;:false,&quot;finishState&quot;:0,&quot;created&quot;:1571109948436,&quot;updated&quot;:1571109948433,&quot;completeTime&quot;:300}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;completeTime&quot;:300,&quot;id&quot;:4404520435570369220,&quot;todoTime&quot;:&quot;20191015112800&quot;}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/setCompleteTime</java.net.URL>
+</httpSample>
+<httpSample t="66" it="0" lt="66" ct="0" ts="1571109947423" s="true" lb="19-专注打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="381" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:48 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 260
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 103
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369220&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371171&quot;,&quot;ruleId&quot;:&quot;4404520435570369237&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20191015112800&quot;,&quot;finishTime&quot;:&quot;20191015112548&quot;,&quot;completeTime&quot;:300,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369220,&quot;finishState&quot;:1,&quot;ruleId&quot;:4404520435570369237,&quot;todoTime&quot;:&quot;20191015112800&quot;}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/allCheckin</java.net.URL>
+</httpSample>
+<httpSample t="55" it="0" lt="55" ct="0" ts="1571109947546" s="true" lb="20-已打卡修改花费时间" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="719" sby="466" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:48 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 598
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 73
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369220&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015112800&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571109948000,&quot;updated&quot;:1571109948000,&quot;version&quot;:&quot;2939&quot;,&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369237&quot;,&quot;todoTime&quot;:&quot;20191015112800&quot;,&quot;aheadType&quot;:[],&quot;deleted&quot;:false,&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015112549&quot;,&quot;created&quot;:1571109948000,&quot;updated&quot;:1571109948664,&quot;completeTime&quot;:600}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;completeTime&quot;:600,&quot;id&quot;:4404520435570369220,&quot;todoTime&quot;:&quot;20191015112800&quot;}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/setCompleteTime</java.net.URL>
+</httpSample>
+<httpSample t="103" it="0" lt="103" ct="0" ts="1571109947652" s="true" lb="21-已打卡修改备注" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1176" sby="835" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:48 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1054
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 443
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369220&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015112800&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571109948000,&quot;updated&quot;:1571109948772,&quot;version&quot;:&quot;2940&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369237&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 28 11 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:2,&quot;duration&quot;:{&quot;1128&quot;:3600},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571109948000,&quot;updated&quot;:1571109948772}],&quot;task&quot;:[],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369237&quot;,&quot;todoTime&quot;:&quot;20191015112800&quot;,&quot;aheadType&quot;:[],&quot;deleted&quot;:false,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;address&quot;:&quot;&quot;,&quot;attachments&quot;:[],&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015112549&quot;,&quot;remark&quot;:&quot;完成备注&quot;,&quot;created&quot;:1571109948000,&quot;updated&quot;:1571109948772,&quot;completeTime&quot;:600,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;duration&quot;:3600,&quot;importance&quot;:1,&quot;intervalType&quot;:2,&quot;localId&quot;:4404520435570345092,&quot;id&quot;:4404520435570369220,&quot;todoClassifyId&quot;:4404520435570345088,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015112800&quot;,&quot;title&quot;:&quot;时间段+自定义分类+不提醒20191015112800&quot;,&quot;todoTime&quot;:&quot;20191015112800&quot;,&quot;address&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;latitude&quot;:&quot;&quot;,&quot;longitude&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;remark&quot;:&quot;完成备注&quot;,&quot;aheadType&quot;:[],&quot;attachments&quot;:[]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/edit</java.net.URL>
+</httpSample>
+<httpSample t="72" it="0" lt="72" ct="0" ts="1571109947804" s="true" lb="22-日程添加（全天+提前提醒）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="801" sby="658" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:48 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 680
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 262
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-466376764&quot;,&quot;id&quot;:&quot;4404520435570369221&quot;,&quot;shortTitle&quot;:&quot;全天日程20191015112800&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571109948924,&quot;updated&quot;:1571109948924,&quot;version&quot;:&quot;2941&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369238&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 0 0 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:0,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571109948924,&quot;updated&quot;:1571109948924}]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todos&quot;:[{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:0,&quot;localId&quot;:-466376764,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;20191015000000&quot;,&quot;shortTitle&quot;:&quot;全天日程20191015112800&quot;,&quot;title&quot;:&quot;全天日程20191015112800&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;remark&quot;:&quot;&quot;}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/batchadd</java.net.URL>
+</httpSample>
+<httpSample t="194" it="0" lt="194" ct="0" ts="1571109947932" s="true" lb="23-日程转清单" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="662" sby="776" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:49 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 541
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 367
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;checklist&quot;:{&quot;id&quot;:&quot;4404520435570363120&quot;,&quot;shortTitle&quot;:&quot;全天日程20191015112800&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;created&quot;:1571109949101,&quot;updated&quot;:1571109949101,&quot;version&quot;:&quot;1010&quot;,&quot;task&quot;:[],&quot;personalizedInfo&quot;:[{&quot;deleted&quot;:false,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;address&quot;:&quot;&quot;,&quot;attachments&quot;:[],&quot;finishState&quot;:0,&quot;remark&quot;:&quot;&quot;,&quot;created&quot;:1571109949101,&quot;updated&quot;:1571109949101,&quot;taskFinishs&quot;:[]}]},&quot;todo&quot;:{&quot;id&quot;:&quot;4404520435570369221&quot;,&quot;status&quot;:0,&quot;deleted&quot;:true}}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:4404520435570346090,&quot;id&quot;:4404520435570369221,&quot;todoClassifyId&quot;:1001,&quot;shortTitle&quot;:&quot;全天日程20191015112800&quot;,&quot;title&quot;:&quot;全天日程20191015112800&quot;,&quot;todoTime&quot;:&quot;20191015000000&quot;,&quot;address&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;latitude&quot;:&quot;&quot;,&quot;longitude&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;remark&quot;:&quot;&quot;,&quot;aheadType&quot;:[],&quot;attachments&quot;:[]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/service/aggregation/schedule/tochecklist</java.net.URL>
+</httpSample>
+<httpSample t="99" it="0" lt="99" ct="0" ts="1571109948174" s="true" lb="24-批量添加日程" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1437" sby="830" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:48 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1315
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 434
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-1220431593&quot;,&quot;id&quot;:&quot;4404520435570369222&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第一条&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571109949295,&quot;updated&quot;:1571109949295,&quot;version&quot;:&quot;2944&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369239&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 28 11 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571109949295,&quot;updated&quot;:1571109949295}]},{&quot;localId&quot;:&quot;-441037804&quot;,&quot;id&quot;:&quot;4404520435570369223&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第二条&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571109949295,&quot;updated&quot;:1571109949295,&quot;version&quot;:&quot;2945&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369240&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 28 11 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571109949295,&quot;updated&quot;:1571109949295}]}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;todos&quot;:[{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:-441037804,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;20191015112800&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第二条&quot;,&quot;title&quot;:&quot;批量添加日程第二条&quot;,&quot;remark&quot;:&quot;&quot;},{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:-1220431593,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;20191015112800&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第一条&quot;,&quot;title&quot;:&quot;批量添加日程第一条&quot;,&quot;remark&quot;:&quot;&quot;}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/batchadd</java.net.URL>
+</httpSample>
+<httpSample t="58" it="0" lt="58" ct="0" ts="1571109948320" s="true" lb="25-日程排序" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="317" sby="539" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <assertionResult>
+    <name>BeanShell断言</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage>返回值断言匹配通过</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>数据库校验</name>
+    <failure>false</failure>
+    <error>false</error>
+    <failureMessage></failureMessage>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:25:49 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 196
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+User-Agent: okhttp/3.3.0
+Content-Length: 149
+Host: 47.112.0.183:8801
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;sorts&quot;:[{&quot;addType&quot;:1,&quot;addNode&quot;:&quot;4404520435570369223&quot;,&quot;afterType&quot;:1,&quot;afterNode&quot;:&quot;4404520435570369222&quot;,&quot;deleteType&quot;:1,&quot;deleteNode&quot;:&quot;4404520435570369223&quot;}]}}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String">{&quot;sorts&quot;:[{&quot;addNode&quot;:4404520435570369223,&quot;addType&quot;:1,&quot;afterNode&quot;:4404520435570369222,&quot;afterType&quot;:1,&quot;deleteNode&quot;:4404520435570369223,&quot;deleteType&quot;:1}]}</queryString>
+  <java.net.URL>http://47.112.0.183:8801/base/plan/record/sort</java.net.URL>
+</httpSample>
+<sample t="3" it="0" lt="0" ct="0" ts="1571109948408" s="true" lb="Debug Sampler" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="22872" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <responseHeader class="java.lang.String"></responseHeader>
+  <requestHeader class="java.lang.String"></requestHeader>
+  <responseData class="java.lang.String">JMeterVariables:
+JMeterThread.last_sample_ok=true
+JMeterThread.pack=org.apache.jmeter.threads.SamplePackage@62d4ca68
+M=1
+N=25
+NULL=NULL
+NULL_matchNr=0
+START.HMS=112543
+START.MS=1571109943265
+START.YMD=20191015
+TESTSTART.MS=1571109943662
+Vcode_#=1
+Vcode_1=0
+__jm__流程循环__idx=0
+__jm__流程测试引擎__idx=0
+__jm__节点循环__idx=0
+__jmeter.U_T__=流程测试引擎 1-1
+account_#=1
+account_1=13610150696
+afterOneDay=20191016
+afterThreeDay=20191018
+content=test
+currentDay=20191015
+currentMin=201910151128
+currentMin_add1=20191015112800
+currentMin_add2=20191015112900
+currentMin_add6=20191015113400
+currentTime=20191015112544  
+currentTimeByMM=201910151125  
+dbcheckpool=org.apache.jmeter.protocol.jdbc.config.DataSourceElement$DataSourceComponentImpl@74dbc03a
+device={&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;}
+deviceTagApp=59db5d3aef9002a9
+device_model=Meizu-16th Plus
+email=testbind@qq.com
+endDateTime=20991231235959
+expect_db_#=25
+expect_db_1={&quot;short_title&quot;:&quot;测试日程编辑流程&quot;,&quot;importance&quot;:1,&quot;ahead_type&quot;:&quot;[{\&quot;offset\&quot;:0}]&quot;,&quot;classify_id&quot;:1001,&quot;todo_type&quot;:1,&quot;start_datetime&quot;:&quot;20190716000000&quot;,&quot;end_datetime&quot;:&quot;20190716235959&quot;,&quot;rules_json&quot;:&quot;[{\&quot;type\&quot;:\&quot;Solar\&quot;,\&quot;expression\&quot;:\&quot;0 40 14 * * ?\&quot;}]&quot;,&quot;status&quot;:1}
+expect_db_10=
+expect_db_11={&quot;start_datetime&quot;:&quot;20190717000000&quot;,&quot;end_datetime&quot;:&quot;20190716235959&quot;}
+expect_db_12={&quot;status&quot;:0}
+expect_db_13=
+expect_db_14={&quot;status&quot;:0}
+expect_db_15=
+expect_db_16=
+expect_db_17=
+expect_db_18=
+expect_db_19=
+expect_db_2={&quot;short_title&quot;:&quot;测试日程编辑流程new&quot;,&quot;importance&quot;:2,&quot;ahead_type&quot;:&quot;[{\&quot;offset\&quot;:0},{\&quot;offset\&quot;:300}]&quot;,&quot;classify_id&quot;:1002,&quot;todo_type&quot;:1,&quot;start_datetime&quot;:&quot;20190717000000&quot;,&quot;end_datetime&quot;:&quot;20190717235959&quot;,&quot;rules_json&quot;:&quot;[{\&quot;type\&quot;:\&quot;Solar\&quot;,\&quot;expression\&quot;:\&quot;0 40 14 * * ?\&quot;}]&quot;,&quot;status&quot;:1}
+expect_db_20=
+expect_db_21=
+expect_db_22=
+expect_db_23=
+expect_db_24=
+expect_db_25=
+expect_db_3={&quot;finish_state&quot;:1}
+expect_db_4={&quot;finish_state&quot;:0}
+expect_db_5={&quot;title&quot;:&quot;子任务1&quot;,&quot;start_datetime&quot;:&quot;20190717000000&quot;,&quot;end_datetime&quot;:&quot;20190717235959&quot;,&quot;todo_time&quot;:&quot;20190722143000&quot;}
+expect_db_6={&quot;title&quot;:&quot;子任务11&quot;,&quot;start_datetime&quot;:&quot;20190717000000&quot;,&quot;end_datetime&quot;:&quot;20190717235959&quot;,&quot;todo_time&quot;:&quot;20190722143000&quot;}
+expect_db_7={&quot;finish_state&quot;:1}
+expect_db_8={&quot;finish_state&quot;:0}
+expect_db_9=
+expect_response_#=25
+expect_response_1=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;shortTitle&quot;:&quot;测试日程编辑流程&quot;|&quot;expression&quot;:&quot;0 40 14 * * ?&quot;
+expect_response_10=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_11=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;endDatetime&quot;:&quot;20190716235959&quot;
+expect_response_12=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;status&quot;:0
+expect_response_13=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_14=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;status&quot;:0
+expect_response_15=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_16=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_17=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_18=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_19=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_2=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;
+expect_response_20=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_21=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_22=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_23=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_24=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_25=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+expect_response_3=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;finishState&quot;:1
+expect_response_4=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;finishState&quot;:0
+expect_response_5=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;title&quot;:&quot;子任务1&quot;
+expect_response_6=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;title&quot;:&quot;子任务11&quot;
+expect_response_7=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;finishState&quot;:1
+expect_response_8=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;|&quot;finishState&quot;:0
+expect_response_9=&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;
+flow_id_#=1
+flow_id_1=1
+flow_name_#=1
+flow_name_1=日程编辑
+id=4404520435570369221
+id1=4404520435570369222
+id2=4404520435570369223
+importance=3
+ischechdb_#=25
+ischechdb_1=0
+ischechdb_10=0
+ischechdb_11=0
+ischechdb_12=0
+ischechdb_13=0
+ischechdb_14=0
+ischechdb_15=0
+ischechdb_16=0
+ischechdb_17=0
+ischechdb_18=0
+ischechdb_19=0
+ischechdb_2=0
+ischechdb_20=0
+ischechdb_21=0
+ischechdb_22=0
+ischechdb_23=0
+ischechdb_24=0
+ischechdb_25=0
+ischechdb_3=0
+ischechdb_4=0
+ischechdb_5=0
+ischechdb_6=0
+ischechdb_7=0
+ischechdb_8=0
+ischechdb_9=0
+isexcute_pre_sql_#=25
+isexcute_pre_sql_1=0
+isexcute_pre_sql_10=0
+isexcute_pre_sql_11=0
+isexcute_pre_sql_12=0
+isexcute_pre_sql_13=0
+isexcute_pre_sql_14=0
+isexcute_pre_sql_15=0
+isexcute_pre_sql_16=0
+isexcute_pre_sql_17=0
+isexcute_pre_sql_18=0
+isexcute_pre_sql_19=0
+isexcute_pre_sql_2=0
+isexcute_pre_sql_20=0
+isexcute_pre_sql_21=0
+isexcute_pre_sql_22=0
+isexcute_pre_sql_23=0
+isexcute_pre_sql_24=0
+isexcute_pre_sql_25=0
+isexcute_pre_sql_3=0
+isexcute_pre_sql_4=0
+isexcute_pre_sql_5=0
+isexcute_pre_sql_6=0
+isexcute_pre_sql_7=0
+isexcute_pre_sql_8=0
+isexcute_pre_sql_9=0
+method_#=25
+method_1=POST
+method_10=POST
+method_11=POST
+method_12=POST
+method_13=POST
+method_14=POST
+method_15=POST
+method_16=POST
+method_17=POST
+method_18=POST
+method_19=POST
+method_2=POST
+method_20=POST
+method_21=POST
+method_22=POST
+method_23=POST
+method_24=POST
+method_25=POST
+method_3=POST
+method_4=POST
+method_5=POST
+method_6=POST
+method_7=POST
+method_8=POST
+method_9=POST
+mobile=14400001111
+next_time_add3=2019-10-15 11:29:44
+node_code_#=25
+node_code_1=FLOW_001NODE_01
+node_code_10=FLOW_001_NODE_010
+node_code_11=FLOW_001_NODE_011
+node_code_12=FLOW_001_NODE_012
+node_code_13=FLOW_001_NODE_013
+node_code_14=FLOW_001_NODE_014
+node_code_15=FLOW_001_NODE_015
+node_code_16=FLOW_001_NODE_016
+node_code_17=FLOW_001_NODE_017
+node_code_18=FLOW_001_NODE_018
+node_code_19=FLOW_001_NODE_019
+node_code_2=FLOW_001_NODE_002
+node_code_20=FLOW_001_NODE_020
+node_code_21=FLOW_001_NODE_021
+node_code_22=FLOW_001_NODE_022
+node_code_23=FLOW_001_NODE_023
+node_code_24=FLOW_001_NODE_024
+node_code_25=FLOW_001_NODE_025
+node_code_3=FLOW_001_NODE_003
+node_code_4=FLOW_001_NODE_004
+node_code_5=FLOW_001_NODE_005
+node_code_6=FLOW_001_NODE_006
+node_code_7=FLOW_001_NODE_007
+node_code_8=FLOW_001_NODE_008
+node_code_9=FLOW_001_NODE_009
+node_id_#=25
+node_id_1=66
+node_id_10=105
+node_id_11=45
+node_id_12=46
+node_id_13=96
+node_id_14=67
+node_id_15=95
+node_id_16=97
+node_id_17=99
+node_id_18=100
+node_id_19=101
+node_id_2=79
+node_id_20=102
+node_id_21=103
+node_id_22=98
+node_id_23=106
+node_id_24=107
+node_id_25=108
+node_id_3=68
+node_id_4=69
+node_id_5=41
+node_id_6=42
+node_id_7=43
+node_id_8=44
+node_id_9=104
+node_name_#=25
+node_name_1=日程添加（时间点+默认分类+准时提醒）
+node_name_10=日程取消打卡（含子任务）
+node_name_11=日程子任务删除
+node_name_12=日程删除1
+node_name_13=日程删除恢复
+node_name_14=日程删除2
+node_name_15=日程永久删除
+node_name_16=日程添加（时间段+自定义分类+不提醒）
+node_name_17=添加专注
+node_name_18=设置时长
+node_name_19=专注打卡
+node_name_2=日程修改
+node_name_20=已打卡修改花费时间
+node_name_21=已打卡修改备注
+node_name_22=日程添加（全天+提前提醒）
+node_name_23=日程转清单
+node_name_24=批量添加日程
+node_name_25=日程排序
+node_name_3=日程打卡
+node_name_4=日程取消打卡
+node_name_5=日程子任务添加
+node_name_6=日程子任务编辑
+node_name_7=日程子任务打卡
+node_name_8=日程子任务取消打卡
+node_name_9=日程打卡（含子任务）
+para={&quot;sorts&quot;:[{&quot;addNode&quot;:4404520435570369223,&quot;addType&quot;:1,&quot;afterNode&quot;:4404520435570369222,&quot;afterType&quot;:1,&quot;deleteNode&quot;:4404520435570369223,&quot;deleteType&quot;:1}]}
+parameter_#=25
+parameter_1={&quot;todos&quot;: [{&quot;title&quot;: &quot;测试日程编辑流程&quot;, &quot;localId&quot;: -1563241933492017464, &quot;duration&quot;: 0, &quot;todoTime&quot;: &quot;20190716144000&quot;, &quot;aheadType&quot;: [{&quot;offset&quot;: 0}], &quot;importance&quot;: 1, &quot;shortTitle&quot;: &quot;测试日程编辑流程&quot;, &quot;intervalType&quot;: 1, &quot;todoClassifyId&quot;: 1001}]}
+parameter_10={&quot;todoId&quot;:$id$,&quot;finishState&quot;:0,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;}
+parameter_11={&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:$id$,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonDeleteList&quot;:[{&quot;localId&quot;:2504001392817995776,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;id&quot;:$taskId$}]}
+parameter_12={&quot;deleteInfos&quot;:[{&quot;id&quot;:$id$,&quot;todoTimes&quot;:[&quot;20190717144000&quot;],&quot;ruleIds&quot;:[$ruleId$]}]}
+parameter_13={&quot;todoIds&quot;:[$id$]}
+parameter_14={&quot;deleteInfos&quot;:[{&quot;id&quot;:$id$,&quot;todoTimes&quot;:[&quot;20190717144000&quot;],&quot;ruleIds&quot;:[$ruleId$]}]}
+parameter_15={&quot;todoIds&quot;:[$id$]}
+parameter_16={&quot;todos&quot;:[{&quot;duration&quot;:3600,&quot;importance&quot;:1,&quot;intervalType&quot;:2,&quot;localId&quot;:-303505539,&quot;todoClassifyId&quot;:4404520435570345088,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒$currentMin_add1$&quot;,&quot;title&quot;:&quot;时间段+自定义分类+不提醒$currentMin_add1$&quot;,&quot;remark&quot;:&quot;&quot;}]}
+parameter_17={&quot;finishState&quot;:&quot;1&quot;,&quot;linkId&quot;:&quot;$id$&quot;,&quot;useTime&quot;:&quot;5&quot;,&quot;linkType&quot;:&quot;todo&quot;,&quot;fullTime&quot;:&quot;5&quot;,&quot;startTime&quot;:20190807144728,&quot;endTime&quot;:20190807145228,&quot;title&quot;:&quot;时间段+自定义分类+不提醒&quot;}
+parameter_18={&quot;completeTime&quot;:300,&quot;id&quot;:$id$,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;}
+parameter_19={&quot;todoId&quot;:$id$,&quot;finishState&quot;:1,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;}
+parameter_2={&quot;duration&quot;: 0,&quot;importance&quot;: 2,&quot;intervalType&quot;: 1,&quot;localId&quot;: 126100789566398197,&quot;id&quot;: &quot;$id$&quot;,&quot;todoClassifyId&quot;: 1002,&quot;shortTitle&quot;: &quot;测试日程编辑流程new&quot;,&quot;title&quot;: &quot;测试日程编辑流程new&quot;,&quot;newTodoTime&quot;: &quot;20190717144000&quot;,&quot;todoTime&quot;: &quot;20190716144000&quot;,&quot;address&quot;: &quot;高德置地广场(冬商场)&quot;,&quot;city&quot;: &quot;广州市&quot;,&quot;country&quot;: &quot;&quot;,&quot;district&quot;: &quot;天河区&quot;,&quot;latitude&quot;: &quot;23.125756730662990&quot;,&quot;longitude&quot;: &quot;113.333537851804800&quot;,&quot;province&quot;: &quot;广东省&quot;,&quot;remark&quot;: &quot;备注测试&quot;,&quot;aheadType&quot;: [{&quot;offset&quot;: 0}, {&quot;offset&quot;: 300}],&quot;attachments&quot;: [{&quot;mediaType&quot;: &quot;0&quot;,&quot;url&quot;: &quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}]}
+parameter_20={&quot;completeTime&quot;:600,&quot;id&quot;:$id$,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;}
+parameter_21={&quot;duration&quot;:3600,&quot;importance&quot;:1,&quot;intervalType&quot;:2,&quot;localId&quot;:4404520435570345092,&quot;id&quot;:$id$,&quot;todoClassifyId&quot;:4404520435570345088,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒$currentMin_add1$&quot;,&quot;title&quot;:&quot;时间段+自定义分类+不提醒$currentMin_add1$&quot;,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;,&quot;address&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;latitude&quot;:&quot;&quot;,&quot;longitude&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;remark&quot;:&quot;完成备注&quot;,&quot;aheadType&quot;:[],&quot;attachments&quot;:[]}
+parameter_22={&quot;todos&quot;:[{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:0,&quot;localId&quot;:-466376764,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;$currentDay$000000&quot;,&quot;shortTitle&quot;:&quot;全天日程$currentMin_add1$&quot;,&quot;title&quot;:&quot;全天日程$currentMin_add1$&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;remark&quot;:&quot;&quot;}]}
+parameter_23={&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:4404520435570346090,&quot;id&quot;:$id$,&quot;todoClassifyId&quot;:1001,&quot;shortTitle&quot;:&quot;全天日程$currentMin_add1$&quot;,&quot;title&quot;:&quot;全天日程$currentMin_add1$&quot;,&quot;todoTime&quot;:&quot;$currentDay$000000&quot;,&quot;address&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;latitude&quot;:&quot;&quot;,&quot;longitude&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;remark&quot;:&quot;&quot;,&quot;aheadType&quot;:[],&quot;attachments&quot;:[]}
+parameter_24={&quot;todos&quot;:[{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:-441037804,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第二条&quot;,&quot;title&quot;:&quot;批量添加日程第二条&quot;,&quot;remark&quot;:&quot;&quot;},{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:-1220431593,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;$currentMin_add1$&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第一条&quot;,&quot;title&quot;:&quot;批量添加日程第一条&quot;,&quot;remark&quot;:&quot;&quot;}]}
+parameter_25={&quot;sorts&quot;:[{&quot;addNode&quot;:$id2$,&quot;addType&quot;:1,&quot;afterNode&quot;:$id1$,&quot;afterType&quot;:1,&quot;deleteNode&quot;:$id2$,&quot;deleteType&quot;:1}]}
+parameter_3={
+  &quot;todoId&quot;: &quot;$id$&quot;,
+  &quot;finishState&quot;: 1,
+  &quot;ruleId&quot;: &quot;$ruleId$&quot;,
+  &quot;todoTime&quot;: &quot;20190717144000&quot;
+}
+parameter_4={&quot;todoId&quot;:$id$,&quot;finishState&quot;:0,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;}
+parameter_5={&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:$id$,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonAddList&quot;:[{&quot;localId&quot;:-1802564779,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务1&quot;}]}
+parameter_6={&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:$id$,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonUpdateList&quot;:[{&quot;localId&quot;:2504001392817995776,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;id&quot;:$taskId$}]}
+parameter_7={&quot;todoId&quot;:$id$,&quot;finishState&quot;:1,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;todoTaskId&quot;:$taskId$}
+parameter_8={&quot;todoId&quot;:$id$,&quot;finishState&quot;:0,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;todoTaskId&quot;:$taskId$}
+parameter_9={&quot;todoId&quot;:$id$,&quot;finishState&quot;:1,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;}
+password=123456
+password_#=1
+password_1=666666
+path_#=25
+path_1=/base/plan/schedule/batchadd
+path_10=/base/plan/checkin
+path_11=/base/plan/schedule/edit
+path_12=/base/plan/delete
+path_13=/base/plan/recycled/recovery
+path_14=/base/plan/delete
+path_15=/base/plan/recycled/delete
+path_16=/base/plan/schedule/batchadd
+path_17=/base/focus/add
+path_18=/base/plan/setCompleteTime
+path_19=/base/plan/allCheckin
+path_2=/base/plan/schedule/edit
+path_20=/base/plan/setCompleteTime
+path_21=/base/plan/schedule/edit
+path_22=/base/plan/schedule/batchadd
+path_23=/service/aggregation/schedule/tochecklist
+path_24=/base/plan/schedule/batchadd
+path_25=/base/plan/record/sort
+path_3=/base/plan/allCheckin
+path_4=/base/plan/checkin
+path_5=/base/plan/schedule/edit
+path_6=/base/plan/schedule/edit
+path_7=/base/plan/checkin
+path_8=/base/plan/checkin
+path_9=/base/plan/allCheckin
+post_keys_#=25
+post_keys_1=id
+post_keys_10=NULL
+post_keys_11=id;ruleId;taskId
+post_keys_12=NULL
+post_keys_13=NULL
+post_keys_14=NULL
+post_keys_15=NULL
+post_keys_16=id;ruleId
+post_keys_17=NULL
+post_keys_18=NULL
+post_keys_19=NULL
+post_keys_2=id;ruleId
+post_keys_20=NULL
+post_keys_21=NULL
+post_keys_22=id;ruleId
+post_keys_23=NULL
+post_keys_24=id1;id2
+post_keys_25=NULL
+post_keys_3=id
+post_keys_4=id
+post_keys_5=id;ruleId;taskId
+post_keys_6=id;ruleId;taskId
+post_keys_7=NULL
+post_keys_8=NULL
+post_keys_9=NULL
+post_keys_default_#=25
+post_keys_default_1=0
+post_keys_default_10=NULL
+post_keys_default_11=0;0;0
+post_keys_default_12=NULL
+post_keys_default_13=NULL
+post_keys_default_14=NULL
+post_keys_default_15=NULL
+post_keys_default_16=0;0
+post_keys_default_17=NULL
+post_keys_default_18=NULL
+post_keys_default_19=NULL
+post_keys_default_2=0;0
+post_keys_default_20=NULL
+post_keys_default_21=NULL
+post_keys_default_22=0;0
+post_keys_default_23=NULL
+post_keys_default_24=0;0
+post_keys_default_25=NULL
+post_keys_default_3=0
+post_keys_default_4=0
+post_keys_default_5=0;0;0
+post_keys_default_6=0;0;0
+post_keys_default_7=NULL
+post_keys_default_8=NULL
+post_keys_default_9=NULL
+post_keys_extractor_#=25
+post_keys_extractor_1=$.data.todos[0].id
+post_keys_extractor_10=NULL
+post_keys_extractor_11=$.data.id;$.data.ruleInfo[0].id;$.data.task[0].id
+post_keys_extractor_12=NULL
+post_keys_extractor_13=NULL
+post_keys_extractor_14=NULL
+post_keys_extractor_15=NULL
+post_keys_extractor_16=$.data.todos[0].id;$.data.todos[0].ruleInfo[0].id
+post_keys_extractor_17=NULL
+post_keys_extractor_18=NULL
+post_keys_extractor_19=NULL
+post_keys_extractor_2=$.data.id;$.data.ruleInfo[0].id
+post_keys_extractor_20=NULL
+post_keys_extractor_21=NULL
+post_keys_extractor_22=$.data.todos[0].id;$.data.todos[0].ruleInfo[0].id
+post_keys_extractor_23=NULL
+post_keys_extractor_24=$.data.todos[0].id;$.data.todos[1].id
+post_keys_extractor_25=NULL
+post_keys_extractor_3=$.data.id
+post_keys_extractor_4=$.data.id
+post_keys_extractor_5=$.data.id;$.data.ruleInfo[0].id;$.data.task[0].id
+post_keys_extractor_6=$.data.id;$.data.ruleInfo[0].id;$.data.task[0].id
+post_keys_extractor_7=NULL
+post_keys_extractor_8=NULL
+post_keys_extractor_9=NULL
+pre_keys_#=25
+pre_keys_1=null
+pre_keys_10=id;ruleId
+pre_keys_11=id;taskId
+pre_keys_12=id;ruleId
+pre_keys_13=id
+pre_keys_14=id;ruleId
+pre_keys_15=id
+pre_keys_16=currentMin_add1
+pre_keys_17=id
+pre_keys_18=id;currentMin_add1
+pre_keys_19=id;ruleId;currentMin_add1
+pre_keys_2=id
+pre_keys_20=id;currentMin_add1
+pre_keys_21=id;currentMin_add1
+pre_keys_22=currentDay;currentMin_add1
+pre_keys_23=id;currentMin_add1;currentDay
+pre_keys_24=currentMin_add1
+pre_keys_25=id1;id2
+pre_keys_3=id;ruleId
+pre_keys_4=id;ruleId
+pre_keys_5=id
+pre_keys_6=id;taskId
+pre_keys_7=id;ruleId;taskId
+pre_keys_8=id;ruleId;taskId
+pre_keys_9=id;ruleId
+pre_sql=
+pre_sql_out_#=25
+pre_sql_out_1=null
+pre_sql_out_10=null
+pre_sql_out_11=null
+pre_sql_out_12=null
+pre_sql_out_13=null
+pre_sql_out_14=null
+pre_sql_out_15=null
+pre_sql_out_16=null
+pre_sql_out_17=null
+pre_sql_out_18=null
+pre_sql_out_19=null
+pre_sql_out_2=null
+pre_sql_out_20=null
+pre_sql_out_21=null
+pre_sql_out_22=null
+pre_sql_out_23=null
+pre_sql_out_24=null
+pre_sql_out_25=null
+pre_sql_out_3=null
+pre_sql_out_4=null
+pre_sql_out_5=null
+pre_sql_out_6=null
+pre_sql_out_7=null
+pre_sql_out_8=null
+pre_sql_out_9=null
+pre_sql_para_#=25
+pre_sql_para_1=null
+pre_sql_para_10=null
+pre_sql_para_11=null
+pre_sql_para_12=null
+pre_sql_para_13=null
+pre_sql_para_14=null
+pre_sql_para_15=null
+pre_sql_para_16=null
+pre_sql_para_17=null
+pre_sql_para_18=null
+pre_sql_para_19=null
+pre_sql_para_2=null
+pre_sql_para_20=null
+pre_sql_para_21=null
+pre_sql_para_22=null
+pre_sql_para_23=null
+pre_sql_para_24=null
+pre_sql_para_25=null
+pre_sql_para_3=null
+pre_sql_para_4=null
+pre_sql_para_5=null
+pre_sql_para_6=null
+pre_sql_para_7=null
+pre_sql_para_8=null
+pre_sql_para_9=null
+pre_sql_str_#=25
+pre_sql_str_1=null
+pre_sql_str_10=null
+pre_sql_str_11=null
+pre_sql_str_12=null
+pre_sql_str_13=null
+pre_sql_str_14=null
+pre_sql_str_15=null
+pre_sql_str_16=null
+pre_sql_str_17=null
+pre_sql_str_18=null
+pre_sql_str_19=null
+pre_sql_str_2=null
+pre_sql_str_20=null
+pre_sql_str_21=null
+pre_sql_str_22=null
+pre_sql_str_23=null
+pre_sql_str_24=null
+pre_sql_str_25=null
+pre_sql_str_3=null
+pre_sql_str_4=null
+pre_sql_str_5=null
+pre_sql_str_6=null
+pre_sql_str_7=null
+pre_sql_str_8=null
+pre_sql_str_9=null
+results=[{status=0}]
+ruleId=4404520435570369238
+sleep_time_#=25
+sleep_time_1=0
+sleep_time_10=0
+sleep_time_11=0
+sleep_time_12=0
+sleep_time_13=0
+sleep_time_14=0
+sleep_time_15=0
+sleep_time_16=0
+sleep_time_17=0
+sleep_time_18=0
+sleep_time_19=0
+sleep_time_2=0
+sleep_time_20=0
+sleep_time_21=0
+sleep_time_22=0
+sleep_time_23=0
+sleep_time_24=0
+sleep_time_25=0
+sleep_time_3=0
+sleep_time_4=0
+sleep_time_5=0
+sleep_time_6=0
+sleep_time_7=0
+sleep_time_8=0
+sleep_time_9=0
+sql=
+sql_para_#=25
+sql_para_1=id
+sql_para_10=null
+sql_para_11=taskId
+sql_para_12=id
+sql_para_13=null
+sql_para_14=id
+sql_para_15=null
+sql_para_16=null
+sql_para_17=null
+sql_para_18=null
+sql_para_19=null
+sql_para_2=id
+sql_para_20=null
+sql_para_21=null
+sql_para_22=null
+sql_para_23=null
+sql_para_24=null
+sql_para_25=null
+sql_para_3=id
+sql_para_4=id
+sql_para_5=id;taskId
+sql_para_6=id;taskId
+sql_para_7=taskId
+sql_para_8=taskId
+sql_para_9=null
+sql_str_#=25
+sql_str_1=select short_title,todo_type,importance,classify_id,ahead_type, DATE_FORMAT(r.start_datetime,&apos;%Y%m%d%H%i%s&apos;) as start_datetime,DATE_FORMAT(r.end_datetime,&apos;%Y%m%d%H%i%s&apos;) as end_datetime,rules_json,status from plan.todo t INNER JOIN plan.todo_repeat_rule r on t.id = r.todo_id where t.id = $id$
+sql_str_10=
+sql_str_11=select DATE_FORMAT(start_datetime,&apos;%Y%m%d%H%i%s&apos;) as start_datetime,DATE_FORMAT(end_datetime,&apos;%Y%m%d%H%i%s&apos;) as end_datetime from plan.todo_task where id = $taskId$
+sql_str_12=select status from plan.todo t where t.id = $id$;
+sql_str_13=
+sql_str_14=select status from plan.todo t where t.id = $id$;
+sql_str_15=
+sql_str_16=
+sql_str_17=
+sql_str_18=
+sql_str_19=
+sql_str_2=select short_title,todo_type,importance,classify_id,f.ahead_type, DATE_FORMAT(r.start_datetime,&apos;%Y%m%d%H%i%s&apos;) as start_datetime,DATE_FORMAT(r.end_datetime,&apos;%Y%m%d%H%i%s&apos;) as end_datetime,rules_json,status from plan.todo t LEFT JOIN plan.todo_repeat_rule r on t.id = r.todo_id LEFT JOIN plan.todo_finish f on t.id = f.todo_id where t.id = $id$;
+sql_str_20=
+sql_str_21=
+sql_str_22=
+sql_str_23=
+sql_str_24=
+sql_str_25=
+sql_str_3=select finish_state from plan.todo t LEFT JOIN plan.todo_finish f on t.id = f.todo_id where t.id = $id$;
+sql_str_4=select finish_state from plan.todo t LEFT JOIN plan.todo_finish f on t.id = f.todo_id where t.id = $id$;
+sql_str_5=select title,DATE_FORMAT(start_datetime,&apos;%Y%m%d%H%i%s&apos;) as start_datetime,DATE_FORMAT(end_datetime,&apos;%Y%m%d%H%i%s&apos;) as end_datetime,DATE_FORMAT(todo_time,&apos;%Y%m%d%H%i%s&apos;) as todo_time from plan.todo_task where id = $taskId$ and todo_id = $id$
+sql_str_6=select title,DATE_FORMAT(start_datetime,&apos;%Y%m%d%H%i%s&apos;) as start_datetime,DATE_FORMAT(end_datetime,&apos;%Y%m%d%H%i%s&apos;) as end_datetime,DATE_FORMAT(todo_time,&apos;%Y%m%d%H%i%s&apos;) as todo_time from plan.todo_task where id = $taskId$ and todo_id = $id$
+sql_str_7=select finish_state from plan.todo_task_finish where todo_task_id = $taskId$
+sql_str_8=select finish_state from plan.todo_task_finish where todo_task_id = $taskId$
+sql_str_9=
+summaryDay=2019-10-15
+taskId=4404520435570364125
+todoDay=15
+todoDay3=18
+todoDay_add3=201910181125
+todoHH=11
+todoHH2=11
+todoHH6=11
+todoHHRepeat=11
+todoHHRepeat2=11
+todoHHRepeat6=11
+todoMonth=10
+todomm=28
+todomm2=29
+todomm6=34
+todommRepeat=28
+todommRepeat2=29
+todommRepeat6=34
+todotime=20191015112544
+todotime_add15=201910151140
+todotime_add2=201910151129
+todotime_add6=201910151134
+token=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+token;user_id=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+token;user_id_g=1
+token;user_id_g0=&quot;token&quot;:&quot;b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd&quot;
+token;user_id_g1=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3ead8dbfb490dd11b4957f335b6ddcbbbd
+userid=4404520435568345088
+
+</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <samplerData class="java.lang.String">JMeterVariables
+</samplerData>
+</sample>
+
+</testResults>

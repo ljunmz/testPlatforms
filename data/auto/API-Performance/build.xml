@@ -1,49 +1,60 @@
-<project basedir="." default="run" name="ant-jmeter-test">
-	<property environment="env" />
-	<tstamp> <format pattern="yyyyMMddHHmm" property="time" /></tstamp>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ant-jmeter-test" default="run" basedir=".">
+    <property environment="env" />
+    <tstamp> <format property="time" pattern="yyyyMMddHHmm" /></tstamp>
     <property name="jmeter.home" value="${env.JMETER_HOME}" />
-    <property name="report.title" value="&#26102;&#20809;&#24207;API&#27979;&#35797;" />
+    <property name="report.title" value="时光序API测试" />
     <property name="jmeter.result.jtl.dir" value="./Report/jtl" />
     <property name="jmeter.result.html.dir" value="./Report/html" />
     <property name="ReportName" value="APITest" />
     <property name="jmeter.result.jtlName" value="${jmeter.result.jtl.dir}/${ReportName}${time}.jtl" />
     <property name="jmeter.result.htmlSummaryName" value="${jmeter.result.html.dir}/${ReportName}_Summary_${time}.html" />
-	<property name="jmeter.result.htmlDetailName" value="${jmeter.result.html.dir}/${ReportName}_Detail_${time}.html" />
-	<property name="mailhost" value="smtp.jielema.com" />
-	<property name="username" value="cuiqingyong@jielema.com" />
-	<property name="password" value="jielema_2015" />
-	<property name="mailfrom" value="cuiqingyong@jielema.com" />
-	<property name="mail_to" value="lja@jielema.com,liujun@jielema.com" />
-	<property name="mailsubject" value="&#26102;&#20809;&#24207;API&#33258;&#21160;&#21270;&#27979;&#35797;&#25253;&#21578;" />
-	<property name="mail_port" value="25" />
+    <property name="jmeter.result.htmlDetailName" value="${jmeter.result.html.dir}/${ReportName}_Detail_${time}.html" />
+    <property name="mailhost" value="smtp.jielema.com"/>
+    <property name="username" value="cuiqingyong@jielema.com"/>
+    <property name="password" value="jielema_2015"/>
+    <property name="mailfrom" value="cuiqingyong@jielema.com"/>
+    <property name="mail_to" value="lja@jielema.com,liujun@jielema.com"/>
+    <property name="mailsubject" value="时光序API性能测试报告"/>
+    <property name="mail_port" value="25"/>
     <target name="run">
         <antcall target="test" />
         <antcall target="report" />
-		<antcall target="sendEmail" />
+        <antcall target="sendEmail" />
     </target>
 
     <target name="test">
-        <taskdef classname="org.programmerplanet.ant.taskdefs.jmeter.JMeterTask" name="jmeter" />
+        <taskdef name="jmeter" classname="org.programmerplanet.ant.taskdefs.jmeter.JMeterTask" />
         <jmeter jmeterhome="${jmeter.home}" resultlog="${jmeter.result.jtlName}">
-            <testplans dir="./" includes="&#27979;&#35797;&#27969;.jmx" />
-            <property name="jmeter.save.saveservice.output_format" value="xml" />
+            <testplans dir="./" includes="测试流.jmx" />
+            <property name="jmeter.save.saveservice.output_format" value="xml"/>
         </jmeter>
     </target>
     <path id="xslt.classpath">
-        <fileset dir="${jmeter.home}/lib" includes="xalan*.jar" />
-        <fileset dir="${jmeter.home}/lib" includes="serializer*.jar" />
+        <fileset dir="${jmeter.home}/lib" includes="xalan*.jar"/>
+        <fileset dir="${jmeter.home}/lib" includes="serializer*.jar"/>
     </path>
 
     <target name="report">
-        <tstamp> <format pattern="yyyy/MM/dd HH:mm" property="report.datestamp" /></tstamp>
-		<xslt classpathref="xslt.classpath" force="true" in="${jmeter.result.jtlName}" out="${jmeter.result.htmlSummaryName}" style="${jmeter.home}/extras/jmeter-results-detail-report_22.xsl">
-              <param expression="${report.datestamp}" name="dateReport" />
-              <param expression="${report.title}:${report.datestamp}" name="titleReport" />
-       </xslt>
-        <xslt classpathref="xslt.classpath" force="true" in="${jmeter.result.jtlName}" out="${jmeter.result.htmlDetailName}" style="${jmeter.home}/extras/jmeter.results.shanhe.me.xsl">
-              <param expression="${report.datestamp}" name="dateReport" />
-              <param expression="${report.title}:${report.datestamp}" name="titleReport" />
-       </xslt>
+        <tstamp> <format property="report.datestamp" pattern="yyyy/MM/dd HH:mm" /></tstamp>
+        <xslt
+                classpathref="xslt.classpath"
+                force="true"
+                in="${jmeter.result.jtlName}"
+                out="${jmeter.result.htmlSummaryName}"
+                style="${jmeter.home}/extras/jmeter-results-detail-report_22.xsl">
+            <param name="dateReport" expression="${report.datestamp}"/>
+            <param name="titleReport" expression="${report.title}:${report.datestamp}"/>
+        </xslt>
+        <xslt
+                classpathref="xslt.classpath"
+                force="true"
+                in="${jmeter.result.jtlName}"
+                out="${jmeter.result.htmlDetailName}"
+                style="${jmeter.home}/extras/jmeter.results.shanhe.me.xsl">
+            <param name="dateReport" expression="${report.datestamp}"/>
+            <param name="titleReport" expression="${report.title}:${report.datestamp}"/>
+        </xslt>
 
         <copy todir="${jmeter.result.html.dir}">
             <fileset dir="${jmeter.home}/extras">
@@ -52,22 +63,28 @@
             </fileset>
         </copy>
     </target>
-	
-	<record action="start" append="no" loglevel="info" name="${jmeter.result.html.dir}/${ReportName}_Log_${time}.txt" />
-	
-	<target name="sendEmail">
-		<loadfile encoding="UTF-8" property="output" srcFile="${jmeter.result.htmlSummaryName}" />
-		<mail mailhost="${mailhost}" mailport="${mail_port}" messagemimetype="text/html" password="${password}" subject="${mailsubject}${time}" tolist="${mail_to}" user="${username}">
-			<from address="${mailfrom}" />
 
-			<fileset dir="${jmeter.result.html.dir}">
-				<include name="${ReportName}_Summary_${time}.html" />
-				<include name="${ReportName}_Detail_${time}.html" />
-			</fileset>
-			<message>
-				${output}
-			</message>  
-		</mail>  
-	</target>
-	
+    <record name="${jmeter.result.html.dir}/${ReportName}_Log_${time}.txt" loglevel="info" append="no" action="start"/>
+
+    <target name="sendEmail">
+        <loadfile property="output" srcFile="${jmeter.result.htmlSummaryName}" encoding="UTF-8"/>
+        <mail tolist="${mail_to}"
+              mailhost="${mailhost}"
+              mailport="${mail_port}"
+              user="${username}"
+              password="${password}"
+              subject="${mailsubject}${time}"
+              messagemimetype="text/html">
+            <from address="${mailfrom}" />
+
+            <fileset dir="${jmeter.result.html.dir}">
+                <include name="${ReportName}_Summary_${time}.html"/>
+                <include name="${ReportName}_Detail_${time}.html"/>
+            </fileset>
+            <message>
+                ${output}
+            </message>
+        </mail>
+    </target>
+
 </project>

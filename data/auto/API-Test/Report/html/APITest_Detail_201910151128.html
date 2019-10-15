@@ -1,0 +1,991 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta content="shanhe.me" name="Author"><title>JMeter Test Results</title><style type="text/css">
+            
+                * { margin: 0; padding: 0 }
+                html, body { width: 100%; height: 100%; background: #b4b4b4; font-size: 12px }
+                table { border: none; border-collapse: collapse; table-layout: fixed }
+                td { vertical-align: baseline; font-size: 12px }
+                #left-panel { position: absolute; left: 0; top: 0; bottom: 0; width: 300px; overflow: auto; background: #dee4ea }
+                #left-panel li.navigation { font-weight: bold; cursor: default; color: #9da8b2; line-height: 18px; background-position: 12px 5px; background-repeat: no-repeat; padding: 0 0 0 25px; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAICAYAAAArzdW1AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBQqGbO7BEcAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAKRJREFUGNN1zM0KgkAYheF3RvtXSsGyWhRNaILS7bdt11W0KgJvoPwZp0UlBPUtz3nOJw7Hk7necv5dOA2Qaazo2vZP0LEt9olCVtqQROufKNmuqBuBNAYW4QzXGX6B0bDPcjGnMQYJ8Cg12U59oSzaUJQa4IUAXMclDHwAAn/MxPMw765FZd2QRgopBWmsKCrdfhXnS/4ZYElBXdyxewN008Y8AephLAkqz613AAAAAElFTkSuQmCC) }
+                #left-panel li.success { color: #565b60 }
+                #left-panel li.failure { color: red }
+                #left-panel li { list-style: none; color: black; cursor: pointer }
+                #left-panel li.selected { background-repeat: repeat-x; color: white; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAUCAYAAABMDlehAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBQxLTs5O2gAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAEdJREFUCNc1y7ERgEAMA0GNUhIyGqM2uqKgtyWZhE9v53A/7/A6D7BkMDNgy2AroB2wHTCZv5UMOgFLG1bvd7XBckBlwCXjA5wMOF5iOX/MAAAAAElFTkSuQmCC) }
+                #left-panel div { line-height: 20px; background-position: 25px 3px; background-repeat: no-repeat; padding: 0 0 0 45px }
+                #left-panel div.success { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBULEEc6wzcAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAiNJREFUKM99kktIVGEYhp/jzJl08lI6logp2Y2EFkbtaqlFROsWrlq4ioJWQRs37VoUVItWkYEVRGSBlhleCpywDEWxTEuxcURTZ6YzxzP/5WshCOHUt36f93kXnyMi5Lsnb4clI4s4fhkXzp5w8mWcfHBvfEpUxVdCUUU6lUPNHuD86cYtBQX5GhPrM7hRg7GaSDRg2vuUd90WuOPVsOyqy6FFo2yOQHlU1S9z9dZT+S/8I7GCLlkAN4eyAf56mnT6Fy1HLnGuuYa++MS/4e74qMRqfXLaJ9BpfnsrLC0m2BYuoqwUbj/+274JD43OEqmexwvW8NUKXnaZtVSS1pNtAAyOvyC6v48HnUNb4Z7PH8UtTlIQWA5tb2RhYY7kz3l2FleytJYg/qWb8t2KZ/0PN+1hgI6uEUr2jpHKpGlquExVaS0VbjUZL7WxaqIXK6ADQ0n9GNfv9XCttWnD/O57t0TKFklnF3g5fJ/seoaa2D4O1x0F4PlgO9oIftbgFgYMfLgjACGqj0vlsddoUnj+Kt/mxunq72RP+UGqYjWMTA7R+b6dUCSEGEF5hoJQip6BaFs4HJtCyRrKs6wHCovDip/kys0WWpovMpOYBCtoT2N9B5uzWG0Zid8gnFrVFEQDtBaUrxEgXBimaEeER2/uIiK4roPOaMRYjBKsFly3fOO3G06dETGCWIsYjckprMphtEKMAQtgsMYi1mJMQHJ6xvkDKQoyphCzkl0AAAAASUVORK5CYII=) }
+                #left-panel div.failure { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBUJOEC5CU8AAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAeVJREFUKM+NkDtok2EUhp8vl9ZLo/EyKI6KFgqCKC4OClrBWUQEcRRx1cGpk3WyInWrgoMZKkW8thYaEYQ0i7WC2ngrNDTERHJvkv/L/3//dxwc7F8jeOAsh/c973OOEhG61aPnaen7maXYt4MLZ4+pbppQt+F06jNH3QWOb8pxUs+SmJzjv83hxY8SVy3wNdtVneiHqe54IhLoB4/TUkyMyOrKj5yXoVtPZK02kLyYK7OnlqFWzgcCGtUC/YUJ3n5a/jd28tU7ORTN0myUA6Jms8bpWIa798elqzn1fokjThrpVBC3ETzNbYAuca59j/Hp+b/N869Tsk8tgVMCXQk+RlfQuk1/tMLMwzsSMCcm5zjhvoR2AdpF0GuwO4aqttS05ZSbZHhsBoAIwI83Cdkd/460XDAOG02d24MxvlR8dsUUh3f2UHaEtgdbWCHz4oZwcVCp66PP5FLhKjEc8DXaCMsNy8DYn/SnZ+L0hhWOb/F8yLs9fDtwk8j+VpqwrlC34PrgGEu2bhlYhZ1b8dncq3AMeBaUr/k6NUyk4ChKzu+N2hc6Bqody+WDG8g2fLatD7F3axjPgmvAtYJvIbouhhIRrl0ZktnkBGIt1gqeMXQ8D2MMiCIUCqFEsFhEQMSykCuqX0MzLAUJTzRsAAAAAElFTkSuQmCC) }
+                #left-panel div.detail { display: none }
+                #right-panel { position: absolute; right: 0; top: 0; bottom: 0; left: 301px; overflow: auto; background: white }
+                #right-panel .group { font-size: 12px; font-weight: bold; line-height: 16px; padding: 0 0 0 18px; counter-reset: assertion; background-repeat: repeat-x; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAQCAYAAADXnxW3AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBUkDq8pxjkAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAADdJREFUCNdVxrERwDAMAzGK0v47eS6Z927SpMFBAAbkvSvnRk5+7K5cVfLMyN39bWakJAjA5xw9R94jN3tVhVEAAAAASUVORK5CYII=) }
+                #right-panel .zebra { background-repeat: repeat; padding: 0 0 0 18px; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAmCAYAAAAFvPEHAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBYWFlNztEcAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAABdJREFUCNdjYKAtePv5338mBgYGBpoQAGy1BAJlb/y6AAAAAElFTkSuQmCC) }
+                #right-panel .data { line-height: 19px; white-space: nowrap }
+                #right-panel pre.data { white-space: pre }
+                #right-panel tbody.failure { color: red }
+                #right-panel td.key { min-width: 108px }
+                #right-panel td.delimiter { min-width: 18px }
+                #right-panel td.assertion:before { counter-increment: assertion; content: counter(assertion) ". " }
+                #right-panel td.assertion { color: black }
+                #right-panel .trail { border-top: 1px solid #b4b4b4 }
+                
+            </style><script type="text/javascript">
+            
+                var onclick_li = (function() {
+                    var last_selected = null;
+                    return function(li) {
+                        if( last_selected == li )
+                            return;
+                        if( last_selected )
+                            last_selected.className = "";
+                        last_selected = li;
+                        last_selected.className = "selected";
+                        document.getElementById("right-panel").innerHTML = last_selected.firstChild.nextSibling.innerHTML;
+                        return false;
+                    };
+                })();
+                
+                var patch_timestamp = function() {
+                    var spans = document.getElementsByTagName("span");
+                    var len = spans.length;
+                    for( var i = 0; i < len; ++i ) {
+                        var span = spans[i];
+                        if( "patch_timestamp" == span.className )
+                            span.innerHTML = new Date( parseInt( span.innerHTML ) );
+                    }
+                };
+                
+                var patch_navigation_class = (function() {
+                
+                    var set_class = function(el, flag) {
+                        if(el) {
+                            el.className += flag ? " success" : " failure";
+                        }
+                    };
+                
+                    var traverse = function(el, group_el, flag) {
+                        while(1) {
+                            if(el) {
+                                if(el.className == 'navigation') {
+                                    set_class(group_el, flag);
+                                    group_el = el;
+                                    flag = true;
+                                } else {
+                                    var o = el.firstChild;
+                                    o = o ? o.className : null;
+                                    flag = flag ? (o == 'success') : false;
+                                }
+                                el = el.nextSibling;
+                            } else {
+                                set_class(group_el, flag);
+                                break;
+                            }
+                        }
+                    };
+                    
+                    return function() {
+                        var o = document.getElementById("result-list");
+                        o = o ? o.firstChild : null;
+                        if(o)
+                            traverse(o, null, true);
+                    };
+                })();
+        
+                window.onload = function() {
+                    patch_timestamp();
+                    patch_navigation_class();
+                    var o = document.getElementById("result-list");
+                    o = o ? o.firstChild : null;
+                    o = o ? o.nextSibling : null;
+                    if(o)
+                        onclick_li(o);
+                };
+        
+            </script></head><body><div id="left-panel"><ol id="result-list"><li class="navigation">Thread: 流程测试引擎 1-1</li><li onclick="return onclick_li(this);"><div class="success">获取流程数据</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110133648</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">464 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">461 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">69</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data"> </pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">shared:false, driver:com.mysql.jdbc.Driver, url:jdbc:mysql://47.112.0.183:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true, user:planadmin</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">flow_id	flow_name	account	password
+1	日程编辑	13610150696	666666
+</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">流程初始化预处理--1-日程编辑</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110134128</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">213 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">0 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">14900</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">Number of samples in transaction : 3, number of failing samples : 0</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data"> </pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">Non-TEXT response data, cannot record: ()</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">1-日程添加（时间点+默认分类+准时提醒）</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110134519</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">84 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">84 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">823</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/schedule/batchadd</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todos": [{"title": "测试日程编辑流程", "localId": -1563241933492017464, "duration": 0, "todoTime": "20190716144000", "aheadType": [{"offset": 0}], "importance": 1, "shortTitle": "测试日程编辑流程", "intervalType": 1, "todoClassifyId": 1001}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 260
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:55 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 702
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"todos":[{"localId":"-1563241933492017464","id":"4404520435570369224","shortTitle":"测试日程编辑流程","deleted":false,"status":1,"importance":1,"aheadType":[{"offset":0}],"todoClassifyId":"1001","todoType":1,"startDatetime":"20190716000000","endDatetime":"20190716235959","created":1571110135644,"updated":1571110135644,"version":"2946","ruleInfo":[{"id":"4404520435570369241","startDatetime":"20190716000000","endDatetime":"20190716235959","rules":[{"type":"Solar","expression":"0 40 14 * * ?"}],"attachDatetimes":[],"detachDatetimes":[],"intervalType":1,"duration":{},"closeState":0,"repeatType":0,"created":1571110135644,"updated":1571110135644}]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">2-日程修改</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110134681</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">107 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">107 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">1348</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/schedule/edit</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"duration": 0,"importance": 2,"intervalType": 1,"localId": 126100789566398197,"id": "4404520435570369224","todoClassifyId": 1002,"shortTitle": "测试日程编辑流程new","title": "测试日程编辑流程new","newTodoTime": "20190717144000","todoTime": "20190716144000","address": "高德置地广场(冬商场)","city": "广州市","country": "","district": "天河区","latitude": "23.125756730662990","longitude": "113.333537851804800","province": "广东省","remark": "备注测试","aheadType": [{"offset": 0}, {"offset": 300}],"attachments": [{"mediaType": "0","url": "livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 668
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:55 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1226
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369224","shortTitle":"测试日程编辑流程new","deleted":false,"status":1,"importance":2,"aheadType":[{"offset":0}],"todoClassifyId":"1002","todoType":1,"startDatetime":"20190717000000","endDatetime":"20190717235959","created":1571110136000,"updated":1571110135811,"version":"2947","ruleInfo":[{"id":"4404520435570369241","startDatetime":"20190717000000","endDatetime":"20190717235959","rules":[{"type":"Solar","expression":"0 40 14 * * ?"}],"attachDatetimes":[],"detachDatetimes":[],"intervalType":1,"duration":{},"closeState":0,"repeatType":0,"created":1571110136000,"updated":1571110135811}],"task":[],"personalizedInfo":[{"ruleId":"4404520435570369241","todoTime":"20190717144000","aheadType":[{"offset":0},{"offset":300}],"deleted":false,"longitude":"113.333537851804800","latitude":"23.125756730662990","country":"","province":"广东省","city":"广州市","district":"天河区","address":"高德置地广场(冬商场)","attachments":[{"mediaType":0,"url":"livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}],"finishState":0,"remark":"备注测试","created":1571110135811,"updated":1571110135811,"taskFinishs":[]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">3-日程打卡</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110134849</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">74 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">74 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">362</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/allCheckin</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{
+  "todoId": "4404520435570369224",
+  "finishState": 1,
+  "ruleId": "4404520435570369241",
+  "todoTime": "20190717144000"
+}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 124
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:55 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 241
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369224","personalizedInfo":[{"id":"4404520435570371173","ruleId":"4404520435570369241","finishState":1,"todoTime":"20190717144000","finishTime":"20191015112855","taskFinishs":[]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">4-日程取消打卡</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110134970</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">81 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">81 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">362</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/checkin</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todoId":4404520435570369224,"finishState":0,"ruleId":4404520435570369241,"todoTime":"20190717144000"}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 103
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:55 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 241
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369224","personalizedInfo":[{"id":"4404520435570371173","ruleId":"4404520435570369241","finishState":0,"todoTime":"20190717144000","finishTime":"20191015112856","completeTime":0}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">5-日程子任务添加</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110135099</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">109 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">109 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">1610</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/schedule/edit</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"duration":0,"importance":2,"intervalType":1,"localId":2504001392817998855,"id":4404520435570369224,"todoClassifyId":1002,"shortTitle":"测试日程编辑流程new","title":"测试日程编辑流程new","todoTime":"20190717144000","address":"高德置地广场(冬商场)","city":"广州市","country":"","district":"天河区","latitude":"23.125756730662990","longitude":"113.333537851804800","province":"广东省","remark":"备注测试","aheadType":[{"offset":0},{"offset":300}],"attachments":[{"mediaType":"0","url":"livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}],"sonAddList":[{"localId":-1802564779,"grade":0,"todoTime":"20190722143000","title":"子任务1"}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 709
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:55 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1488
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369224","shortTitle":"测试日程编辑流程new","deleted":false,"status":1,"importance":2,"aheadType":[{"offset":0}],"todoClassifyId":"1002","todoType":1,"startDatetime":"20190717000000","endDatetime":"20190717235959","created":1571110136000,"updated":1571110136219,"version":"2948","ruleInfo":[{"id":"4404520435570369241","startDatetime":"20190717000000","endDatetime":"20190717235959","rules":[{"type":"Solar","expression":"0 40 14 * * ?"}],"attachDatetimes":[],"detachDatetimes":[],"intervalType":1,"duration":{},"closeState":0,"repeatType":0,"created":1571110136000,"updated":1571110136219}],"task":[{"id":"4404520435570364126","title":"子任务1","startDatetime":"20190717000000","endDatetime":"20190717235959","todoTime":"20190722143000","grade":0,"deleted":false,"created":1571110136219,"updated":1571110136219}],"personalizedInfo":[{"ruleId":"4404520435570369241","todoTime":"20190717144000","aheadType":[{"offset":0},{"offset":300}],"deleted":false,"longitude":"113.333537851804800","latitude":"23.125756730662990","country":"","province":"广东省","city":"广州市","district":"天河区","address":"高德置地广场(冬商场)","attachments":[{"mediaType":0,"url":"livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}],"finishState":0,"finishTime":"20191015112856","remark":"备注测试","created":1571110136000,"updated":1571110136219,"completeTime":0,"taskFinishs":[]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">6-日程子任务编辑</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110135257</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">115 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">115 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">1611</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/schedule/edit</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"duration":0,"importance":2,"intervalType":1,"localId":2504001392817998855,"id":4404520435570369224,"todoClassifyId":1002,"shortTitle":"测试日程编辑流程new","title":"测试日程编辑流程new","todoTime":"20190717144000","address":"高德置地广场(冬商场)","city":"广州市","country":"","district":"天河区","latitude":"23.125756730662990","longitude":"113.333537851804800","province":"广东省","remark":"备注测试","aheadType":[{"offset":0},{"offset":300}],"attachments":[{"mediaType":"0","url":"livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}],"sonUpdateList":[{"localId":2504001392817995776,"grade":0,"todoTime":"20190722143000","title":"子任务11","id":4404520435570364126}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 746
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:55 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1489
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369224","shortTitle":"测试日程编辑流程new","deleted":false,"status":1,"importance":2,"aheadType":[{"offset":0}],"todoClassifyId":"1002","todoType":1,"startDatetime":"20190717000000","endDatetime":"20190717235959","created":1571110136000,"updated":1571110136379,"version":"2949","ruleInfo":[{"id":"4404520435570369241","startDatetime":"20190717000000","endDatetime":"20190717235959","rules":[{"type":"Solar","expression":"0 40 14 * * ?"}],"attachDatetimes":[],"detachDatetimes":[],"intervalType":1,"duration":{},"closeState":0,"repeatType":0,"created":1571110136000,"updated":1571110136379}],"task":[{"id":"4404520435570364126","title":"子任务11","startDatetime":"20190717000000","endDatetime":"20190717235959","todoTime":"20190722143000","grade":0,"deleted":false,"created":1571110136000,"updated":1571110136379}],"personalizedInfo":[{"ruleId":"4404520435570369241","todoTime":"20190717144000","aheadType":[{"offset":0},{"offset":300}],"deleted":false,"longitude":"113.333537851804800","latitude":"23.125756730662990","country":"","province":"广东省","city":"广州市","district":"天河区","address":"高德置地广场(冬商场)","attachments":[{"mediaType":0,"url":"livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}],"finishState":0,"finishTime":"20191015112856","remark":"备注测试","created":1571110136000,"updated":1571110136379,"completeTime":0,"taskFinishs":[]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">7-日程子任务打卡</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110135414</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">84 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">84 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">461</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/checkin</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todoId":4404520435570369224,"finishState":1,"ruleId":4404520435570369241,"todoTime":"20190717144000","todoTaskId":4404520435570364126}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 136
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:55 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 340
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369224","personalizedInfo":[{"id":"4404520435570371173","ruleId":"4404520435570369241","finishState":1,"todoTime":"20190717144000","finishTime":"20191015112857","completeTime":0,"taskFinishs":[{"todoTaskId":"4404520435570364126","finishState":1,"finishTime":"20191015112857"}]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">8-日程子任务取消打卡</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110135542</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">83 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">83 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">461</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/checkin</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todoId":4404520435570369224,"finishState":0,"ruleId":4404520435570369241,"todoTime":"20190717144000","todoTaskId":4404520435570364126}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 136
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:56 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 340
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369224","personalizedInfo":[{"id":"4404520435570371173","ruleId":"4404520435570369241","finishState":0,"todoTime":"20190717144000","finishTime":"20191015112857","completeTime":0,"taskFinishs":[{"todoTaskId":"4404520435570364126","finishState":0,"finishTime":"20191015112857"}]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">9-日程打卡（含子任务）</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110135669</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">95 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">95 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">461</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/allCheckin</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todoId":4404520435570369224,"finishState":1,"ruleId":4404520435570369241,"todoTime":"20190717144000"}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 103
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:56 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 340
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369224","personalizedInfo":[{"id":"4404520435570371173","ruleId":"4404520435570369241","finishState":1,"todoTime":"20190717144000","finishTime":"20191015112856","completeTime":0,"taskFinishs":[{"todoTaskId":"4404520435570364126","finishState":1,"finishTime":"20191015112856"}]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">10-日程取消打卡（含子任务）</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110135812</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">83 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">83 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">461</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/checkin</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todoId":4404520435570369224,"finishState":0,"ruleId":4404520435570369241,"todoTime":"20190717144000"}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 103
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:56 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 340
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369224","personalizedInfo":[{"id":"4404520435570371173","ruleId":"4404520435570369241","finishState":0,"todoTime":"20190717144000","finishTime":"20191015112857","completeTime":0,"taskFinishs":[{"todoTaskId":"4404520435570364126","finishState":0,"finishTime":"20191015112857"}]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">11-日程子任务删除</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110135942</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">96 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">96 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">1693</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/schedule/edit</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"duration":0,"importance":2,"intervalType":1,"localId":2504001392817998855,"id":4404520435570369224,"todoClassifyId":1002,"shortTitle":"测试日程编辑流程new","title":"测试日程编辑流程new","todoTime":"20190717144000","address":"高德置地广场(冬商场)","city":"广州市","country":"","district":"天河区","latitude":"23.125756730662990","longitude":"113.333537851804800","province":"广东省","remark":"备注测试","aheadType":[{"offset":0},{"offset":300}],"attachments":[{"mediaType":"0","url":"livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}],"sonDeleteList":[{"localId":2504001392817995776,"grade":0,"todoTime":"20190722143000","title":"子任务11","id":4404520435570364126}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 746
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:56 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1571
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369224","shortTitle":"测试日程编辑流程new","deleted":false,"status":1,"importance":2,"aheadType":[{"offset":0}],"todoClassifyId":"1002","todoType":1,"startDatetime":"20190717000000","endDatetime":"20190717235959","created":1571110136000,"updated":1571110137061,"version":"2950","ruleInfo":[{"id":"4404520435570369241","startDatetime":"20190717000000","endDatetime":"20190717235959","rules":[{"type":"Solar","expression":"0 40 14 * * ?"}],"attachDatetimes":[],"detachDatetimes":[],"intervalType":1,"duration":{},"closeState":0,"repeatType":0,"created":1571110136000,"updated":1571110137061}],"task":[{"id":"4404520435570364126","title":"子任务11","startDatetime":"20190717000000","endDatetime":"20190716235959","todoTime":"20190722143000","grade":0,"deleted":false,"created":1571110136000,"updated":1571110137061}],"personalizedInfo":[{"ruleId":"4404520435570369241","todoTime":"20190717144000","aheadType":[{"offset":0},{"offset":300}],"deleted":false,"longitude":"113.333537851804800","latitude":"23.125756730662990","country":"","province":"广东省","city":"广州市","district":"天河区","address":"高德置地广场(冬商场)","attachments":[{"mediaType":0,"url":"livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}],"finishState":0,"finishTime":"20191015112857","remark":"备注测试","created":1571110136000,"updated":1571110137061,"completeTime":0,"taskFinishs":[{"todoTaskId":"4404520435570364126","finishState":0,"finishTime":"20191015112857"}]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">12-日程删除1</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110136075</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">76 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">76 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">287</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/delete</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"deleteInfos":[{"id":4404520435570369224,"todoTimes":["20190717144000"],"ruleIds":[4404520435570369241]}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 107
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:56 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 166
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"rows":[{"id":"4404520435570369224","todoType":1,"status":0,"deleted":false,"updated":1571110137196,"personalizedInfo":[]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">13-日程删除恢复</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110136189</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">71 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">71 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">196</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/recycled/recovery</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todoIds":[4404520435570369224]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 33
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:56 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 76
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"todoIds":["4404520435570369224"]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">14-日程删除2</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110136309</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">80 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">80 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">287</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/delete</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"deleteInfos":[{"id":4404520435570369224,"todoTimes":["20190717144000"],"ruleIds":[4404520435570369241]}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 107
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:56 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 166
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"rows":[{"id":"4404520435570369224","todoType":1,"status":0,"deleted":false,"updated":1571110137438,"personalizedInfo":[]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">15-日程永久删除</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110136431</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">53 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">53 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">163</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/recycled/delete</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todoIds":[4404520435570369224]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 33
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:56 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 43
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">16-日程添加（时间段+自定义分类+不提醒）</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110136536</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">80 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">80 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">852</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/schedule/batchadd</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todos":[{"duration":3600,"importance":1,"intervalType":2,"localId":-303505539,"todoClassifyId":4404520435570345088,"todoTime":"20191015113100","shortTitle":"时间段+自定义分类+不提醒20191015113100","title":"时间段+自定义分类+不提醒20191015113100","remark":""}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 284
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:56 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 731
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"todos":[{"localId":"-303505539","id":"4404520435570369225","shortTitle":"时间段+自定义分类+不提醒20191015113100","deleted":false,"status":1,"importance":1,"aheadType":[],"todoClassifyId":"4404520435570345088","todoType":1,"startDatetime":"20191015000000","endDatetime":"20191015235959","created":1571110137655,"updated":1571110137655,"version":"2955","ruleInfo":[{"id":"4404520435570369242","startDatetime":"20191015000000","endDatetime":"20191015235959","rules":[{"type":"Solar","expression":"0 31 11 * * ?"}],"attachDatetimes":[],"detachDatetimes":[],"intervalType":2,"duration":{"1131":3600},"closeState":0,"repeatType":0,"created":1571110137655,"updated":1571110137655}]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">17-添加专注</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110136666</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">71 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">71 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">163</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/focus/add</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"finishState":"1","linkId":"4404520435570369225","useTime":"5","linkType":"todo","fullTime":"5","startTime":20190807144728,"endTime":20190807145228,"title":"时间段+自定义分类+不提醒"}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 195
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:57 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 43
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">18-设置时长</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110136783</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">82 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">82 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">689</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/setCompleteTime</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"completeTime":300,"id":4404520435570369225,"todoTime":"20191015113100"}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 73
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:57 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 568
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369225","shortTitle":"时间段+自定义分类+不提醒20191015113100","deleted":false,"status":1,"importance":1,"aheadType":[],"todoClassifyId":"4404520435570345088","todoType":1,"startDatetime":"20191015000000","endDatetime":"20191015235959","created":1571110138000,"updated":1571110138000,"version":"2955","personalizedInfo":[{"ruleId":"4404520435570369242","todoTime":"20191015113100","aheadType":[],"deleted":false,"finishState":0,"created":1571110137918,"updated":1571110137901,"completeTime":300}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">19-专注打卡</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110136917</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">69 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">69 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">381</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/allCheckin</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todoId":4404520435570369225,"finishState":1,"ruleId":4404520435570369242,"todoTime":"20191015113100"}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 103
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:57 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 260
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369225","personalizedInfo":[{"id":"4404520435570371174","ruleId":"4404520435570369242","finishState":1,"todoTime":"20191015113100","finishTime":"20191015112858","completeTime":300,"taskFinishs":[]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">20-已打卡修改花费时间</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110137041</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">59 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">59 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">719</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/setCompleteTime</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"completeTime":600,"id":4404520435570369225,"todoTime":"20191015113100"}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 73
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:57 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 598
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369225","shortTitle":"时间段+自定义分类+不提醒20191015113100","deleted":false,"status":1,"importance":1,"aheadType":[],"todoClassifyId":"4404520435570345088","todoType":1,"startDatetime":"20191015000000","endDatetime":"20191015235959","created":1571110138000,"updated":1571110138000,"version":"2955","personalizedInfo":[{"ruleId":"4404520435570369242","todoTime":"20191015113100","aheadType":[],"deleted":false,"finishState":1,"finishTime":"20191015112858","created":1571110138000,"updated":1571110138161,"completeTime":600}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">21-已打卡修改备注</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110137147</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">86 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">86 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">1176</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/schedule/edit</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"duration":3600,"importance":1,"intervalType":2,"localId":4404520435570345092,"id":4404520435570369225,"todoClassifyId":4404520435570345088,"shortTitle":"时间段+自定义分类+不提醒20191015113100","title":"时间段+自定义分类+不提醒20191015113100","todoTime":"20191015113100","address":"","city":"","country":"","district":"","latitude":"","longitude":"","province":"","remark":"完成备注","aheadType":[],"attachments":[]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 443
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:57 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1054
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"id":"4404520435570369225","shortTitle":"时间段+自定义分类+不提醒20191015113100","deleted":false,"status":1,"importance":1,"aheadType":[],"todoClassifyId":"4404520435570345088","todoType":1,"startDatetime":"20191015000000","endDatetime":"20191015235959","created":1571110138000,"updated":1571110138265,"version":"2956","ruleInfo":[{"id":"4404520435570369242","startDatetime":"20191015000000","endDatetime":"20191015235959","rules":[{"type":"Solar","expression":"0 31 11 * * ?"}],"attachDatetimes":[],"detachDatetimes":[],"intervalType":2,"duration":{"1131":3600},"closeState":0,"repeatType":0,"created":1571110138000,"updated":1571110138265}],"task":[],"personalizedInfo":[{"ruleId":"4404520435570369242","todoTime":"20191015113100","aheadType":[],"deleted":false,"country":"","province":"","city":"","district":"","address":"","attachments":[],"finishState":1,"finishTime":"20191015112858","remark":"完成备注","created":1571110138000,"updated":1571110138265,"completeTime":600,"taskFinishs":[]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">22-日程添加（全天+提前提醒）</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110137282</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">73 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">73 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">801</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/schedule/batchadd</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todos":[{"duration":0,"importance":2,"intervalType":0,"localId":-466376764,"todoClassifyId":1001,"todoTime":"20191015000000","shortTitle":"全天日程20191015113100","title":"全天日程20191015113100","aheadType":[{"offset":0},{"offset":300}],"remark":""}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 262
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:57 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 680
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"todos":[{"localId":"-466376764","id":"4404520435570369226","shortTitle":"全天日程20191015113100","deleted":false,"status":1,"importance":2,"aheadType":[],"todoClassifyId":"1001","todoType":1,"startDatetime":"20191015000000","endDatetime":"20191015235959","created":1571110138400,"updated":1571110138400,"version":"2957","ruleInfo":[{"id":"4404520435570369243","startDatetime":"20191015000000","endDatetime":"20191015235959","rules":[{"type":"Solar","expression":"0 0 0 * * ?"}],"attachDatetimes":[],"detachDatetimes":[],"intervalType":0,"duration":{},"closeState":0,"repeatType":0,"created":1571110138400,"updated":1571110138400}]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">23-日程转清单</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110137401</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">155 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">155 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">662</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/service/aggregation/schedule/tochecklist</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"duration":0,"importance":2,"intervalType":1,"localId":4404520435570346090,"id":4404520435570369226,"todoClassifyId":1001,"shortTitle":"全天日程20191015113100","title":"全天日程20191015113100","todoTime":"20191015000000","address":"","city":"","country":"","district":"","latitude":"","longitude":"","province":"","remark":"","aheadType":[],"attachments":[]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 367
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:58 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 541
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"checklist":{"id":"4404520435570363121","shortTitle":"全天日程20191015113100","deleted":false,"status":1,"importance":2,"todoClassifyId":"1001","created":1571110138567,"updated":1571110138567,"version":"1011","task":[],"personalizedInfo":[{"deleted":false,"country":"","province":"","city":"","district":"","address":"","attachments":[],"finishState":0,"remark":"","created":1571110138567,"updated":1571110138567,"taskFinishs":[]}]},"todo":{"id":"4404520435570369226","status":0,"deleted":true}}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">24-批量添加日程</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110137604</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">92 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">92 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">1437</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/schedule/batchadd</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"todos":[{"duration":0,"importance":2,"intervalType":1,"localId":-441037804,"todoClassifyId":1001,"todoTime":"20191015113100","shortTitle":"批量添加日程第二条","title":"批量添加日程第二条","remark":""},{"duration":0,"importance":2,"intervalType":1,"localId":-1220431593,"todoClassifyId":1001,"todoTime":"20191015113100","shortTitle":"批量添加日程第一条","title":"批量添加日程第一条","remark":""}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 434
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:57 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1315
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"todos":[{"localId":"-1220431593","id":"4404520435570369227","shortTitle":"批量添加日程第一条","deleted":false,"status":1,"importance":2,"aheadType":[],"todoClassifyId":"1001","todoType":1,"startDatetime":"20191015000000","endDatetime":"20191015235959","created":1571110138724,"updated":1571110138724,"version":"2960","ruleInfo":[{"id":"4404520435570369244","startDatetime":"20191015000000","endDatetime":"20191015235959","rules":[{"type":"Solar","expression":"0 31 11 * * ?"}],"attachDatetimes":[],"detachDatetimes":[],"intervalType":1,"duration":{},"closeState":0,"repeatType":0,"created":1571110138724,"updated":1571110138724}]},{"localId":"-441037804","id":"4404520435570369228","shortTitle":"批量添加日程第二条","deleted":false,"status":1,"importance":2,"aheadType":[],"todoClassifyId":"1001","todoType":1,"startDatetime":"20191015000000","endDatetime":"20191015235959","created":1571110138724,"updated":1571110138724,"version":"2961","ruleInfo":[{"id":"4404520435570369245","startDatetime":"20191015000000","endDatetime":"20191015235959","rules":[{"type":"Solar","expression":"0 31 11 * * ?"}],"attachDatetimes":[],"detachDatetimes":[],"intervalType":1,"duration":{},"closeState":0,"repeatType":0,"created":1571110138724,"updated":1571110138724}]}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">25-日程排序</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110137741</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">56 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">56 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">317</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data"></td></tr></table></div><div class="trail"></div><div class="group">Assertion</div><div class="zebra"><table><tbody class=""><tr><td colspan="3" class="data assertion">BeanShell断言</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data">返回值断言匹配通过</td></tr></tbody><tbody class=""><tr><td colspan="3" class="data assertion">数据库校验</td></tr><tr><td class="data key">Failure</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Error</td><td class="data delimiter">:</td><td class="data">false</td></tr><tr><td class="data key">Failure Message</td><td class="data delimiter">:</td><td class="data"></td></tr></tbody></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">POST http://47.112.0.183:8801/base/plan/record/sort</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"sorts":[{"addNode":4404520435570369228,"addType":1,"afterNode":4404520435570369227,"afterType":1,"deleteNode":4404520435570369228,"deleteType":1}]}</pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Content-Type: application/json;charset=UTF-8
+Accept-Encoding: gzip
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+User-Agent: okhttp/3.3.0
+Content-Length: 149
+Host: 47.112.0.183:8801
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 
+Date: Tue, 15 Oct 2019 03:28:57 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 196
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"code":200,"msg":"操作成功","data":{"sorts":[{"addType":1,"addNode":"4404520435570369228","afterType":1,"afterNode":"4404520435570369227","deleteType":1,"deleteNode":"4404520435570369228"}]}}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">Debug Sampler</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">流程测试引擎 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1571110137827</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">3 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">0 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">22872</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data"> </pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">JMeterVariables:
+JMeterThread.last_sample_ok=true
+JMeterThread.pack=org.apache.jmeter.threads.SamplePackage@1047453a
+M=1
+N=25
+NULL=NULL
+NULL_matchNr=0
+START.HMS=112852
+START.MS=1571110132670
+START.YMD=20191015
+TESTSTART.MS=1571110133070
+Vcode_#=1
+Vcode_1=0
+__jm__流程循环__idx=0
+__jm__流程测试引擎__idx=0
+__jm__节点循环__idx=0
+__jmeter.U_T__=流程测试引擎 1-1
+account_#=1
+account_1=13610150696
+afterOneDay=20191016
+afterThreeDay=20191018
+content=test
+currentDay=20191015
+currentMin=201910151131
+currentMin_add1=20191015113100
+currentMin_add2=20191015113200
+currentMin_add6=20191015113700
+currentTime=20191015112853  
+currentTimeByMM=201910151128  
+dbcheckpool=org.apache.jmeter.protocol.jdbc.config.DataSourceElement$DataSourceComponentImpl@2803037f
+device={"deviceType":"1","appVersion":"1.5.0","deviceTag":"59db5d3aef9002a9","isRoot":false,"osVersion":27,"ip":"172.16.10.55","channel":"_360","deviceModel":"Meizu-16th Plus","channelName":"android","channelType":"sgx","deviceTagApp":"59db5d3aef9002a9"}
+deviceTagApp=59db5d3aef9002a9
+device_model=Meizu-16th Plus
+email=testbind@qq.com
+endDateTime=20991231235959
+expect_db_#=25
+expect_db_1={"short_title":"测试日程编辑流程","importance":1,"ahead_type":"[{\"offset\":0}]","classify_id":1001,"todo_type":1,"start_datetime":"20190716000000","end_datetime":"20190716235959","rules_json":"[{\"type\":\"Solar\",\"expression\":\"0 40 14 * * ?\"}]","status":1}
+expect_db_10=
+expect_db_11={"start_datetime":"20190717000000","end_datetime":"20190716235959"}
+expect_db_12={"status":0}
+expect_db_13=
+expect_db_14={"status":0}
+expect_db_15=
+expect_db_16=
+expect_db_17=
+expect_db_18=
+expect_db_19=
+expect_db_2={"short_title":"测试日程编辑流程new","importance":2,"ahead_type":"[{\"offset\":0},{\"offset\":300}]","classify_id":1002,"todo_type":1,"start_datetime":"20190717000000","end_datetime":"20190717235959","rules_json":"[{\"type\":\"Solar\",\"expression\":\"0 40 14 * * ?\"}]","status":1}
+expect_db_20=
+expect_db_21=
+expect_db_22=
+expect_db_23=
+expect_db_24=
+expect_db_25=
+expect_db_3={"finish_state":1}
+expect_db_4={"finish_state":0}
+expect_db_5={"title":"子任务1","start_datetime":"20190717000000","end_datetime":"20190717235959","todo_time":"20190722143000"}
+expect_db_6={"title":"子任务11","start_datetime":"20190717000000","end_datetime":"20190717235959","todo_time":"20190722143000"}
+expect_db_7={"finish_state":1}
+expect_db_8={"finish_state":0}
+expect_db_9=
+expect_response_#=25
+expect_response_1="code":200,"msg":"操作成功"|"shortTitle":"测试日程编辑流程"|"expression":"0 40 14 * * ?"
+expect_response_10="code":200,"msg":"操作成功"
+expect_response_11="code":200,"msg":"操作成功"|"endDatetime":"20190716235959"
+expect_response_12="code":200,"msg":"操作成功"|"status":0
+expect_response_13="code":200,"msg":"操作成功"
+expect_response_14="code":200,"msg":"操作成功"|"status":0
+expect_response_15="code":200,"msg":"操作成功"
+expect_response_16="code":200,"msg":"操作成功"
+expect_response_17="code":200,"msg":"操作成功"
+expect_response_18="code":200,"msg":"操作成功"
+expect_response_19="code":200,"msg":"操作成功"
+expect_response_2="code":200,"msg":"操作成功"|"shortTitle":"测试日程编辑流程new"
+expect_response_20="code":200,"msg":"操作成功"
+expect_response_21="code":200,"msg":"操作成功"
+expect_response_22="code":200,"msg":"操作成功"
+expect_response_23="code":200,"msg":"操作成功"
+expect_response_24="code":200,"msg":"操作成功"
+expect_response_25="code":200,"msg":"操作成功"
+expect_response_3="code":200,"msg":"操作成功"|"finishState":1
+expect_response_4="code":200,"msg":"操作成功"|"finishState":0
+expect_response_5="code":200,"msg":"操作成功"|"title":"子任务1"
+expect_response_6="code":200,"msg":"操作成功"|"title":"子任务11"
+expect_response_7="code":200,"msg":"操作成功"|"finishState":1
+expect_response_8="code":200,"msg":"操作成功"|"finishState":0
+expect_response_9="code":200,"msg":"操作成功"
+flow_id_#=1
+flow_id_1=1
+flow_name_#=1
+flow_name_1=日程编辑
+id=4404520435570369226
+id1=4404520435570369227
+id2=4404520435570369228
+importance=2
+ischechdb_#=25
+ischechdb_1=0
+ischechdb_10=0
+ischechdb_11=0
+ischechdb_12=0
+ischechdb_13=0
+ischechdb_14=0
+ischechdb_15=0
+ischechdb_16=0
+ischechdb_17=0
+ischechdb_18=0
+ischechdb_19=0
+ischechdb_2=0
+ischechdb_20=0
+ischechdb_21=0
+ischechdb_22=0
+ischechdb_23=0
+ischechdb_24=0
+ischechdb_25=0
+ischechdb_3=0
+ischechdb_4=0
+ischechdb_5=0
+ischechdb_6=0
+ischechdb_7=0
+ischechdb_8=0
+ischechdb_9=0
+isexcute_pre_sql_#=25
+isexcute_pre_sql_1=0
+isexcute_pre_sql_10=0
+isexcute_pre_sql_11=0
+isexcute_pre_sql_12=0
+isexcute_pre_sql_13=0
+isexcute_pre_sql_14=0
+isexcute_pre_sql_15=0
+isexcute_pre_sql_16=0
+isexcute_pre_sql_17=0
+isexcute_pre_sql_18=0
+isexcute_pre_sql_19=0
+isexcute_pre_sql_2=0
+isexcute_pre_sql_20=0
+isexcute_pre_sql_21=0
+isexcute_pre_sql_22=0
+isexcute_pre_sql_23=0
+isexcute_pre_sql_24=0
+isexcute_pre_sql_25=0
+isexcute_pre_sql_3=0
+isexcute_pre_sql_4=0
+isexcute_pre_sql_5=0
+isexcute_pre_sql_6=0
+isexcute_pre_sql_7=0
+isexcute_pre_sql_8=0
+isexcute_pre_sql_9=0
+method_#=25
+method_1=POST
+method_10=POST
+method_11=POST
+method_12=POST
+method_13=POST
+method_14=POST
+method_15=POST
+method_16=POST
+method_17=POST
+method_18=POST
+method_19=POST
+method_2=POST
+method_20=POST
+method_21=POST
+method_22=POST
+method_23=POST
+method_24=POST
+method_25=POST
+method_3=POST
+method_4=POST
+method_5=POST
+method_6=POST
+method_7=POST
+method_8=POST
+method_9=POST
+mobile=14400001111
+next_time_add3=2019-10-15 11:32:53
+node_code_#=25
+node_code_1=FLOW_001NODE_01
+node_code_10=FLOW_001_NODE_010
+node_code_11=FLOW_001_NODE_011
+node_code_12=FLOW_001_NODE_012
+node_code_13=FLOW_001_NODE_013
+node_code_14=FLOW_001_NODE_014
+node_code_15=FLOW_001_NODE_015
+node_code_16=FLOW_001_NODE_016
+node_code_17=FLOW_001_NODE_017
+node_code_18=FLOW_001_NODE_018
+node_code_19=FLOW_001_NODE_019
+node_code_2=FLOW_001_NODE_002
+node_code_20=FLOW_001_NODE_020
+node_code_21=FLOW_001_NODE_021
+node_code_22=FLOW_001_NODE_022
+node_code_23=FLOW_001_NODE_023
+node_code_24=FLOW_001_NODE_024
+node_code_25=FLOW_001_NODE_025
+node_code_3=FLOW_001_NODE_003
+node_code_4=FLOW_001_NODE_004
+node_code_5=FLOW_001_NODE_005
+node_code_6=FLOW_001_NODE_006
+node_code_7=FLOW_001_NODE_007
+node_code_8=FLOW_001_NODE_008
+node_code_9=FLOW_001_NODE_009
+node_id_#=25
+node_id_1=66
+node_id_10=105
+node_id_11=45
+node_id_12=46
+node_id_13=96
+node_id_14=67
+node_id_15=95
+node_id_16=97
+node_id_17=99
+node_id_18=100
+node_id_19=101
+node_id_2=79
+node_id_20=102
+node_id_21=103
+node_id_22=98
+node_id_23=106
+node_id_24=107
+node_id_25=108
+node_id_3=68
+node_id_4=69
+node_id_5=41
+node_id_6=42
+node_id_7=43
+node_id_8=44
+node_id_9=104
+node_name_#=25
+node_name_1=日程添加（时间点+默认分类+准时提醒）
+node_name_10=日程取消打卡（含子任务）
+node_name_11=日程子任务删除
+node_name_12=日程删除1
+node_name_13=日程删除恢复
+node_name_14=日程删除2
+node_name_15=日程永久删除
+node_name_16=日程添加（时间段+自定义分类+不提醒）
+node_name_17=添加专注
+node_name_18=设置时长
+node_name_19=专注打卡
+node_name_2=日程修改
+node_name_20=已打卡修改花费时间
+node_name_21=已打卡修改备注
+node_name_22=日程添加（全天+提前提醒）
+node_name_23=日程转清单
+node_name_24=批量添加日程
+node_name_25=日程排序
+node_name_3=日程打卡
+node_name_4=日程取消打卡
+node_name_5=日程子任务添加
+node_name_6=日程子任务编辑
+node_name_7=日程子任务打卡
+node_name_8=日程子任务取消打卡
+node_name_9=日程打卡（含子任务）
+para={"sorts":[{"addNode":4404520435570369228,"addType":1,"afterNode":4404520435570369227,"afterType":1,"deleteNode":4404520435570369228,"deleteType":1}]}
+parameter_#=25
+parameter_1={"todos": [{"title": "测试日程编辑流程", "localId": -1563241933492017464, "duration": 0, "todoTime": "20190716144000", "aheadType": [{"offset": 0}], "importance": 1, "shortTitle": "测试日程编辑流程", "intervalType": 1, "todoClassifyId": 1001}]}
+parameter_10={"todoId":$id$,"finishState":0,"ruleId":$ruleId$,"todoTime":"20190717144000"}
+parameter_11={"duration":0,"importance":2,"intervalType":1,"localId":2504001392817998855,"id":$id$,"todoClassifyId":1002,"shortTitle":"测试日程编辑流程new","title":"测试日程编辑流程new","todoTime":"20190717144000","address":"高德置地广场(冬商场)","city":"广州市","country":"","district":"天河区","latitude":"23.125756730662990","longitude":"113.333537851804800","province":"广东省","remark":"备注测试","aheadType":[{"offset":0},{"offset":300}],"attachments":[{"mediaType":"0","url":"livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}],"sonDeleteList":[{"localId":2504001392817995776,"grade":0,"todoTime":"20190722143000","title":"子任务11","id":$taskId$}]}
+parameter_12={"deleteInfos":[{"id":$id$,"todoTimes":["20190717144000"],"ruleIds":[$ruleId$]}]}
+parameter_13={"todoIds":[$id$]}
+parameter_14={"deleteInfos":[{"id":$id$,"todoTimes":["20190717144000"],"ruleIds":[$ruleId$]}]}
+parameter_15={"todoIds":[$id$]}
+parameter_16={"todos":[{"duration":3600,"importance":1,"intervalType":2,"localId":-303505539,"todoClassifyId":4404520435570345088,"todoTime":"$currentMin_add1$","shortTitle":"时间段+自定义分类+不提醒$currentMin_add1$","title":"时间段+自定义分类+不提醒$currentMin_add1$","remark":""}]}
+parameter_17={"finishState":"1","linkId":"$id$","useTime":"5","linkType":"todo","fullTime":"5","startTime":20190807144728,"endTime":20190807145228,"title":"时间段+自定义分类+不提醒"}
+parameter_18={"completeTime":300,"id":$id$,"todoTime":"$currentMin_add1$"}
+parameter_19={"todoId":$id$,"finishState":1,"ruleId":$ruleId$,"todoTime":"$currentMin_add1$"}
+parameter_2={"duration": 0,"importance": 2,"intervalType": 1,"localId": 126100789566398197,"id": "$id$","todoClassifyId": 1002,"shortTitle": "测试日程编辑流程new","title": "测试日程编辑流程new","newTodoTime": "20190717144000","todoTime": "20190716144000","address": "高德置地广场(冬商场)","city": "广州市","country": "","district": "天河区","latitude": "23.125756730662990","longitude": "113.333537851804800","province": "广东省","remark": "备注测试","aheadType": [{"offset": 0}, {"offset": 300}],"attachments": [{"mediaType": "0","url": "livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}]}
+parameter_20={"completeTime":600,"id":$id$,"todoTime":"$currentMin_add1$"}
+parameter_21={"duration":3600,"importance":1,"intervalType":2,"localId":4404520435570345092,"id":$id$,"todoClassifyId":4404520435570345088,"shortTitle":"时间段+自定义分类+不提醒$currentMin_add1$","title":"时间段+自定义分类+不提醒$currentMin_add1$","todoTime":"$currentMin_add1$","address":"","city":"","country":"","district":"","latitude":"","longitude":"","province":"","remark":"完成备注","aheadType":[],"attachments":[]}
+parameter_22={"todos":[{"duration":0,"importance":2,"intervalType":0,"localId":-466376764,"todoClassifyId":1001,"todoTime":"$currentDay$000000","shortTitle":"全天日程$currentMin_add1$","title":"全天日程$currentMin_add1$","aheadType":[{"offset":0},{"offset":300}],"remark":""}]}
+parameter_23={"duration":0,"importance":2,"intervalType":1,"localId":4404520435570346090,"id":$id$,"todoClassifyId":1001,"shortTitle":"全天日程$currentMin_add1$","title":"全天日程$currentMin_add1$","todoTime":"$currentDay$000000","address":"","city":"","country":"","district":"","latitude":"","longitude":"","province":"","remark":"","aheadType":[],"attachments":[]}
+parameter_24={"todos":[{"duration":0,"importance":2,"intervalType":1,"localId":-441037804,"todoClassifyId":1001,"todoTime":"$currentMin_add1$","shortTitle":"批量添加日程第二条","title":"批量添加日程第二条","remark":""},{"duration":0,"importance":2,"intervalType":1,"localId":-1220431593,"todoClassifyId":1001,"todoTime":"$currentMin_add1$","shortTitle":"批量添加日程第一条","title":"批量添加日程第一条","remark":""}]}
+parameter_25={"sorts":[{"addNode":$id2$,"addType":1,"afterNode":$id1$,"afterType":1,"deleteNode":$id2$,"deleteType":1}]}
+parameter_3={
+  "todoId": "$id$",
+  "finishState": 1,
+  "ruleId": "$ruleId$",
+  "todoTime": "20190717144000"
+}
+parameter_4={"todoId":$id$,"finishState":0,"ruleId":$ruleId$,"todoTime":"20190717144000"}
+parameter_5={"duration":0,"importance":2,"intervalType":1,"localId":2504001392817998855,"id":$id$,"todoClassifyId":1002,"shortTitle":"测试日程编辑流程new","title":"测试日程编辑流程new","todoTime":"20190717144000","address":"高德置地广场(冬商场)","city":"广州市","country":"","district":"天河区","latitude":"23.125756730662990","longitude":"113.333537851804800","province":"广东省","remark":"备注测试","aheadType":[{"offset":0},{"offset":300}],"attachments":[{"mediaType":"0","url":"livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}],"sonAddList":[{"localId":-1802564779,"grade":0,"todoTime":"20190722143000","title":"子任务1"}]}
+parameter_6={"duration":0,"importance":2,"intervalType":1,"localId":2504001392817998855,"id":$id$,"todoClassifyId":1002,"shortTitle":"测试日程编辑流程new","title":"测试日程编辑流程new","todoTime":"20190717144000","address":"高德置地广场(冬商场)","city":"广州市","country":"","district":"天河区","latitude":"23.125756730662990","longitude":"113.333537851804800","province":"广东省","remark":"备注测试","aheadType":[{"offset":0},{"offset":300}],"attachments":[{"mediaType":"0","url":"livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg"}],"sonUpdateList":[{"localId":2504001392817995776,"grade":0,"todoTime":"20190722143000","title":"子任务11","id":$taskId$}]}
+parameter_7={"todoId":$id$,"finishState":1,"ruleId":$ruleId$,"todoTime":"20190717144000","todoTaskId":$taskId$}
+parameter_8={"todoId":$id$,"finishState":0,"ruleId":$ruleId$,"todoTime":"20190717144000","todoTaskId":$taskId$}
+parameter_9={"todoId":$id$,"finishState":1,"ruleId":$ruleId$,"todoTime":"20190717144000"}
+password=123456
+password_#=1
+password_1=666666
+path_#=25
+path_1=/base/plan/schedule/batchadd
+path_10=/base/plan/checkin
+path_11=/base/plan/schedule/edit
+path_12=/base/plan/delete
+path_13=/base/plan/recycled/recovery
+path_14=/base/plan/delete
+path_15=/base/plan/recycled/delete
+path_16=/base/plan/schedule/batchadd
+path_17=/base/focus/add
+path_18=/base/plan/setCompleteTime
+path_19=/base/plan/allCheckin
+path_2=/base/plan/schedule/edit
+path_20=/base/plan/setCompleteTime
+path_21=/base/plan/schedule/edit
+path_22=/base/plan/schedule/batchadd
+path_23=/service/aggregation/schedule/tochecklist
+path_24=/base/plan/schedule/batchadd
+path_25=/base/plan/record/sort
+path_3=/base/plan/allCheckin
+path_4=/base/plan/checkin
+path_5=/base/plan/schedule/edit
+path_6=/base/plan/schedule/edit
+path_7=/base/plan/checkin
+path_8=/base/plan/checkin
+path_9=/base/plan/allCheckin
+post_keys_#=25
+post_keys_1=id
+post_keys_10=NULL
+post_keys_11=id;ruleId;taskId
+post_keys_12=NULL
+post_keys_13=NULL
+post_keys_14=NULL
+post_keys_15=NULL
+post_keys_16=id;ruleId
+post_keys_17=NULL
+post_keys_18=NULL
+post_keys_19=NULL
+post_keys_2=id;ruleId
+post_keys_20=NULL
+post_keys_21=NULL
+post_keys_22=id;ruleId
+post_keys_23=NULL
+post_keys_24=id1;id2
+post_keys_25=NULL
+post_keys_3=id
+post_keys_4=id
+post_keys_5=id;ruleId;taskId
+post_keys_6=id;ruleId;taskId
+post_keys_7=NULL
+post_keys_8=NULL
+post_keys_9=NULL
+post_keys_default_#=25
+post_keys_default_1=0
+post_keys_default_10=NULL
+post_keys_default_11=0;0;0
+post_keys_default_12=NULL
+post_keys_default_13=NULL
+post_keys_default_14=NULL
+post_keys_default_15=NULL
+post_keys_default_16=0;0
+post_keys_default_17=NULL
+post_keys_default_18=NULL
+post_keys_default_19=NULL
+post_keys_default_2=0;0
+post_keys_default_20=NULL
+post_keys_default_21=NULL
+post_keys_default_22=0;0
+post_keys_default_23=NULL
+post_keys_default_24=0;0
+post_keys_default_25=NULL
+post_keys_default_3=0
+post_keys_default_4=0
+post_keys_default_5=0;0;0
+post_keys_default_6=0;0;0
+post_keys_default_7=NULL
+post_keys_default_8=NULL
+post_keys_default_9=NULL
+post_keys_extractor_#=25
+post_keys_extractor_1=$.data.todos[0].id
+post_keys_extractor_10=NULL
+post_keys_extractor_11=$.data.id;$.data.ruleInfo[0].id;$.data.task[0].id
+post_keys_extractor_12=NULL
+post_keys_extractor_13=NULL
+post_keys_extractor_14=NULL
+post_keys_extractor_15=NULL
+post_keys_extractor_16=$.data.todos[0].id;$.data.todos[0].ruleInfo[0].id
+post_keys_extractor_17=NULL
+post_keys_extractor_18=NULL
+post_keys_extractor_19=NULL
+post_keys_extractor_2=$.data.id;$.data.ruleInfo[0].id
+post_keys_extractor_20=NULL
+post_keys_extractor_21=NULL
+post_keys_extractor_22=$.data.todos[0].id;$.data.todos[0].ruleInfo[0].id
+post_keys_extractor_23=NULL
+post_keys_extractor_24=$.data.todos[0].id;$.data.todos[1].id
+post_keys_extractor_25=NULL
+post_keys_extractor_3=$.data.id
+post_keys_extractor_4=$.data.id
+post_keys_extractor_5=$.data.id;$.data.ruleInfo[0].id;$.data.task[0].id
+post_keys_extractor_6=$.data.id;$.data.ruleInfo[0].id;$.data.task[0].id
+post_keys_extractor_7=NULL
+post_keys_extractor_8=NULL
+post_keys_extractor_9=NULL
+pre_keys_#=25
+pre_keys_1=null
+pre_keys_10=id;ruleId
+pre_keys_11=id;taskId
+pre_keys_12=id;ruleId
+pre_keys_13=id
+pre_keys_14=id;ruleId
+pre_keys_15=id
+pre_keys_16=currentMin_add1
+pre_keys_17=id
+pre_keys_18=id;currentMin_add1
+pre_keys_19=id;ruleId;currentMin_add1
+pre_keys_2=id
+pre_keys_20=id;currentMin_add1
+pre_keys_21=id;currentMin_add1
+pre_keys_22=currentDay;currentMin_add1
+pre_keys_23=id;currentMin_add1;currentDay
+pre_keys_24=currentMin_add1
+pre_keys_25=id1;id2
+pre_keys_3=id;ruleId
+pre_keys_4=id;ruleId
+pre_keys_5=id
+pre_keys_6=id;taskId
+pre_keys_7=id;ruleId;taskId
+pre_keys_8=id;ruleId;taskId
+pre_keys_9=id;ruleId
+pre_sql=
+pre_sql_out_#=25
+pre_sql_out_1=null
+pre_sql_out_10=null
+pre_sql_out_11=null
+pre_sql_out_12=null
+pre_sql_out_13=null
+pre_sql_out_14=null
+pre_sql_out_15=null
+pre_sql_out_16=null
+pre_sql_out_17=null
+pre_sql_out_18=null
+pre_sql_out_19=null
+pre_sql_out_2=null
+pre_sql_out_20=null
+pre_sql_out_21=null
+pre_sql_out_22=null
+pre_sql_out_23=null
+pre_sql_out_24=null
+pre_sql_out_25=null
+pre_sql_out_3=null
+pre_sql_out_4=null
+pre_sql_out_5=null
+pre_sql_out_6=null
+pre_sql_out_7=null
+pre_sql_out_8=null
+pre_sql_out_9=null
+pre_sql_para_#=25
+pre_sql_para_1=null
+pre_sql_para_10=null
+pre_sql_para_11=null
+pre_sql_para_12=null
+pre_sql_para_13=null
+pre_sql_para_14=null
+pre_sql_para_15=null
+pre_sql_para_16=null
+pre_sql_para_17=null
+pre_sql_para_18=null
+pre_sql_para_19=null
+pre_sql_para_2=null
+pre_sql_para_20=null
+pre_sql_para_21=null
+pre_sql_para_22=null
+pre_sql_para_23=null
+pre_sql_para_24=null
+pre_sql_para_25=null
+pre_sql_para_3=null
+pre_sql_para_4=null
+pre_sql_para_5=null
+pre_sql_para_6=null
+pre_sql_para_7=null
+pre_sql_para_8=null
+pre_sql_para_9=null
+pre_sql_str_#=25
+pre_sql_str_1=null
+pre_sql_str_10=null
+pre_sql_str_11=null
+pre_sql_str_12=null
+pre_sql_str_13=null
+pre_sql_str_14=null
+pre_sql_str_15=null
+pre_sql_str_16=null
+pre_sql_str_17=null
+pre_sql_str_18=null
+pre_sql_str_19=null
+pre_sql_str_2=null
+pre_sql_str_20=null
+pre_sql_str_21=null
+pre_sql_str_22=null
+pre_sql_str_23=null
+pre_sql_str_24=null
+pre_sql_str_25=null
+pre_sql_str_3=null
+pre_sql_str_4=null
+pre_sql_str_5=null
+pre_sql_str_6=null
+pre_sql_str_7=null
+pre_sql_str_8=null
+pre_sql_str_9=null
+results=[{status=0}]
+ruleId=4404520435570369243
+sleep_time_#=25
+sleep_time_1=0
+sleep_time_10=0
+sleep_time_11=0
+sleep_time_12=0
+sleep_time_13=0
+sleep_time_14=0
+sleep_time_15=0
+sleep_time_16=0
+sleep_time_17=0
+sleep_time_18=0
+sleep_time_19=0
+sleep_time_2=0
+sleep_time_20=0
+sleep_time_21=0
+sleep_time_22=0
+sleep_time_23=0
+sleep_time_24=0
+sleep_time_25=0
+sleep_time_3=0
+sleep_time_4=0
+sleep_time_5=0
+sleep_time_6=0
+sleep_time_7=0
+sleep_time_8=0
+sleep_time_9=0
+sql=
+sql_para_#=25
+sql_para_1=id
+sql_para_10=null
+sql_para_11=taskId
+sql_para_12=id
+sql_para_13=null
+sql_para_14=id
+sql_para_15=null
+sql_para_16=null
+sql_para_17=null
+sql_para_18=null
+sql_para_19=null
+sql_para_2=id
+sql_para_20=null
+sql_para_21=null
+sql_para_22=null
+sql_para_23=null
+sql_para_24=null
+sql_para_25=null
+sql_para_3=id
+sql_para_4=id
+sql_para_5=id;taskId
+sql_para_6=id;taskId
+sql_para_7=taskId
+sql_para_8=taskId
+sql_para_9=null
+sql_str_#=25
+sql_str_1=select short_title,todo_type,importance,classify_id,ahead_type, DATE_FORMAT(r.start_datetime,'%Y%m%d%H%i%s') as start_datetime,DATE_FORMAT(r.end_datetime,'%Y%m%d%H%i%s') as end_datetime,rules_json,status from plan.todo t INNER JOIN plan.todo_repeat_rule r on t.id = r.todo_id where t.id = $id$
+sql_str_10=
+sql_str_11=select DATE_FORMAT(start_datetime,'%Y%m%d%H%i%s') as start_datetime,DATE_FORMAT(end_datetime,'%Y%m%d%H%i%s') as end_datetime from plan.todo_task where id = $taskId$
+sql_str_12=select status from plan.todo t where t.id = $id$;
+sql_str_13=
+sql_str_14=select status from plan.todo t where t.id = $id$;
+sql_str_15=
+sql_str_16=
+sql_str_17=
+sql_str_18=
+sql_str_19=
+sql_str_2=select short_title,todo_type,importance,classify_id,f.ahead_type, DATE_FORMAT(r.start_datetime,'%Y%m%d%H%i%s') as start_datetime,DATE_FORMAT(r.end_datetime,'%Y%m%d%H%i%s') as end_datetime,rules_json,status from plan.todo t LEFT JOIN plan.todo_repeat_rule r on t.id = r.todo_id LEFT JOIN plan.todo_finish f on t.id = f.todo_id where t.id = $id$;
+sql_str_20=
+sql_str_21=
+sql_str_22=
+sql_str_23=
+sql_str_24=
+sql_str_25=
+sql_str_3=select finish_state from plan.todo t LEFT JOIN plan.todo_finish f on t.id = f.todo_id where t.id = $id$;
+sql_str_4=select finish_state from plan.todo t LEFT JOIN plan.todo_finish f on t.id = f.todo_id where t.id = $id$;
+sql_str_5=select title,DATE_FORMAT(start_datetime,'%Y%m%d%H%i%s') as start_datetime,DATE_FORMAT(end_datetime,'%Y%m%d%H%i%s') as end_datetime,DATE_FORMAT(todo_time,'%Y%m%d%H%i%s') as todo_time from plan.todo_task where id = $taskId$ and todo_id = $id$
+sql_str_6=select title,DATE_FORMAT(start_datetime,'%Y%m%d%H%i%s') as start_datetime,DATE_FORMAT(end_datetime,'%Y%m%d%H%i%s') as end_datetime,DATE_FORMAT(todo_time,'%Y%m%d%H%i%s') as todo_time from plan.todo_task where id = $taskId$ and todo_id = $id$
+sql_str_7=select finish_state from plan.todo_task_finish where todo_task_id = $taskId$
+sql_str_8=select finish_state from plan.todo_task_finish where todo_task_id = $taskId$
+sql_str_9=
+summaryDay=2019-10-15
+taskId=4404520435570364126
+todoDay=15
+todoDay3=18
+todoDay_add3=201910181128
+todoHH=11
+todoHH2=11
+todoHH6=11
+todoHHRepeat=11
+todoHHRepeat2=11
+todoHHRepeat6=11
+todoMonth=10
+todomm=31
+todomm2=32
+todomm6=37
+todommRepeat=31
+todommRepeat2=32
+todommRepeat6=37
+todotime=20191015112853
+todotime_add15=201910151143
+todotime_add2=201910151132
+todotime_add6=201910151137
+token=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token;user_id=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token;user_id_g=1
+token;user_id_g0="token":"b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c"
+token;user_id_g1=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+userid=4404520435568345088
+
+</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li></ol></div><div id="right-panel"></div></body></html>

@@ -3,6 +3,16 @@ import xml.etree.ElementTree as ET
 fileName = "测试流.jmx"
 
 
+def _encode(s, encoding):
+    try:
+        if isinstance(s, str):
+            return s
+        return s.encode(encoding)
+    except AttributeError:
+        return s
+
+ET._encode = _encode
+
 def changeAciton(newStr, path):
     f = open(path + fileName, mode='r', encoding='utf-8').read()
     oldStr = f[f.find("获取流程数据"):f.find("order by") - 1][f[f.find("获取流程数据"):f.find("order by")].find("and") + 4:]
@@ -62,17 +72,37 @@ def changeSThread(loops, num_threads, ramp_time,  path):
 
 # changeServiceInfo("172.16.10.172", "8080", "https", "G:\\svn\\自动化测试\\API-Test\\")
 
+#
+# def changeEmail(email, path):
+#     tree = ET.parse(path + 'build.xml')
+#     root = tree.getroot()
+#     print('tag:', root.tag, 'attrib:', root.attrib, 'text:', root.text)
+#     for elm in root:
+#         if elm.attrib.get("name") == "mail_to":
+#             print(elm.attrib.get("value"))
+#             elm.attrib["value"] = email
+#             print(elm.attrib.get("value"))
+#     tree.write(path + 'build.xml')
+
+
+
 
 def changeEmail(email, path):
-    tree = ET.parse(path + 'build.xml')
-    root = tree.getroot()
-    print('tag:', root.tag, 'attrib:', root.attrib, 'text:', root.text)
-    for elm in root:
-        if elm.attrib.get("name") == "mail_to":
-            print(elm.attrib.get("value"))
-            elm.attrib["value"] = email
-            print(elm.attrib.get("value"))
-    tree.write(path + 'build.xml')
+    f = open(path + "build.xml", mode='r', encoding='utf-8').read()
+    oldStr = f[f.find("<property name=\"mail_to\" value=")+len("<property name=\"mail_to\" value="):f.find("<property name=\"mailsubject\"")-7]
+    print(oldStr)
+    fileData = ''
+    with open(path + "build.xml", mode='r', encoding='utf-8') as ff:
+        for line in ff:
+            if "<property name=\"mail_to\" value=" + oldStr in line:
+                line = line.replace(oldStr, "\""+email+"\"")
+            fileData += line
+    with open(path + "build.xml", mode='w', encoding='utf-8') as ww:
+        ww.write(fileData)
+
+# changeEmail("","G:\\svn\\自动化测试\\API-Test\\")
+
+
 
 
 def getEmailList(path):

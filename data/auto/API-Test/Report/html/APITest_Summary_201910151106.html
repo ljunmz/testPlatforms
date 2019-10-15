@@ -1,0 +1,401 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>时光序API测试:2019/10/15 11:06</title>
+<style type="text/css">
+				body {
+					font:normal 68% verdana,arial,helvetica;
+					color:#000000;
+				}
+				table tr td, table tr th {
+					font-size: 68%;
+				}
+				table.details tr th{
+				    color: #ffffff;
+					font-weight: bold;
+					text-align:center;
+					background:#2674a6;
+					white-space: nowrap;
+				}
+				table.details tr td{
+					background:#eeeee0;
+					white-space: nowrap;
+				}
+				h1 {
+					margin: 0px 0px 5px; font: 165% verdana,arial,helvetica
+				}
+				h2 {
+					margin-top: 1em; margin-bottom: 0.5em; font: bold 125% verdana,arial,helvetica
+				}
+				h3 {
+					margin-bottom: 0.5em; font: bold 115% verdana,arial,helvetica
+				}
+				.Failure {
+					font-weight:bold; color:red;
+				}
+				
+	
+				img
+				{
+				  border-width: 0px;
+				}
+				
+				.expand_link
+				{
+				   position=absolute;
+				   right: 0px;
+				   width: 27px;
+				   top: 1px;
+				   height: 27px;
+				}
+				
+				.page_details
+				{
+				   display: none;
+				}
+                                
+                                .page_details_expanded
+                                {
+                                    display: block;
+                                    display/* hide this definition from  IE5/6 */: table-row;
+                                }
+
+
+			</style>
+<script language="JavaScript">
+                           function expand(details_id)
+			   {
+			      
+			      document.getElementById(details_id).className = "page_details_expanded";
+			   }
+			   
+			   function collapse(details_id)
+			   {
+			      
+			      document.getElementById(details_id).className = "page_details";
+			   }
+			   
+			   function change(details_id)
+			   {
+			      if(document.getElementById(details_id+"_image").src.match("http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg"))
+			      {
+			         document.getElementById(details_id+"_image").src = "http://ww1.sinaimg.cn/large/6fa4e58agy1fgkhzf6p25j200g00g03d.jpg";
+			         expand(details_id);
+			      }
+			      else
+			      {
+			         document.getElementById(details_id+"_image").src = "http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg";
+			         collapse(details_id);
+			      } 
+                           }
+			</script>
+</head>
+<body>
+<h1>时光序API测试:2019/10/15 11:06</h1>
+<table width="100%">
+<tr>
+<td align="left">执行时间: 2019/10/15 11:06</td><td align="center">执行环境:  47.112.0.183:8801</td><td align="right">Designed by shiguangxu test team.</td>
+</tr>
+</table>
+<hr size="1">
+<h2>结果概要</h2>
+<table width="95%" cellspacing="2" cellpadding="5" border="0" class="details" align="center">
+<tr valign="top">
+<th>总执行数</th><th>总失败数</th><th>总通过率</th><th>平均时间</th><th>最小时间</th><th>最大时间</th>
+</tr>
+<tr valign="top" class="Failure">
+<td align="center">15</td><td align="center">1</td><td align="center">93.33%</td><td align="center">119 ms</td><td align="center">2 ms</td><td align="center">601 ms</td>
+</tr>
+</table>
+<hr align="center" width="95%" size="1">
+<h2>接口清单</h2>
+<table width="95%" cellspacing="2" cellpadding="5" border="0" class="details" align="center">
+<tr valign="top">
+<th>接口名称</th><th>执行次数</th><th>失败次数</th><th>执行通过率</th><th>平均时间</th><th>最小时间</th><th>最大时间</th><th></th>
+</tr>
+<tr valign="top" class="">
+<td>获取流程数据</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">601 ms</td><td align="right">601 ms</td><td align="right">601 ms</td><td align="center"><a href="javascript:change('page_details_1')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_1_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_1">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "获取流程数据"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">601</td><td align="right">63</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>流程初始化预处理--1-记账</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">233 ms</td><td align="right">233 ms</td><td align="right">233 ms</td><td align="center"><a href="javascript:change('page_details_2')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_2_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_2">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "流程初始化预处理--1-记账"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">233</td><td align="right">4234</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>1-开启提醒开关</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">86 ms</td><td align="right">86 ms</td><td align="right">86 ms</td><td align="center"><a href="javascript:change('page_details_3')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_3_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_3">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "1-开启提醒开关"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">86</td><td align="right">239</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>2-修改提醒时间</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">207 ms</td><td align="right">207 ms</td><td align="right">207 ms</td><td align="center"><a href="javascript:change('page_details_4')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_4_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_4">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "2-修改提醒时间"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">207</td><td align="right">239</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>3-添加/修改记账预算</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">78 ms</td><td align="right">78 ms</td><td align="right">78 ms</td><td align="center"><a href="javascript:change('page_details_5')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_5_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_5">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "3-添加/修改记账预算"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">78</td><td align="right">163</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>4-记账数据统计</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">59 ms</td><td align="right">59 ms</td><td align="right">59 ms</td><td align="center"><a href="javascript:change('page_details_6')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_6_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_6">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "4-记账数据统计"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">59</td><td align="right">1996</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>5-获取记账数据</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">61 ms</td><td align="right">61 ms</td><td align="right">61 ms</td><td align="center"><a href="javascript:change('page_details_7')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_7_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_7">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "5-获取记账数据"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">61</td><td align="right">1996</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>6-添加记账数据</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">61 ms</td><td align="right">61 ms</td><td align="right">61 ms</td><td align="center"><a href="javascript:change('page_details_8')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_8_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_8">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "6-添加记账数据"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">61</td><td align="right">321</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="#7-%E4%BF%AE%E6%94%B9%E8%AE%B0%E8%B4%A6%E9%87%91%E9%A2%9D/%E6%97%B6%E9%97%B4/%E7%94%A8%E9%80%94">7-修改记账金额/时间/用途</a></td><td align="center">1</td><td align="center">1</td><td align="right">0.00%</td><td align="right">54 ms</td><td align="right">54 ms</td><td align="right">54 ms</td><td align="center"><a href="javascript:change('page_details_9')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_9_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_9">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "7-修改记账金额/时间/用途"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">54</td><td align="right">170</td><td align="center">false</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>8-获取记账数据</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">56 ms</td><td align="right">56 ms</td><td align="right">56 ms</td><td align="center"><a href="javascript:change('page_details_10')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_10_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_10">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "8-获取记账数据"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">56</td><td align="right">2159</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>9-记账打卡完成</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">74 ms</td><td align="right">74 ms</td><td align="right">74 ms</td><td align="center"><a href="javascript:change('page_details_11')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_11_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_11">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "9-记账打卡完成"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">74</td><td align="right">163</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>10-记账取消打卡</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">82 ms</td><td align="right">82 ms</td><td align="right">82 ms</td><td align="center"><a href="javascript:change('page_details_12')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_12_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_12">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "10-记账取消打卡"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">82</td><td align="right">163</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>11-删除记账数据</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">55 ms</td><td align="right">55 ms</td><td align="right">55 ms</td><td align="center"><a href="javascript:change('page_details_13')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_13_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_13">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "11-删除记账数据"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">55</td><td align="right">163</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>12-关闭记账开关</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">79 ms</td><td align="right">79 ms</td><td align="right">79 ms</td><td align="center"><a href="javascript:change('page_details_14')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_14_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_14">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "12-关闭记账开关"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">79</td><td align="right">239</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>Debug Sampler</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">2 ms</td><td align="right">2 ms</td><td align="right">2 ms</td><td align="center"><a href="javascript:change('page_details_15')"><img alt="expand/collapse" src="http://ww1.sinaimg.cn/large/6fa4e58agy1fgki2i10o8j200g00g03i.jpg" id="page_details_15_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_15">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for API "Debug Sampler"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>流程测试引擎 1-1</td><td align="center">1</td><td align="right">2</td><td align="right">9007</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<hr align="center" width="95%" size="1">
+<h2>失败接口详情</h2>
+<h3>7-修改记账金额/时间/用途<a name="7-%E4%BF%AE%E6%94%B9%E8%AE%B0%E8%B4%A6%E9%87%91%E9%A2%9D/%E6%97%B6%E9%97%B4/%E7%94%A8%E9%80%94"></a>
+</h3>
+<table style="table-layout:fixed;" width="95%" cellspacing="2" cellpadding="5" border="0" class="details" align="center">
+<tr valign="top">
+<th width="10%">Response</th><th width="40%">Failure Message</th><th width="45%">Response Data</th>
+</tr>
+<tr>
+<td style="white-space:normal;word-break:break-all" width="10%">200 - </td><td style="white-space:normal;word-break:break-all" width="40%">返回值断言匹配失败:"code":200,"msg":"操作成功"</td><td style="white-space:normal;word-break:break-all" width="45%">{"code":5014002,"msg":"实例不存在","data":{}}</td>
+</tr>
+</table>
+</body>
+</html>

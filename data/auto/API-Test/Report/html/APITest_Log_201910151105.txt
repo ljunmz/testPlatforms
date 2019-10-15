@@ -1,0 +1,52 @@
+
+run:
+
+test:
+   [jmeter] Executing test plan: F:\code\testPlatforms\data\auto\API-Test\测试流.jmx ==> F:\code\testPlatforms\data\auto\API-Test\Report\jtl\APITest201910151105.jtl
+   [jmeter] Creating summariser <summary>
+   [jmeter] Created the tree successfully using F:\code\testPlatforms\data\auto\API-Test\测试流.jmx
+   [jmeter] Starting the test @ Tue Oct 15 11:05:47 CST 2019 (1571108747111)
+   [jmeter] Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+   [jmeter] 2019-10-15 11:05:48: 待执行流程数=1
+   [jmeter] 2019-10-15 11:05:48: 开始执行流程测试......
+   [jmeter] 2019-10-15 11:05:48: 执行流程--日程编辑
+   [jmeter] ==>/base/plan/schedule/batchadd测试结果：true
+   [jmeter] ==>/base/plan/schedule/edit测试结果：true
+   [jmeter] ==>/base/plan/allCheckin测试结果：true
+   [jmeter] ==>/base/plan/checkin测试结果：true
+   [jmeter] ==>/base/plan/schedule/edit测试结果：true
+   [jmeter] ==>/base/plan/schedule/edit测试结果：true
+   [jmeter] ==>/base/plan/checkin测试结果：true
+   [jmeter] ==>/base/plan/checkin测试结果：true
+   [jmeter] ==>/base/plan/allCheckin测试结果：true
+   [jmeter] ==>/base/plan/checkin测试结果：true
+   [jmeter] ==>/base/plan/schedule/edit测试结果：true
+   [jmeter] ==>/base/plan/delete测试结果：true
+   [jmeter] ==>/base/plan/recycled/recovery测试结果：true
+   [jmeter] ==>/base/plan/delete测试结果：true
+   [jmeter] ==>/base/plan/recycled/delete测试结果：true
+   [jmeter] ==>/base/plan/schedule/batchadd测试结果：true
+   [jmeter] ==>/base/focus/add测试结果：true
+   [jmeter] ==>/base/plan/setCompleteTime测试结果：true
+   [jmeter] ==>/base/plan/allCheckin测试结果：true
+   [jmeter] ==>/base/plan/setCompleteTime测试结果：true
+   [jmeter] ==>/base/plan/schedule/edit测试结果：true
+   [jmeter] ==>/base/plan/schedule/batchadd测试结果：true
+   [jmeter] ==>/service/aggregation/schedule/tochecklist测试结果：true
+   [jmeter] ==>/base/plan/schedule/batchadd测试结果：true
+   [jmeter] ==>/base/plan/record/sort测试结果：true
+   [jmeter] summary =     27 in 00:00:06 =    4.8/s Avg:   111 Min:     2 Max:   480 Err:     0 (0.00%)
+   [jmeter] Tidying up ...    @ Tue Oct 15 11:05:53 CST 2019 (1571108753209)
+   [jmeter] ... end of run
+
+report:
+     [xslt] Processing F:\code\testPlatforms\data\auto\API-Test\Report\jtl\APITest201910151105.jtl to F:\code\testPlatforms\data\auto\API-Test\Report\html\APITest_Summary_201910151105.html
+     [xslt] Loading stylesheet D:\tools\apache-jmeter-5.1.1\extras\jmeter-results-detail-report_22.xsl
+     [xslt] Processing F:\code\testPlatforms\data\auto\API-Test\Report\jtl\APITest201910151105.jtl to F:\code\testPlatforms\data\auto\API-Test\Report\html\APITest_Detail_201910151105.html
+     [xslt] Loading stylesheet D:\tools\apache-jmeter-5.1.1\extras\jmeter.results.shanhe.me.xsl
+
+sendEmail:
+     [mail] Sending email: 时光序API自动化测试报告201910151105
+     [mail] Sent email with 2 attachments
+
+BUILD SUCCESSFUL

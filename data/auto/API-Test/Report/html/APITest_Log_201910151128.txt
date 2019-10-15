@@ -1,0 +1,102 @@
+
+run:
+
+test:
+   [jmeter] Executing test plan: F:\code\testPlatforms\data\auto\API-Test\测试流.jmx ==> F:\code\testPlatforms\data\auto\API-Test\Report\jtl\APITest201910151128.jtl
+   [jmeter] Creating summariser <summary>
+   [jmeter] Created the tree successfully using F:\code\testPlatforms\data\auto\API-Test\测试流.jmx
+   [jmeter] Starting the test @ Tue Oct 15 11:28:53 CST 2019 (1571110133066)
+   [jmeter] Waiting for possible Shutdown/StopTestNow/HeapDump/ThreadDump message on port 4445
+   [jmeter] 2019-10-15 11:28:54: 待执行流程数=1
+   [jmeter] 2019-10-15 11:28:54: 开始执行流程测试......
+   [jmeter] 2019-10-15 11:28:54: 执行流程--日程编辑
+   [jmeter] ==>/base/plan/schedule/batchadd测试结果：true
+   [jmeter] ==>/base/plan/schedule/edit测试结果：true
+   [jmeter] ==>/base/plan/allCheckin测试结果：true
+   [jmeter] ==>/base/plan/checkin测试结果：true
+   [jmeter] ==>/base/plan/schedule/edit测试结果：true
+   [jmeter] ==>/base/plan/schedule/edit测试结果：true
+   [jmeter] ==>/base/plan/checkin测试结果：true
+   [jmeter] ==>/base/plan/checkin测试结果：true
+   [jmeter] ==>/base/plan/allCheckin测试结果：true
+   [jmeter] ==>/base/plan/checkin测试结果：true
+   [jmeter] ==>/base/plan/schedule/edit测试结果：true
+   [jmeter] ==>/base/plan/delete测试结果：true
+   [jmeter] ==>/base/plan/recycled/recovery测试结果：true
+   [jmeter] ==>/base/plan/delete测试结果：true
+   [jmeter] ==>/base/plan/recycled/delete测试结果：true
+   [jmeter] ==>/base/plan/schedule/batchadd测试结果：true
+   [jmeter] ==>/base/focus/add测试结果：true
+   [jmeter] ==>/base/plan/setCompleteTime测试结果：true
+   [jmeter] ==>/base/plan/allCheckin测试结果：true
+   [jmeter] ==>/base/plan/setCompleteTime测试结果：true
+   [jmeter] ==>/base/plan/schedule/edit测试结果：true
+   [jmeter] ==>/base/plan/schedule/batchadd测试结果：true
+   [jmeter] ==>/service/aggregation/schedule/tochecklist测试结果：true
+   [jmeter] ==>/base/plan/schedule/batchadd测试结果：true
+   [jmeter] ==>/base/plan/record/sort测试结果：true
+   [jmeter] summary =     27 in 00:00:04 =    6.3/s Avg:    95 Min:     3 Max:   464 Err:     0 (0.00%)
+   [jmeter] Tidying up ...    @ Tue Oct 15 11:28:57 CST 2019 (1571110137847)
+   [jmeter] ... end of run
+
+report:
+     [xslt] Processing F:\code\testPlatforms\data\auto\API-Test\Report\jtl\APITest201910151128.jtl to F:\code\testPlatforms\data\auto\API-Test\Report\html\APITest_Summary_201910151128.html
+     [xslt] Loading stylesheet D:\tools\apache-jmeter-5.1.1\extras\jmeter-results-detail-report_22.xsl
+     [xslt] Processing F:\code\testPlatforms\data\auto\API-Test\Report\jtl\APITest201910151128.jtl to F:\code\testPlatforms\data\auto\API-Test\Report\html\APITest_Detail_201910151128.html
+     [xslt] Loading stylesheet D:\tools\apache-jmeter-5.1.1\extras\jmeter.results.shanhe.me.xsl
+
+sendEmail:
+     [mail] Sending email: 时光序API自动化测试报告201910151128
+     [mail] Failed to send email: Invalid Addresses
+
+BUILD FAILED
+
+F:\code\testPlatforms\data\auto\API-Test\build.xml:22: The following error occurred while executing this line:
+F:\code\testPlatforms\data\auto\API-Test\build.xml:60: Problem while sending mime mail:
+	at org.apache.tools.ant.ProjectHelper.addLocationToBuildException(ProjectHelper.java:571)
+	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:440)
+	at org.apache.tools.ant.taskdefs.CallTarget.execute(CallTarget.java:106)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
+	at sun.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:99)
+	at org.apache.tools.ant.Task.perform(Task.java:350)
+	at org.apache.tools.ant.Target.execute(Target.java:449)
+	at org.apache.tools.ant.Target.performTasks(Target.java:470)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1391)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1364)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1254)
+	at org.apache.tools.ant.Main.runBuild(Main.java:830)
+	at org.apache.tools.ant.Main.startAnt(Main.java:223)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:284)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:101)
+Caused by: F:\code\testPlatforms\data\auto\API-Test\build.xml:60: Problem while sending mime mail:
+	at org.apache.tools.ant.taskdefs.email.MimeMailer.send(MimeMailer.java:259)
+	at org.apache.tools.ant.taskdefs.email.EmailTask.execute(EmailTask.java:581)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:292)
+	at sun.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:99)
+	at org.apache.tools.ant.Task.perform(Task.java:350)
+	at org.apache.tools.ant.Target.execute(Target.java:449)
+	at org.apache.tools.ant.Target.performTasks(Target.java:470)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1391)
+	at org.apache.tools.ant.helper.SingleCheckExecutor.executeTargets(SingleCheckExecutor.java:36)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1254)
+	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:437)
+	... 17 more
+Caused by: javax.mail.SendFailedException: Invalid Addresses;
+  nested exception is:
+	com.sun.mail.smtp.SMTPAddressFailedException: 554 RCPT (lujinai@jielema.com) dosn't exist
+
+	at com.sun.mail.smtp.SMTPTransport.rcptTo(SMTPTransport.java:2079)
+	at com.sun.mail.smtp.SMTPTransport.sendMessage(SMTPTransport.java:1301)
+	at org.apache.tools.ant.taskdefs.email.MimeMailer.send(MimeMailer.java:256)
+	... 30 more
+Caused by: com.sun.mail.smtp.SMTPAddressFailedException: 554 RCPT (lujinai@jielema.com) dosn't exist
+
+	at com.sun.mail.smtp.SMTPTransport.rcptTo(SMTPTransport.java:1979)
+	... 32 more
