@@ -159,4 +159,7 @@ def deleteDefaultVariable(key, path):
         f.close()
         return 601
 
-
+def removeFile(path):
+    listFile = os.listdir(path)
+    for fileName in listFile:
+        os.remove(path+fileName)

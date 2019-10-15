@@ -1,3 +1,4 @@
+import os
 import xml.etree.ElementTree as ET
 
 fileName = "测试流.jmx"
@@ -216,3 +217,9 @@ def deleteDefaultVariable(key, path):
         print("不存在该变量,无法删除")
         f.close()
         return 601
+
+
+def removeFile(path):
+    listFile = os.listdir(path)
+    for fileName in listFile:
+        os.remove(path+fileName)

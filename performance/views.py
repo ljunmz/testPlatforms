@@ -6,7 +6,7 @@ from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from performance.models import PerformanceFlow, PerformanceNode, Config, Testenv, User
 from performance.readJmx import getEmailList, changeEmail, changeAciton, getDefaultVariable, addDefaultVariable, \
-    editDefaultVariable, deleteDefaultVariable, changeServiceInfo, changeSThread
+    editDefaultVariable, deleteDefaultVariable, changeServiceInfo, changeSThread, removeFile
 
 # paths = 'D:\\时光序\\自动化测试\\API-Test\\'
 
@@ -426,6 +426,8 @@ def actionPerformanceFlow(request):
     flow_id = json.loads(request.body)["flow_id"]
     newStr = 'flow_id = ' + str(flow_id)
     changeAciton(newStr, paths)
+    removeFile(paths+"Report\\html\\")
+    removeFile(paths+"Report\\jtl\\")
     os.chdir(paths)
     os.system("ant")
     response = [{"code": "200", "msg": "接口触发允许成功，请查收邮件"}]
@@ -436,6 +438,8 @@ def actionPerformanceFlow(request):
 def actionPerformanceAllFlow(request):
     newStr = "1=1"
     changeAciton(newStr, paths)
+    removeFile(paths+"Report\\html\\")
+    removeFile(paths+"Report\\jtl\\")
     os.chdir(paths)
     os.system("ant")
     response = [{"code": "200", "msg": "接口触发允许成功，请查收邮件"}]
