@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testResults version="1.2">
-<sample t="464" it="0" lt="461" ct="447" ts="1571110133648" s="true" lb="获取流程数据" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="69" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<sample t="489" it="0" lt="488" ct="474" ts="1571118523414" s="true" lb="获取流程数据" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="69" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <responseHeader class="java.lang.String">shared:false, driver:com.mysql.jdbc.Driver, url:jdbc:mysql://47.112.0.183:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true, user:planadmin</responseHeader>
   <requestHeader class="java.lang.String"></requestHeader>
   <responseData class="java.lang.String">flow_id	flow_name	account	password
@@ -11,8 +11,8 @@
 
 </samplerData>
 </sample>
-<sample t="213" it="125" lt="0" ct="0" ts="1571110134128" s="true" lb="流程初始化预处理--1-日程编辑" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="流程测试引擎 1-1" dt="" by="14900" sby="538" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
-  <sample t="43" it="0" lt="39" ct="0" ts="1571110134128" s="true" lb="获取节点数据" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="13489" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<sample t="331" it="113" lt="0" ct="0" ts="1571118523922" s="true" lb="流程初始化预处理--1-日程编辑" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="流程测试引擎 1-1" dt="" by="14900" sby="538" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <sample t="142" it="0" lt="139" ct="0" ts="1571118523922" s="true" lb="获取节点数据" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="13489" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
     <responseHeader class="java.lang.String">shared:false, driver:com.mysql.jdbc.Driver, url:jdbc:mysql://47.112.0.183:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true, user:planadmin</responseHeader>
     <requestHeader class="java.lang.String"></requestHeader>
     <responseData class="java.lang.String">node_id	node_code	node_name	method	path	parameter	expect_response	pre_keys	post_keys	post_keys_extractor	post_keys_default	ischechdb	sql_str	sql_para	expect_db	sleep_time	isexcute_pre_sql	pre_sql_str	pre_sql_para	pre_sql_out
@@ -53,14 +53,14 @@
 1
 varchar</samplerData>
   </sample>
-  <httpSample t="152" it="0" lt="152" ct="41" ts="1571110134256" s="true" lb="登录" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1411" sby="538" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <httpSample t="172" it="0" lt="172" ct="30" ts="1571118524140" s="true" lb="登录" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1411" sby="538" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
     <assertionResult>
       <name>Response Assertion</name>
       <failure>false</failure>
       <error>false</error>
     </assertionResult>
     <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:55 GMT
+Date: Tue, 15 Oct 2019 05:48:45 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 1289
 </responseHeader>
@@ -72,14 +72,14 @@ User-Agent: okhttp/3.3.0
 Content-Length: 330
 Host: 47.112.0.183:8801
 </requestHeader>
-    <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435568345088&quot;,&quot;mobile&quot;:&quot;13610150696&quot;,&quot;userName&quot;:&quot;自动&quot;,&quot;uniqueKey&quot;:&quot;768981c9a23d4106ad60d452634b7e50&quot;,&quot;oldMobile&quot;:&quot;13610150696&quot;,&quot;email&quot;:&quot;cuiqingyong@jielema.com&quot;,&quot;userImage&quot;:&quot;https://livelihood.oss-cn-shenzhen.aliyuncs.com/livelihood/userhead/13610150696/18620090165_2_1567507617000.jpeg&quot;,&quot;deviceType&quot;:&quot;2&quot;,&quot;pwdErrorCount&quot;:0,&quot;nickname&quot;:&quot;依然坚持&quot;,&quot;gender&quot;:1,&quot;signature&quot;:&quot;每天都要过得有仪式感，热爱生活，热爱自由&quot;,&quot;unionid&quot;:&quot;oie8Z1A8ZVdhrYs9zjuN4lQ_Ni2c&quot;,&quot;openid&quot;:&quot;oKsyD1jJVW36vx4WBuLP27_eu6oE&quot;,&quot;telecomOperators&quot;:&quot;yd&quot;,&quot;lunar&quot;:&quot;1&quot;,&quot;birthYear&quot;:1999,&quot;birthMonth&quot;:7,&quot;birthDay&quot;:7,&quot;job&quot;:&quot;02&quot;,&quot;leapMonth&quot;:&quot;false&quot;,&quot;appVersion&quot;:&quot;1.4.6&quot;,&quot;lastLoginTime&quot;:1571110135429,&quot;channelName&quot;:&quot;时光序_ios&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTag&quot;:&quot;3F8F4920-D468-4C93-B3DB-414AA8C9A95B&quot;,&quot;created&quot;:1558404780000,&quot;updated&quot;:1571110135429,&quot;pushToken&quot;:&quot;e3ded3a01ae653c3945dc72d902610b8&quot;,&quot;userToken&quot;:&quot;ec5789f633051bdf400364cc925a8f9a513bfefb484f75dd2d9562d31f38ad0c97f6a11e0cc705ad&quot;,&quot;token&quot;:&quot;b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c&quot;,&quot;wxConcerns&quot;:&quot;1&quot;,&quot;wxBind&quot;:&quot;1&quot;,&quot;type&quot;:&quot;old&quot;,&quot;qqName&quot;:&quot;薇薇&quot;,&quot;qqBind&quot;:&quot;1&quot;}}</responseData>
+    <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435568345088&quot;,&quot;mobile&quot;:&quot;13610150696&quot;,&quot;userName&quot;:&quot;自动&quot;,&quot;uniqueKey&quot;:&quot;768981c9a23d4106ad60d452634b7e50&quot;,&quot;oldMobile&quot;:&quot;13610150696&quot;,&quot;email&quot;:&quot;cuiqingyong@jielema.com&quot;,&quot;userImage&quot;:&quot;https://livelihood.oss-cn-shenzhen.aliyuncs.com/livelihood/userhead/13610150696/18620090165_2_1567507617000.jpeg&quot;,&quot;deviceType&quot;:&quot;2&quot;,&quot;pwdErrorCount&quot;:0,&quot;nickname&quot;:&quot;依然坚持&quot;,&quot;gender&quot;:1,&quot;signature&quot;:&quot;每天都要过得有仪式感，热爱生活，热爱自由&quot;,&quot;unionid&quot;:&quot;oie8Z1A8ZVdhrYs9zjuN4lQ_Ni2c&quot;,&quot;openid&quot;:&quot;oKsyD1jJVW36vx4WBuLP27_eu6oE&quot;,&quot;telecomOperators&quot;:&quot;yd&quot;,&quot;lunar&quot;:&quot;1&quot;,&quot;birthYear&quot;:1999,&quot;birthMonth&quot;:7,&quot;birthDay&quot;:7,&quot;job&quot;:&quot;02&quot;,&quot;leapMonth&quot;:&quot;false&quot;,&quot;appVersion&quot;:&quot;1.4.6&quot;,&quot;lastLoginTime&quot;:1571118525279,&quot;channelName&quot;:&quot;时光序_ios&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTag&quot;:&quot;3F8F4920-D468-4C93-B3DB-414AA8C9A95B&quot;,&quot;created&quot;:1558404780000,&quot;updated&quot;:1571118525279,&quot;pushToken&quot;:&quot;e3ded3a01ae653c3945dc72d902610b8&quot;,&quot;userToken&quot;:&quot;ec5789f633051bdf400364cc925a8f9a513bfefb484f75dd2d9562d31f38ad0c97f6a11e0cc705ad&quot;,&quot;token&quot;:&quot;b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27&quot;,&quot;wxConcerns&quot;:&quot;1&quot;,&quot;wxBind&quot;:&quot;1&quot;,&quot;type&quot;:&quot;old&quot;,&quot;qqName&quot;:&quot;薇薇&quot;,&quot;qqBind&quot;:&quot;1&quot;}}</responseData>
     <responseFile class="java.lang.String"></responseFile>
     <cookies class="java.lang.String"></cookies>
     <method class="java.lang.String">POST</method>
     <queryString class="java.lang.String">{&quot;password&quot;:&quot;666666&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;13610150696&quot;,&quot;type&quot;:&quot;1&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.4.7&quot;,&quot;deviceTag&quot;:&quot;ec:51:bc:a6:a2:d5&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.11.200&quot;,&quot;channel&quot;:&quot;xiaomi&quot;,&quot;deviceModel&quot;:&quot;OPPO-OPPO R11s&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;ec:51:bc:a6:a2:d5&quot;}}</queryString>
     <java.net.URL>http://47.112.0.183:8801/base/user/login</java.net.URL>
   </httpSample>
-  <sample t="18" it="0" lt="0" ct="0" ts="1571110134448" s="true" lb="重置节点计数器" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+  <sample t="17" it="0" lt="0" ct="0" ts="1571118524349" s="true" lb="重置节点计数器" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
     <responseHeader class="java.lang.String"></responseHeader>
     <requestHeader class="java.lang.String"></requestHeader>
     <responseData class="java.lang.String"></responseData>
@@ -220,7 +220,7 @@ vars.put(&quot;todoHHRepeat&quot;,todoHHRepeat);
   <responseData class="java.lang.String">Non-TEXT response data, cannot record: ()</responseData>
   <responseFile class="java.lang.String"></responseFile>
 </sample>
-<httpSample t="84" it="0" lt="84" ct="0" ts="1571110134519" s="true" lb="1-日程添加（时间点+默认分类+准时提醒）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="823" sby="656" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="157" it="0" lt="157" ct="0" ts="1571118524414" s="true" lb="1-日程添加（时间点+默认分类+准时提醒）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="823" sby="656" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -234,26 +234,26 @@ vars.put(&quot;todoHHRepeat&quot;,todoHHRepeat);
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:55 GMT
+Date: Tue, 15 Oct 2019 05:48:45 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 702
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 260
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-1563241933492017464&quot;,&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190716000000&quot;,&quot;endDatetime&quot;:&quot;20190716235959&quot;,&quot;created&quot;:1571110135644,&quot;updated&quot;:1571110135644,&quot;version&quot;:&quot;2946&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369241&quot;,&quot;startDatetime&quot;:&quot;20190716000000&quot;,&quot;endDatetime&quot;:&quot;20190716235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571110135644,&quot;updated&quot;:1571110135644}]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-1563241933492017464&quot;,&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190716000000&quot;,&quot;endDatetime&quot;:&quot;20190716235959&quot;,&quot;created&quot;:1571118525519,&quot;updated&quot;:1571118525519,&quot;version&quot;:&quot;3026&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369266&quot;,&quot;startDatetime&quot;:&quot;20190716000000&quot;,&quot;endDatetime&quot;:&quot;20190716235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571118525519,&quot;updated&quot;:1571118525519}]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
   <queryString class="java.lang.String">{&quot;todos&quot;: [{&quot;title&quot;: &quot;测试日程编辑流程&quot;, &quot;localId&quot;: -1563241933492017464, &quot;duration&quot;: 0, &quot;todoTime&quot;: &quot;20190716144000&quot;, &quot;aheadType&quot;: [{&quot;offset&quot;: 0}], &quot;importance&quot;: 1, &quot;shortTitle&quot;: &quot;测试日程编辑流程&quot;, &quot;intervalType&quot;: 1, &quot;todoClassifyId&quot;: 1001}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/batchadd</java.net.URL>
 </httpSample>
-<httpSample t="107" it="0" lt="107" ct="0" ts="1571110134681" s="true" lb="2-日程修改" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1348" sby="1060" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="208" it="0" lt="208" ct="0" ts="1571118524628" s="true" lb="2-日程修改" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1348" sby="1060" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -267,26 +267,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:55 GMT
+Date: Tue, 15 Oct 2019 05:48:45 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 1226
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 668
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110135811,&quot;version&quot;:&quot;2947&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369241&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110135811}],&quot;task&quot;:[],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369241&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571110135811,&quot;updated&quot;:1571110135811,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118525731,&quot;version&quot;:&quot;3027&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369266&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118525731}],&quot;task&quot;:[],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369266&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571118525731,&quot;updated&quot;:1571118525731,&quot;taskFinishs&quot;:[]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;duration&quot;: 0,&quot;importance&quot;: 2,&quot;intervalType&quot;: 1,&quot;localId&quot;: 126100789566398197,&quot;id&quot;: &quot;4404520435570369224&quot;,&quot;todoClassifyId&quot;: 1002,&quot;shortTitle&quot;: &quot;测试日程编辑流程new&quot;,&quot;title&quot;: &quot;测试日程编辑流程new&quot;,&quot;newTodoTime&quot;: &quot;20190717144000&quot;,&quot;todoTime&quot;: &quot;20190716144000&quot;,&quot;address&quot;: &quot;高德置地广场(冬商场)&quot;,&quot;city&quot;: &quot;广州市&quot;,&quot;country&quot;: &quot;&quot;,&quot;district&quot;: &quot;天河区&quot;,&quot;latitude&quot;: &quot;23.125756730662990&quot;,&quot;longitude&quot;: &quot;113.333537851804800&quot;,&quot;province&quot;: &quot;广东省&quot;,&quot;remark&quot;: &quot;备注测试&quot;,&quot;aheadType&quot;: [{&quot;offset&quot;: 0}, {&quot;offset&quot;: 300}],&quot;attachments&quot;: [{&quot;mediaType&quot;: &quot;0&quot;,&quot;url&quot;: &quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}]}</queryString>
+  <queryString class="java.lang.String">{&quot;duration&quot;: 0,&quot;importance&quot;: 2,&quot;intervalType&quot;: 1,&quot;localId&quot;: 126100789566398197,&quot;id&quot;: &quot;4404520435570369249&quot;,&quot;todoClassifyId&quot;: 1002,&quot;shortTitle&quot;: &quot;测试日程编辑流程new&quot;,&quot;title&quot;: &quot;测试日程编辑流程new&quot;,&quot;newTodoTime&quot;: &quot;20190717144000&quot;,&quot;todoTime&quot;: &quot;20190716144000&quot;,&quot;address&quot;: &quot;高德置地广场(冬商场)&quot;,&quot;city&quot;: &quot;广州市&quot;,&quot;country&quot;: &quot;&quot;,&quot;district&quot;: &quot;天河区&quot;,&quot;latitude&quot;: &quot;23.125756730662990&quot;,&quot;longitude&quot;: &quot;113.333537851804800&quot;,&quot;province&quot;: &quot;广东省&quot;,&quot;remark&quot;: &quot;备注测试&quot;,&quot;aheadType&quot;: [{&quot;offset&quot;: 0}, {&quot;offset&quot;: 300}],&quot;attachments&quot;: [{&quot;mediaType&quot;: &quot;0&quot;,&quot;url&quot;: &quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/edit</java.net.URL>
 </httpSample>
-<httpSample t="74" it="0" lt="74" ct="0" ts="1571110134849" s="true" lb="3-日程打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="362" sby="513" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="74" it="0" lt="74" ct="0" ts="1571118524886" s="true" lb="3-日程打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="362" sby="513" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -300,31 +300,31 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:55 GMT
+Date: Tue, 15 Oct 2019 05:48:45 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 241
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 124
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371173&quot;,&quot;ruleId&quot;:&quot;4404520435570369241&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112855&quot;,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371188&quot;,&quot;ruleId&quot;:&quot;4404520435570369266&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015134845&quot;,&quot;taskFinishs&quot;:[]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
   <queryString class="java.lang.String">{
-  &quot;todoId&quot;: &quot;4404520435570369224&quot;,
+  &quot;todoId&quot;: &quot;4404520435570369249&quot;,
   &quot;finishState&quot;: 1,
-  &quot;ruleId&quot;: &quot;4404520435570369241&quot;,
+  &quot;ruleId&quot;: &quot;4404520435570369266&quot;,
   &quot;todoTime&quot;: &quot;20190717144000&quot;
 }</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/allCheckin</java.net.URL>
 </httpSample>
-<httpSample t="81" it="0" lt="81" ct="0" ts="1571110134970" s="true" lb="4-日程取消打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="362" sby="489" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="67" it="0" lt="67" ct="0" ts="1571118525005" s="true" lb="4-日程取消打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="362" sby="489" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -338,26 +338,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:55 GMT
+Date: Tue, 15 Oct 2019 05:48:45 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 241
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 103
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371173&quot;,&quot;ruleId&quot;:&quot;4404520435570369241&quot;,&quot;finishState&quot;:0,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112856&quot;,&quot;completeTime&quot;:0}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371188&quot;,&quot;ruleId&quot;:&quot;4404520435570369266&quot;,&quot;finishState&quot;:0,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015134846&quot;,&quot;completeTime&quot;:0}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369224,&quot;finishState&quot;:0,&quot;ruleId&quot;:4404520435570369241,&quot;todoTime&quot;:&quot;20190717144000&quot;}</queryString>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369249,&quot;finishState&quot;:0,&quot;ruleId&quot;:4404520435570369266,&quot;todoTime&quot;:&quot;20190717144000&quot;}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/checkin</java.net.URL>
 </httpSample>
-<httpSample t="109" it="0" lt="109" ct="0" ts="1571110135099" s="true" lb="5-日程子任务添加" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1610" sby="1101" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="96" it="0" lt="96" ct="0" ts="1571118525113" s="true" lb="5-日程子任务添加" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1610" sby="1101" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -371,26 +371,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:55 GMT
+Date: Tue, 15 Oct 2019 05:48:45 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 1488
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 709
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110136219,&quot;version&quot;:&quot;2948&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369241&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110136219}],&quot;task&quot;:[{&quot;id&quot;:&quot;4404520435570364126&quot;,&quot;title&quot;:&quot;子任务1&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;grade&quot;:0,&quot;deleted&quot;:false,&quot;created&quot;:1571110136219,&quot;updated&quot;:1571110136219}],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369241&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112856&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110136219,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526217,&quot;version&quot;:&quot;3028&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369266&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526217}],&quot;task&quot;:[{&quot;id&quot;:&quot;4404520435570364131&quot;,&quot;title&quot;:&quot;子任务1&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;grade&quot;:0,&quot;deleted&quot;:false,&quot;created&quot;:1571118526217,&quot;updated&quot;:1571118526217}],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369266&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015134846&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526217,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:4404520435570369224,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonAddList&quot;:[{&quot;localId&quot;:-1802564779,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务1&quot;}]}</queryString>
+  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:4404520435570369249,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonAddList&quot;:[{&quot;localId&quot;:-1802564779,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务1&quot;}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/edit</java.net.URL>
 </httpSample>
-<httpSample t="115" it="0" lt="115" ct="0" ts="1571110135257" s="true" lb="6-日程子任务编辑" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1611" sby="1138" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="106" it="0" lt="106" ct="0" ts="1571118525253" s="true" lb="6-日程子任务编辑" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1611" sby="1138" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -404,26 +404,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:55 GMT
+Date: Tue, 15 Oct 2019 05:48:45 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 1489
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 746
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110136379,&quot;version&quot;:&quot;2949&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369241&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110136379}],&quot;task&quot;:[{&quot;id&quot;:&quot;4404520435570364126&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;grade&quot;:0,&quot;deleted&quot;:false,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110136379}],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369241&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112856&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110136379,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526364,&quot;version&quot;:&quot;3029&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369266&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526364}],&quot;task&quot;:[{&quot;id&quot;:&quot;4404520435570364131&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;grade&quot;:0,&quot;deleted&quot;:false,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526364}],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369266&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015134846&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526364,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:4404520435570369224,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonUpdateList&quot;:[{&quot;localId&quot;:2504001392817995776,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;id&quot;:4404520435570364126}]}</queryString>
+  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:4404520435570369249,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonUpdateList&quot;:[{&quot;localId&quot;:2504001392817995776,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;id&quot;:4404520435570364131}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/edit</java.net.URL>
 </httpSample>
-<httpSample t="84" it="0" lt="84" ct="0" ts="1571110135414" s="true" lb="7-日程子任务打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="522" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="76" it="0" lt="76" ct="0" ts="1571118525397" s="true" lb="7-日程子任务打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="522" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -437,26 +437,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:55 GMT
+Date: Tue, 15 Oct 2019 05:48:45 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 340
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 136
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371173&quot;,&quot;ruleId&quot;:&quot;4404520435570369241&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112857&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364126&quot;,&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015112857&quot;}]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371188&quot;,&quot;ruleId&quot;:&quot;4404520435570369266&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015134847&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364131&quot;,&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015134847&quot;}]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369224,&quot;finishState&quot;:1,&quot;ruleId&quot;:4404520435570369241,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;todoTaskId&quot;:4404520435570364126}</queryString>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369249,&quot;finishState&quot;:1,&quot;ruleId&quot;:4404520435570369266,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;todoTaskId&quot;:4404520435570364131}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/checkin</java.net.URL>
 </httpSample>
-<httpSample t="83" it="0" lt="83" ct="0" ts="1571110135542" s="true" lb="8-日程子任务取消打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="522" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="83" it="0" lt="83" ct="0" ts="1571118525510" s="true" lb="8-日程子任务取消打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="522" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -470,26 +470,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:56 GMT
+Date: Tue, 15 Oct 2019 05:48:46 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 340
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 136
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371173&quot;,&quot;ruleId&quot;:&quot;4404520435570369241&quot;,&quot;finishState&quot;:0,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112857&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364126&quot;,&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112857&quot;}]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371188&quot;,&quot;ruleId&quot;:&quot;4404520435570369266&quot;,&quot;finishState&quot;:0,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015134847&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364131&quot;,&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015134847&quot;}]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369224,&quot;finishState&quot;:0,&quot;ruleId&quot;:4404520435570369241,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;todoTaskId&quot;:4404520435570364126}</queryString>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369249,&quot;finishState&quot;:0,&quot;ruleId&quot;:4404520435570369266,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;todoTaskId&quot;:4404520435570364131}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/checkin</java.net.URL>
 </httpSample>
-<httpSample t="95" it="0" lt="95" ct="0" ts="1571110135669" s="true" lb="9-日程打卡（含子任务）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="80" it="0" lt="80" ct="0" ts="1571118525632" s="true" lb="9-日程打卡（含子任务）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -503,26 +503,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:56 GMT
+Date: Tue, 15 Oct 2019 05:48:46 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 340
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 103
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371173&quot;,&quot;ruleId&quot;:&quot;4404520435570369241&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112856&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364126&quot;,&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015112856&quot;}]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371188&quot;,&quot;ruleId&quot;:&quot;4404520435570369266&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015134846&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364131&quot;,&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015134846&quot;}]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369224,&quot;finishState&quot;:1,&quot;ruleId&quot;:4404520435570369241,&quot;todoTime&quot;:&quot;20190717144000&quot;}</queryString>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369249,&quot;finishState&quot;:1,&quot;ruleId&quot;:4404520435570369266,&quot;todoTime&quot;:&quot;20190717144000&quot;}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/allCheckin</java.net.URL>
 </httpSample>
-<httpSample t="83" it="0" lt="83" ct="0" ts="1571110135812" s="true" lb="10-日程取消打卡（含子任务）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="489" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="83" it="0" lt="83" ct="0" ts="1571118525760" s="true" lb="10-日程取消打卡（含子任务）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="461" sby="489" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -536,26 +536,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:56 GMT
+Date: Tue, 15 Oct 2019 05:48:46 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 340
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 103
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371173&quot;,&quot;ruleId&quot;:&quot;4404520435570369241&quot;,&quot;finishState&quot;:0,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015112857&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364126&quot;,&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112857&quot;}]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371188&quot;,&quot;ruleId&quot;:&quot;4404520435570369266&quot;,&quot;finishState&quot;:0,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;finishTime&quot;:&quot;20191015134847&quot;,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364131&quot;,&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015134847&quot;}]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369224,&quot;finishState&quot;:0,&quot;ruleId&quot;:4404520435570369241,&quot;todoTime&quot;:&quot;20190717144000&quot;}</queryString>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369249,&quot;finishState&quot;:0,&quot;ruleId&quot;:4404520435570369266,&quot;todoTime&quot;:&quot;20190717144000&quot;}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/checkin</java.net.URL>
 </httpSample>
-<httpSample t="96" it="0" lt="96" ct="0" ts="1571110135942" s="true" lb="11-日程子任务删除" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1693" sby="1138" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="103" it="0" lt="103" ct="0" ts="1571118525891" s="true" lb="11-日程子任务删除" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1693" sby="1138" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -569,26 +569,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:56 GMT
+Date: Tue, 15 Oct 2019 05:48:46 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 1571
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 746
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110137061,&quot;version&quot;:&quot;2950&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369241&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110137061}],&quot;task&quot;:[{&quot;id&quot;:&quot;4404520435570364126&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190716235959&quot;,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;grade&quot;:0,&quot;deleted&quot;:false,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110137061}],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369241&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112857&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571110136000,&quot;updated&quot;:1571110137061,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364126&quot;,&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015112857&quot;}]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[{&quot;offset&quot;:0}],&quot;todoClassifyId&quot;:&quot;1002&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526995,&quot;version&quot;:&quot;3030&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369266&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190717235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 40 14 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526995}],&quot;task&quot;:[{&quot;id&quot;:&quot;4404520435570364131&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;startDatetime&quot;:&quot;20190717000000&quot;,&quot;endDatetime&quot;:&quot;20190716235959&quot;,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;grade&quot;:0,&quot;deleted&quot;:false,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526995}],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369266&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;deleted&quot;:false,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;attachments&quot;:[{&quot;mediaType&quot;:0,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015134847&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;created&quot;:1571118526000,&quot;updated&quot;:1571118526995,&quot;completeTime&quot;:0,&quot;taskFinishs&quot;:[{&quot;todoTaskId&quot;:&quot;4404520435570364131&quot;,&quot;finishState&quot;:0,&quot;finishTime&quot;:&quot;20191015134847&quot;}]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:4404520435570369224,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonDeleteList&quot;:[{&quot;localId&quot;:2504001392817995776,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;id&quot;:4404520435570364126}]}</queryString>
+  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:2504001392817998855,&quot;id&quot;:4404520435570369249,&quot;todoClassifyId&quot;:1002,&quot;shortTitle&quot;:&quot;测试日程编辑流程new&quot;,&quot;title&quot;:&quot;测试日程编辑流程new&quot;,&quot;todoTime&quot;:&quot;20190717144000&quot;,&quot;address&quot;:&quot;高德置地广场(冬商场)&quot;,&quot;city&quot;:&quot;广州市&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;天河区&quot;,&quot;latitude&quot;:&quot;23.125756730662990&quot;,&quot;longitude&quot;:&quot;113.333537851804800&quot;,&quot;province&quot;:&quot;广东省&quot;,&quot;remark&quot;:&quot;备注测试&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;attachments&quot;:[{&quot;mediaType&quot;:&quot;0&quot;,&quot;url&quot;:&quot;livelihood/todopic/13610150696/126100789566398197/13610150696_2_1563261077000_0.jpeg&quot;}],&quot;sonDeleteList&quot;:[{&quot;localId&quot;:2504001392817995776,&quot;grade&quot;:0,&quot;todoTime&quot;:&quot;20190722143000&quot;,&quot;title&quot;:&quot;子任务11&quot;,&quot;id&quot;:4404520435570364131}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/edit</java.net.URL>
 </httpSample>
-<httpSample t="76" it="0" lt="76" ct="0" ts="1571110136075" s="true" lb="12-日程删除1" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="287" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="72" it="0" lt="72" ct="0" ts="1571118526039" s="true" lb="12-日程删除1" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="287" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -602,26 +602,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:56 GMT
+Date: Tue, 15 Oct 2019 05:48:46 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 166
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 107
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;rows&quot;:[{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;todoType&quot;:1,&quot;status&quot;:0,&quot;deleted&quot;:false,&quot;updated&quot;:1571110137196,&quot;personalizedInfo&quot;:[]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;rows&quot;:[{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;todoType&quot;:1,&quot;status&quot;:0,&quot;deleted&quot;:false,&quot;updated&quot;:1571118527144,&quot;personalizedInfo&quot;:[]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;deleteInfos&quot;:[{&quot;id&quot;:4404520435570369224,&quot;todoTimes&quot;:[&quot;20190717144000&quot;],&quot;ruleIds&quot;:[4404520435570369241]}]}</queryString>
+  <queryString class="java.lang.String">{&quot;deleteInfos&quot;:[{&quot;id&quot;:4404520435570369249,&quot;todoTimes&quot;:[&quot;20190717144000&quot;],&quot;ruleIds&quot;:[4404520435570369266]}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/delete</java.net.URL>
 </httpSample>
-<httpSample t="71" it="0" lt="71" ct="0" ts="1571110136189" s="true" lb="13-日程删除恢复" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="196" sby="428" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="77" it="0" lt="77" ct="0" ts="1571118526147" s="true" lb="13-日程删除恢复" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="196" sby="428" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -635,26 +635,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:56 GMT
+Date: Tue, 15 Oct 2019 05:48:46 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 76
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 33
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todoIds&quot;:[&quot;4404520435570369224&quot;]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todoIds&quot;:[&quot;4404520435570369249&quot;]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todoIds&quot;:[4404520435570369224]}</queryString>
+  <queryString class="java.lang.String">{&quot;todoIds&quot;:[4404520435570369249]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/recycled/recovery</java.net.URL>
 </httpSample>
-<httpSample t="80" it="0" lt="80" ct="10" ts="1571110136309" s="true" lb="14-日程删除2" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="287" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="81" it="0" lt="81" ct="11" ts="1571118526269" s="true" lb="14-日程删除2" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="287" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -668,26 +668,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:56 GMT
+Date: Tue, 15 Oct 2019 05:48:46 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 166
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 107
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;rows&quot;:[{&quot;id&quot;:&quot;4404520435570369224&quot;,&quot;todoType&quot;:1,&quot;status&quot;:0,&quot;deleted&quot;:false,&quot;updated&quot;:1571110137438,&quot;personalizedInfo&quot;:[]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;rows&quot;:[{&quot;id&quot;:&quot;4404520435570369249&quot;,&quot;todoType&quot;:1,&quot;status&quot;:0,&quot;deleted&quot;:false,&quot;updated&quot;:1571118527383,&quot;personalizedInfo&quot;:[]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;deleteInfos&quot;:[{&quot;id&quot;:4404520435570369224,&quot;todoTimes&quot;:[&quot;20190717144000&quot;],&quot;ruleIds&quot;:[4404520435570369241]}]}</queryString>
+  <queryString class="java.lang.String">{&quot;deleteInfos&quot;:[{&quot;id&quot;:4404520435570369249,&quot;todoTimes&quot;:[&quot;20190717144000&quot;],&quot;ruleIds&quot;:[4404520435570369266]}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/delete</java.net.URL>
 </httpSample>
-<httpSample t="53" it="0" lt="53" ct="0" ts="1571110136431" s="true" lb="15-日程永久删除" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="163" sby="426" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="56" it="0" lt="56" ct="0" ts="1571118526387" s="true" lb="15-日程永久删除" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="163" sby="426" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -701,14 +701,14 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:56 GMT
+Date: Tue, 15 Oct 2019 05:48:46 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 43
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 33
 Host: 47.112.0.183:8801
@@ -717,10 +717,10 @@ Host: 47.112.0.183:8801
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todoIds&quot;:[4404520435570369224]}</queryString>
+  <queryString class="java.lang.String">{&quot;todoIds&quot;:[4404520435570369249]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/recycled/delete</java.net.URL>
 </httpSample>
-<httpSample t="80" it="0" lt="80" ct="0" ts="1571110136536" s="true" lb="16-日程添加（时间段+自定义分类+不提醒）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="852" sby="680" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="78" it="0" lt="78" ct="0" ts="1571118526494" s="true" lb="16-日程添加（时间段+自定义分类+不提醒）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="852" sby="680" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -734,26 +734,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:56 GMT
+Date: Tue, 15 Oct 2019 05:48:46 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 731
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 284
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-303505539&quot;,&quot;id&quot;:&quot;4404520435570369225&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015113100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571110137655,&quot;updated&quot;:1571110137655,&quot;version&quot;:&quot;2955&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369242&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 31 11 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:2,&quot;duration&quot;:{&quot;1131&quot;:3600},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571110137655,&quot;updated&quot;:1571110137655}]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-303505539&quot;,&quot;id&quot;:&quot;4404520435570369250&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015135100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571118527600,&quot;updated&quot;:1571118527600,&quot;version&quot;:&quot;3035&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369267&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 51 13 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:2,&quot;duration&quot;:{&quot;1351&quot;:3600},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571118527600,&quot;updated&quot;:1571118527600}]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todos&quot;:[{&quot;duration&quot;:3600,&quot;importance&quot;:1,&quot;intervalType&quot;:2,&quot;localId&quot;:-303505539,&quot;todoClassifyId&quot;:4404520435570345088,&quot;todoTime&quot;:&quot;20191015113100&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015113100&quot;,&quot;title&quot;:&quot;时间段+自定义分类+不提醒20191015113100&quot;,&quot;remark&quot;:&quot;&quot;}]}</queryString>
+  <queryString class="java.lang.String">{&quot;todos&quot;:[{&quot;duration&quot;:3600,&quot;importance&quot;:1,&quot;intervalType&quot;:2,&quot;localId&quot;:-303505539,&quot;todoClassifyId&quot;:4404520435570345088,&quot;todoTime&quot;:&quot;20191015135100&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015135100&quot;,&quot;title&quot;:&quot;时间段+自定义分类+不提醒20191015135100&quot;,&quot;remark&quot;:&quot;&quot;}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/batchadd</java.net.URL>
 </httpSample>
-<httpSample t="71" it="0" lt="71" ct="0" ts="1571110136666" s="true" lb="17-添加专注" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="163" sby="578" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="76" it="0" lt="76" ct="0" ts="1571118526628" s="true" lb="17-添加专注" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="163" sby="578" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -767,14 +767,14 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:57 GMT
+Date: Tue, 15 Oct 2019 05:48:47 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 43
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 195
 Host: 47.112.0.183:8801
@@ -783,10 +783,10 @@ Host: 47.112.0.183:8801
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;finishState&quot;:&quot;1&quot;,&quot;linkId&quot;:&quot;4404520435570369225&quot;,&quot;useTime&quot;:&quot;5&quot;,&quot;linkType&quot;:&quot;todo&quot;,&quot;fullTime&quot;:&quot;5&quot;,&quot;startTime&quot;:20190807144728,&quot;endTime&quot;:20190807145228,&quot;title&quot;:&quot;时间段+自定义分类+不提醒&quot;}</queryString>
+  <queryString class="java.lang.String">{&quot;finishState&quot;:&quot;1&quot;,&quot;linkId&quot;:&quot;4404520435570369250&quot;,&quot;useTime&quot;:&quot;5&quot;,&quot;linkType&quot;:&quot;todo&quot;,&quot;fullTime&quot;:&quot;5&quot;,&quot;startTime&quot;:20190807144728,&quot;endTime&quot;:20190807145228,&quot;title&quot;:&quot;时间段+自定义分类+不提醒&quot;}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/focus/add</java.net.URL>
 </httpSample>
-<httpSample t="82" it="0" lt="82" ct="0" ts="1571110136783" s="true" lb="18-设置时长" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="689" sby="466" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="84" it="0" lt="84" ct="0" ts="1571118526770" s="true" lb="18-设置时长" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="689" sby="466" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -800,26 +800,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:57 GMT
+Date: Tue, 15 Oct 2019 05:48:47 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 568
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 73
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369225&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015113100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571110138000,&quot;updated&quot;:1571110138000,&quot;version&quot;:&quot;2955&quot;,&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369242&quot;,&quot;todoTime&quot;:&quot;20191015113100&quot;,&quot;aheadType&quot;:[],&quot;deleted&quot;:false,&quot;finishState&quot;:0,&quot;created&quot;:1571110137918,&quot;updated&quot;:1571110137901,&quot;completeTime&quot;:300}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369250&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015135100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571118528000,&quot;updated&quot;:1571118528000,&quot;version&quot;:&quot;3035&quot;,&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369267&quot;,&quot;todoTime&quot;:&quot;20191015135100&quot;,&quot;aheadType&quot;:[],&quot;deleted&quot;:false,&quot;finishState&quot;:0,&quot;created&quot;:1571118527880,&quot;updated&quot;:1571118527877,&quot;completeTime&quot;:300}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;completeTime&quot;:300,&quot;id&quot;:4404520435570369225,&quot;todoTime&quot;:&quot;20191015113100&quot;}</queryString>
+  <queryString class="java.lang.String">{&quot;completeTime&quot;:300,&quot;id&quot;:4404520435570369250,&quot;todoTime&quot;:&quot;20191015135100&quot;}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/setCompleteTime</java.net.URL>
 </httpSample>
-<httpSample t="69" it="0" lt="69" ct="0" ts="1571110136917" s="true" lb="19-专注打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="381" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="69" it="0" lt="69" ct="0" ts="1571118527005" s="true" lb="19-专注打卡" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="381" sby="492" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -833,26 +833,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:57 GMT
+Date: Tue, 15 Oct 2019 05:48:47 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 260
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 103
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369225&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371174&quot;,&quot;ruleId&quot;:&quot;4404520435570369242&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20191015113100&quot;,&quot;finishTime&quot;:&quot;20191015112858&quot;,&quot;completeTime&quot;:300,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369250&quot;,&quot;personalizedInfo&quot;:[{&quot;id&quot;:&quot;4404520435570371189&quot;,&quot;ruleId&quot;:&quot;4404520435570369267&quot;,&quot;finishState&quot;:1,&quot;todoTime&quot;:&quot;20191015135100&quot;,&quot;finishTime&quot;:&quot;20191015134848&quot;,&quot;completeTime&quot;:300,&quot;taskFinishs&quot;:[]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369225,&quot;finishState&quot;:1,&quot;ruleId&quot;:4404520435570369242,&quot;todoTime&quot;:&quot;20191015113100&quot;}</queryString>
+  <queryString class="java.lang.String">{&quot;todoId&quot;:4404520435570369250,&quot;finishState&quot;:1,&quot;ruleId&quot;:4404520435570369267,&quot;todoTime&quot;:&quot;20191015135100&quot;}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/allCheckin</java.net.URL>
 </httpSample>
-<httpSample t="59" it="0" lt="59" ct="0" ts="1571110137041" s="true" lb="20-已打卡修改花费时间" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="719" sby="466" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="56" it="0" lt="56" ct="0" ts="1571118527116" s="true" lb="20-已打卡修改花费时间" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="719" sby="466" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -866,26 +866,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:57 GMT
+Date: Tue, 15 Oct 2019 05:48:47 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 598
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 73
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369225&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015113100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571110138000,&quot;updated&quot;:1571110138000,&quot;version&quot;:&quot;2955&quot;,&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369242&quot;,&quot;todoTime&quot;:&quot;20191015113100&quot;,&quot;aheadType&quot;:[],&quot;deleted&quot;:false,&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015112858&quot;,&quot;created&quot;:1571110138000,&quot;updated&quot;:1571110138161,&quot;completeTime&quot;:600}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369250&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015135100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571118528000,&quot;updated&quot;:1571118528000,&quot;version&quot;:&quot;3035&quot;,&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369267&quot;,&quot;todoTime&quot;:&quot;20191015135100&quot;,&quot;aheadType&quot;:[],&quot;deleted&quot;:false,&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015134848&quot;,&quot;created&quot;:1571118528000,&quot;updated&quot;:1571118528218,&quot;completeTime&quot;:600}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;completeTime&quot;:600,&quot;id&quot;:4404520435570369225,&quot;todoTime&quot;:&quot;20191015113100&quot;}</queryString>
+  <queryString class="java.lang.String">{&quot;completeTime&quot;:600,&quot;id&quot;:4404520435570369250,&quot;todoTime&quot;:&quot;20191015135100&quot;}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/setCompleteTime</java.net.URL>
 </httpSample>
-<httpSample t="86" it="0" lt="86" ct="0" ts="1571110137147" s="true" lb="21-已打卡修改备注" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1176" sby="835" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="87" it="0" lt="87" ct="0" ts="1571118527216" s="true" lb="21-已打卡修改备注" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1176" sby="835" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -899,26 +899,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:57 GMT
+Date: Tue, 15 Oct 2019 05:48:47 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 1054
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 443
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369225&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015113100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571110138000,&quot;updated&quot;:1571110138265,&quot;version&quot;:&quot;2956&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369242&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 31 11 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:2,&quot;duration&quot;:{&quot;1131&quot;:3600},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571110138000,&quot;updated&quot;:1571110138265}],&quot;task&quot;:[],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369242&quot;,&quot;todoTime&quot;:&quot;20191015113100&quot;,&quot;aheadType&quot;:[],&quot;deleted&quot;:false,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;address&quot;:&quot;&quot;,&quot;attachments&quot;:[],&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015112858&quot;,&quot;remark&quot;:&quot;完成备注&quot;,&quot;created&quot;:1571110138000,&quot;updated&quot;:1571110138265,&quot;completeTime&quot;:600,&quot;taskFinishs&quot;:[]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;id&quot;:&quot;4404520435570369250&quot;,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015135100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:1,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;4404520435570345088&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571118528000,&quot;updated&quot;:1571118528322,&quot;version&quot;:&quot;3036&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369267&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 51 13 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:2,&quot;duration&quot;:{&quot;1351&quot;:3600},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571118528000,&quot;updated&quot;:1571118528322}],&quot;task&quot;:[],&quot;personalizedInfo&quot;:[{&quot;ruleId&quot;:&quot;4404520435570369267&quot;,&quot;todoTime&quot;:&quot;20191015135100&quot;,&quot;aheadType&quot;:[],&quot;deleted&quot;:false,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;address&quot;:&quot;&quot;,&quot;attachments&quot;:[],&quot;finishState&quot;:1,&quot;finishTime&quot;:&quot;20191015134848&quot;,&quot;remark&quot;:&quot;完成备注&quot;,&quot;created&quot;:1571118528000,&quot;updated&quot;:1571118528322,&quot;completeTime&quot;:600,&quot;taskFinishs&quot;:[]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;duration&quot;:3600,&quot;importance&quot;:1,&quot;intervalType&quot;:2,&quot;localId&quot;:4404520435570345092,&quot;id&quot;:4404520435570369225,&quot;todoClassifyId&quot;:4404520435570345088,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015113100&quot;,&quot;title&quot;:&quot;时间段+自定义分类+不提醒20191015113100&quot;,&quot;todoTime&quot;:&quot;20191015113100&quot;,&quot;address&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;latitude&quot;:&quot;&quot;,&quot;longitude&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;remark&quot;:&quot;完成备注&quot;,&quot;aheadType&quot;:[],&quot;attachments&quot;:[]}</queryString>
+  <queryString class="java.lang.String">{&quot;duration&quot;:3600,&quot;importance&quot;:1,&quot;intervalType&quot;:2,&quot;localId&quot;:4404520435570345092,&quot;id&quot;:4404520435570369250,&quot;todoClassifyId&quot;:4404520435570345088,&quot;shortTitle&quot;:&quot;时间段+自定义分类+不提醒20191015135100&quot;,&quot;title&quot;:&quot;时间段+自定义分类+不提醒20191015135100&quot;,&quot;todoTime&quot;:&quot;20191015135100&quot;,&quot;address&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;latitude&quot;:&quot;&quot;,&quot;longitude&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;remark&quot;:&quot;完成备注&quot;,&quot;aheadType&quot;:[],&quot;attachments&quot;:[]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/edit</java.net.URL>
 </httpSample>
-<httpSample t="73" it="0" lt="73" ct="0" ts="1571110137282" s="true" lb="22-日程添加（全天+提前提醒）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="801" sby="658" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="81" it="0" lt="81" ct="0" ts="1571118527348" s="true" lb="22-日程添加（全天+提前提醒）" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="801" sby="658" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -932,26 +932,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:57 GMT
+Date: Tue, 15 Oct 2019 05:48:47 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 680
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 262
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-466376764&quot;,&quot;id&quot;:&quot;4404520435570369226&quot;,&quot;shortTitle&quot;:&quot;全天日程20191015113100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571110138400,&quot;updated&quot;:1571110138400,&quot;version&quot;:&quot;2957&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369243&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 0 0 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:0,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571110138400,&quot;updated&quot;:1571110138400}]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-466376764&quot;,&quot;id&quot;:&quot;4404520435570369251&quot;,&quot;shortTitle&quot;:&quot;全天日程20191015135100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571118528453,&quot;updated&quot;:1571118528453,&quot;version&quot;:&quot;3037&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369268&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 0 0 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:0,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571118528453,&quot;updated&quot;:1571118528453}]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todos&quot;:[{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:0,&quot;localId&quot;:-466376764,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;20191015000000&quot;,&quot;shortTitle&quot;:&quot;全天日程20191015113100&quot;,&quot;title&quot;:&quot;全天日程20191015113100&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;remark&quot;:&quot;&quot;}]}</queryString>
+  <queryString class="java.lang.String">{&quot;todos&quot;:[{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:0,&quot;localId&quot;:-466376764,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;20191015000000&quot;,&quot;shortTitle&quot;:&quot;全天日程20191015135100&quot;,&quot;title&quot;:&quot;全天日程20191015135100&quot;,&quot;aheadType&quot;:[{&quot;offset&quot;:0},{&quot;offset&quot;:300}],&quot;remark&quot;:&quot;&quot;}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/batchadd</java.net.URL>
 </httpSample>
-<httpSample t="155" it="0" lt="155" ct="0" ts="1571110137401" s="true" lb="23-日程转清单" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="662" sby="776" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="207" it="0" lt="207" ct="0" ts="1571118527482" s="true" lb="23-日程转清单" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="662" sby="776" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -965,26 +965,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:58 GMT
+Date: Tue, 15 Oct 2019 05:48:48 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 541
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 367
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;checklist&quot;:{&quot;id&quot;:&quot;4404520435570363121&quot;,&quot;shortTitle&quot;:&quot;全天日程20191015113100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;created&quot;:1571110138567,&quot;updated&quot;:1571110138567,&quot;version&quot;:&quot;1011&quot;,&quot;task&quot;:[],&quot;personalizedInfo&quot;:[{&quot;deleted&quot;:false,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;address&quot;:&quot;&quot;,&quot;attachments&quot;:[],&quot;finishState&quot;:0,&quot;remark&quot;:&quot;&quot;,&quot;created&quot;:1571110138567,&quot;updated&quot;:1571110138567,&quot;taskFinishs&quot;:[]}]},&quot;todo&quot;:{&quot;id&quot;:&quot;4404520435570369226&quot;,&quot;status&quot;:0,&quot;deleted&quot;:true}}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;checklist&quot;:{&quot;id&quot;:&quot;4404520435570363126&quot;,&quot;shortTitle&quot;:&quot;全天日程20191015135100&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;created&quot;:1571118528679,&quot;updated&quot;:1571118528679,&quot;version&quot;:&quot;1016&quot;,&quot;task&quot;:[],&quot;personalizedInfo&quot;:[{&quot;deleted&quot;:false,&quot;country&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;address&quot;:&quot;&quot;,&quot;attachments&quot;:[],&quot;finishState&quot;:0,&quot;remark&quot;:&quot;&quot;,&quot;created&quot;:1571118528679,&quot;updated&quot;:1571118528679,&quot;taskFinishs&quot;:[]}]},&quot;todo&quot;:{&quot;id&quot;:&quot;4404520435570369251&quot;,&quot;status&quot;:0,&quot;deleted&quot;:true}}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:4404520435570346090,&quot;id&quot;:4404520435570369226,&quot;todoClassifyId&quot;:1001,&quot;shortTitle&quot;:&quot;全天日程20191015113100&quot;,&quot;title&quot;:&quot;全天日程20191015113100&quot;,&quot;todoTime&quot;:&quot;20191015000000&quot;,&quot;address&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;latitude&quot;:&quot;&quot;,&quot;longitude&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;remark&quot;:&quot;&quot;,&quot;aheadType&quot;:[],&quot;attachments&quot;:[]}</queryString>
+  <queryString class="java.lang.String">{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:4404520435570346090,&quot;id&quot;:4404520435570369251,&quot;todoClassifyId&quot;:1001,&quot;shortTitle&quot;:&quot;全天日程20191015135100&quot;,&quot;title&quot;:&quot;全天日程20191015135100&quot;,&quot;todoTime&quot;:&quot;20191015000000&quot;,&quot;address&quot;:&quot;&quot;,&quot;city&quot;:&quot;&quot;,&quot;country&quot;:&quot;&quot;,&quot;district&quot;:&quot;&quot;,&quot;latitude&quot;:&quot;&quot;,&quot;longitude&quot;:&quot;&quot;,&quot;province&quot;:&quot;&quot;,&quot;remark&quot;:&quot;&quot;,&quot;aheadType&quot;:[],&quot;attachments&quot;:[]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/service/aggregation/schedule/tochecklist</java.net.URL>
 </httpSample>
-<httpSample t="92" it="0" lt="92" ct="0" ts="1571110137604" s="true" lb="24-批量添加日程" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1437" sby="830" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="101" it="0" lt="101" ct="0" ts="1571118527741" s="true" lb="24-批量添加日程" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="1437" sby="830" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -998,26 +998,26 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:57 GMT
+Date: Tue, 15 Oct 2019 05:48:48 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 1315
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 434
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-1220431593&quot;,&quot;id&quot;:&quot;4404520435570369227&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第一条&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571110138724,&quot;updated&quot;:1571110138724,&quot;version&quot;:&quot;2960&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369244&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 31 11 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571110138724,&quot;updated&quot;:1571110138724}]},{&quot;localId&quot;:&quot;-441037804&quot;,&quot;id&quot;:&quot;4404520435570369228&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第二条&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571110138724,&quot;updated&quot;:1571110138724,&quot;version&quot;:&quot;2961&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369245&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 31 11 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571110138724,&quot;updated&quot;:1571110138724}]}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;todos&quot;:[{&quot;localId&quot;:&quot;-1220431593&quot;,&quot;id&quot;:&quot;4404520435570369252&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第一条&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571118528846,&quot;updated&quot;:1571118528846,&quot;version&quot;:&quot;3040&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369269&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 51 13 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571118528846,&quot;updated&quot;:1571118528846}]},{&quot;localId&quot;:&quot;-441037804&quot;,&quot;id&quot;:&quot;4404520435570369253&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第二条&quot;,&quot;deleted&quot;:false,&quot;status&quot;:1,&quot;importance&quot;:2,&quot;aheadType&quot;:[],&quot;todoClassifyId&quot;:&quot;1001&quot;,&quot;todoType&quot;:1,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;created&quot;:1571118528846,&quot;updated&quot;:1571118528846,&quot;version&quot;:&quot;3041&quot;,&quot;ruleInfo&quot;:[{&quot;id&quot;:&quot;4404520435570369270&quot;,&quot;startDatetime&quot;:&quot;20191015000000&quot;,&quot;endDatetime&quot;:&quot;20191015235959&quot;,&quot;rules&quot;:[{&quot;type&quot;:&quot;Solar&quot;,&quot;expression&quot;:&quot;0 51 13 * * ?&quot;}],&quot;attachDatetimes&quot;:[],&quot;detachDatetimes&quot;:[],&quot;intervalType&quot;:1,&quot;duration&quot;:{},&quot;closeState&quot;:0,&quot;repeatType&quot;:0,&quot;created&quot;:1571118528846,&quot;updated&quot;:1571118528846}]}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;todos&quot;:[{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:-441037804,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;20191015113100&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第二条&quot;,&quot;title&quot;:&quot;批量添加日程第二条&quot;,&quot;remark&quot;:&quot;&quot;},{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:-1220431593,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;20191015113100&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第一条&quot;,&quot;title&quot;:&quot;批量添加日程第一条&quot;,&quot;remark&quot;:&quot;&quot;}]}</queryString>
+  <queryString class="java.lang.String">{&quot;todos&quot;:[{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:-441037804,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;20191015135100&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第二条&quot;,&quot;title&quot;:&quot;批量添加日程第二条&quot;,&quot;remark&quot;:&quot;&quot;},{&quot;duration&quot;:0,&quot;importance&quot;:2,&quot;intervalType&quot;:1,&quot;localId&quot;:-1220431593,&quot;todoClassifyId&quot;:1001,&quot;todoTime&quot;:&quot;20191015135100&quot;,&quot;shortTitle&quot;:&quot;批量添加日程第一条&quot;,&quot;title&quot;:&quot;批量添加日程第一条&quot;,&quot;remark&quot;:&quot;&quot;}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/schedule/batchadd</java.net.URL>
 </httpSample>
-<httpSample t="56" it="0" lt="56" ct="0" ts="1571110137741" s="true" lb="25-日程排序" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="317" sby="539" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<httpSample t="60" it="0" lt="60" ct="0" ts="1571118527888" s="true" lb="25-日程排序" rc="200" rm="" tn="流程测试引擎 1-1" dt="text" by="317" sby="539" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>
@@ -1031,39 +1031,39 @@ Host: 47.112.0.183:8801
     <failureMessage></failureMessage>
   </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 200 
-Date: Tue, 15 Oct 2019 03:28:57 GMT
+Date: Tue, 15 Oct 2019 05:48:48 GMT
 Content-Type: application/json;charset=UTF-8
 Content-Length: 196
 </responseHeader>
   <requestHeader class="java.lang.String">Connection: keep-alive
 Content-Type: application/json;charset=UTF-8
 Accept-Encoding: gzip
-token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token: b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 User-Agent: okhttp/3.3.0
 Content-Length: 149
 Host: 47.112.0.183:8801
 </requestHeader>
-  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;sorts&quot;:[{&quot;addType&quot;:1,&quot;addNode&quot;:&quot;4404520435570369228&quot;,&quot;afterType&quot;:1,&quot;afterNode&quot;:&quot;4404520435570369227&quot;,&quot;deleteType&quot;:1,&quot;deleteNode&quot;:&quot;4404520435570369228&quot;}]}}</responseData>
+  <responseData class="java.lang.String">{&quot;code&quot;:200,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:{&quot;sorts&quot;:[{&quot;addType&quot;:1,&quot;addNode&quot;:&quot;4404520435570369253&quot;,&quot;afterType&quot;:1,&quot;afterNode&quot;:&quot;4404520435570369252&quot;,&quot;deleteType&quot;:1,&quot;deleteNode&quot;:&quot;4404520435570369253&quot;}]}}</responseData>
   <responseFile class="java.lang.String"></responseFile>
   <cookies class="java.lang.String"></cookies>
   <method class="java.lang.String">POST</method>
-  <queryString class="java.lang.String">{&quot;sorts&quot;:[{&quot;addNode&quot;:4404520435570369228,&quot;addType&quot;:1,&quot;afterNode&quot;:4404520435570369227,&quot;afterType&quot;:1,&quot;deleteNode&quot;:4404520435570369228,&quot;deleteType&quot;:1}]}</queryString>
+  <queryString class="java.lang.String">{&quot;sorts&quot;:[{&quot;addNode&quot;:4404520435570369253,&quot;addType&quot;:1,&quot;afterNode&quot;:4404520435570369252,&quot;afterType&quot;:1,&quot;deleteNode&quot;:4404520435570369253,&quot;deleteType&quot;:1}]}</queryString>
   <java.net.URL>http://47.112.0.183:8801/base/plan/record/sort</java.net.URL>
 </httpSample>
-<sample t="3" it="0" lt="0" ct="0" ts="1571110137827" s="true" lb="Debug Sampler" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="22872" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
+<sample t="2" it="0" lt="0" ct="0" ts="1571118527977" s="true" lb="Debug Sampler" rc="200" rm="OK" tn="流程测试引擎 1-1" dt="text" by="22872" sby="0" sc="1" ec="0" ng="1" na="1" hn="LAPTOP-UO12M6SP">
   <responseHeader class="java.lang.String"></responseHeader>
   <requestHeader class="java.lang.String"></requestHeader>
   <responseData class="java.lang.String">JMeterVariables:
 JMeterThread.last_sample_ok=true
-JMeterThread.pack=org.apache.jmeter.threads.SamplePackage@1047453a
+JMeterThread.pack=org.apache.jmeter.threads.SamplePackage@3013e88c
 M=1
 N=25
 NULL=NULL
 NULL_matchNr=0
-START.HMS=112852
-START.MS=1571110132670
+START.HMS=134842
+START.MS=1571118522586
 START.YMD=20191015
-TESTSTART.MS=1571110133070
+TESTSTART.MS=1571118522951
 Vcode_#=1
 Vcode_1=0
 __jm__流程循环__idx=0
@@ -1076,13 +1076,13 @@ afterOneDay=20191016
 afterThreeDay=20191018
 content=test
 currentDay=20191015
-currentMin=201910151131
-currentMin_add1=20191015113100
-currentMin_add2=20191015113200
-currentMin_add6=20191015113700
-currentTime=20191015112853  
-currentTimeByMM=201910151128  
-dbcheckpool=org.apache.jmeter.protocol.jdbc.config.DataSourceElement$DataSourceComponentImpl@2803037f
+currentMin=201910151351
+currentMin_add1=20191015135100
+currentMin_add2=20191015135200
+currentMin_add6=20191015135700
+currentTime=20191015134843  
+currentTimeByMM=201910151348  
+dbcheckpool=org.apache.jmeter.protocol.jdbc.config.DataSourceElement$DataSourceComponentImpl@287db49d
 device={&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;}
 deviceTagApp=59db5d3aef9002a9
 device_model=Meizu-16th Plus
@@ -1144,10 +1144,10 @@ flow_id_#=1
 flow_id_1=1
 flow_name_#=1
 flow_name_1=日程编辑
-id=4404520435570369226
-id1=4404520435570369227
-id2=4404520435570369228
-importance=2
+id=4404520435570369251
+id1=4404520435570369252
+id2=4404520435570369253
+importance=1
 ischechdb_#=25
 ischechdb_1=0
 ischechdb_10=0
@@ -1227,7 +1227,7 @@ method_7=POST
 method_8=POST
 method_9=POST
 mobile=14400001111
-next_time_add3=2019-10-15 11:32:53
+next_time_add3=2019-10-15 13:52:43
 node_code_#=25
 node_code_1=FLOW_001NODE_01
 node_code_10=FLOW_001_NODE_010
@@ -1306,7 +1306,7 @@ node_name_6=日程子任务编辑
 node_name_7=日程子任务打卡
 node_name_8=日程子任务取消打卡
 node_name_9=日程打卡（含子任务）
-para={&quot;sorts&quot;:[{&quot;addNode&quot;:4404520435570369228,&quot;addType&quot;:1,&quot;afterNode&quot;:4404520435570369227,&quot;afterType&quot;:1,&quot;deleteNode&quot;:4404520435570369228,&quot;deleteType&quot;:1}]}
+para={&quot;sorts&quot;:[{&quot;addNode&quot;:4404520435570369253,&quot;addType&quot;:1,&quot;afterNode&quot;:4404520435570369252,&quot;afterType&quot;:1,&quot;deleteNode&quot;:4404520435570369253,&quot;deleteType&quot;:1}]}
 parameter_#=25
 parameter_1={&quot;todos&quot;: [{&quot;title&quot;: &quot;测试日程编辑流程&quot;, &quot;localId&quot;: -1563241933492017464, &quot;duration&quot;: 0, &quot;todoTime&quot;: &quot;20190716144000&quot;, &quot;aheadType&quot;: [{&quot;offset&quot;: 0}], &quot;importance&quot;: 1, &quot;shortTitle&quot;: &quot;测试日程编辑流程&quot;, &quot;intervalType&quot;: 1, &quot;todoClassifyId&quot;: 1001}]}
 parameter_10={&quot;todoId&quot;:$id$,&quot;finishState&quot;:0,&quot;ruleId&quot;:$ruleId$,&quot;todoTime&quot;:&quot;20190717144000&quot;}
@@ -1551,7 +1551,7 @@ pre_sql_str_7=null
 pre_sql_str_8=null
 pre_sql_str_9=null
 results=[{status=0}]
-ruleId=4404520435570369243
+ruleId=4404520435570369268
 sleep_time_#=25
 sleep_time_1=0
 sleep_time_10=0
@@ -1632,32 +1632,32 @@ sql_str_7=select finish_state from plan.todo_task_finish where todo_task_id = $t
 sql_str_8=select finish_state from plan.todo_task_finish where todo_task_id = $taskId$
 sql_str_9=
 summaryDay=2019-10-15
-taskId=4404520435570364126
+taskId=4404520435570364131
 todoDay=15
 todoDay3=18
-todoDay_add3=201910181128
-todoHH=11
-todoHH2=11
-todoHH6=11
-todoHHRepeat=11
-todoHHRepeat2=11
-todoHHRepeat6=11
+todoDay_add3=201910181348
+todoHH=13
+todoHH2=13
+todoHH6=13
+todoHHRepeat=13
+todoHHRepeat2=13
+todoHHRepeat6=13
 todoMonth=10
-todomm=31
-todomm2=32
-todomm6=37
-todommRepeat=31
-todommRepeat2=32
-todommRepeat6=37
-todotime=20191015112853
-todotime_add15=201910151143
-todotime_add2=201910151132
-todotime_add6=201910151137
-token=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
-token;user_id=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+todomm=51
+todomm2=52
+todomm6=57
+todommRepeat=51
+todommRepeat2=52
+todommRepeat6=57
+todotime=20191015134843
+todotime_add15=201910151403
+todotime_add2=201910151352
+todotime_add6=201910151357
+token=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
+token;user_id=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 token;user_id_g=1
-token;user_id_g0=&quot;token&quot;:&quot;b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c&quot;
-token;user_id_g1=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e1fde6298bd62a9c4b775f2af5c11b56c
+token;user_id_g0=&quot;token&quot;:&quot;b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27&quot;
+token;user_id_g1=b7d156e6255c2faa94d2bcef94ea87dabedf821b5287f52cc90620a1343d628475ac3b3f9dd16073781d48f5c6f641de8786472aa406b7ad9a4ed74030fe4c7b3ea37c2dd901bb3e7ad7cb7112e115c38d79ae629ee2cd27
 userid=4404520435568345088
 
 </responseData>

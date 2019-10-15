@@ -1,3 +1,4 @@
+import os
 import xml.etree.ElementTree as ET
 
 fileName = "测试流.jmx"
