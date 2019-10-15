@@ -14,7 +14,7 @@
     <property name="username" value="cuiqingyong@jielema.com"/>
     <property name="password" value="jielema_2015"/>
     <property name="mailfrom" value="cuiqingyong@jielema.com"/>
-    <property name="mail_to" value="lja@jielema.com,liujun@jielema.com"/>
+    <property name="mail_to" value="liujun@jielema.com"/>
     <property name="mailsubject" value="时光序API性能测试报告"/>
     <property name="mail_port" value="25"/>
     <target name="run">
