@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'apitest',
     'sql',
     'task',
-    'performance'
+    'performance',
+    'plan'
 ]
 
 MIDDLEWARE = [
@@ -164,10 +165,3 @@ STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), '../static/').replace('\\', '/'),
 )
 
-# CRONJOBS = [
-#     ('*/1 * * * *', "apitest.cornJobs.test", "<<crontab.log")
-# ]
-# from task import celeryconfig
-# BROKER_BACKEND='redis'
-# BOOKER_URL='redis://127.0.0.1:6379/1'
-# CELERY_RESULT_BACKEND='redis://127.0.0.1:6379/2'

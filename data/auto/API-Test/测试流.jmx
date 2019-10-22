@@ -174,7 +174,7 @@
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="获取流程数据" enabled="true">
           <stringProp name="dataSource">dbcheckpool</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select flow_id,flow_name,account,password from automation.testdata_flow where state = 1 and flow_id = 1 order by flow_code</stringProp>
+          <stringProp name="query">select flow_id,flow_name,account,password from automation.testdata_flow where state = 1 and flow_id = 8 order by flow_code</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">flow_id,flow_name,account,password</stringProp>
@@ -646,7 +646,7 @@ vars.put(&quot;sql&quot;,sql);</stringProp>
               <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell断言" enabled="true">
                 <stringProp name="BeanShellAssertion.query">String response = prev.getResponseDataAsString();
 String expect_values=vars.get(&quot;expect_response_&quot;+vars.get(&quot;N&quot;));
-
+System.out.println(expect_values);
 boolean isok = true;
 if(expect_values != null &amp;&amp; expect_values.length()&gt;0)
 {
@@ -672,13 +672,13 @@ if(!isok)
 {
   Failure = true;
   FailureMessage = &quot;返回值断言匹配失败:&quot;+expect_values;
-  System.out.println(&quot;==&gt;接口名称：&quot; + vars.get(&quot;path_&quot;+vars.get(&quot;N&quot;)) + &quot;/ 测试结果：&quot;+!Failure);
+  System.out.println(&quot;==&gt;接口名称：&quot; + vars.get(&quot;path_&quot;+vars.get(&quot;N&quot;)) + &quot;==&gt; 测试结果：&quot;+!Failure);
  }
 else
 {
   Failure = false;
   FailureMessage = &quot;返回值断言匹配通过&quot;;
-  System.out.println(&quot;==&gt;&quot; + vars.get(&quot;path_&quot;+vars.get(&quot;N&quot;)) + &quot;测试结果：&quot;+!Failure);
+  System.out.println(&quot;==&gt;&quot; + vars.get(&quot;path_&quot;+vars.get(&quot;N&quot;)) + &quot;==&gt; 测试结果：&quot;+!Failure);
  }
 
  </stringProp>

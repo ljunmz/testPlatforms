@@ -29,6 +29,7 @@ from performance.views import performance, \
     actionPerformanceAllFlow, changePerformanceFlowState, changePerformanceNodeState, deletePerformanceDefaultVar, \
     addPerformanceDefaultVar, editPerformanceDefaultVar, getPerformanceDefaultVar, getPerformanceConfig,  \
     savePerformanceConfig
+from plan.views import plan
 from sql.views import sqlIndex, register, clearModelCodeRecords, clearPhoneCodeRecords, changeCreatedTime, getUserInfo, \
     getTokenInfo, getTodoInfo, getBuriedInfo
 from task.views import startWork, startBeat
@@ -103,5 +104,6 @@ urlpatterns = [
     url(r'getPerformanceDefaultVar', getPerformanceDefaultVar),
     url(r'getPerformanceConfig', getPerformanceConfig),
     url(r'savePerformanceConfig', savePerformanceConfig),
+    url(r'plan', plan),
     # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_URL}),
 ]

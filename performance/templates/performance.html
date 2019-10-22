@@ -104,7 +104,7 @@
         </el-submenu>
         <el-menu-item index="3"><a href="/index">接口自动化管理</a></el-menu-item>
         <el-menu-item index="4"><a href="/performance">接口性能测试管理</a></el-menu-item>
-        <el-menu-item index="5">测试计划管理</el-menu-item>
+        <el-menu-item index="5"><a href="/plan">测试计划管理</a></el-menu-item>
         <el-menu-item index="6">缺陷统计</el-menu-item>
         <el-menu-item index="7">测试报告</el-menu-item>
         <el-menu-item index="8"><a href="/sqlIndex">SqL操作</a></el-menu-item>
@@ -669,10 +669,9 @@
                                             </el-table-column>
                                             <el-table-column label="操作" width="180px" prop="parameter">
                                                 <template slot-scope="scope">
-                                                    <el-button size="mini" type="success"
-                                                               style="margin: 2px;padding: 5px"
-                                                               @click.native.prevent="addNodeRow(nodeData,scope.$index, scope.row)">
-                                                        添加
+                                                    <el-button size="mini" type="warning" style="margin: 2px;padding: 5px"
+                                                               @click="copyApi(scope.$index,nodeData,scope.row)">
+                                                        复制
                                                     </el-button>
                                                     <el-button size="mini" type="danger"
                                                                style="margin: 2px;padding: 5px"
@@ -871,20 +870,6 @@
             </el-table-column>
         </el-table>
     </el-dialog>
-<!--    <el-dialog style="font-weight: bold" title="邮箱收件人配置(多个收件人以逗号隔开)" :visible.sync="dialogEmailChange">-->
-<!--        <el-form :model="flowDataDefault">-->
-<!--            <el-form-item label="" :label-width="formLabelWidth">-->
-<!--                <el-input v-model="recipients" autocomplete="off" :autosize="{ minRows: 5, maxRows: 20}" size="small"-->
-<!--                          type="textarea"-->
-<!--                          style="margin: 1px;width: 85%"-->
-<!--                          placeholder="请输入收件人邮箱地址(多个收件人时以英文逗号隔开(例如：aaa@jielema.com,bbb@jielema.com))"></el-input>-->
-<!--            </el-form-item>-->
-<!--        </el-form>-->
-<!--        <div slot="footer" class="dialog-footer">-->
-<!--            <el-button @click="dialogEmailChange = false">取 消</el-button>-->
-<!--            <el-button type="primary" @click="emailChange(recipients)">确 定</el-button>-->
-<!--        </div>-->
-<!--    </el-dialog>-->
     <el-dialog style="font-weight: bold" title="新增接口" border :visible.sync="dialogTableVisible" width="1482px">
         <el-table
                 :data="nodeDataDefault"
@@ -1165,6 +1150,10 @@
             }
         },
         methods: {
+            copyApi(nodeData,index,row){
+                this.nodeDataDefault = [row];
+                this.dialogTableVisible = true;
+            },
             envChange(value){
 
             },
