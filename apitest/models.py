@@ -1,6 +1,28 @@
 from django.db import models
 
 # Create your models here.
+
+
+
+
+class ApiStatistics(models.Model):
+    service = models.CharField(max_length=255, blank=True, null=True)
+    summary = models.CharField(max_length=255, blank=True, null=True)
+    path = models.CharField(max_length=255, blank=True, null=True)
+    inner_cell = models.CharField(max_length=255, blank=True, null=True)
+    deleted = models.IntegerField(blank=True, null=True)
+    isauto = models.CharField(db_column='isAuto', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    author = models.CharField(max_length=255, blank=True, null=True)
+    remark = models.CharField(max_length=255, blank=True, null=True)
+    created = models.DateTimeField(blank=True, null=True)
+    updated = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'api_statistics'
+
+
+
 class TestdataFlow(models.Model):
     flow_id = models.IntegerField(primary_key=True)
     flow_code = models.CharField(max_length=20)

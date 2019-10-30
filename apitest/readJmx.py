@@ -163,3 +163,13 @@ def removeFile(path):
     listFile = os.listdir(path)
     for fileName in listFile:
         os.remove(path+fileName)
+
+
+
+#
+# for ip1 in range(10, 11):
+#     for ip2 in range(1, 254):
+#         ip = "172.16."+str(ip1)+"."+str(ip2)
+#         print(ip)
+#         # os.system("ping "+ip)
+#         os.system("mstsc /v: "+"192.168."+str(ip1)+"."+str(ip2)+" /console")

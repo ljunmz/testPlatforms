@@ -5,7 +5,7 @@ from apitest.readJmx import changeAciton
 from task import app
 from task.taskDao import findStatusById
 
-paths = 'G:\\svn\\自动化测试\\API-Test\\'
+paths = os.path.abspath(os.path.dirname(__file__)).split('testPlatforms')[0]+"testPlatforms\\data\\auto\\API-Test\\"
 
 @app.task
 def everySeconds():

@@ -1,6 +1,5 @@
 import os
 
-from gevent import thread
 
 import django
 from django.http import JsonResponse

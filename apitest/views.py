@@ -10,6 +10,8 @@ from apitest.readJmx import changeAciton, getEmailList, changeEmail, getDefaultV
 
 # paths = 'D:\\时光序\\自动化测试\\API-Test\\'
 # paths = 'F:\\code\\testPlatforms\\data\\auto\\API-Test'
+from apitest.swaggerUitls import getSwaggerApi
+
 paths = os.path.abspath(os.path.dirname(__file__)).split('testPlatforms')[0]+"testPlatforms\\data\\auto\\API-Test\\"
 
 @csrf_exempt
@@ -330,8 +332,7 @@ def addNode(request):
     flow_id = json.loads(request.body)["flow_id"]
     order_id = json.loads(request.body)["order_id"]
     node_id = TestdataNode.objects.all().order_by("-node_id")[0].node_id + 1
-    node_code = TestdataFlow.objects.filter(flow_id=flow_id)[0].flow_code.replace("TEST_",
-                                                                                  "") + "_" + "NODE_0" + order_id
+    node_code = TestdataFlow.objects.filter(flow_id=flow_id)[0].flow_code.replace("TEST_", "") + "_" + "NODE_0" + str(order_id)
     node_name = json.loads(request.body)["node_name"]
     method = json.loads(request.body)["method"]
     path = json.loads(request.body)["path"]
@@ -490,3 +491,7 @@ def deleteDefaultVar(request):
     elif result == 601:
         response = [{"code": "601", "msg": "变量不存在"}]
         return JsonResponse(response, safe=False)
+
+@csrf_exempt
+def getApiStatistics(request):
+    return JsonResponse([getSwaggerApi()], safe=False)

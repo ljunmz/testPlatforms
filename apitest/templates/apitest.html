@@ -692,6 +692,46 @@
             <el-tab-pane label="定时任务" style="font-weight: bolder" name="task">
                 <el-button size="small" type="danger" @click="startTask" style="margin: 10px">开启定时任务（每天早上9点50开始接口自动化）</el-button>
             </el-tab-pane>
+            <el-tab-pane label="接口统计" style="font-weight: bolder" name="statistics">
+                <span class="span" style="display: block;font-weight: bold;color: #3557ff">
+                    微服务总数：
+                    {%verbatim%}
+                    {{apiStatisticsData.serviceCount}}
+                    {%endverbatim%}
+                </span>
+                <span class="span" style="display: block;font-weight: bold;color: #3557ff">
+                    接口总数:
+                    {%verbatim%}
+                    {{apiStatisticsData.apiCounts}}
+                    {%endverbatim%}
+                </span>
+                <span class="span" style="display: block;font-weight: bold;color: #3557ff">
+                    未实现接口数：
+                    {%verbatim%}
+                    {{apiStatisticsData.undoneCounts}}
+                    {%endverbatim%}
+                </span>
+                <span class="span" style="display: block;font-weight: bold;color: #3557ff">
+                    未统计接口：
+                    {%verbatim%}
+                    {{apiStatisticsData.unStatisticsCounts}}
+                    {%endverbatim%}
+                </span>
+                <span class="span" style="display: block;font-weight: bold;color: #3557ff">
+                    未实现接口列表：
+                    {%verbatim%}
+                    {{apiStatisticsData.undoneList}}
+                    {%endverbatim%}
+                </span>
+                <span class="span" style="display: block;font-weight: bold;color: #3557ff">
+                    未统计接口列表：
+                    {%verbatim%}
+                    {{apiStatisticsData.unStatisticsList}}
+                    {%endverbatim%}
+                </span>
+
+
+            </el-tab-pane>
         </el-tabs>
     </div>
     <el-dialog style="font-weight: bold" title="新增接口测试流" :visible.sync="dialogFormVisible">
@@ -981,6 +1021,7 @@
                 url: 'http://apitest.shiguangxu.com:8000',
                 // url: 'http://172.16.10.172:8000',
                 filtrate: '',
+                apiStatisticsData:{},
                 recipients: '',
                 pageSize: 18,
                 FlowlistSize: 100,
@@ -1072,6 +1113,7 @@
         },
         methods: {
             copyApi(nodeData,index,row){
+
                 this.nodeDataDefault = [row];
                 this.dialogTableVisible = true;
             },
@@ -1134,8 +1176,12 @@
                 } else if (targetName.name === "task"){
                     this.activeName = targetName.name;
                     console.log(this.activeName);
-                } else {
-                    console.log("sssss")
+                } else if (targetName.name === "statistics") {
+                    this.$http.post(this.url + '/getApiStatistics', dataPost).then(
+                        function (data) {
+                            this.apiStatisticsData = data.body[0];
+                        }
+                    );
                 }
 
             },
@@ -1812,7 +1858,6 @@
                         type: 'error'
                     });
                 } else {
-                    console.log("nodeDataDefault=", nodeDataDefault);
                     var dataPost = {
                         "order_id": nodeDataDefault[0].order_id,
                         "flow_id": this.nodeFlowId,
@@ -1836,7 +1881,6 @@
                         'post_keys_extractor': nodeDataDefault[0].post_keys_extractor,
                         'post_keys_default': nodeDataDefault[0].post_keys_default,
                     };
-                    console.log("DataPost=", dataPost);
                     this.$http.post(this.url + '/addNode', dataPost).then(
                         function (data) {
                             console.log(dataPost);
