@@ -494,4 +494,9 @@ def deleteDefaultVar(request):
 
 @csrf_exempt
 def getApiStatistics(request):
-    return JsonResponse([getSwaggerApi()], safe=False)
+    response = [{"code": "200", "msg": "操作成功", "data": getSwaggerApi()}]
+    return JsonResponse(response, safe=False)
+
+@csrf_exempt
+def lookSummary(request):
+    return render_to_response('../../data/auto/API-Test/Report/html/APITest_Detail_201911081427.html', {})

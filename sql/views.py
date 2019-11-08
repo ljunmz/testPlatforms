@@ -79,7 +79,7 @@ def clearPhoneCodeRecords(request):
 @csrf_exempt
 def changeCreatedTime(request):
     mobile = json.loads(request.body)["mobile"]
-    user_id = User.objects.using("user").filter(mobile="FlYgRzQZUSYvQBJq9oi77Q==")[0].id
+    user_id = User.objects.using("user").filter(mobile=mobile)[0].id
     print(user_id)
     Todo.objects.using("plan").filter(Q(user_id=user_id) | Q(created__gte='2019-08-26 00:00:01')).update(
         created='2019-08-14 00:00:01'

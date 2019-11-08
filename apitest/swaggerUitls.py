@@ -1,6 +1,6 @@
 import json
 
-from apitest.TestdataNodeDao import isExitPath, isExitApiStatistics
+from apitest.TestdataNodeDao import isExitPath, isExitApiStatistics, getRemarks
 from apitest.requestUitls import doRequest
 
 swaggerList = doRequest("GET", "http://47.112.0.183:8801/swagger-resources", {}, {}, {})
@@ -12,6 +12,8 @@ def getSwaggerApi():
     unStatisticsCounts = 0
     undoneList = []
     unStatisticsList = []
+    id = 0
+    ids = 0
     for path in json.loads(swaggerList):
         if path["url"] != "/web-backend/v2/api-docs" and path["url"] != "/service-monitor/v2/api-docs":
             respon = doRequest("GET", "http://47.112.0.183:8801" + path["url"], {}, {}, {})
@@ -25,17 +27,32 @@ def getSwaggerApi():
             unStatisticsCount = 0
             #服务名称
             serviceName = path["name"]
+            print("================"+str(serviceName)+"================")
             for paths in list(responJson["paths"].keys()):
                 if paths != "/checkalive" and paths!= "/service/weixin/api":
                     apiCount = apiCount + 1
-                    if isExitPath(paths)<=0:
-                        # print("未实现-->"+str(paths))
-                        undoneCount = undoneCount +1
-                        undoneList.append(paths)
-                    if isExitApiStatistics(paths)<=0:
-                        print("未统计-->"+str(paths))
-                        unStatisticsCount = unStatisticsCount +1
-                        unStatisticsList.append(paths)
+                    if "post" in responJson["paths"][paths]:
+                        if isExitPath(paths)<=0:
+                            # print("未实现-->"+str(paths))
+                            undoneCount = undoneCount +1
+                            ids = ids + 1
+                            undoneList.append({"id": ids, "serviceName": serviceName, "apiName": responJson["paths"][paths]["post"]["summary"], "url": paths, "remark": getRemarks(paths)})
+                        if isExitApiStatistics(paths)<=0:
+                            print("未统计-->"+str(paths))
+                            unStatisticsCount = unStatisticsCount +1
+                            id = id +1
+                            unStatisticsList.append({"id": id, "serviceName": serviceName, "apiName": responJson["paths"][paths]["post"]["summary"], "url": paths})
+                    elif "get" in responJson["paths"][paths]:
+                        if isExitPath(paths)<=0:
+                            # print("未实现-->"+str(paths))
+                            undoneCount = undoneCount +1
+                            ids = ids + 1
+                            undoneList.append({"id": ids, "serviceName": serviceName, "apiName": responJson["paths"][paths]["get"]["summary"], "url": paths, "remark": getRemarks(paths)})
+                        if isExitApiStatistics(paths)<=0:
+                            print("未统计-->"+str(paths))
+                            unStatisticsCount = unStatisticsCount +1
+                            id = id +1
+                            unStatisticsList.append({"id": id, "serviceName": serviceName, "apiName": responJson["paths"][paths]["get"]["summary"], "url": paths})
             undoneCounts = undoneCounts+undoneCount
             apiCounts = apiCounts + apiCount
             unStatisticsCounts = unStatisticsCounts + unStatisticsCount
@@ -65,7 +82,6 @@ def getSwaggerApi():
 #         if line not in f2:
 #             # print("已统计接口"+ line)
 #             print(line.strip())
-#
 
 
 

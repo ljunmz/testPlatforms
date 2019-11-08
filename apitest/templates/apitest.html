@@ -20,6 +20,10 @@
     <!-- 引入vue-resource -->
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.js" type="text/javascript" charset="utf-8"></script>
     <style lang="scss">
+        .el-checkbox {
+            margin: 1px;
+            padding: 0px;
+        }
         .el-tooltip__popper {
             max-width: 40%
         }
@@ -140,10 +144,10 @@
                                     <el-input style="display: none;margin: 0;padding: 0" :placeholder="scope.row.pk"
                                               v-model="scope.row.pk"></el-input>
                                     <span class="span" style="display: block;font-weight: bold;color: #3557ff">
-                                {%verbatim%}
-                                {{scope.row.pk}}
-                                {%endverbatim%}
-                            </span>
+                                        {%verbatim%}
+                                        {{scope.row.pk}}
+                                        {%endverbatim%}
+                                    </span>
                                 </template>
                             </el-table-column>
                             <el-table-column label="测试流名称" prop="flow_name" id="flowName">
@@ -152,10 +156,10 @@
                                               :placeholder="scope.row.flow_name"
                                               v-model="scope.row.flow_name"></el-input>
                                     <span class="span" style="display: block;font-weight: bold;">
-                                {%verbatim%}
-                                {{scope.row.flow_name}}
-                                {%endverbatim%}
-                            </span>
+                                            {%verbatim%}
+                                            {{scope.row.flow_name}}
+                                            {%endverbatim%}
+                                    </span>
                                 </template>
                             </el-table-column>
                             <el-table-column label="测试账号" prop="account" id="account">
@@ -692,45 +696,131 @@
             <el-tab-pane label="定时任务" style="font-weight: bolder" name="task">
                 <el-button size="small" type="danger" @click="startTask" style="margin: 10px">开启定时任务（每天早上9点50开始接口自动化）</el-button>
             </el-tab-pane>
-            <el-tab-pane label="接口统计" style="font-weight: bolder" name="statistics">
+            <el-tab-pane
+                    label="接口统计"
+                    style="font-weight: bolder"
+                    v-loading="statisticsLoading"
+                    element-loading-text="正在拼命统计中..."
+                    element-loading-spinner="el-icon-loading"
+                    element-loading-background="rgba(0, 0, 0, 0.8)"
+                    name="statistics" >
                 <span class="span" style="display: block;font-weight: bold;color: #3557ff">
-                    微服务总数：
+                    <el-tag>微服务总数 ：
                     {%verbatim%}
                     {{apiStatisticsData.serviceCount}}
                     {%endverbatim%}
+                    </el-tag>
                 </span>
                 <span class="span" style="display: block;font-weight: bold;color: #3557ff">
-                    接口总数:
+                    <el-tag>接口总数 ：
                     {%verbatim%}
                     {{apiStatisticsData.apiCounts}}
                     {%endverbatim%}
+                    </el-tag>
                 </span>
                 <span class="span" style="display: block;font-weight: bold;color: #3557ff">
-                    未实现接口数：
+                    <el-tag type="warning">未实现接口数 ：
                     {%verbatim%}
                     {{apiStatisticsData.undoneCounts}}
                     {%endverbatim%}
+                    </el-tag>
                 </span>
                 <span class="span" style="display: block;font-weight: bold;color: #3557ff">
-                    未统计接口：
+                    <el-tag type="warning">未统计接口 ：
                     {%verbatim%}
                     {{apiStatisticsData.unStatisticsCounts}}
                     {%endverbatim%}
-                </span>
-                <span class="span" style="display: block;font-weight: bold;color: #3557ff">
-                    未实现接口列表：
-                    {%verbatim%}
-                    {{apiStatisticsData.undoneList}}
-                    {%endverbatim%}
-                </span>
-                <span class="span" style="display: block;font-weight: bold;color: #3557ff">
-                    未统计接口列表：
-                    {%verbatim%}
-                    {{apiStatisticsData.unStatisticsList}}
-                    {%endverbatim%}
+                     </el-tag>
                 </span>
 
+                <el-collapse  accordion>
+                    <el-collapse-item >
+                        <template slot="title">
+                            <span class="span" style="display: block;font-weight: bold;color: #ffa354;margin-top: 5px">
+                            未统计接口列表(点击展开详情)：
+                            </span>
+                        </template>
+                        <el-table :data="tableData" style="width: 100%"
+                                  border
+                                  stripe
+                                  size="mini"
+                                  highlight-current-row="true"
+                                  row-style="height:20px"
+                                  cell-style="padding:4px"
+                                  style="width:auto"
+                                  :header-cell-style="{background:'#836FFF',color:'#F0FFFF',padding:'3px'}">
+                            <el-table-column label="序号" size="small" prop="id" id="id" width="90px">
+                                <template slot-scope="scope">
+                                    <el-input style="display: none;margin: 0;padding: 0" :placeholder="scope.row.pk"
+                                              v-model="scope.row.id"></el-input>
+                                    <span class="span" style="display: block;font-weight: bold;color: #0e0513">
+                                        {%verbatim%}
+                                        {{scope.row.id}}
+                                        {%endverbatim%}
+                                    </span>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    v-for="col in colTemplate"
+                                    :prop="col.prop" :label="col.label" >
+                            </el-table-column>
 
+                            <el-table-column label="操作" width="250px" prop="operation" >
+                                <el-button raw-type="button" >
+                                    手动统计
+                                </el-button>
+                            </el-table-column>
+                        </el-table>
+                    </el-collapse-item>
+                    <el-collapse-item >
+                        <template slot="title">
+                            <span class="span" style="display: block;font-weight: bold;color: #d49e54;margin-top: 5px">
+                            未实现接口列表(点击展开详情)：
+                            </span>
+                        </template>
+                        <el-table :data="unDoList" style="width: 100%"
+                                  border
+                                  stripe
+                                  highlight-current-row="true"
+                                  style="width:auto"
+                                  :header-cell-style="{background:'#C8C6D4',color:'#0E0513',padding:'3px'}">
+                            <el-table-column label="序号" size="small" prop="id" id="id" width="90px">
+                                <template slot-scope="scope">
+                                    <span class="span" style="display: block;font-weight: bold;color: #0e0513">
+                                        {%verbatim%}
+                                        {{scope.row.id}}
+                                        {%endverbatim%}
+                                    </span>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    v-for="col in colTemplate"
+                                    :prop="col.prop" :label="col.label" >
+                            </el-table-column>
+                            <el-table-column
+                                    label="备注"
+                                    size="small"
+                                    prop="remark"
+                                    :filters="filters"
+                                    :filter-method="filterTag"
+                                    filter-placement="bottom-end">
+                                    width="290px">
+                                <template slot-scope="scope">
+                                    <span  class="span" style="display: block;font-weight: bold;color: #2b83e9;overflow:unset">
+                                        {%verbatim%}
+                                        {{scope.row.remark}}
+                                        {%endverbatim%}
+                                    </span>
+                                </template>
+                            </el-table-column>
+                            <el-table-column label="操作" width="250px" prop="operation" >
+                                <el-button raw-type="button" >
+                                    手动统计
+                                </el-button>
+                            </el-table-column>
+                        </el-table>
+                    </el-collapse-item>
+                </el-collapse>
             </el-tab-pane>
         </el-tabs>
     </div>
@@ -996,6 +1086,12 @@
             <el-button type="primary" @click="addNodeOk(nodeDataDefault)">确 定</el-button>
         </div>
     </el-dialog>
+    <el-dialog title="接口运行完成，请选择要查看的报告类型" :visible.sync="dialogReport">
+        <el-button @click="lookSummary">查看详细报告</el-button>
+        <el-button type="primary" @click="lookDetail">查看概要报告</el-button>
+    </el-dialog>
+    <el-button @click="lookSummary">查看详细报告</el-button>
+    <a href="../../data/auto/API-Test/Report/html/APITest_Detail_201911081427.html" >查看详细报告</a>
 </div>
 <script type="text/javascript">
     var vm = new Vue({
@@ -1020,9 +1116,35 @@
             return {
                 url: 'http://apitest.shiguangxu.com:8000',
                 // url: 'http://172.16.10.172:8000',
+                tableData: [{
+                    id: '1',
+                    apiName: '暂无数据',
+                    url: '暂无数据'
+                }],
+                colTemplate:[
+                    {prop: 'serviceName', label: '微服务'},
+                    {prop: 'apiName', label: '接口描述'},
+                    {prop: 'url', label: 'url'}
+                ],
                 filtrate: '',
+                unDoList: [{
+                        id: '1',
+                        apiName: '暂无数据',
+                        url: '暂无数据'
+                }],
                 apiStatisticsData:{},
                 recipients: '',
+                filters: [
+                    {text: 'Web端接口', value: 'Web端接口' },
+                    {text: '内部调用', value: '内部调用' },
+                    {text: '测试接口', value: '测试接口' },
+                    {text: '废弃接口', value: '废弃接口' },
+                    {text: '数据割切', value: '数据割切' },
+                    {text: '未覆盖', value: '未覆盖' },
+                    {text: '已覆盖', value: '已覆盖' },
+                    {text: '运营后台', value: '运营后台' },
+                    {text: '暂不支持', value: '暂不支持' }
+                ],
                 pageSize: 18,
                 FlowlistSize: 100,
                 currentPage: 1,
@@ -1049,6 +1171,7 @@
                 deleteNodeId: '',
                 nodeFlowId: '',
                 isCollapse: true,
+                statisticsLoading:false,
                 nodeDataDefault: [
                     {
                         "pk": "",
@@ -1104,6 +1227,7 @@
                 dialogFormVisible: false,
                 dialogEmailChange: false,
                 deleteFlowDialogVisible: false,
+                dialogReport: false,
                 deleteNodeDialogVisible: false,
                 dialogDefaultVar: false,
                 dialogTableVisible: false,
@@ -1112,6 +1236,22 @@
             }
         },
         methods: {
+            lookSummary(){
+                this.dialogReport = false;
+                // window.open("../../data/auto/API-Test/Report/APITest_Detail_201911081427.html");
+                var dataPost = {};
+                this.$http.post(this.url + '/lookSummary', dataPost).then(
+                    function (data) {
+
+                    }
+                );
+            },
+            lookDetail(){
+                this.dialogReport = false;
+            },
+            filterTag(value, row) {
+                return row.remark === value;
+            },
             copyApi(nodeData,index,row){
 
                 this.nodeDataDefault = [row];
@@ -1177,9 +1317,20 @@
                     this.activeName = targetName.name;
                     console.log(this.activeName);
                 } else if (targetName.name === "statistics") {
+                    this.statisticsLoading = true;
                     this.$http.post(this.url + '/getApiStatistics', dataPost).then(
                         function (data) {
-                            this.apiStatisticsData = data.body[0];
+                            code = data.body[0].code;
+                            if (code === "200"){
+                                this.apiStatisticsData = data.body[0].data;
+                                this.tableData = data.body[0].data.unStatisticsList;
+                                this.unDoList = data.body[0].data.undoneList;
+                                this.statisticsLoading = false;
+
+                            }else {
+                                this.statisticsLoading = false;
+                            }
+
                         }
                     );
                 }
@@ -2094,8 +2245,6 @@
                         }
                     }
                 );
-
-
             },
             actionAllFlow() {
                 var dataPost = {};
@@ -2105,6 +2254,7 @@
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
                             this.actionLoading = false;
+
                             this.$message({
                                 showClose: true,
                                 message: '测试流接口执行成功，结果请查收邮件',
