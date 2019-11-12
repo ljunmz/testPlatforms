@@ -1,6 +1,8 @@
 import datetime
 import json
 import os
+import webbrowser
+
 from django.http import  JsonResponse
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
@@ -499,4 +501,8 @@ def getApiStatistics(request):
 
 @csrf_exempt
 def lookSummary(request):
-    return render_to_response('../../data/auto/API-Test/Report/html/APITest_Detail_201911081427.html', {})
+    url = 'https://www.jianshu.com/p/766084428095'
+    webbrowser.open(url)
+    # return render_to_response('https://www.jianshu.com/p/766084428095', {})
+    response = [{"code": "200", "msg": "操作成功"}]
+    return JsonResponse(response, safe=False)
