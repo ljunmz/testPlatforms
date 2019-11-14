@@ -20,7 +20,7 @@ from django.urls import path
 from apitest.views import apitest, getFlowData, getNodeData, getOutSql, getPreSql, getPostKey, getParameter, addFlow, \
     editFlow, deleteFlow, addNode, editNode, savePostKey, editParameter, deleteNode, editOutSql, editPreSql, getCreater, \
     actionFlow, getEmail, emailChange, actionAllFlow, changeFlowState, changeNodeState, editDefaultVar, getDefaultVar, \
-    deleteDefaultVar, addDefaultVar, getApiStatistics, lookSummary
+    deleteDefaultVar, addDefaultVar, getApiStatistics, lookReport, getLog
 from performance.views import performance, \
     getPerformanceFlowData, getPerformanceNodeData, getPerformanceOutSql, getPerformancePreSql, getPerformancePostKey, \
     getPerformanceParameter, addPerformanceFlow, editPerformanceFlow, deletePerformanceFlow, deletePerformanceNode, \
@@ -106,6 +106,7 @@ urlpatterns = [
     url(r'savePerformanceConfig', savePerformanceConfig),
     url(r'plan', plan),
     url(r'getApiStatistics', getApiStatistics),
-    url(r'lookSummary', lookSummary),
+    url(r'lookReport', lookReport),
+    url(r'getLog', getLog),
     # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_URL}),
 ]

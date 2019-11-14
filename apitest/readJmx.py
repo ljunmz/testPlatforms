@@ -1,3 +1,4 @@
+import datetime
 import os
 import xml.etree.ElementTree as ET
 
@@ -163,6 +164,26 @@ def removeFile(path):
     listFile = os.listdir(path)
     for fileName in listFile:
         os.remove(path+fileName)
+
+
+
+def clearText(file):
+    with open(file, "r+") as f:
+        read_data = f.read()
+    f.seek(0)
+    f.truncate()
+
+def readText(file):
+    with open(file, 'r') as f:  # 打开文件
+        lines = f.readlines()  # 读取所有行
+    stra = "日志信息:"+"==>"
+    for i in range(1111):
+        last_line = lines[-i]  # 取最后一行
+        stra = stra + last_line+"==>"
+    return stra
+
+
+# print(readText("F:\\code\\testPlatforms\\nodes\\django.log"))
 
 
 

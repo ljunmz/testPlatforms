@@ -125,7 +125,7 @@
                     <template>
                         <el-table
                                 v-loading="actionLoading"
-                                element-loading-text="接口运行中,请稍后"
+                                :element-loading-text="text"
                                 id="flowTable"
                                 ref="flowTableRef"
                                 :data="flowData"
@@ -732,7 +732,6 @@
                     {%endverbatim%}
                      </el-tag>
                 </span>
-
                 <el-collapse  accordion>
                     <el-collapse-item >
                         <template slot="title">
@@ -1087,10 +1086,9 @@
         </div>
     </el-dialog>
     <el-dialog title="接口运行完成，请选择要查看的报告类型" :visible.sync="dialogReport">
-        <el-button @click="lookSummary">查看详细报告</el-button>
-        <el-button type="primary" @click="lookDetail">查看概要报告</el-button>
+        <el-button @click="lookSummary" type="primary">查看概要报告</el-button>
+        <el-button @click="lookDetail" type="warning">查看详细报告</el-button>
     </el-dialog>
-<!--    <el-button @click="lookSummary">查看详细报告</el-button>-->
 </div>
 <script type="text/javascript">
     var vm = new Vue({
@@ -1114,7 +1112,7 @@
         data() {
             return {
                 url: 'http://apitest.shiguangxu.com:8000',
-                // url: 'http://172.16.10.172:8000',
+                text :"接口运行中...",
                 tableData: [{
                     id: '1',
                     apiName: '暂无数据',
@@ -1237,9 +1235,8 @@
         methods: {
             lookSummary(){
                 this.dialogReport = false;
-                // window.open("../../data/auto/API-Test/Report/APITest_Detail_201911081427.html");
-                var dataPost = {};
-                this.$http.post(this.url + '/lookSummary', dataPost).then(
+                var dataPost = {"reportType":"Summary"};
+                this.$http.post(this.url + '/lookReport', dataPost).then(
                     function (data) {
 
                     }
@@ -1247,6 +1244,12 @@
             },
             lookDetail(){
                 this.dialogReport = false;
+                var dataPost = {"reportType":"Detail"};
+                this.$http.post(this.url + '/lookReport', dataPost).then(
+                    function (data) {
+
+                    }
+                );
             },
             filterTag(value, row) {
                 return row.remark === value;
@@ -2219,11 +2222,34 @@
                 );
 
             },
+            getLog(){
+                console.log("====getLog===");
+                i = 0;
+                while(i < 3){
+                    var dataPost = {};
+                    this.$http.post(this.url + '/getLog', dataPost).then(
+                        function (data) {
+                            var responData = data.status;
+                            if (responData === 200 || responData === '200') {
+                                var t = data.body[0].log;
+                                var texts = t.split('==>');
+                                for(var i = 0;i<len(texts);i++){
+                                    this.text = texts[i]
+                                }
+
+                            } else {
+
+                            }
+                        }
+                    );
+                    i++;
+                }
+            },
             actionFlow(index, row) {
+                this.actionLoading = true;
                 var dataPost = {
                     "flow_id": row.pk,
                 };
-                this.actionLoading = true;
                 this.$http.post(this.url + '/actionFlow', dataPost).then(
                     function (data) {
                         var responData = data.status;
@@ -2234,6 +2260,7 @@
                                 message: '测试流接口执行成功，结果请查收邮件',
                                 type: 'success'
                             });
+                            this.dialogReport = true;
                         } else {
                             this.actionLoading = false;
                             this.$message({
@@ -2241,9 +2268,11 @@
                                 message: '很遗憾，接口执行失败',
                                 type: 'error'
                             });
+                            this.dialogReport = true;
                         }
                     }
                 );
+
             },
             actionAllFlow() {
                 var dataPost = {};
@@ -2253,12 +2282,12 @@
                         var responData = data.status;
                         if (responData === 200 || responData === '200') {
                             this.actionLoading = false;
-
                             this.$message({
                                 showClose: true,
                                 message: '测试流接口执行成功，结果请查收邮件',
                                 type: 'success'
                             });
+                            this.dialogReport = true;
                         } else {
                             this.actionLoading = false;
                             this.$message({
@@ -2266,6 +2295,7 @@
                                 message: '很遗憾，接口执行失败',
                                 type: 'error'
                             });
+                            this.dialogReport = true;
                         }
                     }
                 );

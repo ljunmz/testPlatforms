@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from apitest.models import TestdataNode, TestdataFlow
 from apitest.readJmx import changeAciton, getEmailList, changeEmail, getDefaultVariable, addDefaultVariable, \
-    editDefaultVariable, deleteDefaultVariable, removeFile
+    editDefaultVariable, deleteDefaultVariable, removeFile, readText
 
 # paths = 'D:\\时光序\\自动化测试\\API-Test\\'
 # paths = 'F:\\code\\testPlatforms\\data\\auto\\API-Test'
@@ -497,12 +497,35 @@ def deleteDefaultVar(request):
 @csrf_exempt
 def getApiStatistics(request):
     response = [{"code": "200", "msg": "操作成功", "data": getSwaggerApi()}]
+    return JsonResponse(response, safe=False)\
+
+@csrf_exempt
+def getLog(request):
+    fileName = os.path.abspath(os.path.dirname(__file__)).split('testPlatforms')[0]+"testPlatforms\\nodes\\django.log"
+    # clearText(fileName)
+    log = readText(fileName)
+    print(log)
+    response = [{"code": "200", "msg": "操作成功", "log": log}]
     return JsonResponse(response, safe=False)
 
 @csrf_exempt
-def lookSummary(request):
-    url = 'https://www.jianshu.com/p/766084428095'
-    webbrowser.open(url)
-    # return render_to_response('https://www.jianshu.com/p/766084428095', {})
+def lookReport(request):
+    reportType = json.loads(request.body)["reportType"]
+    if reportType == "Detail":
+        for root, dirs, files in os.walk(paths+"Report\\html\\"):
+            for f in files:
+                if "Detail" in f:
+                    print("打开自动化测试报告")
+                    url = paths+"Report\\html\\"+str(f)
+                    webbrowser.open(url)
+    elif reportType == "Summary":
+        for root, dirs, files in os.walk(paths+"Report\\html\\"):
+            for f in files:
+                if "Summary" in f:
+                    print("打开自动化测试报告")
+                    url = paths+"Report\\html\\"+str(f)
+                    webbrowser.open(url)
     response = [{"code": "200", "msg": "操作成功"}]
     return JsonResponse(response, safe=False)
+
+
