@@ -4,7 +4,7 @@ import os
 import webbrowser
 
 from django.http import  JsonResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.views.decorators.csrf import csrf_exempt
 from apitest.models import TestdataNode, TestdataFlow
 from apitest.readJmx import changeAciton, getEmailList, changeEmail, getDefaultVariable, addDefaultVariable, \
@@ -509,23 +509,39 @@ def getLog(request):
     return JsonResponse(response, safe=False)
 
 @csrf_exempt
-def lookReport(request):
-    reportType = json.loads(request.body)["reportType"]
-    if reportType == "Detail":
-        for root, dirs, files in os.walk(paths+"Report\\html\\"):
-            for f in files:
-                if "Detail" in f:
-                    print("打开自动化测试报告")
-                    url = paths+"Report\\html\\"+str(f)
-                    webbrowser.open(url)
-    elif reportType == "Summary":
-        for root, dirs, files in os.walk(paths+"Report\\html\\"):
-            for f in files:
-                if "Summary" in f:
-                    print("打开自动化测试报告")
-                    url = paths+"Report\\html\\"+str(f)
-                    webbrowser.open(url)
-    response = [{"code": "200", "msg": "操作成功"}]
-    return JsonResponse(response, safe=False)
+def lookDetailReport(request):
+    # reportType = json.loads(request.body)["reportType"]
+    # if reportType == "Detail":
+    #     for root, dirs, files in os.walk(paths+"Report\\html\\"):
+    #         for f in files:
+    #             if "Detail" in f:
+    #                 fileName = str(f)
+    # #                 print("打开自动化测试报告")
+    # #                 url = paths+"Report\\html\\"+str(f)
+    # #                 webbrowser.open(url)
+    # elif reportType == "Summary":
+    #     for root, dirs, files in os.walk(paths+"Report\\html\\"):
+    #         for f in files:
+    #             if "Summary" in f:
+    #                 fileName = str(f)
+    #                 print("打开自动化测试报告")
+    #                 url = paths+"Report\\html\\"+str(f)
+    #                 webbrowser.open(url)
+    # response = [{"code": "200", "msg": "操作成功"}]
+    # return JsonResponse(response, safe=False)
+    # return render(request, 'data/auto/API-Test/Report/html/APITest_Detail_201911141403.html')
+    for root, dirs, files in os.walk(paths+"Report\\html\\"):
+        for f in files:
+            if "Detail" in f:
+                fileName = str(f)
+    return render_to_response('data/auto/API-Test/Report/html/'+fileName, {})
+
+@csrf_exempt
+def lookSummaryReport(request):
+    for root, dirs, files in os.walk(paths+"Report\\html\\"):
+        for f in files:
+            if "Summary" in f:
+                fileName = str(f)
+    return render_to_response('data/auto/API-Test/Report/html/'+fileName, {})
 
 

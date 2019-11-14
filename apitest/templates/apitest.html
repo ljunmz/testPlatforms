@@ -1086,8 +1086,9 @@
         </div>
     </el-dialog>
     <el-dialog title="接口运行完成，请选择要查看的报告类型" :visible.sync="dialogReport">
-        <el-button @click="lookSummary" type="primary">查看概要报告</el-button>
-        <el-button @click="lookDetail" type="warning">查看详细报告</el-button>
+        <el-button icon="el-icon-search"><a href="/lookSummaryReport">查看概要报告</a></el-button>
+        <el-button icon="el-icon-search"><a href="/lookDetailReport">查看详细报告</a></el-button>
+
     </el-dialog>
 </div>
 <script type="text/javascript">
@@ -1233,24 +1234,6 @@
             }
         },
         methods: {
-            lookSummary(){
-                this.dialogReport = false;
-                var dataPost = {"reportType":"Summary"};
-                this.$http.post(this.url + '/lookReport', dataPost).then(
-                    function (data) {
-
-                    }
-                );
-            },
-            lookDetail(){
-                this.dialogReport = false;
-                var dataPost = {"reportType":"Detail"};
-                this.$http.post(this.url + '/lookReport', dataPost).then(
-                    function (data) {
-
-                    }
-                );
-            },
             filterTag(value, row) {
                 return row.remark === value;
             },
