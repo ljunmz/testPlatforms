@@ -134,6 +134,10 @@ var vm = new Vue({
             value: true,
             visible: false,
             dialogFormVisible: false,
+            dialogParameter: false,
+            dialogPreSql: false,
+            dialogOutSql: false,
+            dialogPostKey: false,
             dialogEmailChange: false,
             deleteFlowDialogVisible: false,
             dialogReport: false,
@@ -289,15 +293,14 @@ var vm = new Vue({
         handleClose(key, keyPath) {
             console.log(key, keyPath);
         },
-        savePostKey(postKeyData, row) {
-            console.log("node_id", row.pk);
-            console.log("postKeyData", postKeyData);
-            this.loading = true;
+        savePostKey() {
+            console.log("node_id", this.postKeyData.node_id);
+            console.log("postKeyData", this.postKeyData);
             var dataPost = {
-                "node_id": row.pk,
-                "post_keys": postKeyData.post_keys,
-                "post_keys_extractor": postKeyData.post_keys_extractor,
-                "post_keys_default": postKeyData.post_keys_default
+                "node_id": this.postKeyData.node_id,
+                "post_keys": this.postKeyData.post_keys,
+                "post_keys_extractor": this.postKeyData.post_keys_extractor,
+                "post_keys_default": this.postKeyData.post_keys_default
             };
             this.$http.post(this.url + '/savePostKey', dataPost).then(
                 function (data) {
@@ -307,28 +310,20 @@ var vm = new Vue({
                         console.log("this.nodeData=", this.nodeData);
                         var nodeTable = document.getElementById('nodeTable');
                         var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row")[0];
-                        console.log('post_keys=', postKeyData.post_keys);
-                        if (postKeyData.post_keys != null || postKeyData.post_keys > 0 || postKeyData.post_keys !== "") {
-                            currentRow.getElementsByClassName("popoverButtonPost")[0].innerHTML = postKeyData.post_keys;
+                        console.log('post_keys=', this.postKeyData.post_keys);
+                        if (this.postKeyData.post_keys != null || this.postKeyData.post_keys > 0 || this.postKeyData.post_keys !== "") {
+                            currentRow.getElementsByClassName("popoverButtonPost")[0].innerHTML = this.postKeyData.post_keys;
                         } else {
                             currentRow.getElementsByClassName("popoverButtonPost")[0].innerHTML = '未提取后置变量';
                         }
                         console.log("postKeyData=", this.postKeyData);
-                        row.post_keys = postKeyData.post_keys;
-                        row.post_keys_extractor = postKeyData.post_keys_extractor;
-                        row.post_keys_default = postKeyData.post_keys_default;
                         this.$message({
                             showClose: true,
                             message: '恭喜你，后置变量提取设置成功',
                             type: 'success'
                         });
-                        document.body.click();
+                        this.dialogPostKey = false;
                     } else {
-                        this.postKeyData = {
-                            "post_keys": row.post_keys,
-                            "post_keys_extractor": row.post_keys_extractor,
-                            "post_keys_default": row.post_keys_default
-                        };
                         this.$message({
                             showClose: true,
                             message: '很抱歉，后置变量提取设置失败',
@@ -339,9 +334,8 @@ var vm = new Vue({
             );
 
         },
-        saveParameter(parameterData, row) {
-            this.loading = true;
-            var dataPost = {"node_id": row.pk, "parameter": row.parameter};
+        saveParameter(parameterData) {
+            var dataPost = {"node_id": parameterData.key, "parameter": parameterData.value};
             this.$http.post(this.url + '/editParameter', dataPost).then(
                 function (data) {
                     var responData = data.status;
@@ -353,31 +347,30 @@ var vm = new Vue({
                         });
                         this.parameterData = [
                             {
-                                "key": "接口请求参数",
-                                "value": row.parameter
+                                "key": parameterData.key,
+                                "value": parameterData.value
                             }
-                        ]
+                        ];
+                        this.dialogParameter = false;
                     } else {
-                        row.parameter = this.parameterData[0].value;
                         this.$message({
                             showClose: true,
                             message: '很遗憾，保存失败',
                             type: 'error'
                         });
+                        this.dialogParameter = false;
                     }
 
                 }
             );
-            document.body.click();
         },
-        saveOutSql(outSqlData, row) {
-            this.loading = true;
+        saveOutSql() {
             var dataPost = {
-                "node_id": row.pk,
-                "ischechdb": outSqlData.ischechdb,
-                "sql_str": outSqlData.sql_str,
-                "sql_para": outSqlData.sql_para,
-                "expect_db": outSqlData.expect_db
+                "node_id": this.outSqlData.node_id,
+                "ischechdb": this.outSqlData.ischechdb,
+                "sql_str": this.outSqlData.sql_str,
+                "sql_para": this.outSqlData.sql_para,
+                "expect_db": this.outSqlData.expect_db
             };
             this.$http.post(this.url + '/editOutSql', dataPost).then(
                 function (data) {
@@ -385,30 +378,20 @@ var vm = new Vue({
                     if (responData === 200 || responData === '200') {
                         var nodeTable = document.getElementById('nodeTable');
                         var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row")[0];
-                        if (outSqlData.ischechdb === '1' || outSqlData.ischechdb === 1) {
-                            currentRow.getElementsByClassName("popoverButton")[0].innerHTML = '已开启SQL校验';
-                        } else if (outSqlData.ischechdb === '0' || outSqlData.ischechdb === 0) {
-                            currentRow.getElementsByClassName("popoverButton")[0].innerHTML = '已关闭SQL校验';
+                        if (this.outSqlData.ischechdb === '1' || this.outSqlData.ischechdb === 1) {
+                            currentRow.getElementsByClassName("popoverButton")[0].innerHTML = '已开启';
+                        } else if (this.outSqlData.ischechdb === '0' || this.outSqlData.ischechdb === 0) {
+                            currentRow.getElementsByClassName("popoverButton")[0].innerHTML = '已关闭';
                         } else {
-                            currentRow.getElementsByClassName("popoverButton")[0].innerHTML = '未配置SQL校验';
+                            currentRow.getElementsByClassName("popoverButton")[0].innerHTML = '未配置';
                         }
-                        row.ischechdb = outSqlData.ischechdb;
-                        row.sql_str = outSqlData.sql_str;
-                        row.sql_para = outSqlData.sql_para;
-                        row.expect_db = outSqlData.expect_db;
-                        document.body.click();
+                        this.dialogOutSql = false;
                         this.$message({
                             showClose: true,
                             message: '保存成功',
                             type: 'success'
                         });
                     } else {
-                        this.outSqlData = {
-                            "ischechdb": row.ischechdb,
-                            "sql_str": row.sql_str,
-                            "sql_para": row.sql_para,
-                            "expect_db": row.expect_db
-                        };
                         this.$message({
                             showClose: true,
                             message: '很遗憾，保存失败',
@@ -418,14 +401,13 @@ var vm = new Vue({
                 }
             );
         },
-        savePreSql(preSqlData, row) {
-            this.loading = true;
+        savePreSql() {
             var dataPost = {
-                "node_id": row.pk,
-                "isexcute_pre_sql": preSqlData.isexcute_pre_sql,
-                "pre_sql_str": preSqlData.pre_sql_str,
-                "pre_sql_para": preSqlData.pre_sql_para,
-                "pre_sql_out": preSqlData.pre_sql_out,
+                "node_id": this.preSqlData.node_id,
+                "isexcute_pre_sql": this.preSqlData.isexcute_pre_sql,
+                "pre_sql_str": this.preSqlData.pre_sql_str,
+                "pre_sql_para": this.preSqlData.pre_sql_para,
+                "pre_sql_out": this.preSqlData.pre_sql_out,
             };
             this.$http.post(this.url + '/editPreSql', dataPost).then(
                 function (data) {
@@ -433,30 +415,20 @@ var vm = new Vue({
                     if (responData === 200 || responData === '200') {
                         var nodeTable = document.getElementById('nodeTable');
                         var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row")[0];
-                        if (preSqlData.isexcute_pre_sql === '1' || preSqlData.isexcute_pre_sql === 1) {
-                            currentRow.getElementsByClassName("popoverButtonPre")[0].innerHTML = '已开启前置SQL查询';
-                        } else if (preSqlData.isexcute_pre_sql === '0' || preSqlData.isexcute_pre_sql === 0) {
-                            currentRow.getElementsByClassName("popoverButtonPre")[0].innerHTML = '已关闭前置SQL查询';
+                        if (this.preSqlData.isexcute_pre_sql === '1' || this.preSqlData.isexcute_pre_sql === 1) {
+                            currentRow.getElementsByClassName("popoverButtonPre")[0].innerHTML = '已开启';
+                        } else if (this.preSqlData.isexcute_pre_sql === '0' || this.preSqlData.isexcute_pre_sql === 0) {
+                            currentRow.getElementsByClassName("popoverButtonPre")[0].innerHTML = '已关闭';
                         } else {
-                            currentRow.getElementsByClassName("popoverButtonPre")[0].innerHTML = '未配置前置SQL校验';
+                            currentRow.getElementsByClassName("popoverButtonPre")[0].innerHTML = '未配置';
                         }
-                        row.isexcute_pre_sql = preSqlData.isexcute_pre_sql;
-                        row.pre_sql_str = preSqlData.pre_sql_str;
-                        row.pre_sql_para = preSqlData.pre_sql_para;
-                        row.pre_sql_out = preSqlData.pre_sql_out;
-                        document.body.click();
+                        this.dialogPreSql = false;
                         this.$message({
                             showClose: true,
                             message: '保存成功',
                             type: 'success'
                         });
                     } else {
-                        this.preSqlData = {
-                            "isexcute_pre_sql": row.isexcute_pre_sql,
-                            "pre_sql_str": row.pre_sql_str,
-                            "pre_sql_para": row.pre_sql_para,
-                            "pre_sql_out": row.pre_sql_out
-                        };
                         this.$message({
                             showClose: true,
                             message: '很遗憾，保存失败',
@@ -471,10 +443,10 @@ var vm = new Vue({
             return row.state === 1 || row.state === '1' ? "已开启" : row.state === 0 || row.state === '0' ? "已关闭" : "未设置"
         },
         formatPreSql: function (row, column) {
-            return row.isexcute_pre_sql === 1 || row.isexcute_pre_sql === '1' ? '已开启前置SQL查询' : row.isexcute_pre_sql === 0 || row.isexcute_pre_sql === '0' ? '已关闭前置SQL查询' : '未配置前置SQL查询'
+            return row.isexcute_pre_sql === 1 || row.isexcute_pre_sql === '1' ? '已开启' : row.isexcute_pre_sql === 0 || row.isexcute_pre_sql === '0' ? '已关闭' : '未配置'
         },
         formatOutSql: function (row, column) {
-            return row.ischechdb === 1 || row.ischechdb === '1' ? '已开启SQL校验' : row.ischechdb === 0 || row.ischechdb === '0' ? '已关闭SQL校验' : '未配置SQL校验'
+            return row.ischechdb === 1 || row.ischechdb === '1' ? '已开启' : row.ischechdb === 0 || row.ischechdb === '0' ? '已关闭' : '未配置'
         },
         formatStateNode: function (row, column) {
             console.log("row", row);
@@ -495,13 +467,14 @@ var vm = new Vue({
             console.log('getOutSql-index', index);
             console.log('getOutSql-this.currentRow', this.currentRow);
             this.outSqlData = '';
-            this.loading = true;
+            this.dialogOutSql = true;
             var dataPost = {"node_id": row.pk};
             this.$http.post(this.url + '/getOutSql', dataPost).then(
                 function (data) {
                     var responData = data.body;
                     console.log("responData=", responData);
                     this.outSqlData = {
+                        "node_id": row.pk,
                         "ischechdb": responData[0].ischechdb,
                         "sql_str": responData[0].sql_str,
                         "sql_para": responData[0].sql_para,
@@ -516,7 +489,7 @@ var vm = new Vue({
             console.log('getPreSql-index', index);
             console.log('getPreSql-row', row);
             console.log('getPreSql-this.currentRow', this.currentRow);
-            this.loading = true;
+            this.dialogPreSql = true;
             this.preSqlData = '';
             var dataPost = {"node_id": row.pk};
             this.$http.post(this.url + '/getPreSql', dataPost).then(
@@ -524,6 +497,7 @@ var vm = new Vue({
                     var responData = data.body;
                     console.log("responData=", responData);
                     this.preSqlData = {
+                        "node_id":row.pk,
                         "isexcute_pre_sql": responData[0].isexcute_pre_sql,
                         "pre_sql_str": responData[0].pre_sql_str,
                         "pre_sql_para": responData[0].pre_sql_para,
@@ -538,13 +512,14 @@ var vm = new Vue({
             console.log('getPostKey-index', index);
             console.log('getPostKey-this.currentRow', this.currentRow);
             this.postKeyData = '';
-            this.loading = true;
+            this.dialogPostKey = true;
             var dataPost = {"node_id": row.pk};
             this.$http.post(this.url + '/getPostKey', dataPost).then(
                 function (data) {
                     var responData = data.body;
                     console.log("responData=", responData);
                     this.postKeyData = {
+                        "node_id": row.pk,
                         "post_keys": responData[0].post_keys,
                         "post_keys_extractor": responData[0].post_keys_extractor,
                         "post_keys_default": responData[0].post_keys_default
@@ -555,7 +530,7 @@ var vm = new Vue({
         },
         getParameter(index, row) {
             this.currentRow = document.getElementById('nodeTable').getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row ")[0];
-            this.loading = true;
+            this.dialogParameter = true;
             this.parameterData = '';
             console.log('getParameter-index', index);
             console.log('getParameter-this.currentRow', this.currentRow);
@@ -564,10 +539,10 @@ var vm = new Vue({
                 function (data) {
                     var responData = data.body;
                     console.log("responData=", responData);
-                    this.parameterData = [{
-                        "key": "接口请求参数",
+                    this.parameterData = {
+                        "key": row.pk,
                         "value": responData[0].parameter
-                    }];
+                    };
                     console.log("parameterData=", this.parameterData);
                 }
             )
@@ -1070,6 +1045,9 @@ var vm = new Vue({
         },
         pCancel(row) {
             document.body.click();
+            this.dialogParameter =false;
+            this.dialogPreSql =false;
+            this.dialogPostKey =false;
         },
         expandChange(row, expandedRows, index) {
             this.loading = true;
@@ -1101,12 +1079,12 @@ var vm = new Vue({
                 );
             }
         },
-        formatJson(row, index) {
-            text = row.parameter;
+        formatJson(parameterData) {
+            text = parameterData.value;
             if (text.indexOf("$") !== -1) {
-                row.parameter = JSON.stringify(JSON.parse(text.replace(/\:\$/g, "\:\"\$").replace(/\$\,/g, "\$\"\,").replace(/\$\}/g, "\$\"\}").replace(/\[\$/g, "\[\"\$").replace(/\$\]/g, "\$\"\]")), null, 2);
+                this.parameterData.value = JSON.stringify(JSON.parse(text.replace(/\:\$/g, "\:\"\$").replace(/\$\,/g, "\$\"\,").replace(/\$\}/g, "\$\"\}").replace(/\[\$/g, "\[\"\$").replace(/\$\]/g, "\$\"\]")), null, 2);
             } else {
-                row.parameter = JSON.stringify(JSON.parse(text), null, 2);
+                this.parameterData.value = JSON.stringify(JSON.parse(text), null, 2);
             }
         },
         deleteFlowRow(index,rows,row) {
@@ -1284,4 +1262,4 @@ var vm = new Vue({
 
         }
     }
-})
+});

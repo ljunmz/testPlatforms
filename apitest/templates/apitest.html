@@ -21,6 +21,11 @@
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.js" type="text/javascript" charset="utf-8"></script>
 
     <style lang="scss">
+        .el-table .cell {
+            padding-right: 10px;
+            overflow: inherit;
+            text-overflow: ellipsis;
+        }
         .el-checkbox {
             margin: 1px;
             padding: 0px;
@@ -59,7 +64,6 @@
             font-weight: 500;
             line-height: 2.4;
             text-align: center;
-            text-align: start;
             text-decoration: none;
             text-shadow: none;
             text-transform: none;
@@ -73,7 +77,6 @@
             background-color: #fff;
             background-clip: padding-box;
         }
-
     </style>
     <title>时光序接口测试管理</title>
 </head>
@@ -281,7 +284,7 @@
                                                 highlight-current-row="true"
                                                 :header-cell-style="{background:'#606266',color:'#FFFFFF',padding:0}"
                                                 cell-style="padding:2px,font-size: 10px">
-                                            <el-table-column label="步骤" width="80px"
+                                            <el-table-column label="步骤" width="75px"
                                                              sortable
                                                              resizable="true"
                                                              prop="order_id">
@@ -312,7 +315,7 @@
                                                     </el-tooltip>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="请求方式" width="100px" show-overflow-tooltip
+                                            <el-table-column label="请求方式" width="95px" show-overflow-tooltip
                                                              resizable="true"
                                                              prop="method">
                                                 <template slot-scope="scope">
@@ -346,39 +349,14 @@
                                                 <template slot-scope="scope">
                                                     <el-input size="mini" style="display: none"
                                                               :placeholder="scope.row.parameter"
-                                                              v-model="scope.row.parameter"></el-input>
-                                                    <el-popover
-                                                            style="width:170px"
-                                                            class="popover"
-                                                            width="600px"
-                                                            placement="left"
-                                                            trigger="click">
-                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">接口请求参数配置</p>
-                                                        <el-input class="el-input-parameter" type="textarea"
-                                                                  :autosize="{ minRows: 5, maxRows: 20}"
-                                                                  style="display: block;width: 600px"
-                                                                  :placeholder="scope.row.parameter"
-                                                                  v-model="scope.row.parameter"></el-input>
-                                                        <el-button class="formatButton" type="primary"
-                                                                   style="float: right;margin: 10px"
-                                                                   @click="formatJson(scope.row,scope.$index)">格式化JSON
-                                                        </el-button>
-                                                        <el-button type="primary" style="float: right;margin: 10px"
-                                                                   @click="saveParameter(parameterData,scope.row)">保存修改
-                                                        </el-button>
-                                                        <el-button type="info" style="float: right;margin: 10px"
-                                                                   @click="pCancel()">
-                                                            取消
-                                                        </el-button>
-                                                        <span class="parameterSpan"
-                                                              style="color: chocolate"
-                                                              slot="reference"
-                                                              @click="getParameter(scope.$index, scope.row,scope.$event)">
-                                                            {%verbatim%}
-                                                            {{scope.row.parameter}}
-                                                            {%endverbatim%}
-                                                        </span>
-                                                    </el-popover>
+                                                              v-model="scope.row.parameter">
+                                                    </el-input>
+                                                    <el-button  size="medium"
+                                                          style="color: chocolate;border:1px solid #c8c6d4;text-overflow: ellipsis;width: 160px;overflow: hidden;text-align: left"
+                                                          slot="reference"
+                                                          @click="getParameter(scope.$index, scope.row,scope.$event)">
+                                                        {%verbatim%}{{scope.row.parameter}}{%endverbatim%}
+                                                    </el-button>
                                                 </template>
                                             </el-table-column>
                                             <el-table-column label="请求参数变量" prop="pre_keys" resizable="true">
@@ -434,207 +412,42 @@
                                                     </el-switch>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="前置sql" width="140px" class="preSqlbutton"
+                                            <el-table-column label="前置sql" width="100px" class="preSqlbutton"
                                                              style="padding-bottom: 5px;"
                                                              show-overflow-tooltip
                                                              prop="preSql">
                                                 <template slot-scope="scope">
-                                                    <el-popover
-                                                            class="popover"
-                                                            border="0"
-                                                            placement="left"
-                                                            width="800px"
-                                                            trigger="click">
-                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">前置SQL查询信息配置</p>
-                                                        <p style="font-weight: bold;">
-                                                        <p></p>
-                                                        <el-tag style="float:left;margin: 3px;font-weight: bold" size="medium">
-                                                            前置SQL查询开关
-                                                        </el-tag>
-                                                        <p></p>
-                                                        <el-select size="mini" v-model="preSqlData.isexcute_pre_sql"
-                                                                   style="margin: 1px;width: 750px"
-                                                                   placeholder="请选择是否开启前置SQL查询">
-                                                            <el-option label="开启前置SQl查询" value=1></el-option>
-                                                            <el-option label="关闭前置SQl查询" value=0></el-option>
-                                                        </el-select>
-                                                        </p>
-                                                        <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">前置SQL查询语句
-                                                            </el-tag>
-                                                            <el-input class="el-input-parameter" type="textarea"
-                                                                      :autosize="{ minRows: 3, maxRows: 20}"
-                                                                      style="display: block;width: 750px"
-                                                                      :placeholder="preSqlData.pre_sql_str"
-                                                                      v-model="preSqlData.pre_sql_str">
-                                                            </el-input>
-                                                        </p>
-                                                        <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">前置SQL的变量参数
-                                                            </el-tag>
-                                                            <el-input class="el-input-parameter" type="textarea"
-                                                                      :autosize="{ minRows: 2, maxRows: 20}"
-                                                                      style="display: block;width: 750px"
-                                                                      :placeholder="preSqlData.pre_sql_para"
-                                                                      v-model="preSqlData.pre_sql_para">
-                                                            </el-input>
-                                                        </p>
-                                                        <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 1px" size="medium">前置SQl查询结果接收变量
-                                                            </el-tag>
-                                                            <el-input class="el-input-parameter" type="textarea"
-                                                                      :autosize="{ minRows: 2, maxRows: 20}"
-                                                                      style="display: block;width: 750px"
-                                                                      :placeholder="preSqlData.pre_sql_out"
-                                                                      v-model="preSqlData.pre_sql_out">
-                                                            </el-input>
-                                                        </p>
-                                                        <el-button type="primary" style="float: right;margin: 10px"
-                                                                   @click="savePreSql(preSqlData,scope.row)">保存修改
-                                                        </el-button>
-                                                        <el-button type="info" style="float: right;margin: 10px"
-                                                                   @click="pCancel()">
-                                                            取消
-                                                        </el-button>
-                                                        <span
-                                                                style="color: chocolate"
+                                                    <el-button  size="medium"
                                                                 class="popoverButtonPre"
+                                                                style="color: chocolate;border:1px solid #c8c6d4;text-overflow: ellipsis;width: 90px;overflow: hidden;text-align: left"
                                                                 slot="reference"
                                                                 @click="getPreSql(scope.$index, scope.row,scope.$event)">
-                                                    {%verbatim%}
-                                                    {{formatPreSql(scope.row,preSqlData)}}
-                                                    {%endverbatim%}
-                                                </span>
-                                                    </el-popover>
+                                                                {%verbatim%}{{formatPreSql(scope.row,preSqlData)}}{%endverbatim%}
+                                                    </el-button>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="后置sql" width="110px" show-overflow-tooltip
+                                            <el-table-column label="Sql校验" width="100px" show-overflow-tooltip
                                                              prop="outSqlData">
                                                 <template slot-scope="scope">
-                                                    <el-popover
-                                                            class="popover"
-                                                            border="0"
-                                                            placement="left"
-                                                            width="800px"
-                                                            trigger="click">
-                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">后置SQL校验信息配置</p>
-                                                        <p style="font-weight: bold;">
-                                                        <p></p>
-                                                        <el-tag style="float:left;margin: 3px;font-weight: bold" size="medium">
-                                                            后置SQL校验开关
-                                                        </el-tag>
-                                                        <p></p>
-                                                        <el-select size="mini" v-model="outSqlData.ischechdb"
-                                                                   style="margin: 1px;width: 750px"
-                                                                   placeholder="请选择是否开启后置SQL校验">
-                                                            <el-option label="开启后置SQL校验" value=1></el-option>
-                                                            <el-option label="关闭后置SQL校验" value=0></el-option>
-                                                        </el-select>
-                                                        </p>
-                                                        <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">后置SQL校验语句
-                                                            </el-tag>
-                                                            <el-input class="el-input-parameter" type="textarea"
-                                                                      :autosize="{ minRows: 3, maxRows: 20}"
-                                                                      style="display: block;width: 750px"
-                                                                      :placeholder="outSqlData.sql_str"
-                                                                      v-model="outSqlData.sql_str">
-                                                            </el-input>
-                                                        </p>
-                                                        <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">后置SQL变量参数
-                                                            </el-tag>
-                                                            <el-input class="el-input-parameter" type="textarea"
-                                                                      :autosize="{ minRows: 2, maxRows: 20}"
-                                                                      style="display: block;width: 750px"
-                                                                      :placeholder="outSqlData.sql_para"
-                                                                      v-model="outSqlData.sql_para">
-                                                            </el-input>
-                                                        </p>
-                                                        <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 1px" size="medium">后置SQL校验预期结果
-                                                            </el-tag>
-                                                            <el-input class="el-input-parameter" type="textarea"
-                                                                      :autosize="{ minRows: 2, maxRows: 20}"
-                                                                      style="display: block;width: 750px"
-                                                                      :placeholder="outSqlData.expect_db"
-                                                                      v-model="outSqlData.expect_db">
-                                                            </el-input>
-                                                        </p>
-                                                        <el-button type="primary" style="float: right;margin: 10px"
-                                                                   @click="saveOutSql(outSqlData,scope.row)">保存修改
-                                                        </el-button>
-                                                        <el-button type="info" style="float: right;margin: 10px"
-                                                                   @click="pCancel()">
-                                                            取消
-                                                        </el-button>
-                                                        <span
-                                                                style="color: chocolate"
+                                                    <el-button  size="medium"
                                                                 class="popoverButton"
+                                                                style="color: chocolate;border:1px solid #c8c6d4;text-overflow: ellipsis;width: 90px;overflow: hidden;text-align: left"
                                                                 slot="reference"
                                                                 @click="getOutSql(scope.$index, scope.row,scope.$event)">
-                                                    {%verbatim%}
-                                                    {{formatOutSql(scope.row,outSqlData)}}
-                                                    {%endverbatim%}
-                                                </span>
-                                                    </el-popover>
+                                                                {%verbatim%}{{formatOutSql(scope.row,outSqlData)}}{%endverbatim%}
+                                                    </el-button>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="后置变量提取" width="135px" show-overflow-tooltip
+                                            <el-table-column label="后置变量提取" width="165px" show-overflow-tooltip
                                                              prop="postKeyData">
                                                 <template slot-scope="scope">
-                                                    <el-popover
-                                                            style="width:132px"
-                                                            class="popover"
-                                                            border="0"
-                                                            placement="left"
-                                                            width="800px"
-                                                            trigger="click">
-                                                        <p style="margin: 10px;font-weight: bold;color: #2140ff">后置变量提取信息配置</p>
-                                                        <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">后置提取变量名
-                                                            </el-tag>
-                                                            <el-input class="el-input-parameter"
-                                                                      style="display: block;width: 750px"
-                                                                      :placeholder="postKeyData.post_keys"
-                                                                      v-model="postKeyData.post_keys">
-                                                            </el-input>
-                                                        </p>
-                                                        <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 3px" size="medium">后置变量提取表达式
-                                                            </el-tag>
-                                                            <el-input class="el-input-parameter" type="textarea"
-                                                                      :autosize="{ minRows: 1, maxRows: 20}"
-                                                                      style="display: block;width: 750px"
-                                                                      :placeholder="postKeyData.post_keys_extractor"
-                                                                      v-model="postKeyData.post_keys_extractor">
-                                                            </el-input>
-                                                        </p>
-                                                        <p style="font-weight: bold;">
-                                                            <el-tag style="float:left;margin: 1px" size="medium">后置提取变量默认值
-                                                            </el-tag>
-                                                            <el-input class="el-input-parameter" type="textarea"
-                                                                      :autosize="{ minRows: 1, maxRows: 20}"
-                                                                      style="display: block;width: 750px"
-                                                                      :placeholder="postKeyData.post_keys_default"
-                                                                      v-model="postKeyData.post_keys_default">
-                                                            </el-input>
-                                                        </p>
-                                                        <el-button type="primary" style="float: right;margin: 10px"
-                                                                   @click="savePostKey(postKeyData,scope.row)">保存修改
-                                                        </el-button>
-                                                        <el-button type="info" style="float: right;margin: 10px"
-                                                                   @click="pCancel()">
-                                                            取消
-                                                        </el-button>
-                                                        <span
-                                                                style="color: chocolate"
+                                                    <el-button  size="medium"
                                                                 class="popoverButtonPost"
+                                                                style="color: chocolate;border:1px solid #c8c6d4;text-overflow: ellipsis;width: 150px;overflow: hidden;text-align: left"
                                                                 slot="reference"
-                                                                v-text="formatPostKey(scope.row,postKeyData)"
                                                                 @click="getPostKey(scope.$index, scope.row,scope.$event)">
-                                                </span>
-                                                    </el-popover>
+                                                                {%verbatim%}{{formatPostKey(scope.row,postKeyData)}}{%endverbatim%}
+                                                    </el-button>
                                                 </template>
                                             </el-table-column>
                                             <el-table-column label="操作" width="180px" prop="parameter">
@@ -675,7 +488,6 @@
                             </el-table-column>
                         </el-table>
                     </template>
-
                 </div>
                 <div class="block" style="color:#faf8ff;margin-top:10px;padding: 3px ">
                     <el-pagination
@@ -697,8 +509,7 @@
             <el-tab-pane label="定时任务" style="font-weight: bolder" name="task">
                 <el-button size="small" type="danger" @click="startTask" style="margin: 10px">开启定时任务（每天早上9点50开始接口自动化）</el-button>
             </el-tab-pane>
-            <el-tab-pane label="接口统计"
-                    style="font-weight: bolder"
+            <el-tab-pane label="接口统计" style="font-weight: bolder"
                     v-loading="statisticsLoading"
                     element-loading-text="正在拼命统计中..."
                     element-loading-spinner="el-icon-loading"
@@ -1249,6 +1060,114 @@
     <el-dialog :close-on-click-modal="false" title="接口运行完成，请选择要查看的报告类型" :visible.sync="dialogReport">
         <el-button icon="el-icon-search"><a href="/lookSummaryReport" target="_blank">查看概要报告</a></el-button>
         <el-button icon="el-icon-search"><a href="/lookDetailReport" target="_blank">查看详细报告</a></el-button>
+    </el-dialog>
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="接口请求参数配置" :visible.sync="dialogParameter">
+        <el-input class="el-input-parameter" type="textarea"
+                  :autosize="{ minRows: 5, maxRows: 20}"
+                  style="display: block;width: auto"
+                  :placeholder="parameterData.value"
+                  v-model="parameterData.value"></el-input>
+        <el-button type="primary" style="margin: 10px"
+                   @click="saveParameter(parameterData)">保存修改
+        </el-button>
+        <el-button type="info" style="margin: 10px"
+                   @click="pCancel()">
+            取消
+        </el-button>
+        <el-button class="formatButton" type="primary"
+                   style="margin: 10px;float: right"
+                   @click="formatJson(parameterData)">格式化JSON
+        </el-button>
+    </el-dialog>
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="前置Sql配置" :visible.sync="dialogPreSql">
+        <el-form :model="preSqlData">
+            <el-form-item label="前置SQL开关" :label-width="formLabelWidth">
+                <el-select v-model="preSqlData.isexcute_pre_sql" placeholder="请选择是否开启前置SQL查询">
+                    <el-option label="开启前置SQl查询" value=1></el-option>
+                    <el-option label="关闭前置SQl查询" value=0></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="SQL语句"  :label-width="formLabelWidth">
+                <el-input v-model="preSqlData.pre_sql_str"
+                          type="textarea"
+                          :autosize="{ minRows: 1, maxRows: 20}"
+                          :placeholder="preSqlData.pre_sql_str"></el-input>
+            </el-form-item>
+            <el-form-item label="传入变量"  :label-width="formLabelWidth">
+                <el-input v-model="preSqlData.pre_sql_para"
+                          :placeholder="preSqlData.pre_sql_para"></el-input>
+            </el-form-item>
+            <el-form-item label="接收变量"  :label-width="formLabelWidth">
+                <el-input v-model="preSqlData.pre_sql_out"
+                          :placeholder="preSqlData.pre_sql_out"></el-input>
+            </el-form-item>
+        </el-form>
+        <el-button type="info" style="margin: 10px"
+                   @click="pCancel()">
+            取消
+        </el-button>
+        <el-button type="primary" style="margin: 10px;float: right"
+                   @click="savePreSql()">保存修改
+        </el-button>
+
+    </el-dialog>
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="后置Sql校验配置" :visible.sync="dialogOutSql">
+        <el-form :model="outSqlData">
+            <el-form-item label="SQL校验开关" :label-width="formLabelWidth">
+                <el-select v-model="outSqlData.ischechdb" placeholder="请选择是否开启SQL校验">
+                    <el-option label="开启SQL校验" value=1></el-option>
+                    <el-option label="关闭SQL校验" value=0></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="SQL语句"  :label-width="formLabelWidth">
+                <el-input v-model="outSqlData.sql_str"
+                          type="textarea"
+                          :autosize="{ minRows: 1, maxRows: 20}"
+                          :placeholder="outSqlData.sql_str"></el-input>
+            </el-form-item>
+            <el-form-item label="传入变量"  :label-width="formLabelWidth">
+                <el-input v-model="outSqlData.sql_para"
+                          :placeholder="outSqlData.sql_para"></el-input>
+            </el-form-item>
+            <el-form-item label="预期结果"  :label-width="formLabelWidth">
+                <el-input v-model="outSqlData.expect_db"
+                          type="textarea"
+                          :autosize="{ minRows: 1, maxRows: 20}"
+                          :placeholder="outSqlData.expect_db"></el-input>
+            </el-form-item>
+        </el-form>
+        <el-button type="primary" style="margin: 10px;float: right"
+                   @click="saveOutSql()">保存修改
+        </el-button>
+        <el-button type="info" style="margin: 10px"
+                   @click="pCancel()">
+            取消
+        </el-button>
+    </el-dialog>
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="后置变量提取配置" :visible.sync="dialogPostKey">
+        <el-form :model="postKeyData">
+            <el-form-item label="提取变量名"  :label-width="formLabelWidth">
+                <el-input v-model="postKeyData.post_keys"
+                          :placeholder="postKeyData.post_keys"></el-input>
+            </el-form-item>
+            <el-form-item label="提取表达式"  :label-width="formLabelWidth">
+                <el-input v-model="postKeyData.post_keys_extractor"
+                          type="textarea"
+                          :autosize="{ minRows: 1, maxRows: 20}"
+                          :placeholder="postKeyData.post_keys_extractor"></el-input>
+            </el-form-item>
+            <el-form-item label="默认值"  :label-width="formLabelWidth">
+                <el-input v-model="postKeyData.post_keys_default"
+                          :placeholder="postKeyData.post_keys_default"></el-input>
+            </el-form-item>
+        </el-form>
+        <el-button type="primary" style="margin: 10px;float: right"
+                   @click="savePostKey()">保存修改
+        </el-button>
+        <el-button type="info" style="margin: 10px"
+                   @click="pCancel()">
+            取消
+        </el-button>
     </el-dialog>
 </div>
 <script src="../../static/js/apitest.js" type="text/javascript"></script>
