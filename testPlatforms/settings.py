@@ -149,7 +149,7 @@ LANGUAGE_CODE = 'zh-hans'
 
 # TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Shanghai'
-
+DEFAULT_CHARSET = "UTF-8"
 USE_I18N = True
 
 USE_L10N = True
@@ -161,7 +161,11 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = os.path.join(HERE, '../')
+
 STATICFILES_DIRS = (
-    os.path.join(os.path.dirname(__file__), '../static/').replace('\\', '/'),
+    # os.path.join(os.path.dirname(__file__), '../static/').replace('\\', '/'),
+    os.path.join(HERE, 'static/'),
 )
 
