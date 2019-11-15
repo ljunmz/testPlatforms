@@ -331,11 +331,11 @@
                                                     <el-input size="mini" style="display: none" :placeholder="scope.row.path"
                                                               v-model="scope.row.path"></el-input>
                                                     <el-tooltip class="item" effect="dark" :content="scope.row.path" placement="top-start">
-                                            <span class="span" style="display: block;font-weight: bold;">
-                                                {%verbatim%}
-                                                    {{scope.row.path}}
-                                                {%endverbatim%}
-                                            </span>
+                                                        <span class="span" style="display: block;font-weight: bold;">
+                                                            {%verbatim%}
+                                                                {{scope.row.path}}
+                                                            {%endverbatim%}
+                                                        </span>
                                                     </el-tooltip>
                                                 </template>
                                             </el-table-column>
@@ -373,10 +373,10 @@
                                                               style="color: chocolate"
                                                               slot="reference"
                                                               @click="getParameter(scope.$index, scope.row,scope.$event)">
-                                                    {%verbatim%}
-                                                    {{scope.row.parameter}}
-                                                    {%endverbatim%}
-                                                </span>
+                                                            {%verbatim%}
+                                                            {{scope.row.parameter}}
+                                                            {%endverbatim%}
+                                                        </span>
                                                     </el-popover>
                                                 </template>
                                             </el-table-column>
@@ -823,7 +823,7 @@
             </el-tab-pane>
         </el-tabs>
     </div>
-    <el-dialog style="font-weight: bold" title="新增接口测试流" :visible.sync="dialogFormVisible">
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="新增接口测试流" :visible.sync="dialogFormVisible">
         <el-form :model="flowDataDefault">
             <el-form-item label="测试流名称" :label-width="formLabelWidth">
                 <el-input v-model="flowDataDefault.flow_name" autocomplete="off"
@@ -854,7 +854,7 @@
             <el-button type="primary" @click="addFlowOk(flowDataDefault)">确 定</el-button>
         </div>
     </el-dialog>
-    <el-dialog title="配置全局默认变量" :visible.sync="dialogDefaultVar">
+    <el-dialog :close-on-click-modal="false" title="配置全局默认变量" :visible.sync="dialogDefaultVar">
         <el-button size="mini" class="save"
                    style="display: block;margin: 2px;padding: 5px;float: left"
                    type="success">+添加全局变量
@@ -911,7 +911,7 @@
             </el-table-column>
         </el-table>
     </el-dialog>
-    <el-dialog style="font-weight: bold" title="邮箱收件人配置(多个收件人以逗号隔开)" :visible.sync="dialogEmailChange">
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="邮箱收件人配置(多个收件人以逗号隔开)" :visible.sync="dialogEmailChange">
         <el-form :model="flowDataDefault">
             <el-form-item label="" :label-width="formLabelWidth">
                 <el-input v-model="recipients" autocomplete="off" :autosize="{ minRows: 5, maxRows: 20}" size="small"
@@ -925,7 +925,7 @@
             <el-button type="primary" @click="emailChange(recipients)">确 定</el-button>
         </div>
     </el-dialog>
-    <el-dialog style="font-weight: bold" title="新增接口" border :visible.sync="dialogTableVisible" width="1482px">
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="新增接口" border :visible.sync="dialogTableVisible" width="1482px">
         <el-table
                 :data="nodeDataDefault"
                 :header-cell-style="{background:'#606266',color:'#FFFFFF',padding:0}"
@@ -1085,11 +1085,30 @@
             <el-button type="primary" @click="addNodeOk(nodeDataDefault)">确 定</el-button>
         </div>
     </el-dialog>
-    <el-dialog title="接口运行完成，请选择要查看的报告类型" :visible.sync="dialogReport">
-        <el-button icon="el-icon-search"><a href="/lookSummaryReport">查看概要报告</a></el-button>
-        <el-button icon="el-icon-search"><a href="/lookDetailReport">查看详细报告</a></el-button>
-
+    <el-dialog :close-on-click-modal="false" title="接口运行完成，请选择要查看的报告类型" :visible.sync="dialogReport">
+        <el-button icon="el-icon-search"><a href="/lookSummaryReport" target="_blank">查看概要报告</a></el-button>
+        <el-button icon="el-icon-search"><a href="/lookDetailReport" target="_blank">查看详细报告</a></el-button>
     </el-dialog>
+<!--    <el-dialog :close-on-click-modal="false" title="请求参数配置" :visible.sync="dialogParameter">-->
+<!--        <el-input class="el-input-parameter" type="textarea"-->
+<!--                  :autosize="{ minRows: 5, maxRows: 20}"-->
+<!--                  style="display: block;width: 600px"-->
+<!--                  :placeholder="scope.row.parameter"-->
+<!--                  v-model="scope.row.parameter"></el-input>-->
+<!--        <el-button class="formatButton" type="primary"-->
+<!--                   style="float: right;margin: 10px"-->
+<!--                   @click="formatJson(scope.row,scope.$index)">格式化JSON-->
+<!--        </el-button>-->
+<!--        <el-button type="primary" style="float: right;margin: 10px"-->
+<!--                   @click="saveParameter(parameterData,scope.row)">保存修改-->
+<!--        </el-button>-->
+<!--        <el-button type="info" style="float: right;margin: 10px"-->
+<!--                   @click="pCancel()">-->
+<!--            取消-->
+<!--        </el-button>-->
+<!--    </el-dialog>-->
+
+
 </div>
 <script type="text/javascript">
     var vm = new Vue({
@@ -1180,7 +1199,7 @@
                         "parameter": "",
                         "expect_response": "",
                         "sleep_time": 0,
-                        "state": "0",
+                        "state": "1",
                         "isexcute_pre_sql": "0",
                         "pre_keys": "",
                         "pre_sql_str": "",

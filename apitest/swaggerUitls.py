@@ -15,7 +15,7 @@ def getSwaggerApi():
     id = 0
     ids = 0
     for path in json.loads(swaggerList):
-        if path["url"] != "/web-backend/v2/api-docs" and path["url"] != "/service-monitor/v2/api-docs":
+        if path["url"] != "/web-backend/v2/api-docs" and path["url"] != "/service-monitor/v2/api-docs" and path["url"] != "/base-water/v2/api-docs"and path["url"] != "/base-work/v2/api-docs" and path["url"] != "/base-book/v2/api-docs" and path["url"] != "/base-lifeday/v2/api-docs" and path["url"] != "/base-healthy/v2/api-docs":
             respon = doRequest("GET", "http://47.112.0.183:8801" + path["url"], {}, {}, {})
             responJson = json.loads(respon)
             serviceCount = serviceCount + 1
