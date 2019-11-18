@@ -351,12 +351,14 @@
                                                               :placeholder="scope.row.parameter"
                                                               v-model="scope.row.parameter">
                                                     </el-input>
-                                                    <el-button  size="medium"
-                                                          style="color: chocolate;border:1px solid #c8c6d4;text-overflow: ellipsis;width: 160px;overflow: hidden;text-align: left"
-                                                          slot="reference"
-                                                          @click="getParameter(scope.$index, scope.row,scope.$event)">
+                                                    <el-button size="medium"
+                                                               style="color: chocolate;border:1px solid #c8c6d4;text-overflow: ellipsis;width: 160px;overflow: hidden;text-align: left"
+                                                               class="parameterButton"
+                                                               slot="reference"
+                                                               @click="getParameter(scope.$index, scope.row,scope.$event)">
                                                         {%verbatim%}{{scope.row.parameter}}{%endverbatim%}
                                                     </el-button>
+
                                                 </template>
                                             </el-table-column>
                                             <el-table-column label="请求参数变量" prop="pre_keys" resizable="true">
@@ -412,7 +414,7 @@
                                                     </el-switch>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="前置sql" width="100px" class="preSqlbutton"
+                                            <el-table-column label="前置sql" width="110px" class="preSqlbutton"
                                                              style="padding-bottom: 5px;"
                                                              show-overflow-tooltip
                                                              prop="preSql">
@@ -426,7 +428,7 @@
                                                     </el-button>
                                                 </template>
                                             </el-table-column>
-                                            <el-table-column label="Sql校验" width="100px" show-overflow-tooltip
+                                            <el-table-column label="Sql校验" width="110px" show-overflow-tooltip
                                                              prop="outSqlData">
                                                 <template slot-scope="scope">
                                                     <el-button  size="medium"
@@ -1068,7 +1070,7 @@
                   :placeholder="parameterData.value"
                   v-model="parameterData.value"></el-input>
         <el-button type="primary" style="margin: 10px"
-                   @click="saveParameter(parameterData)">保存修改
+                   @click="saveParameter()">保存修改
         </el-button>
         <el-button type="info" style="margin: 10px"
                    @click="pCancel()">

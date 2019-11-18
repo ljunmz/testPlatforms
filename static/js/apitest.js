@@ -334,23 +334,20 @@ var vm = new Vue({
             );
 
         },
-        saveParameter(parameterData) {
-            var dataPost = {"node_id": parameterData.key, "parameter": parameterData.value};
+        saveParameter() {
+            var dataPost = {"node_id": this.parameterData.key, "parameter": this.parameterData.value};
             this.$http.post(this.url + '/editParameter', dataPost).then(
                 function (data) {
                     var responData = data.status;
                     if (responData === 200 || responData === '200') {
+                        var nodeTable = document.getElementById('nodeTable');
+                        var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row")[0];
+                        currentRow.getElementsByClassName("parameterButton")[0].innerHTML = this.parameterData.value;
                         this.$message({
                             showClose: true,
                             message: '保存成功',
                             type: 'success'
                         });
-                        this.parameterData = [
-                            {
-                                "key": parameterData.key,
-                                "value": parameterData.value
-                            }
-                        ];
                         this.dialogParameter = false;
                     } else {
                         this.$message({
@@ -706,21 +703,21 @@ var vm = new Vue({
             }
             currentRow.children[7].getElementsByClassName('save')[0].style.display = 'block';
             currentRow.children[7].getElementsByClassName('edit')[0].style.display = 'none';
-            console.log("row", row);
-            console.log("index", index);
-        },
-        editNodeTable(index, row) {
-            console.log("this.currentRow", this.currentRow);
-            var nodeTable = document.getElementById('nodeTable');
-            var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row")[index];
-            console.log("editNodeTable-index", index);
-            console.log("editNodeTable-row", row);
-            console.log("editNodeTable-nodeTable", nodeTable);
-            console.log("editNodeTable-currentRow", currentRow);
-            console.log("editNodeTable-el-table__row", nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row"));
-            for (var i = 0; i < currentRow.children.length - 5; i++) {
-                var cell = currentRow.children[i].getElementsByClassName('cell')[0];
-                var elInput = cell.children[0];
+                console.log("row", row);
+                console.log("index", index);
+            },
+            editNodeTable(index, row) {
+                console.log("this.currentRow", this.currentRow);
+                var nodeTable = document.getElementById('nodeTable');
+                var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row")[index];
+                console.log("editNodeTable-index", index);
+                console.log("editNodeTable-row", row);
+                console.log("editNodeTable-nodeTable", nodeTable);
+                console.log("editNodeTable-currentRow", currentRow);
+                console.log("editNodeTable-el-table__row", nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row"));
+                for (var i = 0; i < currentRow.children.length - 5; i++) {
+                    var cell = currentRow.children[i].getElementsByClassName('cell')[0];
+                    var elInput = cell.children[0];
                 var elSpan = cell.children[1];
                 elInput.style.display = 'block';
                 elSpan.style.display = 'none';
