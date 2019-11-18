@@ -1045,6 +1045,7 @@ var vm = new Vue({
             this.dialogParameter =false;
             this.dialogPreSql =false;
             this.dialogPostKey =false;
+            this.dialogOutSql =false;
         },
         expandChange(row, expandedRows, index) {
             this.loading = true;
