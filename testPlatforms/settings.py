@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'automation',
         'USER': 'planadmin',
         'PASSWORD': 'pL%5^an3a$4in',
-        'HOST': '47.112.0.183',
+        'HOST': '192.168.16.8',
         'PORT': '3306'
 
     },
@@ -101,7 +101,7 @@ DATABASES = {
         'NAME': 'thirdparty',
         'USER': 'planadmin',
         'PASSWORD': 'pL%5^an3a$4in',
-        'HOST': '47.112.0.183',
+        'HOST': '192.168.16.8',
         'PORT': '3306'
     },
     'user': {
@@ -109,7 +109,7 @@ DATABASES = {
         'NAME': 'user',
         'USER': 'planadmin',
         'PASSWORD': 'pL%5^an3a$4in',
-        'HOST': '47.112.0.183',
+        'HOST': '192.168.16.8',
         'PORT': '3306'
     },
     'plan': {
@@ -117,7 +117,7 @@ DATABASES = {
         'NAME': 'plan',
         'USER': 'planadmin',
         'PASSWORD': 'pL%5^an3a$4in',
-        'HOST': '47.112.0.183',
+        'HOST': '192.168.16.8',
         'PORT': '3306'
     }
 

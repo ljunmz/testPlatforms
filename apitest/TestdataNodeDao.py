@@ -1,6 +1,6 @@
 from apitest.dbUitls import MysqlHelper
 
-mh = MysqlHelper('47.112.0.183', 'planadmin', 'pL%5^an3a$4in', 'automation')
+mh = MysqlHelper('192.168.16.8', 'planadmin', 'pL%5^an3a$4in', 'automation')
 
 def getPathByTestDataNode():
     sql = "SELECT path FROM automation.testdata_node"
