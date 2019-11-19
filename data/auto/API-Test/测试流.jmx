@@ -159,7 +159,7 @@
           <stringProp name="checkQuery"></stringProp>
           <stringProp name="connectionAge">5000</stringProp>
           <stringProp name="dataSource">dbcheckpool</stringProp>
-          <stringProp name="dbUrl">jdbc:mysql://47.112.0.183:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true</stringProp>
+          <stringProp name="dbUrl">jdbc:mysql://192.168.16.8:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true</stringProp>
           <stringProp name="driver">com.mysql.jdbc.Driver</stringProp>
           <boolProp name="keepAlive">true</boolProp>
           <stringProp name="password">pL%5^an3a$4in</stringProp>
