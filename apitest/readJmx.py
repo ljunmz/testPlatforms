@@ -1,4 +1,3 @@
-import datetime
 import os
 import xml.etree.ElementTree as ET
 
@@ -29,16 +28,6 @@ def changeAciton(newStr, path):
         ww.write(fileData)
 
 
-# def changeEmail(email, path):
-#     tree = ET.parse(path + 'build.xml')
-#     root = tree.getroot()
-#     print('tag:', root.tag, 'attrib:', root.attrib, 'text:', root.text)
-#     for elm in root:
-#         if elm.attrib.get("name") == "mail_to":
-#             print(elm.attrib.get("value"))
-#             elm.attrib["value"] = email
-#             print(elm.attrib.get("value"))
-#     tree.write(path + 'build.xml')
 def changeEmail(email, path):
     f = open(path + "build.xml", mode='r', encoding='utf-8').read()
     oldStr = f[f.find("<property name=\"mail_to\" value=")+len("<property name=\"mail_to\" value="):f.find("<property name=\"mailsubject\"")-7]
@@ -52,7 +41,6 @@ def changeEmail(email, path):
     with open(path + "build.xml", mode='w', encoding='utf-8') as ww:
         ww.write(fileData)
 
-# changeEmail("l@jielema.com", "F:\\code\\testPlatforms\\data\\auto\\API-Test\\")
 
 def getEmailList(path):
     tree = ET.parse(path + 'build.xml')
@@ -83,7 +71,6 @@ def getDefaultVariable(path):
                             )
     return variableList
 
-# getDefaultVariable("G:\\svn\\自动化测试\\API-Test\\")
 
 
 def formElementProp(argumentName, argumentValue):
@@ -114,9 +101,6 @@ def addDefaultVariable(argumentName, argumentValue, path):
         print("变量已存在")
         return 601
 
-#
-# addDefaultVariable("importance11112", "importance1", "G:\\svn\\自动化测试\\API-Test\\")
-
 
 def editDefaultVariable(oldKey, newKey, value, path):
     keyword = "<elementProp name=" + "\"" + oldKey + "\""
@@ -137,7 +121,6 @@ def editDefaultVariable(oldKey, newKey, value, path):
         print("不存在该变量")
         f.close()
         return 601
-# editDefaultVariable("importance", "importance1", "1${__Random(1,4,)}", "G:\\svn\\自动化测试\\API-Test\\")
 
 
 def deleteDefaultVariable(key, path):
@@ -182,15 +165,3 @@ def readText(file):
         stra = stra + last_line+"==>"
     return stra
 
-
-# print(readText("F:\\code\\testPlatforms\\nodes\\django.log"))
-
-
-
-#
-# for ip1 in range(10, 11):
-#     for ip2 in range(1, 254):
-#         ip = "172.16."+str(ip1)+"."+str(ip2)
-#         print(ip)
-#         # os.system("ping "+ip)
-#         os.system("mstsc /v: "+"192.168."+str(ip1)+"."+str(ip2)+" /console")

@@ -114,7 +114,7 @@
         <el-tabs type="border-card"  v-model="activeName"  @tab-click="handleClick">
             <el-tab-pane label="接口测试流管理" name="apitest">
                 <el-button size="small"  type="primary" @click="dialogFormVisible = true" style="margin:10px;font-weight: bolder">+添加接口测试流</el-button>
-                <el-button size="small" type="warning" @click="actionAllFlow()" style="margin: 10px">运行所有测试流</el-button>
+                <el-button size="small" type="warning" @click="actionAllFlow()" style="margin: 10px;float: right">运行所有测试流</el-button>
                 <template>
                     <el-select size="small" v-model="filtrate" @change="filtrateCreater" placeholder="筛选负责人">
                         <el-option
@@ -125,6 +125,12 @@
                         </el-option>
                     </el-select>
                 </template>
+                <el-input size="small" placeholder="请输入测试流名称" v-model="flowName" class="input-with-select" style="width: 400px">
+                    <el-button slot="append" icon="el-icon-search" @click="filterFlowName()">搜索测试流</el-button>
+                </el-input>
+                <el-input size="small" placeholder="请输入接口URL" v-model="path" class="input-with-select" style="width: 400px">
+                    <el-button slot="append" icon="el-icon-search" @click="filterPath()">搜索URL</el-button>
+                </el-input>
                 <div>
                     <template>
                         <el-table
@@ -667,7 +673,7 @@
             <el-button type="primary" @click="addFlowOk(flowDataDefault)">确 定</el-button>
         </div>
     </el-dialog>
-    <el-dialog :close-on-click-modal="false" title="配置全局默认变量" :visible.sync="dialogDefaultVar">
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="配置全局默认变量" :visible.sync="dialogDefaultVar">
         <el-button size="mini" class="save"
                    style="display: block;margin: 2px;padding: 5px;float: left"
                    type="success">+添加全局变量
@@ -724,7 +730,7 @@
             </el-table-column>
         </el-table>
     </el-dialog>
-    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="邮箱收件人配置(多个收件人以逗号隔开)" :visible.sync="dialogEmailChange">
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" style="font-weight: bold" title="邮箱收件人配置(多个收件人以逗号隔开)" :visible.sync="dialogEmailChange">
         <el-form :model="flowDataDefault">
             <el-form-item label="" :label-width="formLabelWidth">
                 <el-input v-model="recipients" autocomplete="off" :autosize="{ minRows: 5, maxRows: 20}" size="small"
@@ -1059,7 +1065,7 @@
             <el-button type="primary" @click="dialogCopyNode = false;copyNodeOk(nodeDataDefault)">确 定</el-button>
         </div>
     </el-dialog>
-    <el-dialog :close-on-click-modal="false" title="接口运行完成，请选择要查看的报告类型" :visible.sync="dialogReport">
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="接口运行完成，请选择要查看的报告类型" :visible.sync="dialogReport">
         <el-button icon="el-icon-search"><a href="/lookSummaryReport" target="_blank">查看概要报告</a></el-button>
         <el-button icon="el-icon-search"><a href="/lookDetailReport" target="_blank">查看详细报告</a></el-button>
     </el-dialog>
@@ -1111,7 +1117,6 @@
         <el-button type="primary" style="margin: 10px;float: right"
                    @click="savePreSql()">保存修改
         </el-button>
-
     </el-dialog>
     <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="后置Sql校验配置" :visible.sync="dialogOutSql">
         <el-form :model="outSqlData">

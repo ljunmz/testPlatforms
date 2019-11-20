@@ -1,7 +1,4 @@
-import json
-
 import requests
-
 
 def doRequest(method, url, datas, jsons, header):
     if method == "get" or method == "GET":

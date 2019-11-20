@@ -71,31 +71,3 @@ def getSwaggerApi():
         "undoneList": undoneList,
         "unStatisticsList": unStatisticsList,
         }
-
-
-# getSwaggerApi()
-
-#
-# f2 = open("F:\\code\\testPlatforms\\nodes\\2.txt", mode='r', encoding='utf-8').read()
-# with open("F:\\code\\testPlatforms\\nodes\\1.txt", mode='r', encoding='utf-8') as ss:
-#     for line in ss:
-#         if line not in f2:
-#             # print("已统计接口"+ line)
-#             print(line.strip())
-
-
-
-
-
-# from redminelib import Redmine
-# import json
-#
-# redMineURL = "red.shiguangxu.com"
-# userName = "liujun"
-# passWord = "lj111235422@a"
-#
-# redmine = Redmine(redMineURL, username=userName, password=passWord)
-# project = redmine.project.get("livelihood")
-# print(project.id)
-#
-# print(redmine.issue.get(11939))

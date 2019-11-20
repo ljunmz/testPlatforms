@@ -73,3 +73,51 @@ class TestdataNode(models.Model):
         managed = False
         db_table = 'testdata_node'
 
+class Checklist(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    user_id = models.BigIntegerField()
+    title = models.CharField(max_length=1024, blank=True, null=True)
+    short_title = models.CharField(max_length=1024, blank=True, null=True)
+    classify_id = models.BigIntegerField()
+    importance = models.IntegerField(blank=True, null=True)
+    grade = models.IntegerField(blank=True, null=True)
+    user_code = models.IntegerField(blank=True, null=True)
+    old_todo_info_id = models.IntegerField(blank=True, null=True)
+    remark = models.TextField(blank=True, null=True)
+    status = models.IntegerField()
+    ip = models.CharField(max_length=255, blank=True, null=True)
+    version = models.BigIntegerField()
+    deleted = models.IntegerField()
+    created = models.DateTimeField()
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'checklist'
+
+class Todo(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    user_id = models.BigIntegerField()
+    title = models.CharField(max_length=1024)
+    short_title = models.CharField(max_length=1024, blank=True, null=True)
+    start_datetime = models.DateTimeField(blank=True, null=True)
+    end_datetime = models.DateTimeField(blank=True, null=True)
+    classify_id = models.BigIntegerField()
+    importance = models.IntegerField()
+    ahead_type = models.CharField(max_length=512, blank=True, null=True)
+    todo_type = models.IntegerField()
+    is_forever = models.IntegerField(blank=True, null=True)
+    grade = models.IntegerField(blank=True, null=True)
+    user_code = models.IntegerField(blank=True, null=True)
+    old_todo_info_id = models.IntegerField(blank=True, null=True)
+    remark = models.TextField(blank=True, null=True)
+    status = models.IntegerField()
+    ip = models.CharField(max_length=255, blank=True, null=True)
+    version = models.BigIntegerField()
+    deleted = models.IntegerField()
+    created = models.DateTimeField()
+    updated = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'todo'

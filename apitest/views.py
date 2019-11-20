@@ -6,7 +6,7 @@ import webbrowser
 from django.http import  JsonResponse
 from django.shortcuts import render_to_response, render
 from django.views.decorators.csrf import csrf_exempt
-from apitest.models import TestdataNode, TestdataFlow
+from apitest.models import TestdataNode, TestdataFlow, Todo, Checklist
 from apitest.readJmx import changeAciton, getEmailList, changeEmail, getDefaultVariable, addDefaultVariable, \
     editDefaultVariable, deleteDefaultVariable, removeFile, readText
 
@@ -43,6 +43,50 @@ def getFlowData(request):
     response = [{"code": "200", "msg": "邮箱获取成功", "flowData": flowData, "size": flowlistSize}]
     return JsonResponse(response, safe=False)
 
+@csrf_exempt
+def filterFlowName(request):
+    flow_name = json.loads(request.body)["flow_name"]
+    flowDataList = []
+    for e in TestdataFlow.objects.filter(flow_name__icontains=flow_name).order_by("pk"):
+        flowDataList.insert(10000,
+                            {
+                                'pk': e.pk,
+                                'flow_name': e.flow_name,
+                                'account': e.account,
+                                'password': e.password,
+                                'priority': e.priority,
+                                'creater': e.creater,
+                                'state': str(e.state),
+                                'operation': "1"})
+    response = [{"code": "200", "msg": "操作成功", "flowData": flowDataList}]
+    print("filterFlowName_flowDataList:", flowDataList)
+    return JsonResponse(response, safe=False)
+
+@csrf_exempt
+def filterPath(request):
+    path = json.loads(request.body)["path"]
+    flowDataList = []
+    new_id=[]
+    newFlowDataList=[]
+    for id in TestdataNode.objects.filter(path__exact=path).order_by("pk"):
+        for e in TestdataFlow.objects.filter(flow_id__exact=id.flow_id).order_by("pk"):
+            flowDataList.insert(10000,
+                                {
+                                    'pk': e.pk,
+                                    'flow_name': e.flow_name,
+                                    'account': e.account,
+                                    'password': e.password,
+                                    'priority': e.priority,
+                                    'creater': e.creater,
+                                    'state': str(e.state),
+                                    'operation': "1"})
+    for i in flowDataList:
+        if i.get("pk") not in new_id:
+            newFlowDataList.append(i)
+            new_id.append(i.get("pk"))
+    response = [{"code": "200", "msg": "操作成功", "flowData": newFlowDataList}]
+    print("filterPath_flowDataList:", flowDataList)
+    return JsonResponse(response, safe=False)
 
 @csrf_exempt
 def getEmail(request):

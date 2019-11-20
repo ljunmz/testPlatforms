@@ -36,6 +36,7 @@ var vm = new Vue({
                 {prop: 'url', label: 'url'}
             ],
             filtrate: '',
+            path: '',
             unDoList: [{
                 id: '1',
                 apiName: '暂无数据',
@@ -71,10 +72,6 @@ var vm = new Vue({
                     "creater": "余一鸣"
                 }, {
                     "creater": "陆金爱"
-                }, {
-                    "creater": "刘鎏"
-                }, {
-                    "creater": "余伟鹏"
                 }],
             deleteFlowId: '',
             deleteNodeId: '',
@@ -121,6 +118,7 @@ var vm = new Vue({
                 "argumentValue":"示例1:变量值",
             }],
             modal1: false,
+            flowName: "",
             search: '',
             modal2: false,
             flowData: [],
@@ -150,8 +148,23 @@ var vm = new Vue({
         }
     },
     methods: {
-        queryFlowData(){
 
+        filterPath(){
+            var dataPost = {"path": this.path};
+            this.$http.post(this.url + '/filterPath()', dataPost).then(
+                function (data) {
+                    this.flowData = data.body[0].flowData;
+                    this.pageSize = 100;
+                }
+            );
+        },
+        filterFlowName(){
+            var dataPost = {"flow_name": this.flowName};
+            this.$http.post(this.url + '/filterFlowName()', dataPost).then(
+                function (data) {
+                    this.flowData = data.body[0].flowData;
+                }
+            );
         },
         filterTag(value, row) {
             return row.remark === value;
