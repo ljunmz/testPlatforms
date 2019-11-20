@@ -582,7 +582,7 @@
                             </el-table-column>
                             <el-table-column label="操作" width="250px" prop="operation" >
                                 <template slot-scope="scope">
-                                    <el-button raw-type="button" @click="manualStatistics(scope.row)">
+                                    <el-button raw-type="button" @click="manualStatistics(scope.$index,tableData,scope.row)">
                                         手动统计
                                     </el-button>
                                 </template>

@@ -178,7 +178,10 @@ var vm = new Vue({
                 }
             );
         },
-        manualStatistics(row){
+        manualStatistics(index, rows,row){
+            console.log("manualStatistics-->",index);
+            console.log("manualStatistics-->",rows);
+            console.log("manualStatistics-->",row);
             this.unStatisticsData = {
                 "index":row.id,
                 "service":row.serviceName,
@@ -188,6 +191,7 @@ var vm = new Vue({
                 "author":"",
                 "remark":""
             };
+            rows.splice(index, 1);
             this.dialogManualStatistics = true;
             console.log("manualStatistics-->",this.unStatisticsData);
         },
