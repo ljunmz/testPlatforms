@@ -37,6 +37,7 @@ var vm = new Vue({
             ],
             filtrate: '',
             path: '',
+            unStatisticsData: {},
             unDoList: [{
                 id: '1',
                 apiName: '暂无数据',
@@ -72,6 +73,8 @@ var vm = new Vue({
                     "creater": "余一鸣"
                 }, {
                     "creater": "陆金爱"
+                }, {
+                    "creater": "刘鎏"
                 }],
             deleteFlowId: '',
             deleteNodeId: '',
@@ -133,6 +136,7 @@ var vm = new Vue({
             visible: false,
             dialogFormVisible: false,
             dialogParameter: false,
+            dialogManualStatistics: false,
             dialogPreSql: false,
             dialogOutSql: false,
             dialogPostKey: false,
@@ -148,7 +152,45 @@ var vm = new Vue({
         }
     },
     methods: {
-
+        saveUnStatisticsData(row){
+            console.log(row);
+            var index = this.unStatisticsData.index;
+            var dataPost = {
+                "unStatisticsData": this.unStatisticsData,
+            };
+            this.$http.post(this.url + '/saveUnStatisticsData', dataPost).then(
+                function (data) {
+                    var responData = data.status;
+                    if (responData === 200 || responData === '200') {
+                        this.dialogManualStatistics = false;
+                        this.$message({
+                            showClose: true,
+                            message: '保存成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '很遗憾，保存失败',
+                            type: 'error'
+                        });
+                    }
+                }
+            );
+        },
+        manualStatistics(row){
+            this.unStatisticsData = {
+                "index":row.id,
+                "service":row.serviceName,
+                "summary":row.apiName,
+                "path":row.url,
+                "isAuto":"否",
+                "author":"",
+                "remark":""
+            };
+            this.dialogManualStatistics = true;
+            console.log("manualStatistics-->",this.unStatisticsData);
+        },
         filterPath(){
             var dataPost = {"path": this.path};
             this.$http.post(this.url + '/filterPath()', dataPost).then(
@@ -515,7 +557,7 @@ var vm = new Vue({
                     };
                     console.log("preSqlData=", this.preSqlData);
                 }
-            )
+            );
         },
         getPostKey(index, row) {
             this.currentRow = document.getElementById('nodeTable').getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row ")[0];
@@ -1059,6 +1101,7 @@ var vm = new Vue({
             this.dialogPreSql =false;
             this.dialogPostKey =false;
             this.dialogOutSql =false;
+            this.dialogManualStatistics =false;
         },
         expandChange(row, expandedRows, index) {
             this.loading = true;

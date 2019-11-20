@@ -21,7 +21,7 @@ from apitest.views import apitest, getFlowData, getNodeData, getOutSql, getPreSq
     editFlow, deleteFlow, addNode, editNode, savePostKey, editParameter, deleteNode, editOutSql, editPreSql, getCreater, \
     actionFlow, getEmail, emailChange, actionAllFlow, changeFlowState, changeNodeState, editDefaultVar, getDefaultVar, \
     deleteDefaultVar, addDefaultVar, getApiStatistics, getLog, lookDetailReport, lookSummaryReport, filterFlowName, \
-    filterPath
+    filterPath, saveUnStatisticsData
 from performance.views import performance, \
     getPerformanceFlowData, getPerformanceNodeData, getPerformanceOutSql, getPerformancePreSql, getPerformancePostKey, \
     getPerformanceParameter, addPerformanceFlow, editPerformanceFlow, deletePerformanceFlow, deletePerformanceNode, \
@@ -112,5 +112,6 @@ urlpatterns = [
     url(r'getLog', getLog),
     url(r'filterFlowName', filterFlowName),
     url(r'filterPath', filterPath),
+    url(r'saveUnStatisticsData', saveUnStatisticsData),
     # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_URL}),
 ]

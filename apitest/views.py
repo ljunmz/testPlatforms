@@ -6,7 +6,7 @@ import webbrowser
 from django.http import  JsonResponse
 from django.shortcuts import render_to_response, render
 from django.views.decorators.csrf import csrf_exempt
-from apitest.models import TestdataNode, TestdataFlow, Todo, Checklist
+from apitest.models import TestdataNode, TestdataFlow, Todo, Checklist, ApiStatistics
 from apitest.readJmx import changeAciton, getEmailList, changeEmail, getDefaultVariable, addDefaultVariable, \
     editDefaultVariable, deleteDefaultVariable, removeFile, readText
 
@@ -541,7 +541,7 @@ def deleteDefaultVar(request):
 @csrf_exempt
 def getApiStatistics(request):
     response = [{"code": "200", "msg": "操作成功", "data": getSwaggerApi()}]
-    return JsonResponse(response, safe=False)\
+    return JsonResponse(response, safe=False)
 
 @csrf_exempt
 def getLog(request):
@@ -554,26 +554,6 @@ def getLog(request):
 
 @csrf_exempt
 def lookDetailReport(request):
-    # reportType = json.loads(request.body)["reportType"]
-    # if reportType == "Detail":
-    #     for root, dirs, files in os.walk(paths+"Report\\html\\"):
-    #         for f in files:
-    #             if "Detail" in f:
-    #                 fileName = str(f)
-    # #                 print("打开自动化测试报告")
-    # #                 url = paths+"Report\\html\\"+str(f)
-    # #                 webbrowser.open(url)
-    # elif reportType == "Summary":
-    #     for root, dirs, files in os.walk(paths+"Report\\html\\"):
-    #         for f in files:
-    #             if "Summary" in f:
-    #                 fileName = str(f)
-    #                 print("打开自动化测试报告")
-    #                 url = paths+"Report\\html\\"+str(f)
-    #                 webbrowser.open(url)
-    # response = [{"code": "200", "msg": "操作成功"}]
-    # return JsonResponse(response, safe=False)
-    # return render(request, 'data/auto/API-Test/Report/html/APITest_Detail_201911141403.html')
     for root, dirs, files in os.walk(paths+"Report\\html\\"):
         for f in files:
             if "Detail" in f:
@@ -589,3 +569,22 @@ def lookSummaryReport(request):
     return render_to_response('data/auto/API-Test/Report/html/'+fileName, {})
 
 
+@csrf_exempt
+def saveUnStatisticsData(request):
+    unStatisticsData = json.loads(request.body)["unStatisticsData"]
+    print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    apiStatisticsData = ApiStatistics.objects.create(
+        service=unStatisticsData.get("service"),
+        summary=unStatisticsData.get("summary"),
+        path=unStatisticsData.get("path"),
+        inner_cell="否",
+        deleted="0",
+        isauto=unStatisticsData.get("isAuto"),
+        author=unStatisticsData.get("author"),
+        remark=unStatisticsData.get("remark"),
+        created=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        updated=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    )
+    print(apiStatisticsData)
+    response = [{"code": "200", "msg": "操作成功"}]
+    return JsonResponse(response, safe=False)

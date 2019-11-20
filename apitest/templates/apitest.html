@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
     <!-- 引入vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
@@ -19,7 +16,6 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- 引入vue-resource -->
     <script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.js" type="text/javascript" charset="utf-8"></script>
-
     <style lang="scss">
         .el-table .cell {
             padding-right: 10px;
@@ -558,7 +554,9 @@
                             未统计接口列表(点击展开详情)：
                             </span>
                         </template>
-                        <el-table :data="tableData" style="width: 100%"
+                        <el-table :data="tableData"
+                                  id="unStatisticsTable"
+                                  style="width: 100%"
                                   border
                                   stripe
                                   size="mini"
@@ -582,11 +580,13 @@
                                     v-for="col in colTemplate"
                                     :prop="col.prop" :label="col.label" >
                             </el-table-column>
-
                             <el-table-column label="操作" width="250px" prop="operation" >
-                                <el-button raw-type="button" >
-                                    手动统计
-                                </el-button>
+                                <template slot-scope="scope">
+                                    <el-button raw-type="button" @click="manualStatistics(scope.row)">
+                                        手动统计
+                                    </el-button>
+                                </template>
+
                             </el-table-column>
                         </el-table>
                     </el-collapse-item>
@@ -730,7 +730,7 @@
             </el-table-column>
         </el-table>
     </el-dialog>
-    <el-dialog :close-on-click-modal="false" style="font-weight: bold" style="font-weight: bold" title="邮箱收件人配置(多个收件人以逗号隔开)" :visible.sync="dialogEmailChange">
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold" title="邮箱收件人配置(多个收件人以逗号隔开)" :visible.sync="dialogEmailChange">
         <el-form :model="flowDataDefault">
             <el-form-item label="" :label-width="formLabelWidth">
                 <el-input v-model="recipients" autocomplete="off" :autosize="{ minRows: 5, maxRows: 20}" size="small"
@@ -1170,6 +1170,43 @@
         </el-form>
         <el-button type="primary" style="margin: 10px;float: right"
                    @click="savePostKey()">保存修改
+        </el-button>
+        <el-button type="info" style="margin: 10px"
+                   @click="pCancel()">
+            取消
+        </el-button>
+    </el-dialog>
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold; width:80%" title="手动统计接口信息配置" :visible.sync="dialogManualStatistics">
+        <el-form :model="unStatisticsData">
+            <el-form-item label="微服务"  :label-width="formLabelWidth">
+                <el-input v-model="unStatisticsData.service" style="width:80%"
+                          :placeholder="unStatisticsData.service"></el-input>
+            </el-form-item>
+            <el-form-item label="接口描述"  :label-width="formLabelWidth">
+                <el-input v-model="unStatisticsData.summary" style="width:80%"
+                          :placeholder="unStatisticsData.summary"></el-input>
+            </el-form-item>
+            <el-form-item label="接口Url"  :label-width="formLabelWidth">
+                <el-input v-model="unStatisticsData.path" style="width:80%"
+                          :placeholder="unStatisticsData.path"></el-input>
+            </el-form-item>
+            <el-form-item label="统计人"  :label-width="formLabelWidth">
+                <el-input v-model="unStatisticsData.author" style="width:80%"
+                          placeholder="请输入统计人"></el-input>
+            </el-form-item>
+            <el-form-item label="是否实现自动化" :label-width="formLabelWidth">
+                <el-select v-model="unStatisticsData.isAuto" placeholder="请统计该接口是否实现自动化">
+                    <el-option label="是" value=1></el-option>
+                    <el-option label="否" value=0></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="备注"  :label-width="formLabelWidth">
+                <el-input v-model="unStatisticsData.remark" style="width:80%"
+                          placeholder="请输入无法实现原因，待实现接口直接填写：未覆盖"></el-input>
+            </el-form-item>
+        </el-form>
+        <el-button type="primary" style="margin: 10px;float: right"
+                   @click="saveUnStatisticsData()">保存修改
         </el-button>
         <el-button type="info" style="margin: 10px"
                    @click="pCancel()">
