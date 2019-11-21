@@ -186,7 +186,7 @@
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="获取流程数据" enabled="true">
           <stringProp name="dataSource">dbcheckpool</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select flow_id,flow_name,account,password from automation.testdata_flow where run_env like &apos;%${envname}%&apos; and state = 1 and flow_id = 3 order by flow_code</stringProp>
+          <stringProp name="query">select flow_id,flow_name,account,password from automation.testdata_flow where run_env like &apos;%${envname}%&apos; and state =1 and 1=1 order by flow_code</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">flow_id,flow_name,account,password</stringProp>

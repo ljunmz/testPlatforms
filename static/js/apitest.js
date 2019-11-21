@@ -51,6 +51,7 @@ var vm = new Vue({
             filtrate: '',
             path: '',
             unStatisticsData: {},
+            unDoStatisticsData: {},
             unDoList: [{
                 id: '1',
                 apiName: '暂无数据',
@@ -152,6 +153,7 @@ var vm = new Vue({
             dialogFormVisible: false,
             dialogParameter: false,
             dialogManualStatistics: false,
+            dialogUnDoStatistics: false,
             dialogPreSql: false,
             dialogOutSql: false,
             dialogPostKey: false,
@@ -193,6 +195,35 @@ var vm = new Vue({
                 }
             );
         },
+        saveUnDoStatisticsData(){
+            console.log("saveUnDoStatisticsData-->",this.unDoStatisticsData);
+            var index = this.unDoStatisticsData.index;
+            var dataPost = {
+                "unDoStatisticsData": this.unDoStatisticsData,
+            };
+            this.$http.post(this.url + '/saveUnDoStatisticsData', dataPost).then(
+                function (data) {
+                    var responData = data.status;
+                    if (responData === 200 || responData === '200') {
+                        this.dialogUnDoStatistics = false;
+                        var nodeTable = document.getElementById('unDoList');
+                        var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("current-row")[0];
+                        currentRow.getElementsByClassName("unDoStatistics")[0].innerHTML = this.unDoStatisticsData.remark;
+                        this.$message({
+                            showClose: true,
+                            message: '保存成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message({
+                            showClose: true,
+                            message: '很遗憾，保存失败',
+                            type: 'error'
+                        });
+                    }
+                }
+            );
+        },
         manualStatistics(index, rows,row){
             console.log("manualStatistics-->",row);
             this.unStatisticsData = {
@@ -206,6 +237,20 @@ var vm = new Vue({
             };
             rows.splice(index, 1);
             this.dialogManualStatistics = true;
+        },
+        unDoStatistics(index, rows,row){
+            console.log("unDoStatistics-->",row);
+            this.unDoStatisticsData = {
+                "index":row.id,
+                "service":row.serviceName,
+                "summary":row.apiName,
+                "path":row.url,
+                "isAuto":"否",
+                "author":"",
+                "remark":""
+            };
+            // rows.splice(index, 1);
+            this.dialogUnDoStatistics = true;
         },
         filterPath(){
             var dataPost = {"path": this.path};
@@ -1128,6 +1173,7 @@ var vm = new Vue({
             this.dialogPostKey =false;
             this.dialogOutSql =false;
             this.dialogManualStatistics =false;
+            this.dialogUnDoStatistics =false;
         },
         expandChange(row, expandedRows, index) {
             this.loading = true;

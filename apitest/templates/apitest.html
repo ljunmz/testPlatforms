@@ -612,7 +612,6 @@
                                         手动统计
                                     </el-button>
                                 </template>
-
                             </el-table-column>
                         </el-table>
                     </el-collapse-item>
@@ -622,7 +621,9 @@
                             未实现接口列表(点击展开详情)：
                             </span>
                         </template>
-                        <el-table :data="unDoList" style="width: 100%"
+                        <el-table :data="unDoList"
+                                  id="unDoList"
+                                  style="width: 100%"
                                   border
                                   stripe
                                   highlight-current-row="true"
@@ -650,7 +651,7 @@
                                     filter-placement="bottom-end">
                                     width="290px">
                                 <template slot-scope="scope">
-                                    <span  class="span" style="display: block;font-weight: bold;color: #2b83e9;overflow:unset">
+                                    <span  class="unDoStatistics"  style="display: block;font-weight: bold;color: #2b83e9;overflow:unset">
                                         {%verbatim%}
                                         {{scope.row.remark}}
                                         {%endverbatim%}
@@ -658,9 +659,11 @@
                                 </template>
                             </el-table-column>
                             <el-table-column label="操作" width="250px" prop="operation" >
-                                <el-button raw-type="button" >
-                                    手动统计
-                                </el-button>
+                                <template slot-scope="scope">
+                                    <el-button raw-type="button"  @click="unDoStatistics(scope.$index,unDoList,scope.row)">
+                                        手动统计
+                                    </el-button>
+                                </template>
                             </el-table-column>
                         </el-table>
                     </el-collapse-item>
@@ -1286,6 +1289,43 @@
         </el-form>
         <el-button type="primary" style="margin: 10px;float: right"
                    @click="saveUnStatisticsData()">保存修改
+        </el-button>
+        <el-button type="info" style="margin: 10px"
+                   @click="pCancel()">
+            取消
+        </el-button>
+    </el-dialog>
+    <el-dialog :close-on-click-modal="false" style="font-weight: bold; width:80%" title="手动统计接口信息配置" :visible.sync="dialogUnDoStatistics">
+        <el-form :model="unDoStatisticsData">
+            <el-form-item label="微服务"  :label-width="formLabelWidth">
+                <el-input v-model="unDoStatisticsData.service" style="width:80%"
+                          :placeholder="unDoStatisticsData.service"></el-input>
+            </el-form-item>
+            <el-form-item label="接口描述"  :label-width="formLabelWidth">
+                <el-input v-model="unDoStatisticsData.summary" style="width:80%"
+                          :placeholder="unDoStatisticsData.summary"></el-input>
+            </el-form-item>
+            <el-form-item label="接口Url"  :label-width="formLabelWidth">
+                <el-input v-model="unDoStatisticsData.path" style="width:80%"
+                          :placeholder="unDoStatisticsData.path"></el-input>
+            </el-form-item>
+            <el-form-item label="统计人"  :label-width="formLabelWidth">
+                <el-input v-model="unDoStatisticsData.author" style="width:80%"
+                          placeholder="请输入统计人"></el-input>
+            </el-form-item>
+            <el-form-item label="是否实现自动化" :label-width="formLabelWidth">
+                <el-select v-model="unDoStatisticsData.isAuto" placeholder="请统计该接口是否实现自动化">
+                    <el-option label="是" value=1></el-option>
+                    <el-option label="否" value=0></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="备注"  :label-width="formLabelWidth">
+                <el-input v-model="unDoStatisticsData.remark" style="width:80%"
+                          placeholder="请输入无法实现原因，待实现接口直接填写：未覆盖"></el-input>
+            </el-form-item>
+        </el-form>
+        <el-button type="primary" style="margin: 10px;float: right"
+                   @click="saveUnDoStatisticsData()">保存修改
         </el-button>
         <el-button type="info" style="margin: 10px"
                    @click="pCancel()">

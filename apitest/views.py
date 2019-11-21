@@ -600,3 +600,38 @@ def saveUnStatisticsData(request):
     print(apiStatisticsData)
     response = [{"code": "200", "msg": "操作成功"}]
     return JsonResponse(response, safe=False)
+
+@csrf_exempt
+def saveUnDoStatisticsData(request):
+    unDoStatisticsData = json.loads(request.body)["unDoStatisticsData"]
+    path = unDoStatisticsData.get("path")
+    print()
+    if len(ApiStatistics.objects.filter(path=path).order_by("created")) >0:
+        print("接口已统计，修改信息")
+        apiStatisticsData = ApiStatistics.objects.filter(path=path).update(
+            service=unDoStatisticsData.get("service"),
+            summary=unDoStatisticsData.get("summary"),
+            path=unDoStatisticsData.get("path"),
+            inner_cell="否",
+            deleted="0",
+            isauto=unDoStatisticsData.get("isAuto"),
+            author=unDoStatisticsData.get("author"),
+            remark=unDoStatisticsData.get("remark"),
+            updated=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        )
+    else:
+        print("接口未统计，新增信息")
+        apiStatisticsData = ApiStatistics.objects.create(
+            service=unDoStatisticsData.get("service"),
+            summary=unDoStatisticsData.get("summary"),
+            path=unDoStatisticsData.get("path"),
+            inner_cell="否",
+            deleted="0",
+            isauto=unDoStatisticsData.get("isAuto"),
+            author=unDoStatisticsData.get("author"),
+            remark=unDoStatisticsData.get("remark"),
+            created=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            updated=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        )
+    response = [{"code": "200", "msg": "操作成功"}]
+    return JsonResponse(response, safe=False)
