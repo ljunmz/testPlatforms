@@ -77,7 +77,7 @@
           </elementProp>
           <elementProp name="device" elementType="Argument">
             <stringProp name="Argument.name">device</stringProp>
-            <stringProp name="Argument.value">{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.5.0&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;}</stringProp>
+            <stringProp name="Argument.value">{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.1.2&quot;,&quot;deviceTag&quot;:&quot;59db5d3aef9002a9&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.10.55&quot;,&quot;channel&quot;:&quot;_360&quot;,&quot;deviceModel&quot;:&quot;Meizu-16th Plus&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;59db5d3aef9002a9&quot;}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="deviceTagApp" elementType="Argument">
@@ -186,7 +186,7 @@
         <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="获取流程数据" enabled="true">
           <stringProp name="dataSource">dbcheckpool</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">select flow_id,flow_name,account,password from automation.testdata_flow where run_env like &apos;%${envname}%&apos; and state = 1 and 1=1 order by flow_code</stringProp>
+          <stringProp name="query">select flow_id,flow_name,account,password from automation.testdata_flow where run_env like &apos;%${envname}%&apos; and state = 1 and flow_id = 3 order by flow_code</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames">flow_id,flow_name,account,password</stringProp>
@@ -247,7 +247,7 @@ System.out.println(df.format(new Date()) + &quot;: 开始执行流程测试.....
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;password&quot;:&quot;${__V(password_${M})}&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;${__V(account_${M})}&quot;,&quot;type&quot;:&quot;1&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;1.4.7&quot;,&quot;deviceTag&quot;:&quot;ec:51:bc:a6:a2:d5&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.11.200&quot;,&quot;channel&quot;:&quot;xiaomi&quot;,&quot;deviceModel&quot;:&quot;OPPO-OPPO R11s&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;ec:51:bc:a6:a2:d5&quot;}}</stringProp>
+                    <stringProp name="Argument.value">{&quot;password&quot;:&quot;${__V(password_${M})}&quot;,&quot;appType&quot;:&quot;1&quot;,&quot;mobile&quot;:&quot;${__V(account_${M})}&quot;,&quot;type&quot;:&quot;1&quot;,&quot;device&quot;:{&quot;deviceType&quot;:&quot;1&quot;,&quot;appVersion&quot;:&quot;2.1.2&quot;,&quot;deviceTag&quot;:&quot;ec:51:bc:a6:a2:d5&quot;,&quot;isRoot&quot;:false,&quot;osVersion&quot;:27,&quot;ip&quot;:&quot;172.16.11.200&quot;,&quot;channel&quot;:&quot;xiaomi&quot;,&quot;deviceModel&quot;:&quot;OPPO-OPPO R11s&quot;,&quot;channelName&quot;:&quot;android&quot;,&quot;channelType&quot;:&quot;sgx&quot;,&quot;deviceTagApp&quot;:&quot;ec:51:bc:a6:a2:d5&quot;}}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -658,7 +658,6 @@ vars.put(&quot;sql&quot;,sql);</stringProp>
               <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="返回值断言" enabled="true">
                 <stringProp name="BeanShellAssertion.query">String response = prev.getResponseDataAsString();
 String expect_values=vars.get(&quot;expect_response_&quot;+vars.get(&quot;N&quot;));
-System.out.println(expect_values);
 boolean isok = true;
 if(expect_values != null &amp;&amp; expect_values.length()&gt;0)
 {
@@ -690,7 +689,7 @@ else
 {
   Failure = false;
   FailureMessage = &quot;返回值断言匹配通过&quot;;
-  //System.out.println(&quot;==&gt;&quot; + vars.get(&quot;path_&quot;+vars.get(&quot;N&quot;)) + &quot;==&gt; 测试结果：&quot;+!Failure);
+  System.out.println(&quot;==&gt;&quot; + vars.get(&quot;path_&quot;+vars.get(&quot;N&quot;)) + &quot;==&gt; 测试结果：&quot;+!Failure);
  }
 
  </stringProp>

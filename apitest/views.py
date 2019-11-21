@@ -4,9 +4,9 @@ import os
 import webbrowser
 
 from django.http import  JsonResponse
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
-from apitest.models import TestdataNode, TestdataFlow, Todo, Checklist, ApiStatistics
+from apitest.models import TestdataNode, TestdataFlow, ApiStatistics
 from apitest.readJmx import changeAciton, getEmailList, changeEmail, getDefaultVariable, addDefaultVariable, \
     editDefaultVariable, deleteDefaultVariable, removeFile, readText
 
@@ -483,7 +483,7 @@ def editNode(request):
 @csrf_exempt
 def actionFlow(request):
     flow_id = json.loads(request.body)["flow_id"]
-    newStr = 'flow_id = ' + str(flow_id)
+    newStr = 'state = 1 and flow_id = ' + str(flow_id)
     changeAciton(newStr, paths)
     removeFile(paths+"Report\\html\\")
     removeFile(paths+"Report\\jtl\\")
@@ -495,7 +495,7 @@ def actionFlow(request):
 
 @csrf_exempt
 def actionAllFlow(request):
-    newStr = "1=1"
+    newStr = "state =1 and 1=1"
     changeAciton(newStr, paths)
     removeFile(paths+"Report\\html\\")
     removeFile(paths+"Report\\jtl\\")

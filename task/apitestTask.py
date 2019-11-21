@@ -13,7 +13,7 @@ def everySeconds():
     status = findStatusById("1")[0][5]
     if status==1 or status =="1":
         print("允许执行定时任务")
-        newStr = "1=1"
+        newStr = "state = 1 and 1=1"
         changeAciton(newStr, paths)
         os.chdir(paths)
         os.system("ant")
