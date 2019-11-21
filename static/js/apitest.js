@@ -21,6 +21,19 @@ var vm = new Vue({
         return {
             url: 'http://apitest.shiguangxu.com:8000',
             text :"接口运行中...",
+            envOptions: [{
+                value: 'test',
+                label: '测试环境'
+            }, {
+                value: 'pre',
+                label: '预发布环境'
+            }, {
+                value: 'prod',
+                label: '线上环境'
+            }, {
+                value: 'dev',
+                label: '开发环境'
+            }],
             formInline: {
                 user: '',
                 region: ''
@@ -89,6 +102,7 @@ var vm = new Vue({
                     "method": "POST",
                     "path": "",
                     "parameter": "",
+                    "run_env": "",
                     "expect_response": "",
                     "sleep_time": 0,
                     "state": "1",
@@ -113,6 +127,7 @@ var vm = new Vue({
                 "password": "",
                 "priority": "1",
                 "creater": "",
+                "run_env": "",
                 "state": "1"
             },
             activeIndex2: '3',
@@ -179,8 +194,6 @@ var vm = new Vue({
             );
         },
         manualStatistics(index, rows,row){
-            console.log("manualStatistics-->",index);
-            console.log("manualStatistics-->",rows);
             console.log("manualStatistics-->",row);
             this.unStatisticsData = {
                 "index":row.id,
@@ -193,7 +206,6 @@ var vm = new Vue({
             };
             rows.splice(index, 1);
             this.dialogManualStatistics = true;
-            console.log("manualStatistics-->",this.unStatisticsData);
         },
         filterPath(){
             var dataPost = {"path": this.path};
@@ -610,6 +622,7 @@ var vm = new Vue({
                 "password": "请输入测试账号密码",
                 "priority": "请设置优先级",
                 "creater": "请输入负责人",
+                "run_env": "请选择可运行环境",
                 "state": "请设置是否开启自动化",
                 "pk": flowData.length + 1
             })
@@ -621,6 +634,7 @@ var vm = new Vue({
                 "method": "",
                 "path": "",
                 "parameter": "",
+                "run_env": "",
                 "pre_keys": "",
                 "sleep_time": "",
                 "state": "0",
@@ -657,6 +671,7 @@ var vm = new Vue({
                 "password": row.password,
                 "priority": row.priority,
                 "creater": row.creater,
+                "run_env": row.run_env,
                 "state": row.state,
                 "pk": row.pk
             };
@@ -669,8 +684,8 @@ var vm = new Vue({
                             message: '恭喜你，保存成功',
                             type: 'success'
                         });
-                        currentRow.children[7].getElementsByClassName('save')[0].style.display = 'none';
-                        currentRow.children[7].getElementsByClassName('edit')[0].style.display = 'block';
+                        currentRow.children[8].getElementsByClassName('save')[0].style.display = 'none';
+                        currentRow.children[8].getElementsByClassName('edit')[0].style.display = 'block';
                     } else {
                         this.$message({
                             showClose: true,
@@ -742,8 +757,8 @@ var vm = new Vue({
                 elSpan.style.display = 'none';
                 cell.style.color = 'blue';
             }
-            currentRow.children[7].getElementsByClassName('save')[0].style.display = 'block';
-            currentRow.children[7].getElementsByClassName('edit')[0].style.display = 'none';
+            currentRow.children[8].getElementsByClassName('save')[0].style.display = 'block';
+            currentRow.children[8].getElementsByClassName('edit')[0].style.display = 'none';
             console.log("row", row);
             console.log("index", index);
         },
@@ -760,12 +775,12 @@ var vm = new Vue({
                 elSpan.style.display = 'none';
                 cell.style.color = 'blue';
             }
-            currentRow.children[7].getElementsByClassName('save')[0].style.display = 'block';
-            currentRow.children[7].getElementsByClassName('edit')[0].style.display = 'none';
-                console.log("row", row);
-                console.log("index", index);
+            currentRow.children[8].getElementsByClassName('save')[0].style.display = 'block';
+            currentRow.children[8].getElementsByClassName('edit')[0].style.display = 'none';
+            console.log("row", row);
+            console.log("index", index);
             },
-            editNodeTable(index, row) {
+        editNodeTable(index, row) {
                 console.log("this.currentRow", this.currentRow);
                 var nodeTable = document.getElementById('nodeTable');
                 var currentRow = nodeTable.getElementsByClassName('el-table__body')[0].getElementsByClassName("el-table__row")[index];
@@ -782,8 +797,8 @@ var vm = new Vue({
                 elSpan.style.display = 'none';
                 cell.style.color = 'blue';
             }
-            currentRow.children[12].getElementsByClassName('saveNode')[0].style.display = 'block';
-            currentRow.children[12].getElementsByClassName('editNode')[0].style.display = 'none';
+            currentRow.children[13].getElementsByClassName('saveNode')[0].style.display = 'block';
+            currentRow.children[13].getElementsByClassName('editNode')[0].style.display = 'none';
         },
         dbEditNodeTable(index, row) {
             var nodeTable = document.getElementById('nodeTable');
@@ -796,8 +811,8 @@ var vm = new Vue({
                 elSpan.style.display = 'none';
                 cell.style.color = 'blue';
             }
-            currentRow.children[12].getElementsByClassName('saveNode')[0].style.display = 'block';
-            currentRow.children[12].getElementsByClassName('editNode')[0].style.display = 'none';
+            currentRow.children[13].getElementsByClassName('saveNode')[0].style.display = 'block';
+            currentRow.children[13].getElementsByClassName('editNode')[0].style.display = 'none';
         },
         saveNodeEdit(index, row, event) {
             var nodeTable = document.getElementById('nodeTable');
@@ -807,7 +822,6 @@ var vm = new Vue({
             console.log("saveNodeEdit-index", index);
             console.log("saveNodeEdit-nodeTable", nodeTable);
             console.log("saveNodeEdit-currentRow", currentRow);
-
             for (var i = 0; i < currentRow.children.length - 5; i++) {
                 var cell = currentRow.children[i].getElementsByClassName('cell')[0];
                 var elInput = cell.children[0];
@@ -824,6 +838,7 @@ var vm = new Vue({
                 "method": row.method,
                 "path": row.path,
                 "parameter": row.parameter,
+                "run_env": row.run_env,
                 "pre_keys": row.pre_keys,
                 "sleep_time": row.sleep_time,
                 "state": row.state,
@@ -850,8 +865,8 @@ var vm = new Vue({
                             message: '恭喜你，保存成功',
                             type: 'success'
                         });
-                        currentRow.children[12].getElementsByClassName('saveNode')[0].style.display = 'none';
-                        currentRow.children[12].getElementsByClassName('editNode')[0].style.display = 'block';
+                        currentRow.children[13].getElementsByClassName('saveNode')[0].style.display = 'none';
+                        currentRow.children[13].getElementsByClassName('editNode')[0].style.display = 'block';
                     } else {
                         this.$message({
                             showClose: true,
@@ -876,7 +891,7 @@ var vm = new Vue({
                             showClose: true,
                             message: '恭喜你，邮箱修改成功',
                             type: 'success'
-                        })
+                        });
                         this.dialogEmailChange = false;
                     } else {
                         this.$message({
@@ -890,11 +905,13 @@ var vm = new Vue({
             );
         },
         addFlowOk(flowDataDefault) {
+            console.log(flowDataDefault.run_env);
             var account = flowDataDefault.account;
             var flow_name = flowDataDefault.flow_name;
             var password = flowDataDefault.password;
             var priority = flowDataDefault.priority;
             var creater = flowDataDefault.creater;
+            var run_env = flowDataDefault.run_env;
             var state = flowDataDefault.state;
             if (state === null || state === undefined) {
                 alert("请选择是否开启自动化")
@@ -906,6 +923,7 @@ var vm = new Vue({
                     "password": password,
                     "priority": priority,
                     "creater": creater,
+                    "run_env": run_env,
                     "state": state,
                     "pk": this.flowData.length + 1
                 };
@@ -946,6 +964,7 @@ var vm = new Vue({
                     "method": nodeDataDefault[0].method,
                     "path": nodeDataDefault[0].path,
                     "parameter": nodeDataDefault[0].parameter,
+                    "run_env": nodeDataDefault[0].run_env,
                     "pre_keys": nodeDataDefault[0].pre_keys,
                     "sleep_time": nodeDataDefault[0].sleep_time,
                     "state": nodeDataDefault[0].state,
@@ -981,6 +1000,7 @@ var vm = new Vue({
                                     "method": nodeDataDefault[0].method,
                                     "path": nodeDataDefault[0].path,
                                     "parameter": nodeDataDefault[0].parameter,
+                                    "run_env": nodeDataDefault[0].run_env,
                                     "pre_keys": nodeDataDefault[0].pre_keys,
                                     "sleep_time": nodeDataDefault[0].sleep_time,
                                     "state": nodeDataDefault[0].state,
@@ -1025,6 +1045,7 @@ var vm = new Vue({
                     "method": nodeDataDefault[0].method,
                     "path": nodeDataDefault[0].path,
                     "parameter": nodeDataDefault[0].parameter,
+                    "run_env": nodeDataDefault[0].run_env,
                     "pre_keys": nodeDataDefault[0].pre_keys,
                     "sleep_time": nodeDataDefault[0].sleep_time,
                     "state": nodeDataDefault[0].state,
@@ -1065,6 +1086,7 @@ var vm = new Vue({
                                     "method": "POST",
                                     "path": "",
                                     "parameter": "",
+                                    "run_env": "",
                                     "expect_response": "",
                                     "sleep_time": 0,
                                     "state": "1",

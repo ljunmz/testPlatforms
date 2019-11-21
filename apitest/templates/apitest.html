@@ -216,6 +216,18 @@
                         </span>
                                 </template>
                             </el-table-column>
+                            <el-table-column label="可运行环境" prop="creater" width="220px" id="run_env">
+                                <template slot-scope="scope">
+                                    <el-input size="mini" style="display: none;margin: 0;padding: 0"
+                                              :placeholder="scope.row.run_env"
+                                              v-model="scope.row.run_env"></el-input>
+                                    <span class="span" style="display: block">
+                                        {%verbatim%}
+                                        {{scope.row.run_env}}
+                                        {%endverbatim%}
+                                    </span>
+                                </template>
+                            </el-table-column>
                             <el-table-column label="状态" prop="state" width="60px" id="state">
                                 <template slot-scope="scope">
                                     <el-switch
@@ -396,11 +408,25 @@
                                                               :placeholder="scope.row.expect_response"
                                                               v-model="scope.row.expect_response"></el-input>
                                                     <el-tooltip class="item" effect="dark" :content="scope.row.expect_response" placement="top-start">
-                                            <span class="span" style="display: block" >
-                                                {%verbatim%}
-                                                    {{scope.row.expect_response}}
-                                                {%endverbatim%}
-                                            </span>
+                                                        <span class="span" style="display: block" >
+                                                            {%verbatim%}
+                                                                {{scope.row.expect_response}}
+                                                            {%endverbatim%}
+                                                        </span>
+                                                    </el-tooltip>
+                                                </template>
+                                            </el-table-column>
+                                            <el-table-column label="可运行环境" width="140px"  prop="run_env" resizable="true">
+                                                <template slot-scope="scope">
+                                                    <el-input size="mini" style="display: none"
+                                                              :placeholder="scope.row.run_env"
+                                                              v-model="scope.row.run_env"></el-input>
+                                                    <el-tooltip class="item" effect="dark" :content="scope.row.run_env" placement="top-start">
+                                                        <span class="span" style="display: block" >
+                                                            {%verbatim%}
+                                                                {{scope.row.run_env}}
+                                                            {%endverbatim%}
+                                                        </span>
                                                     </el-tooltip>
                                                 </template>
                                             </el-table-column>
@@ -661,6 +687,23 @@
             <el-form-item label="负责人" :label-width="formLabelWidth">
                 <el-input v-model="flowDataDefault.creater" autocomplete="off" placeholder="请输入模块自动化测试负责人"></el-input>
             </el-form-item>
+            <el-form-item label="可运行环境" :label-width="formLabelWidth">
+                <el-select
+                        v-model="flowDataDefault.run_env"
+                        multiple
+                        filterable
+                        allow-create
+                        default-first-option
+                        style="width: 450px"
+                        placeholder="请选择可运行环境">
+                    <el-option
+                            v-for="item in envOptions"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
             <el-form-item label="是否开启自动化" :label-width="formLabelWidth">
                 <el-select v-model="flowDataDefault.state" placeholder="请选择是否开启自动化">
                     <el-option label="开启自动化" value=1></el-option>
@@ -796,6 +839,24 @@
                                           type="textarea"
                                           placeholder="请输入接口响应校验正则表达式（多个以|隔开）"
                                           v-model="nodeDataDefault[0].expect_response"></el-input>
+                            </p>
+                            <p style="font-weight: bold;">
+                                <el-tag style="float:left;margin: 1px" size="medium">运行环境</el-tag>
+                                <el-select
+                                        v-model="nodeDataDefault.run_env"
+                                        multiple
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        style="width: 78%"
+                                        placeholder="请选择可运行环境">
+                                    <el-option
+                                            v-for="item in envOptions"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
                             </p>
                             <p style="font-weight: bold;">
                                 <el-tag style="float:left;margin: 1px" size="medium">接口状态</el-tag>
@@ -957,6 +1018,24 @@
                                           type="textarea"
                                           placeholder="请输入接口响应校验正则表达式（多个以|隔开）"
                                           v-model="nodeDataDefault[0].expect_response"></el-input>
+                            </p>
+                            <p style="font-weight: bold;">
+                                <el-tag style="float:left;margin: 1px" size="medium">运行环境</el-tag>
+                                <el-select
+                                        v-model="nodeDataDefault.run_env"
+                                        multiple
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        style="width: 78%"
+                                        placeholder="请选择可运行环境">
+                                    <el-option
+                                            v-for="item in nodeDataDefault.run_env"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
                             </p>
                             <p style="font-weight: bold;">
                                 <el-tag style="float:left;margin: 1px" size="medium">接口状态</el-tag>

@@ -35,6 +35,7 @@ def getFlowData(request):
                                 'password': e.password,
                                 'priority': e.priority,
                                 'creater': e.creater,
+                                'run_env': e.run_env,
                                 'state': str(e.state),
                                 'operation': "1"})
     flowData = flowDataList[(page_id - 1) * page_size:page_id * page_size]
@@ -56,6 +57,7 @@ def filterFlowName(request):
                                 'password': e.password,
                                 'priority': e.priority,
                                 'creater': e.creater,
+                                'run_env': e.run_env,
                                 'state': str(e.state),
                                 'operation': "1"})
     response = [{"code": "200", "msg": "操作成功", "flowData": flowDataList}]
@@ -78,6 +80,7 @@ def filterPath(request):
                                     'password': e.password,
                                     'priority': e.priority,
                                     'creater': e.creater,
+                                    'run_env': e.run_env,
                                     'state': str(e.state),
                                     'operation': "1"})
     for i in flowDataList:
@@ -118,6 +121,7 @@ def getNodeData(request):
             'path': e.path,
             'method': e.method,
             'parameter': e.parameter,
+            'run_env': e.run_env,
             'expect_response': e.expect_response,
             'state': str(e.state),
             "ischechdb": str(e.ischechdb),
@@ -278,6 +282,7 @@ def getCreater(request):
                                           'password': e.password,
                                           'priority': e.priority,
                                           'creater': e.creater,
+                                          'run_env': e.run_env,
                                           'state': str(e.state),
                                           'operation': 1})
     print(flowDataListForCreater)
@@ -319,6 +324,7 @@ def addFlow(request):
     password = json.loads(request.body)["password"]
     priority = json.loads(request.body)["priority"]
     creater = json.loads(request.body)["creater"]
+    run_env = json.loads(request.body)["run_env"]
     state = json.loads(request.body)["state"]
     account = json.loads(request.body)["account"]
     create_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -332,6 +338,7 @@ def addFlow(request):
         state=state,
         account=account,
         creater=creater,
+        run_env=run_env,
         create_time=create_time,
         update_time=update_time
     )
@@ -349,6 +356,7 @@ def editFlow(request):
         state=json.loads(request.body)["state"],
         account=json.loads(request.body)["account"],
         creater=json.loads(request.body)["creater"],
+        run_env=json.loads(request.body)["run_env"],
         update_time=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     )
     response = [{"code": "200", "msg": "测试流保存成功"}]
@@ -383,6 +391,7 @@ def addNode(request):
     method = json.loads(request.body)["method"]
     path = json.loads(request.body)["path"]
     parameter = json.loads(request.body)["parameter"]
+    run_env = json.loads(request.body)["run_env"]
     pre_keys = json.loads(request.body)["pre_keys"]
     sleep_time = json.loads(request.body)["sleep_time"]
     expect_response = json.loads(request.body)["expect_response"]
@@ -410,6 +419,7 @@ def addNode(request):
         method=method,
         path=path,
         parameter=parameter,
+        run_env=run_env,
         pre_keys=pre_keys,
         sleep_time=sleep_time,
         expect_response=expect_response,
@@ -443,6 +453,7 @@ def editNode(request):
     method = json.loads(request.body)["method"]
     path = json.loads(request.body)["path"]
     parameter = json.loads(request.body)["parameter"]
+    run_env = json.loads(request.body)["run_env"]
     expect_response = json.loads(request.body)["expect_response"]
     pre_keys = json.loads(request.body)["pre_keys"]
     sleep_time = json.loads(request.body)["sleep_time"]
@@ -458,6 +469,7 @@ def editNode(request):
         method=method,
         path=path,
         parameter=parameter,
+        run_env=run_env,
         expect_response=expect_response,
         pre_keys=pre_keys,
         sleep_time=sleep_time,
